@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="在接觸 Git 之前，對它真的很陌生，直到開始探索之後，發現 Git 帶來許多新奇且方便的功能，不僅能便於管理，也能檢視自己增修、刪減的檔案！ What is Git? Git 像是時光機，能保存檔案，也能回顧過去的紀錄，是一種記載著連續性歷史紀錄的系統。  有接觸 Git 工具的人可能會說：「 Git 是一種分散式版本控制系統。」 聽到這會覺得，每個字都看得懂，但是，仍然不知道實質上是做些什麼？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Viisit Git - Time Machine!">
+<meta property="og:url" content="https://viiining.github.io/2023/07/05/Git/index.html">
+<meta property="og:site_name" content="Viii Blog">
+<meta property="og:description" content="在接觸 Git 之前，對它真的很陌生，直到開始探索之後，發現 Git 帶來許多新奇且方便的功能，不僅能便於管理，也能檢視自己增修、刪減的檔案！ What is Git? Git 像是時光機，能保存檔案，也能回顧過去的紀錄，是一種記載著連續性歷史紀錄的系統。  有接觸 Git 工具的人可能會說：「 Git 是一種分散式版本控制系統。」 聽到這會覺得，每個字都看得懂，但是，仍然不知道實質上是做些什麼？">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-07-05T02:17:19.000Z">
+<meta property="article:modified_time" content="2023-07-05T02:27:35.116Z">
+<meta property="article:author" content="Zinni Chang">
+<meta property="article:tag" content="Learning">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Viisit Git - Time Machine!</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/07/05/Terminal/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiining.github.io/2023/07/05/Git/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiining.github.io/2023/07/05/Git/&text=Viisit Git - Time Machine!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiining.github.io/2023/07/05/Git/&title=Viisit Git - Time Machine!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiining.github.io/2023/07/05/Git/&is_video=false&description=Viisit Git - Time Machine!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viisit Git - Time Machine!&body=Check out this article: https://viiining.github.io/2023/07/05/Git/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiining.github.io/2023/07/05/Git/&title=Viisit Git - Time Machine!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiining.github.io/2023/07/05/Git/&title=Viisit Git - Time Machine!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiining.github.io/2023/07/05/Git/&title=Viisit Git - Time Machine!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiining.github.io/2023/07/05/Git/&title=Viisit Git - Time Machine!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiining.github.io/2023/07/05/Git/&name=Viisit Git - Time Machine!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiining.github.io/2023/07/05/Git/&t=Viisit Git - Time Machine!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-Git"><span class="toc-number">1.</span> <span class="toc-text">What is Git?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%80%8C%EF%BC%8CGit-%E4%B9%8B%E6%89%80%E4%BB%A5%E7%A8%B1%E4%B9%8B%E7%82%BA%E5%88%86%E6%95%A3%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%B5%B1%EF%BC%8C%E6%BA%90%E8%87%AA%E6%96%BC%E4%BB%96%E4%B8%8D%E9%9C%80%E8%A6%81%E4%BC%BA%E6%9C%8D%E5%99%A8%E8%BB%9F%E9%AB%94%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E9%81%8B%E4%BD%9C%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%EF%BC%8C%E4%B8%8D%E7%94%A8%E6%93%94%E5%BF%83%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%A3%9E%E4%BA%86%E6%88%96%E8%80%85%E6%B2%92%E6%9C%89%E7%B6%B2%E8%B7%AF%E7%9A%84%E7%92%B0%E5%A2%83%E5%B0%B1%E7%84%A1%E6%B3%95%E9%81%8B%E4%BD%9C%E3%80%82%E4%B8%80%E8%88%AC%E8%80%8C%E8%A8%80%EF%BC%8C%E5%A4%A7%E9%83%A8%E5%88%86-Git-%E7%9A%84%E6%93%8D%E4%BD%9C%E9%83%BD%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%95%B8%E6%93%9A%E5%BA%AB-Local-Repository-%E8%A3%A1%E5%9F%B7%E8%A1%8C%EF%BC%8C%E4%B9%9F%E5%B0%B1%E6%98%AF%E5%9C%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9B%BB%E8%85%A6%E4%B8%8A%E5%AE%8C%E6%88%90%E6%93%8D%E4%BD%9C%EF%BC%8C%E6%89%80%E4%BB%A5%E4%BD%BF%E7%94%A8%E4%B8%8A%E5%8F%AF%E4%BB%A5%E4%B8%8D%E7%94%A8%E9%81%8E%E6%96%BC%E6%93%94%E5%BF%83%E3%80%82"><span class="toc-number">2.</span> <span class="toc-text">而，Git 之所以稱之為分散式版本控制系統，源自於他不需要伺服器軟體，就可以運作版本控制，不用擔心伺服器壞了或者沒有網路的環境就無法運作。一般而言，大部分 Git 的操作都在本地數據庫 (Local Repository) 裡執行，也就是在自己的電腦上完成操作，所以使用上可以不用過於擔心。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Commands"><span class="toc-number">3.</span> <span class="toc-text">Commands</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Working-Tree"><span class="toc-number">3.0.1.</span> <span class="toc-text">Working Tree</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Changes-not-staged-for-commit"><span class="toc-number">3.0.2.</span> <span class="toc-text">Changes not staged for commit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Staging-Area"><span class="toc-number">3.0.3.</span> <span class="toc-text">Staging Area</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Local-Repository"><span class="toc-number">3.0.4.</span> <span class="toc-text">Local Repository</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Useful-Commands"><span class="toc-number">3.0.5.</span> <span class="toc-text">Useful Commands</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Viisit Git - Time Machine!
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Zinni Chang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-07-05T02:17:19.000Z" class="dt-published" itemprop="datePublished">2023-07-05</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Viiisit-Series/">Viiisit Series</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Learning/" rel="tag">Learning</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>在接觸 Git 之前，對它真的很陌生，直到開始探索之後，發現 Git 帶來許多新奇且方便的功能，不僅能便於管理，也能檢視自己增修、刪減的檔案！</p>
+<h2 id="What-is-Git"><a href="#What-is-Git" class="headerlink" title="What is Git?"></a>What is Git?</h2><blockquote>
+<p>Git 像是時光機，能保存檔案，也能回顧過去的紀錄，是一種記載著連續性歷史紀錄的系統。</p>
+</blockquote>
+<p>有接觸 Git 工具的人可能會說：「 Git 是一種分散式版本控制系統。」</p>
+<p>聽到這會覺得，每個字都看得懂，但是，仍然不知道實質上是做些什麼？</p>
+<p>來看看自己是不是有過數個檔案、數本報告改了又改，檔案命名換了又換，到最後要繳交的時候，根本搞不清楚自己要的最終版本是哪一個？ 又或者，當與別人一起共同編輯資料，如果對方沒說明，不會知道資料哪裡變更了？</p>
+<p>這種時候，Git 真的就是最好的幫手，因為他可以紀錄每個檔案在何時被新增、何時被修改或者被誰異動過，就這樣紀錄著每個檔案！</p>
+<p>首先，Git 免費且開源 (Open Source) ，大家都可以搜尋 Git 網站，下載並使用！</p>
+<p>當知道 Git 會保留歷史紀錄，使我們完全可以在發生狀況的當下，一一檢視哪裡出問題以及該找誰負責，對於想要有效率地檢視檔案內容哪裡有變動的人來說，真的是一個很方便的工具！</p>
+<h2 id="而，Git-之所以稱之為分散式版本控制系統，源自於他不需要伺服器軟體，就可以運作版本控制，不用擔心伺服器壞了或者沒有網路的環境就無法運作。一般而言，大部分-Git-的操作都在本地數據庫-Local-Repository-裡執行，也就是在自己的電腦上完成操作，所以使用上可以不用過於擔心。"><a href="#而，Git-之所以稱之為分散式版本控制系統，源自於他不需要伺服器軟體，就可以運作版本控制，不用擔心伺服器壞了或者沒有網路的環境就無法運作。一般而言，大部分-Git-的操作都在本地數據庫-Local-Repository-裡執行，也就是在自己的電腦上完成操作，所以使用上可以不用過於擔心。" class="headerlink" title="而，Git 之所以稱之為分散式版本控制系統，源自於他不需要伺服器軟體，就可以運作版本控制，不用擔心伺服器壞了或者沒有網路的環境就無法運作。一般而言，大部分 Git 的操作都在本地數據庫 (Local Repository) 裡執行，也就是在自己的電腦上完成操作，所以使用上可以不用過於擔心。"></a>而，Git 之所以稱之為分散式版本控制系統，源自於他不需要伺服器軟體，就可以運作版本控制，不用擔心伺服器壞了或者沒有網路的環境就無法運作。一般而言，大部分 Git 的操作都在本地數據庫 (Local Repository) 裡執行，也就是在自己的電腦上完成操作，所以使用上可以不用過於擔心。</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">digraph&#123;</span><br><span class="line">rankdir=TB</span><br><span class="line">nodesep=.5</span><br><span class="line">node [fontname=Courier, shape=box]</span><br><span class="line">    a [label=&quot;Working Tree</span><br><span class="line">(Untracked/Unstaged files)&quot;; color=red;];</span><br><span class="line">    b [label=&quot;Changes not staged for commit&quot;; color=red]</span><br><span class="line">    c [label=&quot;Staging Area</span><br><span class="line">(Changes to be committed)&quot;; color=green];</span><br><span class="line">    d [label=&quot;Local Repository&quot;;]</span><br><span class="line">    a-&gt;c [label=&quot;  git add&quot;; color=red]</span><br><span class="line">    c-&gt;d [label=&quot;  git commit&quot;; color=green];</span><br><span class="line">    d-&gt;b [label=&quot;  modified files&quot;; color=red]</span><br><span class="line">    b-&gt;c [label=&quot;  git add&quot;; color=red;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Commands"><a href="#Commands" class="headerlink" title="Commands"></a>Commands</h2><h4 id="Working-Tree"><a href="#Working-Tree" class="headerlink" title="Working Tree"></a>Working Tree</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add                                 - add untrack files to staging area</span><br><span class="line">git add . (. = here)                    - add all the files here</span><br><span class="line">git add --all or git add -A             - add all the files</span><br></pre></td></tr></table></figure>
+<h4 id="Changes-not-staged-for-commit"><a href="#Changes-not-staged-for-commit" class="headerlink" title="Changes not staged for commit"></a>Changes not staged for commit</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git restore                             - discard the changes in working tree</span><br><span class="line">git restore .                           - discard all the changes here</span><br></pre></td></tr></table></figure>
+<h4 id="Staging-Area"><a href="#Staging-Area" class="headerlink" title="Staging Area"></a>Staging Area</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;message&quot;                 - commit tracked files to local repository</span><br></pre></td></tr></table></figure>
+<h4 id="Local-Repository"><a href="#Local-Repository" class="headerlink" title="Local Repository"></a>Local Repository</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone &#x27;URL&#x27;                        - fetch the online sources URL(such as GitHub) to the local repository</span><br><span class="line"></span><br><span class="line">git pull                               - fetch and merge the remote repository to my files</span><br><span class="line">git push                               - push to remote repository</span><br></pre></td></tr></table></figure>
+<h4 id="Useful-Commands"><a href="#Useful-Commands" class="headerlink" title="Useful Commands"></a>Useful Commands</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">git blame `file name`                  - log out the file information</span><br><span class="line">git branch                             - see all the branches</span><br><span class="line">git branch `branch name`               - add a new branch</span><br><span class="line">git branch -d `branch name`            - delete a branch</span><br><span class="line"></span><br><span class="line">git checkout                           - save the deleted file &amp; switch the branch</span><br><span class="line"></span><br><span class="line">git log                                - log out the records</span><br><span class="line">git log -- oneline                     - log out the simplified records</span><br><span class="line">git log -p `file name`                 - log out the specified file record</span><br><span class="line">l                                      - show the detailed list</span><br><span class="line">ls                                     - show the file name</span><br><span class="line">ls *.html (`*` means all)              - show all the HTML file</span><br><span class="line"></span><br><span class="line">git merge -m “merge message”           - merge branches (merge consults)</span><br><span class="line">git mv                                 - renamed the file in git</span><br><span class="line"></span><br><span class="line">git rebase                             - change the base of branches</span><br><span class="line">git reflog or git log -g               - see all the edited records</span><br><span class="line">git reset HEAD, branch, commit         - gets rid of all the current staged files and gives us control over where HEAD should point to.</span><br><span class="line">git reset HEAD\^                       - return the previous one move</span><br><span class="line">git reset HEAD~`number`                - backward to wanted moves</span><br><span class="line">git reset HEAD\^ --mixed               - (drfault) the hidden file will go to working tree</span><br><span class="line">git reset HEAD\^ --soft                - the hidden file will go to staging area</span><br><span class="line">git reset HEAD\^ --hard                - the hidden file will disappear</span><br><span class="line">git restore                            - save the deleted file (return to the previous move)</span><br><span class="line"></span><br><span class="line">git rm                                 - remove the file from git</span><br><span class="line">rm                                     - remove the directory in git</span><br><span class="line">rm *.html                              - remove all the html files</span><br><span class="line">rm -rf                                 - force to remove the ./git directory in the folder</span><br><span class="line"></span><br><span class="line">git switch                             - switch the HEAD of branch</span><br><span class="line">git switch `commit number` --detach    - switch the HEAD of commit files</span><br></pre></td></tr></table></figure>
+<hr>
+<p>迅速地介紹完 Git ，希望大家在使用上都能得心應手，viiisit series 下回見！</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-is-Git"><span class="toc-number">1.</span> <span class="toc-text">What is Git?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%80%8C%EF%BC%8CGit-%E4%B9%8B%E6%89%80%E4%BB%A5%E7%A8%B1%E4%B9%8B%E7%82%BA%E5%88%86%E6%95%A3%E5%BC%8F%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%B5%B1%EF%BC%8C%E6%BA%90%E8%87%AA%E6%96%BC%E4%BB%96%E4%B8%8D%E9%9C%80%E8%A6%81%E4%BC%BA%E6%9C%8D%E5%99%A8%E8%BB%9F%E9%AB%94%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E9%81%8B%E4%BD%9C%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%EF%BC%8C%E4%B8%8D%E7%94%A8%E6%93%94%E5%BF%83%E4%BC%BA%E6%9C%8D%E5%99%A8%E5%A3%9E%E4%BA%86%E6%88%96%E8%80%85%E6%B2%92%E6%9C%89%E7%B6%B2%E8%B7%AF%E7%9A%84%E7%92%B0%E5%A2%83%E5%B0%B1%E7%84%A1%E6%B3%95%E9%81%8B%E4%BD%9C%E3%80%82%E4%B8%80%E8%88%AC%E8%80%8C%E8%A8%80%EF%BC%8C%E5%A4%A7%E9%83%A8%E5%88%86-Git-%E7%9A%84%E6%93%8D%E4%BD%9C%E9%83%BD%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%95%B8%E6%93%9A%E5%BA%AB-Local-Repository-%E8%A3%A1%E5%9F%B7%E8%A1%8C%EF%BC%8C%E4%B9%9F%E5%B0%B1%E6%98%AF%E5%9C%A8%E8%87%AA%E5%B7%B1%E7%9A%84%E9%9B%BB%E8%85%A6%E4%B8%8A%E5%AE%8C%E6%88%90%E6%93%8D%E4%BD%9C%EF%BC%8C%E6%89%80%E4%BB%A5%E4%BD%BF%E7%94%A8%E4%B8%8A%E5%8F%AF%E4%BB%A5%E4%B8%8D%E7%94%A8%E9%81%8E%E6%96%BC%E6%93%94%E5%BF%83%E3%80%82"><span class="toc-number">2.</span> <span class="toc-text">而，Git 之所以稱之為分散式版本控制系統，源自於他不需要伺服器軟體，就可以運作版本控制，不用擔心伺服器壞了或者沒有網路的環境就無法運作。一般而言，大部分 Git 的操作都在本地數據庫 (Local Repository) 裡執行，也就是在自己的電腦上完成操作，所以使用上可以不用過於擔心。</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Commands"><span class="toc-number">3.</span> <span class="toc-text">Commands</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Working-Tree"><span class="toc-number">3.0.1.</span> <span class="toc-text">Working Tree</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Changes-not-staged-for-commit"><span class="toc-number">3.0.2.</span> <span class="toc-text">Changes not staged for commit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Staging-Area"><span class="toc-number">3.0.3.</span> <span class="toc-text">Staging Area</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Local-Repository"><span class="toc-number">3.0.4.</span> <span class="toc-text">Local Repository</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Useful-Commands"><span class="toc-number">3.0.5.</span> <span class="toc-text">Useful Commands</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiining.github.io/2023/07/05/Git/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiining.github.io/2023/07/05/Git/&text=Viisit Git - Time Machine!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiining.github.io/2023/07/05/Git/&title=Viisit Git - Time Machine!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiining.github.io/2023/07/05/Git/&is_video=false&description=Viisit Git - Time Machine!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viisit Git - Time Machine!&body=Check out this article: https://viiining.github.io/2023/07/05/Git/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiining.github.io/2023/07/05/Git/&title=Viisit Git - Time Machine!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiining.github.io/2023/07/05/Git/&title=Viisit Git - Time Machine!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiining.github.io/2023/07/05/Git/&title=Viisit Git - Time Machine!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiining.github.io/2023/07/05/Git/&title=Viisit Git - Time Machine!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiining.github.io/2023/07/05/Git/&name=Viisit Git - Time Machine!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiining.github.io/2023/07/05/Git/&t=Viisit Git - Time Machine!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Zinni Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
