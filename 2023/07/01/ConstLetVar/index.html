@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="在 JavaScript 裡，最常見的 const, let, var，這三者到底有什麼不同？  Basics const 常數在宣告常數上，要注意不能重複宣告也不能重新賦值，但是在宣告陣列或是物件時，可修改其內部屬性。在第三點可以發現 const d &#x3D; [“a”, “b”, “c”] 可以藉由取 index 的方式，更換陣列裡的元素。  1234567891011121314151">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Viiisit JavaScript - const, let, var!">
+<meta property="og:url" content="https://viiining.github.io/2023/07/01/ConstLetVar/index.html">
+<meta property="og:site_name" content="Viii Blog">
+<meta property="og:description" content="在 JavaScript 裡，最常見的 const, let, var，這三者到底有什麼不同？  Basics const 常數在宣告常數上，要注意不能重複宣告也不能重新賦值，但是在宣告陣列或是物件時，可修改其內部屬性。在第三點可以發現 const d &#x3D; [“a”, “b”, “c”] 可以藉由取 index 的方式，更換陣列裡的元素。  1234567891011121314151">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-07-01T12:12:42.000Z">
+<meta property="article:modified_time" content="2023-07-08T15:57:39.031Z">
+<meta property="article:author" content="Zinni Chang">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Viiisit JavaScript - const, let, var!</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/06/28/GitHub/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiining.github.io/2023/07/01/ConstLetVar/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiining.github.io/2023/07/01/ConstLetVar/&text=Viiisit JavaScript - const, let, var!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiining.github.io/2023/07/01/ConstLetVar/&title=Viiisit JavaScript - const, let, var!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiining.github.io/2023/07/01/ConstLetVar/&is_video=false&description=Viiisit JavaScript - const, let, var!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit JavaScript - const, let, var!&body=Check out this article: https://viiining.github.io/2023/07/01/ConstLetVar/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiining.github.io/2023/07/01/ConstLetVar/&title=Viiisit JavaScript - const, let, var!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiining.github.io/2023/07/01/ConstLetVar/&title=Viiisit JavaScript - const, let, var!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiining.github.io/2023/07/01/ConstLetVar/&title=Viiisit JavaScript - const, let, var!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiining.github.io/2023/07/01/ConstLetVar/&title=Viiisit JavaScript - const, let, var!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiining.github.io/2023/07/01/ConstLetVar/&name=Viiisit JavaScript - const, let, var!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiining.github.io/2023/07/01/ConstLetVar/&t=Viiisit JavaScript - const, let, var!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Basics"><span class="toc-number">1.</span> <span class="toc-text">Basics</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%8A%E6%95%B8%E6%87%89%E7%95%B6%E5%AE%A3%E5%91%8A%E5%BE%8C%E5%86%8D%E4%BD%BF%E7%94%A8%EF%BC%8C%E9%81%BF%E5%85%8D%E4%BD%BF%E7%94%A8%E7%84%A1%E5%AE%A3%E5%91%8A%E8%AE%8A%E6%95%B8"><span class="toc-number">1.0.1.</span> <span class="toc-text">變數應當宣告後再使用，避免使用無宣告變數</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%87%89%E7%95%B6%E5%B8%B8%E4%BD%BF%E7%94%A8-const-let-%E8%80%8C%E9%9D%9E-var"><span class="toc-number">1.0.2.</span> <span class="toc-text">應當常使用 const, let 而非 var</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Brief-Summary"><span class="toc-number">1.0.3.</span> <span class="toc-text">Brief Summary</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hoisting-%E6%8F%90%E5%8D%87"><span class="toc-number">2.</span> <span class="toc-text">Hoisting 提升</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#What-is-hoisting"><span class="toc-number">2.0.1.</span> <span class="toc-text">What is hoisting?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Creation-Phase-amp-Execution-Phase"><span class="toc-number">2.0.2.</span> <span class="toc-text">Creation Phase &amp; Execution Phase</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scope-%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">3.</span> <span class="toc-text">Scope 作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#What-is-Scope%EF%BC%9F"><span class="toc-number">3.0.1.</span> <span class="toc-text">What is Scope？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JavaScript-%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">3.0.2.</span> <span class="toc-text">JavaScript 作用域有哪些？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Global-scope-%E5%85%A8%E5%9F%9F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">3.0.2.1.</span> <span class="toc-text">Global scope 全域作用域</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Function-scope-%E5%87%BD%E5%BC%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">3.0.2.2.</span> <span class="toc-text">Function scope 函式作用域</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Block-scope-%E5%8D%80%E5%A1%8A%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">3.0.2.3.</span> <span class="toc-text">Block scope 區塊作用域</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scope-Chain-%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%8F%88"><span class="toc-number">4.</span> <span class="toc-text">Scope Chain 作用域鏈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#What-is-Scope-Chain"><span class="toc-number">4.0.1.</span> <span class="toc-text">What is Scope Chain?</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Viiisit JavaScript - const, let, var!
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Zinni Chang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-07-01T12:12:42.000Z" class="dt-published" itemprop="datePublished">2023-07-01</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Keep-Learning/">Keep Learning</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/JavaScript/" rel="tag">JavaScript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <blockquote>
+<p>在 JavaScript 裡，最常見的 const, let, var，這三者到底有什麼不同？</p>
+</blockquote>
+<h2 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h2><ul>
+<li><strong>const 常數</strong><br>在宣告常數上，要注意<strong>不能重複宣告也不能重新賦值</strong>，但是在<strong>宣告陣列或是物件時，可修改其內部屬性</strong>。<br>在第三點可以發現 const d &#x3D; [“a”, “b”, “c”] 可以藉由取 <strong>index</strong> 的方式，更換陣列裡的元素。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. constant declaration</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="number">2</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. const cannot be re-assigned!</span></span><br><span class="line"><span class="comment">//example 1</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="number">2</span>;</span><br><span class="line">b = <span class="number">3</span>; <span class="comment">// Uncaught TypeError: Assignment to constant variable.</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b);</span><br><span class="line"></span><br><span class="line"><span class="comment">//example 2</span></span><br><span class="line"><span class="keyword">const</span> c = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>];</span><br><span class="line">c = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>]; <span class="comment">// Uncaught TypeError: Assignment to constant variable.</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(c);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. const can changed by index</span></span><br><span class="line"><span class="keyword">const</span> d = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>];</span><br><span class="line">d[<span class="number">0</span>] = <span class="number">333</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(d); <span class="comment">// [333, &#x27;b&#x27;, &#x27;c&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>let 宣告在當前區塊的變數</strong></p>
+</li>
+<li><p><strong>var 宣告一個變數</strong></p>
+<blockquote>
+<p>let 與 var 都是可以用來宣告變數的，差異在:</p>
+<ol>
+<li>var 可以重複宣告，let 則不行</li>
+<li>作用域 (scope) 不同<br>let 作用於 block scope ; var 作用於 function scope。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">1</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b); <span class="comment">// Uncaught SyntaxError: Identifier &#x27;b&#x27; has already been declared</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> c = <span class="number">1</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(c); <span class="comment">// Uncaught SyntaxError: Identifier &#x27;c&#x27; has already been declared</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> d = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> d = <span class="number">1</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(d); <span class="comment">// Uncaught SyntaxError: Identifier &#x27;d&#x27; has already been declared</span></span><br></pre></td></tr></table></figure></blockquote>
+</li>
+</ul>
+<h4 id="變數應當宣告後再使用，避免使用無宣告變數"><a href="#變數應當宣告後再使用，避免使用無宣告變數" class="headerlink" title="變數應當宣告後再使用，避免使用無宣告變數"></a>變數應當宣告後再使用，避免使用無宣告變數</h4><p>有宣告與沒宣告變數差別在是否可以 delete (一個刪除物件的運算)<br><em>delete operator: removes a property from an object.</em></p>
+<p>下方例子說明，無宣告的變數會被當作物件屬性新增，容易在 coding 上誤刪造成 bug，因此回歸到標題所述，<br><strong>變數應當宣告後再使用，避免使用無宣告變數</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> user = <span class="string">&quot;小明&quot;</span>;</span><br><span class="line"><span class="keyword">delete</span> user; <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">user = <span class="string">&quot;小明&quot;</span>;</span><br><span class="line"><span class="keyword">delete</span> user; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="應當常使用-const-let-而非-var"><a href="#應當常使用-const-let-而非-var" class="headerlink" title="應當常使用 const, let 而非 var"></a>應當常使用 const, let 而非 var</h4><p>const 的規則相較 let, var 嚴謹許多，因此在宣告上比較不會有重複的狀況。<br>透過上面的說明，可以知道 let 與 var 很相似，但是！<br>var 沒做好管理，容易發生變數相互覆蓋，最嚴重的情形便是<strong>全域汙染</strong>，因此在使用上要小心。</p>
+<p><em>使用上的方法，可以參考 Google 的說明：<a target="_blank" rel="noopener" href="https://google.github.io/styleguide/jsguide.html#features-declare-types-as-needed">Google JavaScript Style Guide</a></em></p>
+<h4 id="Brief-Summary"><a href="#Brief-Summary" class="headerlink" title="Brief Summary"></a><mark>Brief Summary</mark></h4><table>
+<thead>
+<tr>
+<th align="center">-</th>
+<th align="center">var</th>
+<th align="center">let &#x2F; const</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>Variable Hoisting</strong></td>
+<td align="center">yes</td>
+<td align="center">yes <mark>TDZ</mark></td>
+</tr>
+<tr>
+<td align="center"><strong>Scope</strong></td>
+<td align="center">function scope</td>
+<td align="center">block scope</td>
+</tr>
+<tr>
+<td align="center"><strong>Repeated declaration</strong></td>
+<td align="center">yes</td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td align="center"><strong>Influence to Global attributes</strong></td>
+<td align="center">yes</td>
+<td align="center">no</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="Hoisting-提升"><a href="#Hoisting-提升" class="headerlink" title="Hoisting 提升"></a>Hoisting 提升</h2><p><em>在說明 Block Scope &amp; Function Scope 之前，<br>先來了解 Hoisting (變數提升)，有助於理解之後的內容！</em></p>
+<h4 id="What-is-hoisting"><a href="#What-is-hoisting" class="headerlink" title="What is hoisting?"></a>What is hoisting?</h4><p>在 JavaScript，如果試圖對一個還沒宣告的變數取值，會發生：<br><strong><code>Uncaught ReferenceError: i is not defined</code></strong><br>這是因為沒有宣告，JavaScript 也找不到這個變數！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(i); <span class="comment">// Uncaught ReferenceError: i is not defined</span></span><br></pre></td></tr></table></figure>
+
+<p>但，詭異的事情發生了！<br>在 <code>console.log(l);</code> 之後才宣告一個變數，這會使得結果變為 <code>undefined</code>；<br>這樣的效果就是 Hoisting ，因為發生在變數身上，因此也稱為變數提升 (Variable Hoisting)。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(l); <span class="comment">// undifined</span></span><br><span class="line"><span class="keyword">var</span> l = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>會造成這樣的原因，要了解 JavaScript 在運作上到底做了什麼！</p>
+</blockquote>
+<h4 id="Creation-Phase-amp-Execution-Phase"><a href="#Creation-Phase-amp-Execution-Phase" class="headerlink" title="Creation Phase &amp; Execution Phase"></a>Creation Phase &amp; Execution Phase</h4><p>JavaScript 在運作上分兩個主階段，Creation Phase（創建期） 跟 Execution Phase（執行期）。</p>
+<p><em>所有程式碼在 Creation Phase（創建期）跑完才會進行 Execution Phase（執行期）</em></p>
+<ol>
+<li><p><strong>var Lifecycle</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(l); <span class="comment">// undifined</span></span><br><span class="line"><span class="keyword">var</span> l = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>Creation Phase: a. Declaration b. Initialization</strong><br>在 var 的生命週期裡，創建期會執行：a. 宣告 b. 初始化<br>line 1: <code>console.log(l);</code> 在 Creation Phase（創建期）不會執行，<br>code 會繼續往下到 line 2: <code>var l = 2;</code>，<br>此時，Declaration （宣告） 會完成並記錄 l 這個變數，<br>同時，Initialization （初始化） 會賦予 l 這個變數 undefined。</p>
+</li>
+<li><p><strong>Execution Phase: Assignment</strong><br>接下來進入 Execution Phase（執行期）：賦值，<br>line 1: <code>console.log(l);</code> 因為沒有 Assignment（賦值），<br>因此，在 Initialization 被賦予的 undefined 就被 console.log 出來。<br>code 繼續往下到 line 2: <code>var l = 2;</code>，<br>此時，才會完成 Assignment（賦值），而 l 的數值才改變為 2。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>let &amp; const Lifecycle</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(l); <span class="comment">// Uncaught ReferenceError: Cannot access &#x27;l&#x27; before initialization</span></span><br><span class="line"><span class="keyword">let</span> l = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(l); <span class="comment">// Uncaught ReferenceError: Cannot access &#x27;l&#x27; before initialization</span></span><br><span class="line"><span class="keyword">const</span> l = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>Creation Phase: a. Declaration</strong><br>在 let &amp; const 的生命週期裡，創建期執行： a. 宣告<br>line 1: <code>console.log(l);</code> 在 Creation Phase（創建期）不會執行，<br>code 會繼續往下到 line 2: <code>let l = 2;</code> &#x2F; <code>const l = 2;</code>，<br>此時，Declaration （宣告） 會完成並記錄 l 這個變數，<br>注意！let &amp; const 並沒有初始化的過程，所以 l 這個變數處於 not defined，無法被使用。</p>
+</li>
+<li><p><strong>Execution Phase: Assignment</strong><br>接下來進入 Execution Phase（執行期）：賦值，<br>line 1: <code>console.log(l);</code> 因為沒有 Assignment（賦值），<br>因此，在沒有初始化的狀態下 console.log，就會出現：<br><code>Uncaught ReferenceError: Cannot access &#39;l&#39; before initialization</code><br>此時，因為 line 1 報錯，後面的 code 便無法進行。</p>
+<p><strong>會造成這樣的原因，是因為 TDZ - Temporal Dead Zone！</strong><br><strong>TDZ 可以防止使用一個尚未被賦值的變數；因此，在使用 let &amp; const 要定義在執行之前！</strong></p>
+<blockquote>
+<p>A variable declared with let, const, or class is said to be in a “temporal dead zone” (TDZ) from the start of the block until code execution reaches the line where the variable is declared and initialized. While inside the TDZ, the variable has not been initialized with a value, and any attempt to access it will result in a ReferenceError.<br>Reference: <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#temporal_dead_zone_tdz">MDN - Temporal dead zone (TDZ)</a></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="Scope-作用域"><a href="#Scope-作用域" class="headerlink" title="Scope 作用域"></a>Scope 作用域</h2><p><em>終於回歸到先前要說明的 Block Scope &amp; Function Scope!</em></p>
+<h4 id="What-is-Scope？"><a href="#What-is-Scope？" class="headerlink" title="What is Scope？"></a>What is Scope？</h4><p>在詳細介紹前，先來閱讀一下 MDN 的定義說明：</p>
+<blockquote>
+<p>The scope is the current context of execution in which values and expressions are “visible” or can be referenced. If a variable or expression is not in the current scope, it will not be available for use. Scopes can also be layered in a hierarchy, so that child scopes have access to parent scopes, but not vice versa.<br>Reference: <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Glossary/Scope">MDN - Scope</a></p>
+</blockquote>
+<p>總括來說，作用域就是有效範圍，以下歸納兩個重點：</p>
+<ul>
+<li>離開有效範圍的變數無法被存取</li>
+<li>外部作用域無法取得內部作用域的變數，但內層的變數可以取得外層的變數</li>
+</ul>
+<p><em>(在接下來的說明中，主要講的是<strong>變數的作用域</strong>)</em></p>
+<hr>
+<h4 id="JavaScript-作用域有哪些？"><a href="#JavaScript-作用域有哪些？" class="headerlink" title="JavaScript 作用域有哪些？"></a>JavaScript 作用域有哪些？</h4><p>JavaScript 有三種類型的作用域：</p>
+<ul>
+<li>Global scope</li>
+<li>Function scope</li>
+<li>Block scope</li>
+</ul>
+<p><em>JavaScript 作用域在引入 ES6 之後，因為 let 與 const 的關係而有了區塊作用域 (Block scope)。</em></p>
+<hr>
+<h5 id="Global-scope-全域作用域"><a href="#Global-scope-全域作用域" class="headerlink" title="Global scope 全域作用域"></a>Global scope 全域作用域</h5><p>全域作用域是 JavaScript 作用域的最外層（window 物件就是在這範圍裡），<br><strong>在全域作用域宣告的變數或函式都可以在其他作用域取得</strong>，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> number = <span class="number">2</span>;  <span class="comment">// 全域變數</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getNumber</span>(<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(number);  <span class="comment">// 2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(number);  <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p>要注意的是！<br>如果宣告很多變數、函式卻沒使用，他們就全部都在全域作用域中，會造成<strong>全域污染</strong>，容易引起命名衝突。</p>
+<h5 id="Function-scope-函式作用域"><a href="#Function-scope-函式作用域" class="headerlink" title="Function scope 函式作用域"></a>Function scope 函式作用域</h5><p>當建立一個函式，就會生成函式作用域；<br>不論是 const、let 或 var，當他們在函式中宣告時，皆屬於函式作用域。<br><strong>在函式作用域裡的變數無法在函式外面取得，且該變數只存在於函式裡</strong>，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// const</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getNumber</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> number = <span class="number">2</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(number); <span class="comment">// 2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">getNumber</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(number); <span class="comment">// Uncaught ReferenceError: number is not defined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// let</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getNumber</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> number = <span class="number">3</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(number); <span class="comment">// 3</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">getNumber</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(number); <span class="comment">// Uncaught ReferenceError: number is not defined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// var</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getNumber</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> number = <span class="number">4</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(number); <span class="comment">// 4</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">getNumber</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(number); <span class="comment">// Uncaught ReferenceError: number is not defined</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="Block-scope-區塊作用域"><a href="#Block-scope-區塊作用域" class="headerlink" title="Block scope 區塊作用域"></a>Block scope 區塊作用域</h5><p><em>ES6 引入了 const, let 變數，這 2 個變數宣告方式提供了區塊作用域。</em></p>
+<p>區塊作用域的範圍只存在於 <code>&#123; &#125;</code><br><strong>在區塊作用域裡的變數無法在區塊外面取得，且該變數只存在於<code>&#123; &#125;</code>裡</strong>，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getNumber</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> number = <span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(number); <span class="comment">// Uncaught ReferenceError: number is not defined</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">getNumber</span>();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>const, let 作用於 Block Scope； var 作用於 Function Scope</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// const</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getNumber</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> number = <span class="number">2</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(number); <span class="comment">// Uncaught ReferenceError: number is not defined</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">getNumber</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// let</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getNumber</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> number = <span class="number">3</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(number); <span class="comment">// Uncaught ReferenceError: number is not defined</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">getNumber</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// var 不會被 &#123;&#125; 限制</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getNumber</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> number = <span class="number">4</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(number); <span class="comment">// 4</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">getNumber</span>();</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>作用域重要在於<strong>可以明確規範變數的使用範圍</strong>，並在程式中不同的位置使用相同名稱的變數，<br>寫出來的程式更具可讀性與可維護性，這部分的延伸便是閉包，之後的文章會繼續說明。</p>
+</blockquote>
+<hr>
+<h2 id="Scope-Chain-作用域鏈"><a href="#Scope-Chain-作用域鏈" class="headerlink" title="Scope Chain 作用域鏈"></a>Scope Chain 作用域鏈</h2><h4 id="What-is-Scope-Chain"><a href="#What-is-Scope-Chain" class="headerlink" title="What is Scope Chain?"></a>What is Scope Chain?</h4><p>當 JavaScript 使用每一個變數的時候，會先嘗試在當前作用域中尋找該變數；<br>若在當前的作用域找不到該變數，會一直往外層作用域尋找，直到全域作用域還是沒找到，就會直接報錯。<br>這一層一層的關係，就是作用域鏈。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getNumber</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 在 getNumber 函式作用域中沒有變數 a，於是透過作用域鏈往外層尋找，</span></span><br><span class="line">  <span class="comment">// 在這邊的外層是全域，也就找到了 a 變數</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 100</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">getNumber</span>();</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><em>references:</em><br><em>- <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Glossary/Scope">MDN</a></em><br><em>- <a target="_blank" rel="noopener" href="https://jianline.com/javascript-scope-and-scope-chain/">ㄚ建的技能樹</a></em><br><em>- <a target="_blank" rel="noopener" href="https://www.explainthis.io/zh-hant/interview-guides/javascript/what-is-scope-and-scope-chain">ExplainThis</a></em></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Basics"><span class="toc-number">1.</span> <span class="toc-text">Basics</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%8A%E6%95%B8%E6%87%89%E7%95%B6%E5%AE%A3%E5%91%8A%E5%BE%8C%E5%86%8D%E4%BD%BF%E7%94%A8%EF%BC%8C%E9%81%BF%E5%85%8D%E4%BD%BF%E7%94%A8%E7%84%A1%E5%AE%A3%E5%91%8A%E8%AE%8A%E6%95%B8"><span class="toc-number">1.0.1.</span> <span class="toc-text">變數應當宣告後再使用，避免使用無宣告變數</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%87%89%E7%95%B6%E5%B8%B8%E4%BD%BF%E7%94%A8-const-let-%E8%80%8C%E9%9D%9E-var"><span class="toc-number">1.0.2.</span> <span class="toc-text">應當常使用 const, let 而非 var</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Brief-Summary"><span class="toc-number">1.0.3.</span> <span class="toc-text">Brief Summary</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hoisting-%E6%8F%90%E5%8D%87"><span class="toc-number">2.</span> <span class="toc-text">Hoisting 提升</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#What-is-hoisting"><span class="toc-number">2.0.1.</span> <span class="toc-text">What is hoisting?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Creation-Phase-amp-Execution-Phase"><span class="toc-number">2.0.2.</span> <span class="toc-text">Creation Phase &amp; Execution Phase</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scope-%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">3.</span> <span class="toc-text">Scope 作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#What-is-Scope%EF%BC%9F"><span class="toc-number">3.0.1.</span> <span class="toc-text">What is Scope？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JavaScript-%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">3.0.2.</span> <span class="toc-text">JavaScript 作用域有哪些？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Global-scope-%E5%85%A8%E5%9F%9F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">3.0.2.1.</span> <span class="toc-text">Global scope 全域作用域</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Function-scope-%E5%87%BD%E5%BC%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">3.0.2.2.</span> <span class="toc-text">Function scope 函式作用域</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Block-scope-%E5%8D%80%E5%A1%8A%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">3.0.2.3.</span> <span class="toc-text">Block scope 區塊作用域</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scope-Chain-%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%8F%88"><span class="toc-number">4.</span> <span class="toc-text">Scope Chain 作用域鏈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#What-is-Scope-Chain"><span class="toc-number">4.0.1.</span> <span class="toc-text">What is Scope Chain?</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiining.github.io/2023/07/01/ConstLetVar/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiining.github.io/2023/07/01/ConstLetVar/&text=Viiisit JavaScript - const, let, var!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiining.github.io/2023/07/01/ConstLetVar/&title=Viiisit JavaScript - const, let, var!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiining.github.io/2023/07/01/ConstLetVar/&is_video=false&description=Viiisit JavaScript - const, let, var!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit JavaScript - const, let, var!&body=Check out this article: https://viiining.github.io/2023/07/01/ConstLetVar/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiining.github.io/2023/07/01/ConstLetVar/&title=Viiisit JavaScript - const, let, var!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiining.github.io/2023/07/01/ConstLetVar/&title=Viiisit JavaScript - const, let, var!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiining.github.io/2023/07/01/ConstLetVar/&title=Viiisit JavaScript - const, let, var!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiining.github.io/2023/07/01/ConstLetVar/&title=Viiisit JavaScript - const, let, var!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiining.github.io/2023/07/01/ConstLetVar/&name=Viiisit JavaScript - const, let, var!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiining.github.io/2023/07/01/ConstLetVar/&t=Viiisit JavaScript - const, let, var!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Zinni Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
