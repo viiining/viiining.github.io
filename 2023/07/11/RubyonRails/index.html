@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="Ruby 實作 - 建立網站Route, Controller, View(待編輯！)實作一個網站，這網站有 homepage, aboutpage… Blog Configuration  title: string password: string content: text status: string, default: draft draft &#x2F; publish    首先，要">
+    <meta name="description" content="Ruby 實作Route, Controller, ViewBlog Configuration  - title: string - password: string - content: text - status: string, default: draft - draft &#x2F; publish  實作一個網站，這網站有 homepage, aboutpage… 首先，要先在 routes.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Viiisit Ruby on Rails - 實作 Blog !">
+<meta property="og:title" content="Viiisit Ruby on Rails - 實作 Route, Controller, View !">
 <meta property="og:url" content="https://viiining.github.io/2023/07/11/RubyonRails/index.html">
 <meta property="og:site_name" content="Viii Blog">
-<meta property="og:description" content="Ruby 實作 - 建立網站Route, Controller, View(待編輯！)實作一個網站，這網站有 homepage, aboutpage… Blog Configuration  title: string password: string content: text status: string, default: draft draft &#x2F; publish    首先，要">
+<meta property="og:description" content="Ruby 實作Route, Controller, ViewBlog Configuration  - title: string - password: string - content: text - status: string, default: draft - draft &#x2F; publish  實作一個網站，這網站有 homepage, aboutpage… 首先，要先在 routes.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-07-11T07:02:20.000Z">
-<meta property="article:modified_time" content="2023-07-12T04:35:22.745Z">
+<meta property="article:modified_time" content="2023-07-12T10:08:02.139Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="Ruby on Rails">
 <meta name="twitter:card" content="summary">
@@ -37,7 +37,7 @@
       
     
     <!-- title -->
-    <title>Viiisit Ruby on Rails - 實作 Blog !</title>
+    <title>Viiisit Ruby on Rails - 實作 Route, Controller, View !</title>
     <!-- async scripts -->
     <!-- Google Analytics -->
 
@@ -101,23 +101,23 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiining.github.io/2023/07/11/RubyonRails/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiining.github.io/2023/07/11/RubyonRails/&text=Viiisit Ruby on Rails - 實作 Blog !"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Blog !"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiining.github.io/2023/07/11/RubyonRails/&is_video=false&description=Viiisit Ruby on Rails - 實作 Blog !"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - 實作 Blog !&body=Check out this article: https://viiining.github.io/2023/07/11/RubyonRails/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Blog !"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Blog !"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Blog !"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Blog !"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiining.github.io/2023/07/11/RubyonRails/&name=Viiisit Ruby on Rails - 實作 Blog !&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiining.github.io/2023/07/11/RubyonRails/&t=Viiisit Ruby on Rails - 實作 Blog !"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiining.github.io/2023/07/11/RubyonRails/&text=Viiisit Ruby on Rails - 實作 Route, Controller, View !"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Route, Controller, View !"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiining.github.io/2023/07/11/RubyonRails/&is_video=false&description=Viiisit Ruby on Rails - 實作 Route, Controller, View !"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - 實作 Route, Controller, View !&body=Check out this article: https://viiining.github.io/2023/07/11/RubyonRails/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Route, Controller, View !"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Route, Controller, View !"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Route, Controller, View !"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Route, Controller, View !"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiining.github.io/2023/07/11/RubyonRails/&name=Viiisit Ruby on Rails - 實作 Route, Controller, View !&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiining.github.io/2023/07/11/RubyonRails/&t=Viiisit Ruby on Rails - 實作 Route, Controller, View !"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ruby-%E5%AF%A6%E4%BD%9C-%E5%BB%BA%E7%AB%8B%E7%B6%B2%E7%AB%99"><span class="toc-number">1.</span> <span class="toc-text">Ruby 實作 - 建立網站</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Route-Controller-View"><span class="toc-number">1.0.1.</span> <span class="toc-text">Route, Controller, View</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ruby-%E5%AF%A6%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">Ruby 實作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Route-Controller-View"><span class="toc-number">1.0.1.</span> <span class="toc-text">Route, Controller, View</span></a></li></ol></li></ol></li></ol>
       </div>
     
   </span>
@@ -130,7 +130,7 @@
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
-        Viiisit Ruby on Rails - 實作 Blog !
+        Viiisit Ruby on Rails - 實作 Route, Controller, View !
     </h1>
 
 
@@ -167,17 +167,15 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="Ruby-實作-建立網站"><a href="#Ruby-實作-建立網站" class="headerlink" title="Ruby 實作 - 建立網站"></a>Ruby 實作 - 建立網站</h2><h4 id="Route-Controller-View"><a href="#Route-Controller-View" class="headerlink" title="Route, Controller, View"></a>Route, Controller, View</h4><p>(待編輯！)實作一個網站，這網站有 <strong>homepage, aboutpage</strong>…</p>
-<p>Blog Configuration</p>
-<ul>
-<li>title: string</li>
-<li>password: string</li>
-<li>content: text</li>
-<li>status: string, default: draft<ul>
-<li>draft &#x2F; publish</li>
-</ul>
-</li>
-</ul>
+    <h2 id="Ruby-實作"><a href="#Ruby-實作" class="headerlink" title="Ruby 實作"></a>Ruby 實作</h2><h4 id="Route-Controller-View"><a href="#Route-Controller-View" class="headerlink" title="Route, Controller, View"></a>Route, Controller, View</h4><pre><code>Blog Configuration
+
+- title: string
+- password: string
+- content: text
+- status: string, default: draft
+- draft / publish
+</code></pre>
+<p>實作一個網站，這網站有 <strong>homepage, aboutpage</strong>…</p>
 <p>首先，要先在 <strong>routes.rb 檔案</strong>裡設定新路徑：</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Rails</span>.application.routes.draw <span class="keyword">do</span></span><br><span class="line">  <span class="comment"># get &#x27;/about&#x27;, controller: &#x27;pages&#x27;, action: &#x27;about&#x27;</span></span><br><span class="line">  <span class="comment"># get ‘/路徑名稱’ -&gt; 建立路徑, to: &#x27;controller名稱#action名稱&#x27; -&gt; 建立 controller 跟 action</span></span><br><span class="line">  get <span class="string">&#x27;/&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;pages#home&#x27;</span> <span class="comment"># 建立 homepage</span></span><br><span class="line">  get <span class="string">&#x27;/about&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;pages#about&#x27;</span> <span class="comment"># 建立 aboutpage</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
@@ -217,23 +215,23 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ruby-%E5%AF%A6%E4%BD%9C-%E5%BB%BA%E7%AB%8B%E7%B6%B2%E7%AB%99"><span class="toc-number">1.</span> <span class="toc-text">Ruby 實作 - 建立網站</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Route-Controller-View"><span class="toc-number">1.0.1.</span> <span class="toc-text">Route, Controller, View</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ruby-%E5%AF%A6%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">Ruby 實作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Route-Controller-View"><span class="toc-number">1.0.1.</span> <span class="toc-text">Route, Controller, View</span></a></li></ol></li></ol></li></ol>
       </div>
     
 
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiining.github.io/2023/07/11/RubyonRails/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiining.github.io/2023/07/11/RubyonRails/&text=Viiisit Ruby on Rails - 實作 Blog !"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Blog !"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiining.github.io/2023/07/11/RubyonRails/&is_video=false&description=Viiisit Ruby on Rails - 實作 Blog !"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - 實作 Blog !&body=Check out this article: https://viiining.github.io/2023/07/11/RubyonRails/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Blog !"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Blog !"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Blog !"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Blog !"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiining.github.io/2023/07/11/RubyonRails/&name=Viiisit Ruby on Rails - 實作 Blog !&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiining.github.io/2023/07/11/RubyonRails/&t=Viiisit Ruby on Rails - 實作 Blog !"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiining.github.io/2023/07/11/RubyonRails/&text=Viiisit Ruby on Rails - 實作 Route, Controller, View !"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Route, Controller, View !"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiining.github.io/2023/07/11/RubyonRails/&is_video=false&description=Viiisit Ruby on Rails - 實作 Route, Controller, View !"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - 實作 Route, Controller, View !&body=Check out this article: https://viiining.github.io/2023/07/11/RubyonRails/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Route, Controller, View !"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Route, Controller, View !"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Route, Controller, View !"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiining.github.io/2023/07/11/RubyonRails/&title=Viiisit Ruby on Rails - 實作 Route, Controller, View !"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiining.github.io/2023/07/11/RubyonRails/&name=Viiisit Ruby on Rails - 實作 Route, Controller, View !&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiining.github.io/2023/07/11/RubyonRails/&t=Viiisit Ruby on Rails - 實作 Route, Controller, View !"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
