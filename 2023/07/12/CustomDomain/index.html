@@ -6,17 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="gandi 購買網域cloudflare 架設 DNS(目前尚未成功) 透過在 gandi 買完的網域名稱，可以使用 cloudflare 來建置外部的伺服器。一開始單用 GitHub Pages 做設置，始終無法成功，可能是當初伺服器沒有架設好，為了尋求解法，轉用 cloudflare 美國的雲端運算服務商， 小豆說故事，這裡有滿詳細的介紹，可以參考看看～！ GitHub Settings在 G">
+    <meta name="description" content="OMG!!! 終於成功了！（灑花～過程真的一波三折，但是看到成功的瞬間，內心真的灑下一百種花，先為自己鼓掌一下！！！  這裡分享以 Hexo + GitHub Pages + gandi + Cloudflare 上架！  gandi 購買網域透過龍哥的介紹，根本跳過前面爬文篩選可以買網域的關卡 ୧ʕ•̀ᴥ•́ʔ୨直接使用 gandi 作為我購買人生第一個網域的地方！  進入官網註冊帳號，如同常見">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Custom Domain - to create your own domain!">
+<meta property="og:title" content="Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !">
 <meta property="og:url" content="https://viiisit.com/2023/07/12/CustomDomain/index.html">
 <meta property="og:site_name" content="Viii Blog">
-<meta property="og:description" content="gandi 購買網域cloudflare 架設 DNS(目前尚未成功) 透過在 gandi 買完的網域名稱，可以使用 cloudflare 來建置外部的伺服器。一開始單用 GitHub Pages 做設置，始終無法成功，可能是當初伺服器沒有架設好，為了尋求解法，轉用 cloudflare 美國的雲端運算服務商， 小豆說故事，這裡有滿詳細的介紹，可以參考看看～！ GitHub Settings在 G">
+<meta property="og:description" content="OMG!!! 終於成功了！（灑花～過程真的一波三折，但是看到成功的瞬間，內心真的灑下一百種花，先為自己鼓掌一下！！！  這裡分享以 Hexo + GitHub Pages + gandi + Cloudflare 上架！  gandi 購買網域透過龍哥的介紹，根本跳過前面爬文篩選可以買網域的關卡 ୧ʕ•̀ᴥ•́ʔ୨直接使用 gandi 作為我購買人生第一個網域的地方！  進入官網註冊帳號，如同常見">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-07-12T15:14:28.000Z">
-<meta property="article:modified_time" content="2023-07-15T07:49:33.172Z">
+<meta property="article:modified_time" content="2023-07-15T16:58:07.039Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="DNS">
+<meta property="article:tag" content="GitHub Pages">
+<meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary">
     
     
@@ -37,7 +39,7 @@
       
     
     <!-- title -->
-    <title>Custom Domain - to create your own domain!</title>
+    <title>Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !</title>
     <!-- async scripts -->
     <!-- Google Analytics -->
 
@@ -103,16 +105,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/2023/07/12/CustomDomain/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/2023/07/12/CustomDomain/&text=Custom Domain - to create your own domain!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - to create your own domain!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/2023/07/12/CustomDomain/&is_video=false&description=Custom Domain - to create your own domain!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Custom Domain - to create your own domain!&body=Check out this article: https://viiisit.com/2023/07/12/CustomDomain/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - to create your own domain!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - to create your own domain!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - to create your own domain!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - to create your own domain!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/2023/07/12/CustomDomain/&name=Custom Domain - to create your own domain!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/2023/07/12/CustomDomain/&t=Custom Domain - to create your own domain!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/2023/07/12/CustomDomain/&text=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/2023/07/12/CustomDomain/&is_video=false&description=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !&body=Check out this article: https://viiisit.com/2023/07/12/CustomDomain/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/2023/07/12/CustomDomain/&name=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/2023/07/12/CustomDomain/&t=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -132,7 +134,7 @@
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
-        Custom Domain - to create your own domain!
+        Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !
     </h1>
 
 
@@ -160,7 +162,7 @@
       
     <div class="article-tag">
         <i class="fa-solid fa-tag"></i>
-        <a class="p-category" href="/tags/DNS/" rel="tag">DNS</a>
+        <a class="p-category" href="/tags/DNS/" rel="tag">DNS</a>, <a class="p-category" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a>, <a class="p-category" href="/tags/Hexo/" rel="tag">Hexo</a>
     </div>
 
 
@@ -169,7 +171,18 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="gandi-購買網域"><a href="#gandi-購買網域" class="headerlink" title="gandi 購買網域"></a>gandi 購買網域</h2><h2 id="cloudflare-架設-DNS"><a href="#cloudflare-架設-DNS" class="headerlink" title="cloudflare 架設 DNS"></a>cloudflare 架設 DNS</h2><p>(目前尚未成功)</p>
+    <p>OMG!!! 終於成功了！（灑花～<br><em>過程真的一波三折，但是看到成功的瞬間，內心真的灑下一百種花，先為自己鼓掌一下！！！</em></p>
+<blockquote>
+<p>這裡分享以 Hexo + GitHub Pages + gandi + Cloudflare 上架！</p>
+</blockquote>
+<h2 id="gandi-購買網域"><a href="#gandi-購買網域" class="headerlink" title="gandi 購買網域"></a>gandi 購買網域</h2><p>透過龍哥的介紹，根本跳過前面爬文篩選可以買網域的關卡 ୧ʕ•̀ᴥ•́ʔ୨<br>直接使用 <a target="_blank" rel="noopener" href="https://www.gandi.net/zh-Hant">gandi</a> 作為我購買人生第一個網域的地方！</p>
+<ul>
+<li>進入官網註冊帳號，如同常見的註冊方式，請輸入所需資訊並驗證信箱，回到 gandi 就正式來買網域囉！</li>
+<li>前往 <a target="_blank" rel="noopener" href="https://www.gandi.net/zh-Hant">gandi</a> 首頁，在搜索欄輸入想要的單字或是網域名，進行搜索，如果沒有人使用過，就會顯示出數種可以用的網域名，其中包括 <code>.me</code> <code>.com</code> <code>.tw</code>，依據每個域名而有不同的價格，可以依照個人需求。</li>
+<li>gandi 會寄送相關信件。</li>
+</ul>
+<p><em>接著我們要搭配 cloudflare 來架設 DNS</em></p>
+<h2 id="cloudflare-架設-DNS"><a href="#cloudflare-架設-DNS" class="headerlink" title="cloudflare 架設 DNS"></a>cloudflare 架設 DNS</h2><p>(目前尚未成功)</p>
 <p>透過在 gandi 買完的網域名稱，可以使用 cloudflare 來建置外部的伺服器。<br><em>一開始單用 GitHub Pages 做設置，始終無法成功，可能是當初伺服器沒有架設好，為了尋求解法，轉用 cloudflare 美國的雲端運算服務商，</em></p>
 <p><a target="_blank" rel="noopener" href="https://www.imjanehsieh.com/cloudflare-teaching/">小豆說故事</a>，這裡有滿詳細的介紹，可以參考看看～！</p>
 <h2 id="GitHub-Settings"><a href="#GitHub-Settings" class="headerlink" title="GitHub Settings"></a>GitHub Settings</h2><p>在 GitHub 上建立的 GitHub Pages 會有一個網址，這個網址是 GitHub 提供的，這次是要來設置自己的專屬 Domain，透過每個步驟來成功建置！</p>
@@ -224,16 +237,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/2023/07/12/CustomDomain/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/2023/07/12/CustomDomain/&text=Custom Domain - to create your own domain!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - to create your own domain!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/2023/07/12/CustomDomain/&is_video=false&description=Custom Domain - to create your own domain!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Custom Domain - to create your own domain!&body=Check out this article: https://viiisit.com/2023/07/12/CustomDomain/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - to create your own domain!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - to create your own domain!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - to create your own domain!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - to create your own domain!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/2023/07/12/CustomDomain/&name=Custom Domain - to create your own domain!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/2023/07/12/CustomDomain/&t=Custom Domain - to create your own domain!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/2023/07/12/CustomDomain/&text=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/2023/07/12/CustomDomain/&is_video=false&description=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !&body=Check out this article: https://viiisit.com/2023/07/12/CustomDomain/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/2023/07/12/CustomDomain/&title=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/2023/07/12/CustomDomain/&name=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/2023/07/12/CustomDomain/&t=Custom Domain - 從零到有，成功掛上獨一無二網域的 Blog !"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
