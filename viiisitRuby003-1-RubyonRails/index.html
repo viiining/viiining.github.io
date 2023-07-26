@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="before_action :先備知識RESTREST (Representational State Transfer) 是一種軟體架構風格， 主要用於設計網路應用程式的 API(幫助世界各地不同軟體、程式在網際網路中能夠互相傳遞訊息)它基於資源（Resource）的概念，每個資源都有唯一的識別符號（URI），並且可以透過不同的 HTTP 方法（GET、POST、PUT、DELETE 等）來執行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Viiisit Ruby on Rails - 先備知識!">
+<meta property="og:url" content="https://viiisit.com/viiisitRuby003-1-RubyonRails/index.html">
+<meta property="og:site_name" content="Viiisit!">
+<meta property="og:description" content="before_action :先備知識RESTREST (Representational State Transfer) 是一種軟體架構風格， 主要用於設計網路應用程式的 API(幫助世界各地不同軟體、程式在網際網路中能夠互相傳遞訊息)它基於資源（Resource）的概念，每個資源都有唯一的識別符號（URI），並且可以透過不同的 HTTP 方法（GET、POST、PUT、DELETE 等）來執行">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://railsbook.tw/images/chapter10/mvc.png">
+<meta property="article:published_time" content="2023-07-10T03:05:28.000Z">
+<meta property="article:modified_time" content="2023-07-26T12:42:31.707Z">
+<meta property="article:author" content="Zinni Chang">
+<meta property="article:tag" content="Ruby on Rails">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://railsbook.tw/images/chapter10/mvc.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Viiisit Ruby on Rails - 先備知識!</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/viiisitRuby003-2-RubyonRails/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/viiisitRuby002-ConstantVariable/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/viiisitRuby003-1-RubyonRails/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&text=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&is_video=false&description=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - 先備知識!&body=Check out this article: https://viiisit.com/viiisitRuby003-1-RubyonRails/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&name=Viiisit Ruby on Rails - 先備知識!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/viiisitRuby003-1-RubyonRails/&t=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#before-action-%E5%85%88%E5%82%99%E7%9F%A5%E8%AD%98"><span class="toc-number">1.</span> <span class="toc-text">before_action :先備知識</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#REST"><span class="toc-number">1.1.</span> <span class="toc-text">REST</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RESTful"><span class="toc-number">1.2.</span> <span class="toc-text">RESTful</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CRUD"><span class="toc-number">1.3.</span> <span class="toc-text">CRUD</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%B0%8D%E6%87%89%E7%9A%84-SQL-%E8%AA%9E%E6%B3%95%E3%80%81HTTP-%E8%AB%8B%E6%B1%82%E3%80%81REST-%E8%A1%A8%E7%8F%BE%E5%B1%A4%E7%8B%80%E6%85%8B%E8%BD%89%E6%8F%9B"><span class="toc-number">1.3.1.</span> <span class="toc-text">相對應的 SQL 語法、HTTP 請求、REST 表現層狀態轉換</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Route-Controller-View-Model-Migration"><span class="toc-number">1.4.</span> <span class="toc-text">Route, Controller, View, Model, Migration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E5%B0%88%E6%A1%88%EF%BC%81"><span class="toc-number">1.5.</span> <span class="toc-text">建立專案！</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Viiisit Ruby on Rails - 先備知識!
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Zinni Chang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-07-10T03:05:28.000Z" class="dt-published" itemprop="datePublished">2023-07-10</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Keep-Learning/">Keep Learning</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Ruby-on-Rails/" rel="tag">Ruby on Rails</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="before-action-先備知識"><a href="#before-action-先備知識" class="headerlink" title="before_action :先備知識"></a>before_action :先備知識</h2><h3 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h3><p>REST (Representational State Transfer) 是一種軟體架構風格，<br> <mark>主要用於設計網路應用程式的 API(幫助世界各地不同軟體、程式在網際網路中能夠互相傳遞訊息)</mark><br>它基於資源（Resource）的概念，每個資源都有唯一的識別符號（URI），<br>並且可以透過不同的 HTTP 方法（GET、POST、PUT、DELETE 等）來執行相應的操作。</p>
+<blockquote>
+<p>每個網頁都可視為一個資源提供使用者使用，而我們就可以透過 URL，也就是這些資源的地址，<br>來取得這些資源並在瀏覽器上使用。</p>
+</blockquote>
+<pre><code>Remark:
+URI - Uniform Resource Identifier，
+其中最常看見的 URL 是 URI 的一種特殊形式，兩者都是用來唯一識別資源的地址。
+</code></pre>
+<h3 id="RESTful"><a href="#RESTful" class="headerlink" title="RESTful"></a>RESTful</h3><p>RESTful 是符合 REST 設計原則的 API。當我們在設計 API 時，遵循 REST 的原則，特別是適當地使用 HTTP 方法、URI 和回應狀態碼，我們就可以稱這個 API 為 RESTful API。</p>
+<pre><code>Remark:
+所謂的 API 是應用程式介面 (application programming interface)，
+網址也是一種應用程式的「介面」，故稱為 API。
+</code></pre>
+<p><mark> RESTful 風格的網址設計強調從路由結構就能看出要對什麼資料、進行什麼操作。 </mark></p>
+<p>Ruby on Rails 在設計上已經將 RESTful 的路由設定架構出來了。透過 Rails 的路徑設定，可以快速地建立符合 RESTful 概念的路由，並使應用程序遵循 RESTful 架構來處理資源的 CRUD 操作。</p>
+<p>在之後 <code>Viiisit Ruby on Rails - Route!</code> 的篇章中，就能看的出來其中的設計理念了！</p>
+<h3 id="CRUD"><a href="#CRUD" class="headerlink" title="CRUD"></a>CRUD</h3><p><strong>CRUD 是 Create, Read, Update, Delete</strong> 四個字母的縮寫，中文是「增刪查改」；<br>這是一連串常見的動作行為，通常是為了針對某個特定資源所作出的舉動，如：建立資料、讀取資料等。<br>這四個行為最常見的用途是在<strong>使用 SQL 資料庫</strong>與<strong>網站的 API 埠口</strong>的時候。</p>
+<h4 id="相對應的-SQL-語法、HTTP-請求、REST-表現層狀態轉換"><a href="#相對應的-SQL-語法、HTTP-請求、REST-表現層狀態轉換" class="headerlink" title="相對應的 SQL 語法、HTTP 請求、REST 表現層狀態轉換"></a>相對應的 SQL 語法、HTTP 請求、REST 表現層狀態轉換</h4><table>
+<thead>
+<tr>
+<th align="center">-</th>
+<th align="center">SQL</th>
+<th align="center">HTTP</th>
+<th align="center">REST 表現層狀態轉換</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Create 建立</td>
+<td align="center">INSERT</td>
+<td align="center">PUT &#x2F; POST</td>
+<td align="center">POST</td>
+</tr>
+<tr>
+<td align="center">Read 讀取</td>
+<td align="center">SELECT</td>
+<td align="center">GET</td>
+<td align="center">GET</td>
+</tr>
+<tr>
+<td align="center">Update 更新</td>
+<td align="center">UPDATE</td>
+<td align="center">PUT &#x2F; POST &#x2F; PATCH</td>
+<td align="center">PUT</td>
+</tr>
+<tr>
+<td align="center">Delete 刪除</td>
+<td align="center">DELETE</td>
+<td align="center">DELETE</td>
+<td align="center">DELETE</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="Route-Controller-View-Model-Migration"><a href="#Route-Controller-View-Model-Migration" class="headerlink" title="Route, Controller, View, Model, Migration"></a>Route, Controller, View, Model, Migration</h3><p>基本了解 CRUD 是什麼之後，接著要開始學習在 Ruby on Rials 裡面，<br>Route, Controller, View, Model, Migration 各自扮演的角色是什麼!</p>
+<p>在 CRUD 實作裡，最常接觸的就是 Route, Controller, View, Model, Migration，<br>以下分別解釋他們的作用：</p>
+<ul>
+<li><p>Route 定義應用程式路徑，將特定的 URL 導向相應的 <code>controller#action</code>。</p>
+</li>
+<li><p>View 呈現資料和生成用戶界面，顯示資料給使用者，以及收集和顯示表單數據。</p>
+</li>
+<li><p>Controller 處理 route 請求，協調 model 與 view 之間的交互作用。<br>接收來自用戶的請求，檢索或修改資料，然後將資料傳遞給 view 進行呈現。</p>
+</li>
+<li><p>Model 定義資料庫結構，包括表格和屬性，並提供對資料的存取和操作。</p>
+</li>
+<li><p>Migration 用於管理資料庫結構變更的工具。</p>
+<pre><code>Remark:
+Migration 是定義資料庫結構的版本控制，提供一種便捷的方式來新增、修改或刪除資料表、欄位、索引等。
+每個 Migration 文件都包含一些操作，用於改變資料庫結構，例如新增欄位、修改欄位類型、建立關聯等。
+Migration 可以跟蹤和管理資料庫結構的變化，並在不影響資料完整性的情況下進行更新。
+</code></pre>
+</li>
+</ul>
+<p><img src="https://railsbook.tw/images/chapter10/mvc.png" alt="Route, Model, View, Controller"><br><em>Image Source: (<a target="_blank" rel="noopener" href="https://railsbook.tw/chapters/13-crud-part-1">https://railsbook.tw/chapters/13-crud-part-1</a>)</em></p>
+<hr>
+<h3 id="建立專案！"><a href="#建立專案！" class="headerlink" title="建立專案！"></a>建立專案！</h3><p>打開終端機，建立一個新的專案，透過下方指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails new `自定義名稱`</span><br></pre></td></tr></table></figure>
+<p>接著進入到該專案資料夾：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd `自定義名稱`</span><br></pre></td></tr></table></figure>
+<p>後續，我會以建立 Route 作為開端，一一介紹他們各自在 Ruby on Rails 的作用～！</p>
+<hr>
+<p><em>References:</em><br><em>- <a target="_blank" rel="noopener" href="https://railsbook.tw/chapters/13-crud-part-1">為你自己學 Ruby on Rails</a></em><br><em>- <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E5%A2%9E%E5%88%AA%E6%9F%A5%E6%94%B9">增刪查改</a></em><br><em>- <a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2017/02/25/csrf-introduction/">TechBridge 技術共筆部落格</a></em></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#before-action-%E5%85%88%E5%82%99%E7%9F%A5%E8%AD%98"><span class="toc-number">1.</span> <span class="toc-text">before_action :先備知識</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#REST"><span class="toc-number">1.1.</span> <span class="toc-text">REST</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RESTful"><span class="toc-number">1.2.</span> <span class="toc-text">RESTful</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CRUD"><span class="toc-number">1.3.</span> <span class="toc-text">CRUD</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%B0%8D%E6%87%89%E7%9A%84-SQL-%E8%AA%9E%E6%B3%95%E3%80%81HTTP-%E8%AB%8B%E6%B1%82%E3%80%81REST-%E8%A1%A8%E7%8F%BE%E5%B1%A4%E7%8B%80%E6%85%8B%E8%BD%89%E6%8F%9B"><span class="toc-number">1.3.1.</span> <span class="toc-text">相對應的 SQL 語法、HTTP 請求、REST 表現層狀態轉換</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Route-Controller-View-Model-Migration"><span class="toc-number">1.4.</span> <span class="toc-text">Route, Controller, View, Model, Migration</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E5%B0%88%E6%A1%88%EF%BC%81"><span class="toc-number">1.5.</span> <span class="toc-text">建立專案！</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/viiisitRuby003-1-RubyonRails/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&text=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&is_video=false&description=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - 先備知識!&body=Check out this article: https://viiisit.com/viiisitRuby003-1-RubyonRails/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&name=Viiisit Ruby on Rails - 先備知識!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/viiisitRuby003-1-RubyonRails/&t=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Zinni Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
