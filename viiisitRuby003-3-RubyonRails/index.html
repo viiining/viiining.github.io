@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="建立 Controller 與定義 Action在先前介紹路徑時，以「文章列表」的路徑為例子： 1get &amp;#x27;&#x2F;articles&amp;#x27;, to: &amp;#x27;articles#index&amp;#x27; 可以發現，在建立路徑的同時，to: 後方就是 controller 與 action！ 依照 Rails 的慣例，controller 的名字通常跟路徑一致。這種命名幫助我們更好地組織與">
+    <meta name="description" content="建立 Controller 與定義 Action在先前介紹路徑時，以「文章列表」的路徑為例子： 1get &amp;#x27;&#x2F;articles&amp;#x27;, to: &amp;#x27;articles#index&amp;#x27; 可以發現，在建立路徑的同時，to: 後方就是 controller 與 action！ Controller 的命名會根據 Route 是使用複數的 resources 還是單數 res">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Viiisit Ruby on Rails - Controller, Action, View!">
 <meta property="og:url" content="https://viiisit.com/viiisitRuby003-3-RubyonRails/index.html">
 <meta property="og:site_name" content="Viiisit!">
-<meta property="og:description" content="建立 Controller 與定義 Action在先前介紹路徑時，以「文章列表」的路徑為例子： 1get &amp;#x27;&#x2F;articles&amp;#x27;, to: &amp;#x27;articles#index&amp;#x27; 可以發現，在建立路徑的同時，to: 後方就是 controller 與 action！ 依照 Rails 的慣例，controller 的名字通常跟路徑一致。這種命名幫助我們更好地組織與">
+<meta property="og:description" content="建立 Controller 與定義 Action在先前介紹路徑時，以「文章列表」的路徑為例子： 1get &amp;#x27;&#x2F;articles&amp;#x27;, to: &amp;#x27;articles#index&amp;#x27; 可以發現，在建立路徑的同時，to: 後方就是 controller 與 action！ Controller 的命名會根據 Route 是使用複數的 resources 還是單數 res">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-07-15T15:17:21.000Z">
-<meta property="article:modified_time" content="2023-07-29T05:18:02.158Z">
+<meta property="article:modified_time" content="2023-07-29T05:48:46.369Z">
 <meta property="article:author" content="Zinni Chang">
 <meta name="twitter:card" content="summary">
     
@@ -161,7 +161,8 @@
     <h2 id="建立-Controller-與定義-Action"><a href="#建立-Controller-與定義-Action" class="headerlink" title="建立 Controller 與定義 Action"></a>建立 Controller 與定義 Action</h2><p>在先前介紹路徑時，以「文章列表」的路徑為例子：</p>
 <figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get <span class="string">&#x27;/articles&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;articles#index&#x27;</span></span><br></pre></td></tr></table></figure>
 <p>可以發現，在建立路徑的同時，to: 後方就是 controller 與 action！</p>
-<p><strong>依照 Rails 的慣例，controller 的名字通常跟路徑一致。</strong><br>這種命名幫助我們更好地組織與管理 controller 與 action，程式碼也更易於理解和維護。<br>同时也符合 Rails 的約定優於配置（Convention over Configuration）的原則。</p>
+<p><strong>Controller 的命名會根據 Route 是使用複數的 resources 還是單數 resource 方法而定。</strong><br>這種命名幫助我們更好地組織與管理 controller 與 action，程式碼也更易於理解和維護。<br>同时也符合 Rails 的約定優於配置（Convention over Configuration）的原則。</p>
+<p>在這裡我們使用的是 resources，所以我們可以建立一個 ArticlesController!</p>
 <h3 id="rails-g-controller-Articles"><a href="#rails-g-controller-Articles" class="headerlink" title="rails g controller Articles"></a>rails g controller Articles</h3><p>透過 <strong>rails generate controller Articles</strong> or <strong>rails g controller Articles</strong> 指令，<br>生成叫做 Articles 的 controller！</p>
 <pre><code>Remark:
 controller 建立， rails generate controller 自定義名字 -&gt; rails g controller 自定義名字
@@ -207,7 +208,7 @@ controller 移除， rails destroy controller 自定義名字 -&gt; rails d cont
 <hr>
 <h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>自己在實作 CRUD 方式是從 Route -&gt; Controller -&gt; Action -&gt; View 一個一個打造起來，<br>這篇主要敘述 Controller, Action &amp; View，這三者之間的關聯與遇到 CSRF 錯誤訊息的狀況，<br>下一章會說明重點中的重點！ Model! Model! Model! （很重要所以說三遍！）<br>請詳見 <strong>Viiisit Ruby on Rails - Model!</strong></p>
 <hr>
-<p><em>References:</em><br><em>- <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0">wikipedia - 跨站請求偽造</a></em><br><em>- <a target="_blank" rel="noopener" href="https://www.explainthis.io/zh-hant/interview-guides/browser/what-is-csrf">ExplainThis</a></em></p>
+<p><em>References:</em><br><em>- <a target="_blank" rel="noopener" href="https://railsbook.tw/chapters/12-controllers">為你自己學 Ruby on Rails - Controller</a></em><br><em>- <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0">wikipedia - 跨站請求偽造</a></em><br><em>- <a target="_blank" rel="noopener" href="https://www.explainthis.io/zh-hant/interview-guides/browser/what-is-csrf">ExplainThis</a></em></p>
 
   </div>
 </article>
