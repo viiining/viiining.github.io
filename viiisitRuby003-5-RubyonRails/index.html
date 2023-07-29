@@ -13,13 +13,13 @@
 <meta property="og:site_name" content="Viiisit!">
 <meta property="og:description" content="before_action :前言我們在一個專案裡，一定不只有一個 Model，會同時存在許多 Model，在 Rails 裡，我們可以為這些 Model 做許多關聯，為什麼 Model 需要關聯性？大致上可以歸納出以下原因：  Model 需要關聯性是為了更好地組織和管理資料，以及實現資料間的關聯和連結。   資料的結構化：通常一個應用程式涉及多個資料，彼此之間可能存在著很複雜的關係。使用 Mo">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://viiisit.com/public/images/relationships.png">
+<meta property="og:image" content="https://viiisit.com/source/images/relationships.png">
 <meta property="article:published_time" content="2023-07-18T06:43:11.000Z">
-<meta property="article:modified_time" content="2023-07-29T07:49:50.364Z">
+<meta property="article:modified_time" content="2023-07-29T07:52:13.472Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="Ruby on Rails">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://viiisit.com/public/images/relationships.png">
+<meta name="twitter:image" content="https://viiisit.com/source/images/relationships.png">
     
     
       
@@ -200,7 +200,7 @@
 
 <h4 id="Model-Article"><a href="#Model-Article" class="headerlink" title="Model: Article"></a>Model: Article</h4><figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Article</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  validates <span class="symbol">:title</span>, <span class="symbol">presence:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># relationships</span></span><br><span class="line">  belongs_to <span class="symbol">:user</span></span><br><span class="line">  has_many <span class="symbol">:comments</span></span><br><span class="line"></span><br><span class="line">  has_many <span class="symbol">:like_logs</span></span><br><span class="line">  has_many <span class="symbol">:users</span>, <span class="symbol">through:</span> <span class="symbol">:like_logs</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 <h4 id="Model-Comment"><a href="#Model-Comment" class="headerlink" title="Model: Comment"></a>Model: Comment</h4><figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Comment</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  validates <span class="symbol">:content</span>, <span class="symbol">presence:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  belongs_to <span class="symbol">:user</span></span><br><span class="line">  belongs_to <span class="symbol">:article</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-<p><img src="/public/images/relationships.png" alt="relationships"></p>
+<p><img src="/source/images/relationships.png" alt="relationships"></p>
 
   </div>
 </article>
