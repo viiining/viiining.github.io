@@ -9,7 +9,7 @@
     <meta name="description" content="怎麼用 Ruby 語法查詢資料？findfind 方法只能使用 primary key(id) 值來查找，也就是從 id 去找，返回查詢對象或拋出 exception（例外訊息）！exception 意即：如果找不到對應的記錄，則會拋出 ActiveRecord::RecordNotFound 錯誤。 123# Find the article with primary key (id) 6.ar">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Viiisit Ruby - 常見的查詢方法!">
-<meta property="og:url" content="https://viiisit.com/viiisitRuby004-RubyMethod-find&where/index.html">
+<meta property="og:url" content="https://viiisit.com/viiisitRuby003-InquireMethod/index.html">
 <meta property="og:site_name" content="Viiisit!">
 <meta property="og:description" content="怎麼用 Ruby 語法查詢資料？findfind 方法只能使用 primary key(id) 值來查找，也就是從 id 去找，返回查詢對象或拋出 exception（例外訊息）！exception 意即：如果找不到對應的記錄，則會拋出 ActiveRecord::RecordNotFound 錯誤。 123# Find the article with primary key (id) 6.ar">
 <meta property="og:locale" content="en_US">
@@ -86,6 +86,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" aria-label="Previous post" href="/viiisitRails006-Stimulus/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" aria-label="Next post" href="/viiisit007-SQL/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -100,17 +102,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/&text=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/&is_video=false&description=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Ruby - 常見的查詢方法!&body=Check out this article: https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/&name=Viiisit Ruby - 常見的查詢方法!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/&t=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/viiisitRuby003-InquireMethod/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/viiisitRuby003-InquireMethod/&text=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/viiisitRuby003-InquireMethod/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/viiisitRuby003-InquireMethod/&is_video=false&description=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Ruby - 常見的查詢方法!&body=Check out this article: https://viiisit.com/viiisitRuby003-InquireMethod/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/viiisitRuby003-InquireMethod/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/viiisitRuby003-InquireMethod/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/viiisitRuby003-InquireMethod/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/viiisitRuby003-InquireMethod/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/viiisitRuby003-InquireMethod/&name=Viiisit Ruby - 常見的查詢方法!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/viiisitRuby003-InquireMethod/&t=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -244,17 +246,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/&text=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/&is_video=false&description=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Ruby - 常見的查詢方法!&body=Check out this article: https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/&name=Viiisit Ruby - 常見的查詢方法!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/viiisitRuby004-RubyMethod-find&amp;where/&t=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/viiisitRuby003-InquireMethod/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/viiisitRuby003-InquireMethod/&text=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/viiisitRuby003-InquireMethod/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/viiisitRuby003-InquireMethod/&is_video=false&description=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Ruby - 常見的查詢方法!&body=Check out this article: https://viiisit.com/viiisitRuby003-InquireMethod/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/viiisitRuby003-InquireMethod/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/viiisitRuby003-InquireMethod/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/viiisitRuby003-InquireMethod/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/viiisitRuby003-InquireMethod/&title=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/viiisitRuby003-InquireMethod/&name=Viiisit Ruby - 常見的查詢方法!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/viiisitRuby003-InquireMethod/&t=Viiisit Ruby - 常見的查詢方法!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

@@ -9,7 +9,7 @@
     <meta name="description" content="About RailsRails 是使用 Ruby 程式語言所開發出來的網站開發框架（Web Framework）由 David Heinemeier Hansson（簡稱 DHH）所開發。 在 Rails 世界有兩個大重點：  慣例優於設定（Convention over Configuration, CoC）所謂的慣例就是當遇到某種情況的時候我們會用特定的方式來解決問題。順著 Rails 的慣">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Viiisit Ruby on Rails - 先備知識!">
-<meta property="og:url" content="https://viiisit.com/viiisitRuby003-1-RubyonRails/index.html">
+<meta property="og:url" content="https://viiisit.com/viiisitRails001-BeforeAction/index.html">
 <meta property="og:site_name" content="Viiisit!">
 <meta property="og:description" content="About RailsRails 是使用 Ruby 程式語言所開發出來的網站開發框架（Web Framework）由 David Heinemeier Hansson（簡稱 DHH）所開發。 在 Rails 世界有兩個大重點：  慣例優於設定（Convention over Configuration, CoC）所謂的慣例就是當遇到某種情況的時候我們會用特定的方式來解決問題。順著 Rails 的慣">
 <meta property="og:locale" content="en_US">
@@ -88,7 +88,7 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" aria-label="Previous post" href="/viiisitRuby003-2-RubyonRails/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Previous post" href="/viiisitRails002-Route/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" aria-label="Next post" href="/viiisit005-CustomDomain/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -104,17 +104,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/viiisitRuby003-1-RubyonRails/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&text=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&is_video=false&description=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - 先備知識!&body=Check out this article: https://viiisit.com/viiisitRuby003-1-RubyonRails/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&name=Viiisit Ruby on Rails - 先備知識!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/viiisitRuby003-1-RubyonRails/&t=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/viiisitRails001-BeforeAction/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/viiisitRails001-BeforeAction/&text=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/viiisitRails001-BeforeAction/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/viiisitRails001-BeforeAction/&is_video=false&description=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - 先備知識!&body=Check out this article: https://viiisit.com/viiisitRails001-BeforeAction/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/viiisitRails001-BeforeAction/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/viiisitRails001-BeforeAction/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/viiisitRails001-BeforeAction/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/viiisitRails001-BeforeAction/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/viiisitRails001-BeforeAction/&name=Viiisit Ruby on Rails - 先備知識!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/viiisitRails001-BeforeAction/&t=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -297,17 +297,17 @@ Migration 可以跟蹤和管理資料庫結構的變化，並在不影響資料�
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/viiisitRuby003-1-RubyonRails/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&text=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&is_video=false&description=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - 先備知識!&body=Check out this article: https://viiisit.com/viiisitRuby003-1-RubyonRails/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/viiisitRuby003-1-RubyonRails/&name=Viiisit Ruby on Rails - 先備知識!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/viiisitRuby003-1-RubyonRails/&t=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/viiisitRails001-BeforeAction/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/viiisitRails001-BeforeAction/&text=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/viiisitRails001-BeforeAction/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/viiisitRails001-BeforeAction/&is_video=false&description=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - 先備知識!&body=Check out this article: https://viiisit.com/viiisitRails001-BeforeAction/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/viiisitRails001-BeforeAction/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/viiisitRails001-BeforeAction/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/viiisitRails001-BeforeAction/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/viiisitRails001-BeforeAction/&title=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/viiisitRails001-BeforeAction/&name=Viiisit Ruby on Rails - 先備知識!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/viiisitRails001-BeforeAction/&t=Viiisit Ruby on Rails - 先備知識!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
