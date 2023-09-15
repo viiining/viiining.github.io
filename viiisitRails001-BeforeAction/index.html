@@ -15,7 +15,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://railsbook.tw/images/chapter10/mvc.png">
 <meta property="article:published_time" content="2023-07-13T03:05:28.000Z">
-<meta property="article:modified_time" content="2023-07-31T12:12:19.000Z">
+<meta property="article:modified_time" content="2023-08-18T15:07:47.673Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="Ruby on Rails">
 <meta name="twitter:card" content="summary">
@@ -243,11 +243,9 @@ URI - Uniform Resource Identifier，
 </li>
 <li><p>Model 定義資料庫結構，包括表格和屬性，並提供對資料的存取和操作。</p>
 </li>
-<li><p>Migration 用於管理資料庫結構變更的工具。</p>
+<li><p>Migration 用於管理資料庫結構變更的工具，可以說是一個<strong>資料庫變更的紀錄檔</strong>。</p>
 <pre><code>Remark:
-Migration 是定義資料庫結構的版本控制，提供一種便捷的方式來新增、修改或刪除資料表、欄位、索引等。
-每個 Migration 文件都包含一些操作，用於改變資料庫結構，例如新增欄位、修改欄位類型、建立關聯等。
-Migration 可以跟蹤和管理資料庫結構的變化，並在不影響資料完整性的情況下進行更新。
+Migration 在生成時會自動產生時間戳記，資料庫每執行一次 migration 都會有時間戳記產生，所以資料庫會知道我們執行過哪一個 migration。db:migrate 就是讓資料庫「執行還沒執行過的migration」，執行過的migration則會自動略過。
 </code></pre>
 </li>
 </ul>
