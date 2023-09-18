@@ -14,7 +14,7 @@
 <meta property="og:description" content="今天來點 Scope Chain (作用域鏈) 與 Closure (閉包)！ Scope Chain（作用域鏈）是什麼？當 JavaScript 使用每一個變數時，會先嘗試在目前的作用域中尋找該變數；若找不到該變數，便會一直往外層作用域尋找，直到全域作用域還是沒找到的話就會直接報錯。這一層一層的關係，就是作用域鏈。以下是一段簡單的範例： 1234567let a &#x3D; 100;function g">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-18T12:12:42.000Z">
-<meta property="article:modified_time" content="2023-09-18T08:34:42.827Z">
+<meta property="article:modified_time" content="2023-09-18T12:27:36.974Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
@@ -182,9 +182,9 @@
 <ol>
 <li><p>開始執行 Global Execution Context，因為 JavaScript 中的 hoisting（提升），function say 已經被建立且儲存在記憶體中，並且可以在作用域中使用。</p>
 </li>
-<li><p>Global Execution Context 繼續執行 <code>var host = say(&#39;Welcome&#39;);</code>。在執行 <code>say(&#39;Welcome&#39;)</code> 時，一個新的 Execution Context 被建立，<code>greeting</code> 也被儲存在 function say 的 Execution Context 中。 透過 say 函式，我們建立了一個匿名函式。此時，function say 也就執行完了。雖然 Execution Context 已經不在了，但其中的變數還是儲存在那個記憶體位置！</p>
+<li><p>Global Execution Context 繼續執行 <code>var host = say(&#39;Welcome&#39;);</code>。在執行 <code>say(&#39;Welcome&#39;)</code> 時，一個新的 Execution Context 被建立，<code>greeting</code> 也被儲存在 function say 的 Execution Context 中。 透過 say 函式，內部建立一個匿名函式。此時，function say 也就執行完了。雖然 Execution Context 已經不在了，但其中的變數還是儲存在那個記憶體位置！</p>
 </li>
-<li><p>結束前一個任務後，繼續回到 Global Execution Context 去逐行執行，這時候碰到了 <code>host(&#39;Viii&#39;)</code> 於是我們建立了一個給匿名函式的 Execution Context，同時裡面帶有參數 name，因為此時在自己的 function 裡面找不到 <code>greeting</code> 這個變數，所以會開始透過 Scope Chain 尋找。因為前面有提及 function say 在記憶體位置仍留有參照，所以在 function say 裡面所建立的函式仍然可以找得到 <code>greeting</code> 這個變數。最後就印出結果 <code>Welcome Viii</code>。</p>
+<li><p>結束前一個任務後，繼續回到 Global Execution Context，接著，碰到了 <code>host(&#39;Viii&#39;)</code> 於是我們建立了一個給匿名函式的 Execution Context，同時裡面帶有參數 name，因為此時在自己的 function 裡面找不到 <code>greeting</code> 這個變數，所以會開始透過 Scope Chain 尋找。因為前面有提及 function say 在記憶體位置仍留有參照，所以在 function say 裡面所建立的函式仍然可以找得到 <code>greeting</code> 這個變數。最後就印出結果 <code>Welcome Viii</code>。</p>
 </li>
 </ol>
 <h4 id="Brief-Summary"><a href="#Brief-Summary" class="headerlink" title="Brief Summary"></a>Brief Summary</h4><p>可以在第三點看出，匿名函示式的 Execution Context 與外面的變數 <code>greeting</code> close 在一起了，這就是閉包 (Closure)。透過這樣的特性，可以確保當在執行 function 的時候，JavaScript 能夠找到其相對應的變數。</p>
