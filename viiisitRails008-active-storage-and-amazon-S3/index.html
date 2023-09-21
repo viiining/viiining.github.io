@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="before_action :set_knowledge最近在專案執行上，碰上需要上傳圖片並且圖片能夠在線上的資料庫做保存，這次藉由 Rails Guide 介紹的 Active Storage 與 Amazon S3 的設置環節來記錄一整個建置的過程！ About Active StorageActive Storage 是 Ruby on Rails 一個內建庫，專門用於處理各種類型的文件，如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!">
+<meta property="og:url" content="https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/index.html">
+<meta property="og:site_name" content="Viiisit!">
+<meta property="og:description" content="before_action :set_knowledge最近在專案執行上，碰上需要上傳圖片並且圖片能夠在線上的資料庫做保存，這次藉由 Rails Guide 介紹的 Active Storage 與 Amazon S3 的設置環節來記錄一整個建置的過程！ About Active StorageActive Storage 是 Ruby on Rails 一個內建庫，專門用於處理各種類型的文件，如">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-08-20T14:35:04.000Z">
+<meta property="article:modified_time" content="2023-09-20T02:35:53.657Z">
+<meta property="article:author" content="Zinni Chang">
+<meta property="article:tag" content="Ruby on Rails">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png">
+        
+      
+    
+    <!-- title -->
+    <title>Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/viiisitJS003-scope-chain-and-closure-in-javascript/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/viiisitRails006-pdf/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/&text=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/&title=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/&is_video=false&description=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!&body=Check out this article: https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/&title=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/&title=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/&title=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/&title=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/&name=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/&t=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#before-action-set-knowledge"><span class="toc-number">1.</span> <span class="toc-text">before_action :set_knowledge</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#About-Active-Storage"><span class="toc-number">1.1.</span> <span class="toc-text">About Active Storage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#About-Amazon-S3"><span class="toc-number">1.2.</span> <span class="toc-text">About Amazon S3</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Zinni Chang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-08-20T14:35:04.000Z" class="dt-published" itemprop="datePublished">2023-08-20</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Keep-Learning/">Keep Learning</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Ruby-on-Rails/" rel="tag">Ruby on Rails</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="before-action-set-knowledge"><a href="#before-action-set-knowledge" class="headerlink" title="before_action :set_knowledge"></a>before_action :set_knowledge</h2><p>最近在專案執行上，碰上需要上傳圖片並且圖片能夠在線上的資料庫做保存，這次藉由 Rails Guide 介紹的 Active Storage 與 Amazon S3 的設置環節來記錄一整個建置的過程！</p>
+<h3 id="About-Active-Storage"><a href="#About-Active-Storage" class="headerlink" title="About Active Storage"></a>About Active Storage</h3><p>Active Storage 是 Ruby on Rails 一個內建庫，專門用於處理各種類型的文件，如圖片、視頻、聲音、文檔的上傳、管理和儲存。</p>
+<p>再次複習 Active Storage 主要功能：</p>
+<ol>
+<li><p><strong>文件上傳和存儲</strong>：簡化文件上傳的過程，並提供多個存儲後端的選擇，包括本地、雲存儲服務（如 Amazon S3、Google Cloud Storage）等。</p>
+</li>
+<li><p><strong>附件關聯</strong>：你可以將文件附件與任何 Active Record 模型進行關聯，ex. 用戶頭像、文章圖片等。</p>
+</li>
+<li><p><strong>文件處理</strong>：Active Storage 允許定義不同版本的文件，ex. 生成縮略圖、處理不同尺寸或格式的文件等。</p>
+</li>
+<li><p><strong>檢視和下載文件</strong>：可以輕鬆通過生成文件 URL，讓用戶查看或下載文件。</p>
+</li>
+<li><p><strong>安全性和驗證</strong>：Active Storage 提供文件類型的驗證，確保上傳的文件符合安全要求。</p>
+</li>
+<li><p><strong>簡化的 API</strong>：通過簡單的 API，可以執行文件上傳、刪除、獲取 URL 等操作。</p>
+</li>
+</ol>
+<h3 id="About-Amazon-S3"><a href="#About-Amazon-S3" class="headerlink" title="About Amazon S3"></a>About Amazon S3</h3><p>Amazon S3（Simple Storage Service）是一種可擴展的物件儲存服務。<br>它被廣泛用於存儲和檢索各種數據，包括圖像、視頻、文檔、數據庫備份等。</p>
+<p>Amazon S3 主要功能：</p>
+<ol>
+<li><p><strong>無限擴展性和耐用性</strong>：Amazon S3 使用分佈式架構，可以自動擴展以滿足不同規模的儲存需求。它提供高度耐用性，將數據複製到多個數據中心，以防止故障和數據丟失。</p>
+</li>
+<li><p><strong>對象儲存</strong>：S3 是一個對象儲存服務，它不僅儲存數據本身，還包括元數據（例如標籤、屬性）和一個唯一的鍵（稱為對象鍵），用於訪問儲存在 S3 中的數據。</p>
+</li>
+<li><p><strong>無需容量計劃</strong>：S3 不需要事先購買或配置特定的儲存容量，你可以根據實際需求進行擴展或縮減，並且只支付實際使用的儲存容量和數據傳輸。</p>
+</li>
+<li><p><strong>安全性</strong>：S3 提供了多層次的安全性，包括數據加密（在傳輸和靜態儲存中）、存取控制和身份驗證，以確保只有授權的用戶可以訪問數據。</p>
+</li>
+<li><p><strong>數據分類和標籤</strong>：你可以使用分類和標籤來組織和管理儲存在 S3 中的數據，以便更有效地管理和檢索數據。</p>
+</li>
+<li><p><strong>高性能</strong>：Amazon S3 提供了高度可靠和低延遲的數據傳輸，可用於快速存儲和檢索大量的數據。</p>
+</li>
+<li><p><strong>生態系統整合</strong>：Amazon S3 與其他 AWS 服務無縫集成，例如 Amazon EC2、Amazon Lambda、Amazon Redshift 等，可以實現更多複雜的應用場景。</p>
+</li>
+<li><p><strong>成本效益</strong>：由於 Amazon S3 的按需定價模型，你只需要支付實際使用的儲存和數據傳輸費用，這有助於降低儲存成本。</p>
+</li>
+</ol>
+<hr>
+<p>接著，將透過建置 AWS S3 的 Bucket，來建立一個對外的儲存庫！</p>
+<p>首先，註冊 AWS 會員<br>接著，要進入 S3 -&gt; Create Bucket<br>The core features of Active Storage require the following permissions: <code>s3:ListBucket</code>, <code>s3:PutObject</code>, <code>s3:GetObject</code>, and <code>s3:DeleteObject</code>. Public access additionally requires <code>s3:PutObjectAcl</code>.</p>
+<ul>
+<li><p>開啟 credentials.yml 存取 Access Key 與 Secret Access Key</p>
+</li>
+<li><p>如果有使用 dotenv 套件，可以將機密的資訊放在 <code>.env</code> 檔案裡</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">EDITOR=&quot;code --wait&quot; rails credentials:edit</span><br><span class="line">File encrypted and saved.</span><br></pre></td></tr></table></figure>
+<p>確認 Gemfile 有以下兩個指令：</p>
+<ul>
+<li>gem “image_processing”, “~&gt; 1.2”</li>
+<li>gem “aws-sdk-s3”, require: false<br>接著，</li>
+<li>bundle<br>如果還沒裝 vips 也可以藉由 (macOS) Homebrew 裝一下：</li>
+<li>brew install vips</li>
+</ul>
+</li>
+<li><p>需要設置 CORS<br>AWS S3 Bucket 的 CORS 設定用於控制瀏覽器如何處理跨來源的 Web 請求，特別是 Ajax 請求和其他前端 Web 請求。<br>通過設置 CORS，我們可以指定允許哪些來源的網站訪問 Bucket 中的資源，以及允許的 HTTP 方法和標頭。<br>這是 Web 安全功能，確保資源只能被授權的網站訪問，同時防止跨站請求偽造（CSRF）等攻擊。<br>在 Rails Guide Active Storage 的教學中，有特別在 AWS S3 設置上提到 CORS 設定，<br>確保對 Bucket 中的內容進行安全而有序的跨來源訪問。<br><strong>link_to:</strong> <a target="_blank" rel="noopener" href="https://edgeguides.rubyonrails.org/active_storage_overview.html#cross-origin-resource-sharing-cors-configuration">Cross-Origin Resource Sharing (CORS) Configuration</a></p>
+</li>
+<li><p>cloudflare<br><a target="_blank" rel="noopener" href="https://medium.com/chouhsiang/cloudflare-30-days/home">30 天入門 Cloudflare</a><br><a target="_blank" rel="noopener" href="https://godleon.github.io/blog/AWS/learn-AWS-IAM-1-user-group-credential/">[AWS IAM] 學習重點節錄</a></p>
+<p>Remarks:<br>  Amazon S3 與 PG 差異：<br>  Amazon S3是一個雲端對象存儲服務，主要用於存儲各種非結構化數據，如文件、媒體文件和備份。它以高可靠性和可擴展性聞名，對象以唯一的鍵進行存儲，可進行高效的數據檢索和存取。相對而言，PostgreSQL是一個關聯式數據庫管理系統，專用於結構化數據的存儲和管理，支援SQL查詢和複雜的數據分析。</p>
+<p>  S3適用於大量非結構化數據的存儲，而PostgreSQL適用於需要結構化數據和SQL功能的應用，如企業應用或數據庫驅動的應用程序。選擇取決於數據性質和用途需求。</p>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#before-action-set-knowledge"><span class="toc-number">1.</span> <span class="toc-text">before_action :set_knowledge</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#About-Active-Storage"><span class="toc-number">1.1.</span> <span class="toc-text">About Active Storage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#About-Amazon-S3"><span class="toc-number">1.2.</span> <span class="toc-text">About Amazon S3</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/&text=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/&title=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/&is_video=false&description=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!&body=Check out this article: https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/&title=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/&title=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/&title=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/&title=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/&name=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/viiisitRails008-active-storage-and-amazon-S3/&t=Viiisit Ruby on Rails - 由 Active Storage 延伸至 Amazon S3 Bucket!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Zinni Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
