@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="繼上篇提及到回呼函式（Callback Function），今天來講 Promise 與 async&#x2F;await！ Promise 是什麼？Promise 是 JavaScript 中用於處理非同步操作的一種概念和對象。主要目的是更好地處理非同步操作的回調（callback）地獄問題，使代碼更具可讀性和可維護性。 Promise 的三種狀態 待定（Pending）：Promise 的初始">
+    <meta name="description" content="繼上篇提及到回呼函式（Callback Function），今天來講 Promise 與 async&#x2F;await！ Promise 是什麼？Promise 是 JavaScript 中用於處理非同步操作的一種概念和對象。主要目的是更好地處理非同步操作的 Callback Hell (回調地獄) 問題，使代碼更具可讀性和可維護性。 Promise 的三種狀態 待定（Pending）：Pro">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Viiisit JavaScript - Promise &amp; async&#x2F;await!">
 <meta property="og:url" content="https://viiisit.com/viiisitJS006-promise-and-async-await-in-javascript/index.html">
 <meta property="og:site_name" content="Viiisit!">
-<meta property="og:description" content="繼上篇提及到回呼函式（Callback Function），今天來講 Promise 與 async&#x2F;await！ Promise 是什麼？Promise 是 JavaScript 中用於處理非同步操作的一種概念和對象。主要目的是更好地處理非同步操作的回調（callback）地獄問題，使代碼更具可讀性和可維護性。 Promise 的三種狀態 待定（Pending）：Promise 的初始">
+<meta property="og:description" content="繼上篇提及到回呼函式（Callback Function），今天來講 Promise 與 async&#x2F;await！ Promise 是什麼？Promise 是 JavaScript 中用於處理非同步操作的一種概念和對象。主要目的是更好地處理非同步操作的 Callback Hell (回調地獄) 問題，使代碼更具可讀性和可維護性。 Promise 的三種狀態 待定（Pending）：Pro">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-21T04:12:42.000Z">
-<meta property="article:modified_time" content="2023-09-21T05:18:47.452Z">
+<meta property="article:modified_time" content="2023-09-21T05:21:11.798Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
@@ -168,7 +168,7 @@
 
   <div class="content e-content" itemprop="articleBody">
     <p><em>繼上篇提及到回呼函式（Callback Function），今天來講 Promise 與 async&#x2F;await！</em></p>
-<h3 id="Promise-是什麼？"><a href="#Promise-是什麼？" class="headerlink" title="Promise 是什麼？"></a>Promise 是什麼？</h3><p>Promise 是 JavaScript 中用於處理非同步操作的一種概念和對象。<br>主要目的是更好地處理非同步操作的回調（callback）地獄問題，使代碼更具可讀性和可維護性。</p>
+<h3 id="Promise-是什麼？"><a href="#Promise-是什麼？" class="headerlink" title="Promise 是什麼？"></a>Promise 是什麼？</h3><p>Promise 是 JavaScript 中用於處理非同步操作的一種概念和對象。<br>主要目的是更好地處理非同步操作的 Callback Hell (回調地獄) 問題，使代碼更具可讀性和可維護性。</p>
 <h4 id="Promise-的三種狀態"><a href="#Promise-的三種狀態" class="headerlink" title="Promise 的三種狀態"></a>Promise 的三種狀態</h4><ul>
 <li><strong>待定（Pending）</strong>：Promise 的初始狀態，表示操作正在進行中，但還未完成。</li>
 <li><strong>完成（Fulfilled）</strong>：表示操作成功完成，執行 resolve 函式，並返回結果。</li>
