@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="講到 Ruby 大家一定也聽過 Ruby on Rails 或者 RoR，今天就來點 Ruby on Rails 吧！ Ruby on Rails 是什麼？Ruby on Rails（簡稱RoR）是一個使用 Ruby 程式語言所開發出來的 Web Framework（網站應用程式框架）。作者是名為 David Heinemeier Hansson（DHH）的丹麥人。 Rails 在發佈以後的短短的">
+    <meta name="description" content="講到 Ruby 大家一定也聽過 Ruby on Rails 或者 RoR，今天就來點 Ruby on Rails 吧！ Ruby on Rails 是什麼？Ruby on Rails（簡稱RoR）是一個使用 Ruby 程式語言所開發出來的 Web Framework（網站應用程式框架）。作者是名為 David Heinemeier Hansson（DHH）的丹麥人。 Ruby on Rails 充">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Viiisit Ruby on Rails - CoC &amp; DRY!">
 <meta property="og:url" content="https://viiisit.com/20230929-ruby-on-rails-intro-of-coc-and-dry/index.html">
 <meta property="og:site_name" content="Viiisit!">
-<meta property="og:description" content="講到 Ruby 大家一定也聽過 Ruby on Rails 或者 RoR，今天就來點 Ruby on Rails 吧！ Ruby on Rails 是什麼？Ruby on Rails（簡稱RoR）是一個使用 Ruby 程式語言所開發出來的 Web Framework（網站應用程式框架）。作者是名為 David Heinemeier Hansson（DHH）的丹麥人。 Rails 在發佈以後的短短的">
+<meta property="og:description" content="講到 Ruby 大家一定也聽過 Ruby on Rails 或者 RoR，今天就來點 Ruby on Rails 吧！ Ruby on Rails 是什麼？Ruby on Rails（簡稱RoR）是一個使用 Ruby 程式語言所開發出來的 Web Framework（網站應用程式框架）。作者是名為 David Heinemeier Hansson（DHH）的丹麥人。 Ruby on Rails 充">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-29T14:12:42.000Z">
-<meta property="article:modified_time" content="2023-09-29T07:07:40.409Z">
+<meta property="article:modified_time" content="2023-09-30T06:36:11.835Z">
 <meta property="article:author" content="Zinni Chang">
-<meta property="article:tag" content="Ruby on Rails">
 <meta property="article:tag" content="Ruby">
+<meta property="article:tag" content="Ruby on Rails">
 <meta name="twitter:card" content="summary">
     
     
@@ -172,11 +172,7 @@
   <div class="content e-content" itemprop="articleBody">
     <p><em>講到 Ruby 大家一定也聽過 Ruby on Rails 或者 RoR，今天就來點 Ruby on Rails 吧！</em></p>
 <h2 id="Ruby-on-Rails-是什麼？"><a href="#Ruby-on-Rails-是什麼？" class="headerlink" title="Ruby on Rails 是什麼？"></a>Ruby on Rails 是什麼？</h2><p>Ruby on Rails（簡稱RoR）是一個使用 Ruby 程式語言所開發出來的 Web Framework（網站應用程式框架）。作者是名為 David Heinemeier Hansson（DHH）的丹麥人。</p>
-<p>Rails 在發佈以後的短短的時間內就迅速獲得很多開發人員歡迎，DHH 認為這是因為他將 Rails 設計為 opinionated software（有主見的軟體）。</p>
-<blockquote>
-<p>所謂的 opinionated software（有主見的軟體）是指一種軟體設計方式，設計上會在許多方面對開發人員做出了具體的建議和決策，以簡化開發過程並提高代碼的一致性。</p>
-</blockquote>
-<p>Rails 當中有很多規定從一開始就按照 DHH 的意見制定好了，所以在 Rails 上開發應用程式時，開發人員可以專注於應用程式自身的設計，省卻那些花在瞭解及組態基礎框架上面的時間。</p>
+<p>Ruby on Rails 充分利用了 Ruby 的優勢，提供了一種快速、高效且優雅的方式來開發 Web 應用程式。<br>Ruby on Rails 的設計哲學是以 <strong>慣例優於設定 和 DRY（Don’t Repeat Yourself）原則</strong>為基礎，以提高開發速度和代碼的可讀性。</p>
 <p>因此，我們來看看 Ruby on Rails 設計原則吧！</p>
 <h2 id="Rails-設計原則"><a href="#Rails-設計原則" class="headerlink" title="Rails 設計原則"></a>Rails 設計原則</h2><p>在 Rails 裡，有兩個主要的設計原則：</p>
 <h3 id="Convention-over-Configuration-CoC-慣例優於設定"><a href="#Convention-over-Configuration-CoC-慣例優於設定" class="headerlink" title="Convention over Configuration (CoC) 慣例優於設定"></a>Convention over Configuration (CoC) 慣例優於設定</h3><p>Rails 強調慣例優於設定（Convention over Configuration（CoC））。<br><strong>所謂的慣例就是當遇到某種情況的時候我們會用特定的方式來解決問題。</strong><br><strong>這些慣例幫助開發人員在不同項目之間保持一致性，並且使代碼更容易理解和維護。</strong></p>
