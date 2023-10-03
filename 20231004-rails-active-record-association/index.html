@@ -9,7 +9,7 @@
     <meta name="description" content="before_action :前言為什麼需要關聯性？在 Rails 中，Active Record 關聯是指不同 Model 之間的連結與關係。 我們在一個專案裡，一定不只有一個 Model，會同時存在許多 Model，在 Rails 裡，我們可以透過關聯將這些 Model 連結在一起，大致上歸納出以下優點：  Model 需要關聯性是為了更好地組織和管理資料，以及實現資料間的關聯和連結。   資">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Viiisit Ruby on Rails - Active Record Associations!">
-<meta property="og:url" content="https://viiisit.com/20231004-rails-model-association/index.html">
+<meta property="og:url" content="https://viiisit.com/20231004-rails-active-record-association/index.html">
 <meta property="og:site_name" content="Viiisit!">
 <meta property="og:description" content="before_action :前言為什麼需要關聯性？在 Rails 中，Active Record 關聯是指不同 Model 之間的連結與關係。 我們在一個專案裡，一定不只有一個 Model，會同時存在許多 Model，在 Rails 裡，我們可以透過關聯將這些 Model 連結在一起，大致上歸納出以下優點：  Model 需要關聯性是為了更好地組織和管理資料，以及實現資料間的關聯和連結。   資">
 <meta property="og:locale" content="en_US">
@@ -101,17 +101,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231004-rails-model-association/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231004-rails-model-association/&text=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231004-rails-model-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231004-rails-model-association/&is_video=false&description=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - Active Record Associations!&body=Check out this article: https://viiisit.com/20231004-rails-model-association/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231004-rails-model-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231004-rails-model-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231004-rails-model-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231004-rails-model-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231004-rails-model-association/&name=Viiisit Ruby on Rails - Active Record Associations!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231004-rails-model-association/&t=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231004-rails-active-record-association/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231004-rails-active-record-association/&text=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231004-rails-active-record-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231004-rails-active-record-association/&is_video=false&description=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - Active Record Associations!&body=Check out this article: https://viiisit.com/20231004-rails-active-record-association/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231004-rails-active-record-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231004-rails-active-record-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231004-rails-active-record-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231004-rails-active-record-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231004-rails-active-record-association/&name=Viiisit Ruby on Rails - Active Record Associations!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231004-rails-active-record-association/&t=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -292,17 +292,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231004-rails-model-association/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231004-rails-model-association/&text=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231004-rails-model-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231004-rails-model-association/&is_video=false&description=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - Active Record Associations!&body=Check out this article: https://viiisit.com/20231004-rails-model-association/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231004-rails-model-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231004-rails-model-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231004-rails-model-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231004-rails-model-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231004-rails-model-association/&name=Viiisit Ruby on Rails - Active Record Associations!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231004-rails-model-association/&t=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231004-rails-active-record-association/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231004-rails-active-record-association/&text=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231004-rails-active-record-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231004-rails-active-record-association/&is_video=false&description=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - Active Record Associations!&body=Check out this article: https://viiisit.com/20231004-rails-active-record-association/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231004-rails-active-record-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231004-rails-active-record-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231004-rails-active-record-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231004-rails-active-record-association/&title=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231004-rails-active-record-association/&name=Viiisit Ruby on Rails - Active Record Associations!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231004-rails-active-record-association/&t=Viiisit Ruby on Rails - Active Record Associations!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
