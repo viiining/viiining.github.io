@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="上回我們講到 Active Record Association 的基礎觀念，今天繼續延伸下去！ Polymorphic Association多型關聯（Polymorphic Association）是一種在資料庫中建立關聯的方法，允許一個模型與多個其他模型建立關聯，並且可以根據需要動態指向這些模型中的一個。主要目的是在不知道或不確定關聯到哪個模型的情況下實現關聯。 想像你正在建立一個簡單的網站">
+    <meta name="description" content="上回我們講到 Active Record Association 的基礎觀念，今天繼續延伸下去！ Polymorphic Association 多型關聯多型關聯（Polymorphic Association）是一種在資料庫中建立關聯的方法，允許一個模型與多個其他模型建立關聯，並且可以根據需要動態指向這些模型中的一個。主要目的是在不知道或不確定關聯到哪個模型的情況下實現關聯。 想像你正在建立一個">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Viiisit Ruby on Rails - Active Record Associations (下)!">
 <meta property="og:url" content="https://viiisit.com/20231005-rails-active-record-association-2/index.html">
 <meta property="og:site_name" content="Viiisit!">
-<meta property="og:description" content="上回我們講到 Active Record Association 的基礎觀念，今天繼續延伸下去！ Polymorphic Association多型關聯（Polymorphic Association）是一種在資料庫中建立關聯的方法，允許一個模型與多個其他模型建立關聯，並且可以根據需要動態指向這些模型中的一個。主要目的是在不知道或不確定關聯到哪個模型的情況下實現關聯。 想像你正在建立一個簡單的網站">
+<meta property="og:description" content="上回我們講到 Active Record Association 的基礎觀念，今天繼續延伸下去！ Polymorphic Association 多型關聯多型關聯（Polymorphic Association）是一種在資料庫中建立關聯的方法，允許一個模型與多個其他模型建立關聯，並且可以根據需要動態指向這些模型中的一個。主要目的是在不知道或不確定關聯到哪個模型的情況下實現關聯。 想像你正在建立一個">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-05T05:17:21.000Z">
-<meta property="article:modified_time" content="2023-10-04T18:40:48.066Z">
+<meta property="article:modified_time" content="2023-10-04T18:41:52.685Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="Ruby on Rails">
 <meta property="article:tag" content="Active Record">
@@ -118,7 +118,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Polymorphic-Association"><span class="toc-number">1.</span> <span class="toc-text">Polymorphic Association</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#self-joining-associations"><span class="toc-number">2.</span> <span class="toc-text">self-joining associations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%9C%E5%85%85%E8%A7%80%E5%BF%B5"><span class="toc-number">3.</span> <span class="toc-text">補充觀念</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Polymorphic-Association-%E5%A4%9A%E5%9E%8B%E9%97%9C%E8%81%AF"><span class="toc-number">1.</span> <span class="toc-text">Polymorphic Association 多型關聯</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Self-joining-Associations-%E8%87%AA%E9%80%A3%E6%8E%A5%E9%97%9C%E8%81%AF"><span class="toc-number">2.</span> <span class="toc-text">Self-joining Associations 自連接關聯</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%9C%E5%85%85%E8%A7%80%E5%BF%B5"><span class="toc-number">3.</span> <span class="toc-text">補充觀念</span></a></li></ol>
       </div>
     
   </span>
@@ -169,7 +169,7 @@
 
   <div class="content e-content" itemprop="articleBody">
     <p><em>上回我們講到 Active Record Association 的基礎觀念，今天繼續延伸下去！</em></p>
-<h2 id="Polymorphic-Association"><a href="#Polymorphic-Association" class="headerlink" title="Polymorphic Association"></a>Polymorphic Association</h2><p>多型關聯（Polymorphic Association）是一種在資料庫中建立關聯的方法，允許一個模型與多個其他模型建立關聯，並且可以根據需要動態指向這些模型中的一個。主要目的是在不知道或不確定關聯到哪個模型的情況下實現關聯。</p>
+<h2 id="Polymorphic-Association-多型關聯"><a href="#Polymorphic-Association-多型關聯" class="headerlink" title="Polymorphic Association 多型關聯"></a>Polymorphic Association 多型關聯</h2><p>多型關聯（Polymorphic Association）是一種在資料庫中建立關聯的方法，允許一個模型與多個其他模型建立關聯，並且可以根據需要動態指向這些模型中的一個。主要目的是在不知道或不確定關聯到哪個模型的情況下實現關聯。</p>
 <p>想像你正在建立一個簡單的網站，用戶可以發表評論（Comments），但這些評論可以關聯到多種不同類型的內容，例如文章（Articles）和圖片（Photos）。這時就可以使用多型關聯。</p>
 <ul>
 <li><p>建立一個 <code>Comment</code> 模型，該模型將關聯到多種不同類型的內容。</p>
@@ -182,7 +182,7 @@
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建立一個評論關聯到一篇文章</span></span><br><span class="line">article = <span class="title class_">Article</span>.find(<span class="number">1</span>)</span><br><span class="line">comment = article.comments.create(<span class="symbol">content:</span> <span class="string">&#x27;這是一個評論&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立一個評論關聯到一張圖片</span></span><br><span class="line">photo = <span class="title class_">Photo</span>.find(<span class="number">2</span>)</span><br><span class="line">comment = photo.comments.create(<span class="symbol">content:</span> <span class="string">&#x27;這是另一個評論&#x27;</span>)</span><br></pre></td></tr></table></figure>
 
 <p>可以通過 <code>commentable</code> 關聯動態地關聯到不同類型的內容，同時保持代碼的簡單性和可擴展性。</p>
-<h2 id="self-joining-associations"><a href="#self-joining-associations" class="headerlink" title="self-joining associations"></a>self-joining associations</h2><p>自連接（Self-joining）關聯是一種在資料庫中建立關聯的技術，其中同一個表格（或模型）中的記錄可以與該表格中的其他記錄建立關聯。換句話說，就是在一個模型中創建一個與自己相關聯的關聯，通常用於處理與模型自身相關的數據。</p>
+<h2 id="Self-joining-Associations-自連接關聯"><a href="#Self-joining-Associations-自連接關聯" class="headerlink" title="Self-joining Associations 自連接關聯"></a>Self-joining Associations 自連接關聯</h2><p>自連接（Self-joining）關聯是一種在資料庫中建立關聯的技術，其中同一個表格（或模型）中的記錄可以與該表格中的其他記錄建立關聯。換句話說，就是在一個模型中創建一個與自己相關聯的關聯，通常用於處理與模型自身相關的數據。</p>
 <p>例如，有一個 “Employee” 的模型，每個員工都有一個直接上級（即另一個員工），並且他們都屬於同一個公司。<br>可以使用自連接來建立員工之間的關聯，同時維護每個員工的直接上級。</p>
 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Employee 模型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Employee</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  belongs_to <span class="symbol">:manager</span>, <span class="symbol">class_name:</span> <span class="string">&#x27;Employee&#x27;</span>, <span class="symbol">optional:</span> <span class="literal">true</span></span><br><span class="line">  has_many <span class="symbol">:subordinates</span>, <span class="symbol">class_name:</span> <span class="string">&#x27;Employee&#x27;</span>, <span class="symbol">foreign_key:</span> <span class="string">&#x27;manager_id&#x27;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
@@ -248,7 +248,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Polymorphic-Association"><span class="toc-number">1.</span> <span class="toc-text">Polymorphic Association</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#self-joining-associations"><span class="toc-number">2.</span> <span class="toc-text">self-joining associations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%9C%E5%85%85%E8%A7%80%E5%BF%B5"><span class="toc-number">3.</span> <span class="toc-text">補充觀念</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Polymorphic-Association-%E5%A4%9A%E5%9E%8B%E9%97%9C%E8%81%AF"><span class="toc-number">1.</span> <span class="toc-text">Polymorphic Association 多型關聯</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Self-joining-Associations-%E8%87%AA%E9%80%A3%E6%8E%A5%E9%97%9C%E8%81%AF"><span class="toc-number">2.</span> <span class="toc-text">Self-joining Associations 自連接關聯</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A3%9C%E5%85%85%E8%A7%80%E5%BF%B5"><span class="toc-number">3.</span> <span class="toc-text">補充觀念</span></a></li></ol>
       </div>
     
 
