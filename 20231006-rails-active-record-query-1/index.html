@@ -8,13 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="繼續來探究 Active Record，前幾篇談論資料的關聯性，這次我們來點在 Active Record 怎麼抓取資料！ 前情提要大家還記得當時提及 Active Record 的好處嗎？如果沒印象，可以回頭看看：Day 19 - 理解 Ruby on Rails，ORM 與 Active Record 是什麼？  Active Record 是具體的 ORM 實現，提供一種方式來定義和操作 M">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Viiisit Ruby on Rails - !">
-<meta property="og:url" content="https://viiisit.com/20231006-rails/index.html">
+<meta property="og:title" content="Viiisit Ruby on Rails - Active Record Query (上)!">
+<meta property="og:url" content="https://viiisit.com/20231006-rails-active-record-query-1/index.html">
 <meta property="og:site_name" content="Viiisit!">
 <meta property="og:description" content="繼續來探究 Active Record，前幾篇談論資料的關聯性，這次我們來點在 Active Record 怎麼抓取資料！ 前情提要大家還記得當時提及 Active Record 的好處嗎？如果沒印象，可以回頭看看：Day 19 - 理解 Ruby on Rails，ORM 與 Active Record 是什麼？  Active Record 是具體的 ORM 實現，提供一種方式來定義和操作 M">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-06T05:17:21.000Z">
-<meta property="article:modified_time" content="2023-10-06T14:00:13.502Z">
+<meta property="article:modified_time" content="2023-10-06T14:02:03.275Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="Ruby on Rails">
 <meta property="article:tag" content="Active Record">
@@ -38,7 +38,7 @@
       
     
     <!-- title -->
-    <title>Viiisit Ruby on Rails - !</title>
+    <title>Viiisit Ruby on Rails - Active Record Query (上)!</title>
     <!-- async scripts -->
     <!-- Google Analytics -->
 
@@ -101,17 +101,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231006-rails/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231006-rails/&text=Viiisit Ruby on Rails - !"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231006-rails/&title=Viiisit Ruby on Rails - !"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231006-rails/&is_video=false&description=Viiisit Ruby on Rails - !"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - !&body=Check out this article: https://viiisit.com/20231006-rails/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231006-rails/&title=Viiisit Ruby on Rails - !"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231006-rails/&title=Viiisit Ruby on Rails - !"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231006-rails/&title=Viiisit Ruby on Rails - !"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231006-rails/&title=Viiisit Ruby on Rails - !"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231006-rails/&name=Viiisit Ruby on Rails - !&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231006-rails/&t=Viiisit Ruby on Rails - !"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231006-rails-active-record-query-1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231006-rails-active-record-query-1/&text=Viiisit Ruby on Rails - Active Record Query (上)!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231006-rails-active-record-query-1/&title=Viiisit Ruby on Rails - Active Record Query (上)!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231006-rails-active-record-query-1/&is_video=false&description=Viiisit Ruby on Rails - Active Record Query (上)!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - Active Record Query (上)!&body=Check out this article: https://viiisit.com/20231006-rails-active-record-query-1/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231006-rails-active-record-query-1/&title=Viiisit Ruby on Rails - Active Record Query (上)!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231006-rails-active-record-query-1/&title=Viiisit Ruby on Rails - Active Record Query (上)!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231006-rails-active-record-query-1/&title=Viiisit Ruby on Rails - Active Record Query (上)!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231006-rails-active-record-query-1/&title=Viiisit Ruby on Rails - Active Record Query (上)!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231006-rails-active-record-query-1/&name=Viiisit Ruby on Rails - Active Record Query (上)!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231006-rails-active-record-query-1/&t=Viiisit Ruby on Rails - Active Record Query (上)!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -131,7 +131,7 @@
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
-        Viiisit Ruby on Rails - !
+        Viiisit Ruby on Rails - Active Record Query (上)!
     </h1>
 
 
@@ -205,12 +205,6 @@
 <ul>
 <li>Active Record: 使用 <code>take</code> 方法，取得資料表中的一條記錄。<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user = <span class="title class_">User</span>.take</span><br></pre></td></tr></table></figure></li>
 <li>SQL 語法: 檢索資料表中的一條記錄。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users LIMIT <span class="number">1</span>;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p><strong>find_or_create_by</strong></p>
-<ul>
-<li>Active Record: 使用 <code>find_or_create_by</code> 方法，根據指定的條件查找記錄，<br>如果找不到則建立一個新記錄。<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user = <span class="title class_">User</span>.find_or_create_by(<span class="symbol">username:</span> <span class="string">&#x27;zinni&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
-<li>SQL 語法: 查找用戶名為 <code>&#39;zinni&#39;</code> 的記錄，如果不存在則插入一條新記錄。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> users (username) <span class="keyword">VALUES</span> (<span class="string">&#x27;zinni&#x27;</span>) <span class="keyword">ON</span> CONFLICT DO NOTHING;</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> username <span class="operator">=</span> <span class="string">&#x27;zinni&#x27;</span> LIMIT <span class="number">1</span>;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ol>
@@ -342,7 +336,7 @@
 </li>
 </ol>
 <h3 id="Brief-Summary"><a href="#Brief-Summary" class="headerlink" title="Brief Summary"></a>Brief Summary</h3><ul>
-<li>要查找單一記錄，你可以使用 <code>find</code>、<code>find_by</code>、<code>first</code>、<code>last</code>、<code>take</code> 或 <code>find_or_create_by</code>。</li>
+<li>要查找單一記錄，你可以使用 <code>find</code>、<code>find_by</code>、<code>first</code>、<code>last</code>、<code>take</code>。</li>
 <li>要批次處理多條記錄，可使用 <code>find_each</code> 或 <code>find_in_batches</code> 以提高效能。</li>
 <li>使用 <code>where</code> 方法可以建立條件搜尋，避免 SQL 注入攻擊。可以使用純字串、陣列、物件、或哈希來構建條件。 - <code>NOT</code>、<code>OR</code>、<code>AND</code> 條件也可輕鬆應用。</li>
 <li>進一步控制查詢結果可以使用 <code>order</code>、<code>select</code>、<code>distinct</code>、<code>limit</code> 和 <code>offset</code>。</li>
@@ -386,17 +380,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231006-rails/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231006-rails/&text=Viiisit Ruby on Rails - !"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231006-rails/&title=Viiisit Ruby on Rails - !"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231006-rails/&is_video=false&description=Viiisit Ruby on Rails - !"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - !&body=Check out this article: https://viiisit.com/20231006-rails/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231006-rails/&title=Viiisit Ruby on Rails - !"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231006-rails/&title=Viiisit Ruby on Rails - !"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231006-rails/&title=Viiisit Ruby on Rails - !"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231006-rails/&title=Viiisit Ruby on Rails - !"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231006-rails/&name=Viiisit Ruby on Rails - !&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231006-rails/&t=Viiisit Ruby on Rails - !"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231006-rails-active-record-query-1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231006-rails-active-record-query-1/&text=Viiisit Ruby on Rails - Active Record Query (上)!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231006-rails-active-record-query-1/&title=Viiisit Ruby on Rails - Active Record Query (上)!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231006-rails-active-record-query-1/&is_video=false&description=Viiisit Ruby on Rails - Active Record Query (上)!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - Active Record Query (上)!&body=Check out this article: https://viiisit.com/20231006-rails-active-record-query-1/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231006-rails-active-record-query-1/&title=Viiisit Ruby on Rails - Active Record Query (上)!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231006-rails-active-record-query-1/&title=Viiisit Ruby on Rails - Active Record Query (上)!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231006-rails-active-record-query-1/&title=Viiisit Ruby on Rails - Active Record Query (上)!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231006-rails-active-record-query-1/&title=Viiisit Ruby on Rails - Active Record Query (上)!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231006-rails-active-record-query-1/&name=Viiisit Ruby on Rails - Active Record Query (上)!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231006-rails-active-record-query-1/&t=Viiisit Ruby on Rails - Active Record Query (上)!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
