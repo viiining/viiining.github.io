@@ -14,7 +14,7 @@
 <meta property="og:description" content="繼續來探究 Active Record 在抓取資料上的方法！繼上篇，我們已經學習了如何進行基本的資料查詢。這篇將深入介紹一些查詢方法以及常見的解決 N+1 問題該如何解決，Let’s go! Grouping要在查詢 SQL 中應用 GROUP BY 子句，可以使用 group 方法。   SQL 中的 GROUP BY 子句用於將資料庫中的記錄按照一個或多個欄位的值分組，可以對每個不同組的記錄應">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-07T07:17:21.000Z">
-<meta property="article:modified_time" content="2023-10-07T15:54:45.309Z">
+<meta property="article:modified_time" content="2023-10-07T15:57:55.035Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="Ruby on Rails">
 <meta property="article:tag" content="Active Record">
@@ -246,9 +246,7 @@
 <blockquote>
 <p><strong>使用 <code>eager_load</code>，Active Record 會使用 LEFT OUTER JOIN 來載入所有指定的關聯。</strong></p>
 <blockquote>
-<p><code>LEFT OUTER JOIN</code> 是 SQL 中的一種 JOIN 類型，用於結合兩個或多個表中的數據，以便在結果中檢索相關數據。具體來說，<code>LEFT OUTER JOIN</code> 返回左側表中的所有行，並返回右側表中與左側表中的行相匹配的行。如果右側表中沒有與左側表匹配的行，則返回 NULL 值。<br>假設你有兩個表：<code>Users</code> 和 <code>Posts</code>，並且希望獲得每個用戶的所有貼文，即使有些用戶還沒有。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">&gt;&gt;</span><span class="keyword">SELECT</span> Users.name, Posts.post_number</span><br><span class="line"><span class="operator">&gt;&gt;</span><span class="keyword">FROM</span> Users</span><br><span class="line"><span class="operator">&gt;&gt;</span><span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> Posts <span class="keyword">ON</span> Users.id <span class="operator">=</span> Posts.user_id;</span><br></pre></td></tr></table></figure>
-<p>在這個查詢中，<code>Users</code> 表是左側表，<code>Posts</code> 表是右側表。<br><code>ON Users.id = Posts.user_id</code> 指定了表之間的關聯條件。結果將返回所有用戶的名稱以及他們的貼文，如果某個用戶沒有，則貼文將顯示為 NULL。</p>
+<p><code>LEFT OUTER JOIN</code> 是 SQL 中的一種 JOIN 類型，用於結合兩個或多個表中的數據，以便在結果中檢索相關數據。具體來說，<code>LEFT OUTER JOIN</code> 返回左側表中的所有行，並返回右側表中與左側表中的行相匹配的行。如果右側表中沒有與左側表匹配的行，則返回 NULL 值。<br>假設你有兩個表：<code>Users</code> 和 <code>Posts</code>，並且希望獲得每個用戶的所有貼文，即使有些用戶還沒有。<br>  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Users.name, Posts.post_number</span><br><span class="line"><span class="keyword">FROM</span> Users</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> Posts <span class="keyword">ON</span> Users.id <span class="operator">=</span> Posts.user_id;</span><br></pre></td></tr></table></figure><br>在這個查詢中，<code>Users</code> 表是左側表，<code>Posts</code> 表是右側表。<br><code>ON Users.id = Posts.user_id</code> 指定了表之間的關聯條件。結果將返回所有用戶的名稱以及他們的貼文，如果某個用戶沒有，則貼文將顯示為 NULL。</p>
 </blockquote>
 </blockquote>
 <blockquote>
