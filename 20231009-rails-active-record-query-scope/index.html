@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="在 Rails 查詢資料上，除了先前所介紹的 find, where 的抓取資料的方式之外，還有一個很特別的方式 - scope! 今天來點 scope！ scope 是什麼？在 Rails 中，scope（作用域）是一種特殊的查詢方法，scope 查詢方法常見用途是用於按狀態、日期、日期範圍、排序、分組等進行過濾，可以使用之前介紹過的所有方法，例如 where, includes, joins，">
+    <meta name="description" content="在 Rails 查詢資料上，除了先前所介紹的 find, where 的抓取資料的方式之外，還有一個很特別的方式 - scope! 今天真的來點 scope！ scope 是什麼？在 Rails 中，scope（作用域）是一種特殊的查詢方法，scope 查詢方法常見用途是用於按狀態、日期、日期範圍、排序、分組等進行過濾，可以使用之前介紹過的所有方法，例如 where, includes, join">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Viiisit Ruby on Rails - Active Record Query - scope!">
 <meta property="og:url" content="https://viiisit.com/20231009-rails-active-record-query-scope/index.html">
 <meta property="og:site_name" content="Viiisit!">
-<meta property="og:description" content="在 Rails 查詢資料上，除了先前所介紹的 find, where 的抓取資料的方式之外，還有一個很特別的方式 - scope! 今天來點 scope！ scope 是什麼？在 Rails 中，scope（作用域）是一種特殊的查詢方法，scope 查詢方法常見用途是用於按狀態、日期、日期範圍、排序、分組等進行過濾，可以使用之前介紹過的所有方法，例如 where, includes, joins，">
+<meta property="og:description" content="在 Rails 查詢資料上，除了先前所介紹的 find, where 的抓取資料的方式之外，還有一個很特別的方式 - scope! 今天真的來點 scope！ scope 是什麼？在 Rails 中，scope（作用域）是一種特殊的查詢方法，scope 查詢方法常見用途是用於按狀態、日期、日期範圍、排序、分組等進行過濾，可以使用之前介紹過的所有方法，例如 where, includes, join">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-08T18:17:21.000Z">
-<meta property="article:modified_time" content="2023-10-08T17:24:38.859Z">
+<meta property="article:modified_time" content="2023-10-08T17:27:03.727Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="Ruby on Rails">
 <meta property="article:tag" content="Active Record">
@@ -169,7 +169,7 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <p><em>在 Rails 查詢資料上，除了先前所介紹的 <code>find</code>, <code>where</code> 的抓取資料的方式之外，<br>還有一個很特別的方式 - <strong>scope</strong>! 今天來點 scope！</em></p>
+    <p><em>在 Rails 查詢資料上，除了先前所介紹的 <code>find</code>, <code>where</code> 的抓取資料的方式之外，<br>還有一個很特別的方式 - <strong>scope</strong>! 今天真的來點 scope！</em></p>
 <h2 id="scope-是什麼？"><a href="#scope-是什麼？" class="headerlink" title="scope 是什麼？"></a>scope 是什麼？</h2><p>在 Rails 中，scope（作用域）是一種特殊的查詢方法，<br>scope 查詢方法常見用途是用於<strong>按狀態、日期、日期範圍、排序、分組</strong>等進行過濾，<br>可以使用之前介紹過的所有方法，例如 <code>where</code>, <code>includes</code>, <code>joins</code>，<br>所有作用域會返回一個 ActiveRecord::Relation 或 nil，讓我們能進一步調用其他作用域的方法。</p>
 <blockquote>
 <p>ActiveRecord::Relation 是一個 Class，代表資料庫表的查詢，<br>可以通過 method chaining （方法鏈）進行進一步的篩選、排序和操作，最終將查詢轉化為 SQL 語句並執行。Active Record::Relation 具有 “惰性加載”（lazy loading）的特性！</p>
