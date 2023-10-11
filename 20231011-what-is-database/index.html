@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="在之前透過 Active Record Query 去探索在 Rails 裡是如何對資料庫找資料的，想想發現對於資料庫的基本觀念似乎還沒有講述，今天來點資料庫吧！ 資料庫是什麼？簡單來說，資料庫是用於有效地存儲、檢索和管理所有資料！平時在詳列出自己的購物清單明細，其實這樣列點式出來就很像一個小型的資料庫，一張紙上列出一筆筆購物項目，可以新增修改刪除。而在電腦上的資料庫就是儲存在電腦系統上的資料資訊">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Viiisit Database - 資料庫是什麼？">
+<meta property="og:url" content="https://viiisit.com/20231011-what-is-database/index.html">
+<meta property="og:site_name" content="Viiisit!">
+<meta property="og:description" content="在之前透過 Active Record Query 去探索在 Rails 裡是如何對資料庫找資料的，想想發現對於資料庫的基本觀念似乎還沒有講述，今天來點資料庫吧！ 資料庫是什麼？簡單來說，資料庫是用於有效地存儲、檢索和管理所有資料！平時在詳列出自己的購物清單明細，其實這樣列點式出來就很像一個小型的資料庫，一張紙上列出一筆筆購物項目，可以新增修改刪除。而在電腦上的資料庫就是儲存在電腦系統上的資料資訊">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-10-11T04:17:21.000Z">
+<meta property="article:modified_time" content="2023-10-11T08:19:01.662Z">
+<meta property="article:author" content="Zinni Chang">
+<meta property="article:tag" content="Database">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png">
+        
+      
+    
+    <!-- title -->
+    <title>Viiisit Database - 資料庫是什麼？</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/20231010-rails-active-record-query-enum/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231011-what-is-database/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231011-what-is-database/&text=Viiisit Database - 資料庫是什麼？"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231011-what-is-database/&is_video=false&description=Viiisit Database - 資料庫是什麼？"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Database - 資料庫是什麼？&body=Check out this article: https://viiisit.com/20231011-what-is-database/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231011-what-is-database/&name=Viiisit Database - 資料庫是什麼？&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231011-what-is-database/&t=Viiisit Database - 資料庫是什麼？"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B3%87%E6%96%99%E5%BA%AB%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">資料庫是什麼？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B3%87%E6%96%99%E5%BA%AB%E7%B3%BB%E7%B5%B1%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">資料庫系統是什麼？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%A8%AD%E8%A8%88%E8%B3%87%E6%96%99%E5%BA%AB"><span class="toc-number">3.</span> <span class="toc-text">如何設計資料庫?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A8%AD%E8%A8%88%E8%B3%87%E6%96%99%E8%A1%A8"><span class="toc-number">3.1.</span> <span class="toc-text">設計資料表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B3%87%E6%96%99%E5%9E%8B%E6%85%8B"><span class="toc-number">3.1.1.</span> <span class="toc-text">資料型態</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E8%B3%87%E6%96%99%E8%A1%A8%EF%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text">建立資料表：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E8%A6%8F%E5%8C%96%E8%B3%87%E6%96%99%E5%BA%AB"><span class="toc-number">3.3.</span> <span class="toc-text">正規化資料庫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%BA%E4%BD%95%E9%9C%80%E8%A6%81%E6%AD%A3%E8%A6%8F%E5%8C%96%EF%BC%9F"><span class="toc-number">3.4.</span> <span class="toc-text">為何需要正規化？</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Viiisit Database - 資料庫是什麼？
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Zinni Chang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-10-11T04:17:21.000Z" class="dt-published" itemprop="datePublished">2023-10-11</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Keep-Learning/">Keep Learning</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Database/" rel="tag">Database</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p><em>在之前透過 Active Record Query 去探索在 Rails 裡是如何對資料庫找資料的，想想發現對於資料庫的基本觀念似乎還沒有講述，今天來點資料庫吧！</em></p>
+<h2 id="資料庫是什麼？"><a href="#資料庫是什麼？" class="headerlink" title="資料庫是什麼？"></a>資料庫是什麼？</h2><p>簡單來說，資料庫是用於有效地存儲、檢索和管理所有資料！<br>平時在詳列出自己的購物清單明細，其實這樣列點式出來就很像一個小型的資料庫，<br>一張紙上列出一筆筆購物項目，可以新增修改刪除。<br>而在電腦上的資料庫就是儲存在電腦系統上的資料資訊集合，例如書店的庫存資訊。</p>
+<p>資料庫通常包括以下元素：</p>
+<ul>
+<li><p>表格（Tables）：表格是資料庫中的主要結構，用於組織和儲存資料。每個表格通常包含多個列，每個列代表不同的資料。</p>
+</li>
+<li><p>列（Columns）：列是表格中的儲存單元，每個列對應一個特定類型的資料，例如姓名、地址、日期等。</p>
+</li>
+<li><p>行（Rows）：行是表格中的記錄，每個行包含與該記錄相關的資料。</p>
+</li>
+<li><p>鍵（Keys）：鍵是用於唯一識別表格中的每個記錄的一個或多個列。</p>
+<blockquote>
+<p><strong>主鍵（Primary Key）簡稱 PK，是用於唯一識別每個記錄的關鍵，一個資料表只能有一個主鍵，且主鍵的取值不能缺失，即不能為空值（Null）。</strong><br><strong>外鍵（Foreign Key）簡稱 FK，建立不同資料表之間的關聯，用於確保資料的一致性和參照完整性，並允許表格之間建立關聯，以便進行查詢和操作。</strong></p>
+</blockquote>
+</li>
+<li><p>查詢（Queries）：查詢是用於檢索、更新或處理資料庫中資料的命令或語句。</p>
+</li>
+<li><p>索引（Indexes）：索引是用於加速資料檢索的資料結構，通常基於一個或多個列的值。</p>
+</li>
+</ul>
+<p>隨著資料越來越龐大，想要讓資料保持井然有序、易於存取且安全無虞變得更為困難。<br>為了解決這些問題，就有了現在常聽到的資料庫管理系統 (DBMS)。而資料庫管理系統又是什麼？</p>
+<h2 id="資料庫系統是什麼？"><a href="#資料庫系統是什麼？" class="headerlink" title="資料庫系統是什麼？"></a>資料庫系統是什麼？</h2><p>想要有效率地使用與管理資料，能方便、有效使用資料庫的軟體，<br>就是資料庫管理系統 (Database Management System，簡稱 DBMS)。<br>資料庫管理系統能幫我們與資料庫做溝通，<br>其中包括<strong>關聯型資料庫管理系統（RDBMS）</strong>以及<strong>非關聯型資料庫 (NoSQL)</strong> 。</p>
+<blockquote>
+<p>為什麼非關聯型資料庫稱為 NoSQL?<br>在關聯型資料庫管理系統 (RDBMS) 裡，通常使用結構化查詢語言，也就是 SQL 語法來管理和檢索資料；而非關聯型資料庫 (NoSQL) 通常不使用 SQL，而是使用不同的方法來存儲和檢索資料！</p>
+</blockquote>
+<ul>
+<li><p>關聯型資料庫管理系統（RDBMS）</p>
+<ul>
+<li><strong>MySQL：</strong><br>一個開源的關聯型資料庫管理系統，相容於各個不同的程式語言、作業系統、資源眾多，廣泛用於 Web 應用程式。</li>
+<li><strong>PostgreSQL：</strong><br>另一個開源關聯型資料庫，具有高度可擴展性和擴展功能，商業應用導向，擁有比 MySQL 更嚴格的測試驗證和設計機制。</li>
+<li><strong>Oracle Database：</strong><br>由 Oracle Corporation 甲骨文公司開發的商業級 RDBMS，廣泛用於企業級應用程式，常見於較有歷史的組織，例如銀行、公部門。</li>
+<li><strong>Microsoft SQL Server：</strong><br>由 Microsoft 開發的 RDBMS，適用於 Windows 環境並支持企業級資料管理。</li>
+</ul>
+</li>
+<li><p>非關聯型資料庫 (NoSQL)</p>
+<ul>
+<li><strong>MongoDB (Document DB)：</strong><br>一個以文件儲存方式的 NoSQL 資料庫，用於處理半結構化資料，特別適合大資料應用。</li>
+<li><strong>Cassandra (Column DB)：</strong><br>一個高度可擴展的分佈式 NoSQL 資料庫，用於處理大規模資料和時間序列資料。</li>
+<li><strong>Redis (Key-Value)：</strong><br>一個用於快速資料存儲和緩存的 NoSQL 資料庫，通常用於緩存和即時應用。</li>
+<li><strong>Amazon DynamoDB  (Key-Value)：</strong><br>由亞馬遜 AWS 提供的分佈式 NoSQL 資料庫，專為高可用性和擴展性而設計。</li>
+<li><strong>Neo4j  (Graph DB)：</strong><br>一個圖形資料庫，專為處理具有複雜關係的資料而設計，常用於社交網絡和推薦系統。</li>
+</ul>
+<blockquote>
+<p>資料庫也可以分成 <code>伺服器型資料庫</code> 和 <code>檔案型資料庫</code>：<br>伺服器型資料庫 - 幾乎所有 RDBMS 都是伺服器型資料庫，資料庫需要先將資料庫安裝於電腦主機上才能使用。<br>檔案型資料庫 - 一個檔案本身就是一個資料庫，像是 SQLite 適合用在資料量較少，且不會有多人同時存取的情況。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="如何設計資料庫"><a href="#如何設計資料庫" class="headerlink" title="如何設計資料庫?"></a>如何設計資料庫?</h2><p>在建立資料庫時，需要先針對需求以及規格去思考要建立哪些資料表以及資料表中所包含的資料型態，甚至還有資料與資料之間的關聯以及很常見的資料庫正規化觀念，<br>今天就來淺談這幾點吧！Let’s go!</p>
+<h3 id="設計資料表"><a href="#設計資料表" class="headerlink" title="設計資料表"></a>設計資料表</h3><ul>
+<li>根據需求，開始設計資料表。每個資料表應該對應到一個特定的實體，例如顧客、訂單、商品等。</li>
+<li>決定每個資料表中需要包含哪些欄位，以及每個欄位的資料型態，例如整數、文字、日期等。</li>
+<li>考慮是否需要主鍵來唯一識別每個記錄，以及是否需要外鍵來建立資料表之間的關聯，可能包括一對一、一對多、多對多等關聯類型。</li>
+</ul>
+<h4 id="資料型態"><a href="#資料型態" class="headerlink" title="資料型態"></a>資料型態</h4><p>在建立資料表之前，我們要先來看看有哪些資料型態：</p>
+<ol>
+<li><p><strong>整數 (INTEGER)</strong>:</p>
+<ul>
+<li>整數資料型態用於存儲不帶小數點的數值，用於存儲年齡、計數等。</li>
+</ul>
+</li>
+<li><p><strong>小數 (DECIMAL&#x2F;NUMERIC, FLOAT, DOUBLE)</strong>:</p>
+<ul>
+<li>這些資料型態用於存儲帶有小數點的數值，用於存儲價格、百分比等。</li>
+</ul>
+</li>
+<li><p><strong>字符 (CHAR, VARCHAR, TEXT)</strong>:</p>
+<ul>
+<li>用於存儲文字，像是名稱、地址、評論等。</li>
+<li><code>CHAR</code> 是固定長度的字符，而 <code>VARCHAR</code> 是可變長度的字符。</li>
+</ul>
+</li>
+<li><p><strong>日期和時間 (DATE, TIME, DATETIME, TIMESTAMP)</strong>:</p>
+<ul>
+<li>這些資料型態用於存儲日期和時間。</li>
+</ul>
+</li>
+<li><p><strong>布林 (BOOLEAN)</strong>:</p>
+<ul>
+<li>用於存儲真或假值，用於表示狀態、開關等。</li>
+</ul>
+</li>
+<li><p><strong>枚舉 (ENUM)</strong>:</p>
+<ul>
+<li>這種資料型態允許在一組預定義的值中選擇一個，用於表示選項，例如產品類型（例如 “小型”、”中型”、”大型”）。</li>
+</ul>
+</li>
+<li><p><strong>二進制 (BINARY, BLOB)</strong>:</p>
+<ul>
+<li>用於存儲二進制數據，例如圖像、音頻、文件，用於存儲用戶上傳的圖像或文件。</li>
+</ul>
+</li>
+</ol>
+<h3 id="建立資料表："><a href="#建立資料表：" class="headerlink" title="建立資料表："></a>建立資料表：</h3><ul>
+<li><p>使用選定的資料庫管理系統（例如MySQL、PostgreSQL、MongoDB等）來實際建立資料表。</p>
+</li>
+<li><p>可以透過一開始設計的資料表去做建立，以下使用 SQL 語法：</p>
+</li>
+<li><p>建立顧客（Customer）資料表，包括顧客ID、顧客名稱、名字、姓氏、電子郵件和註冊日期等欄位：</p>
+</li>
+</ul>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Customers (</span><br><span class="line">    CustomerID <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    Customername <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    FirstName <span class="type">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">    LastName <span class="type">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">    Email <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">UNIQUE</span>,</span><br><span class="line">    RegistrationDate <span class="type">DATE</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>建立訂單（Order）資料表，包括訂單ID、顧客ID、訂單日期、總金額等欄位，使用外鍵來建立與 “Customers” 資料表之間的關聯：</li>
+</ul>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Orders (</span><br><span class="line">    OrderID <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    CustomerID <span class="type">INT</span>,</span><br><span class="line">    OrderDate <span class="type">DATE</span>,</span><br><span class="line">    TotalAmount <span class="type">DECIMAL</span>(<span class="number">10</span>, <span class="number">2</span>),</span><br><span class="line">    <span class="keyword">FOREIGN</span> KEY (CustomerID) <span class="keyword">REFERENCES</span> Customers(CustomerID)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>商品（Product）資料表，包括商品ID、商品名稱、價格、類別等欄位：</li>
+</ul>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Products (</span><br><span class="line">    ProductID <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    ProductName <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    Price <span class="type">DECIMAL</span>(<span class="number">10</span>, <span class="number">2</span>),</span><br><span class="line">    Category <span class="type">VARCHAR</span>(<span class="number">50</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="正規化資料庫"><a href="#正規化資料庫" class="headerlink" title="正規化資料庫"></a>正規化資料庫</h3><ul>
+<li>正規化是資料庫設計的一個關鍵概念，旨在減少資料的冗余和確保資料的一致性。</li>
+<li>使用正規化規則來分解資料表，以達到最佳的資料結構，透過將資料拆分成多個相關的資料表，並使用關聯連接在一起，以減少減少數據存儲和更新時的異常情況。</li>
+</ul>
+<p>  正規化通常分為不同的正規化級別，通常以正規形（NF）表示，如下：</p>
+<ol>
+<li><strong>第一正規形（1NF）：</strong></li>
+</ol>
+<ul>
+<li><p>每個資料表的每個欄位都應該是不可再分的，也就是說，每個欄位應該包含單一的數值。</p>
+</li>
+<li><p>如果有一個訂單的資料表，應該將訂單的產品列表拆分成獨立的資料表，而不是將他們存儲在一個單一的欄位中。</p>
+<p><strong>未正規化的訂單資料表</strong></p>
+<table>
+<thead>
+<tr>
+<th>訂單ID</th>
+<th>顧客名稱</th>
+<th>產品列表</th>
+<th>價格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Viii</td>
+<td>商品A, 商品B, 商品C</td>
+<td>200, 150, 100</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Mark</td>
+<td>商品B, 商品D</td>
+<td>150, 50</td>
+</tr>
+</tbody></table>
+<p><strong>為了符合第一正規化，我們應該將資料庫修改如下，<br>沒有任何兩筆以上的資料是完全重複且資料表中有 Primary Key，<br>而其他所有的欄位都相依於 Primary Key</strong></p>
+<p> <strong>第一正規化的訂單資料表</strong></p>
+<table>
+<thead>
+<tr>
+<th>訂單ID</th>
+<th>顧客名稱</th>
+<th>產品列表</th>
+<th>價格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Viii</td>
+<td>商品A</td>
+<td>200</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Viii</td>
+<td>商品B</td>
+<td>150</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Viii</td>
+<td>商品C</td>
+<td>100</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Mark</td>
+<td>商品B</td>
+<td>150</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Mark</td>
+<td>商品D</td>
+<td>50</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<ol start="2">
+<li><strong>第二正規形（2NF）：</strong></li>
+</ol>
+<ul>
+<li><p>一個資料表應該符合第一正規形也就是要符合： 1NF，<br>並且非主鍵欄位應該完全依賴於主鍵。</p>
+</li>
+<li><p>延續剛剛的訂單資料表，主鍵是訂單 ID，並且訂單中包含多個產品，<br>則應該將產品的資訊拆分成另一個資料表，<br>其中主鍵包括訂單 ID 和產品 ID，以確保非主鍵欄位只依賴於主鍵。</p>
+<p> <strong>延續第一正規化的訂單資料表</strong></p>
+<table>
+<thead>
+<tr>
+<th>訂單ID</th>
+<th>顧客名稱</th>
+<th>產品列表</th>
+<th>價格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Viii</td>
+<td>商品A</td>
+<td>200</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Viii</td>
+<td>商品B</td>
+<td>150</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Viii</td>
+<td>商品C</td>
+<td>100</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Mark</td>
+<td>商品B</td>
+<td>150</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Mark</td>
+<td>商品D</td>
+<td>50</td>
+</tr>
+</tbody></table>
+<p><strong>為了符合第二正規化，我們應該將產品的資訊拆分成另一個資料表，<br>並使用複合主鍵（訂單 ID 和產品 ID）建立 “訂單產品” 資料表。</strong></p>
+</li>
+<li><p>建立 “訂單” 資料表，包含訂單相關的信息，並使用訂單 ID 作為主鍵。</p>
+<p> <strong>訂單資料表 (Order)</strong></p>
+<table>
+<thead>
+<tr>
+<th>訂單ID</th>
+<th>顧客名稱</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Viii</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Mark</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>建立 “產品” 資料表，包含產品相關的信息，並使用產品 ID 作為主鍵。</p>
+<p> <strong>產品資料表 (Product)</strong></p>
+<table>
+<thead>
+<tr>
+<th>產品ID</th>
+<th>產品名稱</th>
+<th>價格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>101</td>
+<td>商品A</td>
+<td>200</td>
+</tr>
+<tr>
+<td>102</td>
+<td>商品B</td>
+<td>150</td>
+</tr>
+<tr>
+<td>103</td>
+<td>商品C</td>
+<td>100</td>
+</tr>
+<tr>
+<td>104</td>
+<td>商品D</td>
+<td>50</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>建立 “訂單產品” 資料表，用於建立 “訂單” 和 “產品” 之間的關聯。<br>在這個資料表中，使用複合主鍵（訂單 ID 和產品 ID）作為主鍵。</p>
+<p> <strong>訂單產品資料表 (OrderProduct)</strong></p>
+<table>
+<thead>
+<tr>
+<th>訂單ID</th>
+<th>產品ID</th>
+<th>價格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>101</td>
+<td>200</td>
+</tr>
+<tr>
+<td>1</td>
+<td>102</td>
+<td>150</td>
+</tr>
+<tr>
+<td>1</td>
+<td>103</td>
+<td>100</td>
+</tr>
+<tr>
+<td>2</td>
+<td>102</td>
+<td>150</td>
+</tr>
+<tr>
+<td>2</td>
+<td>104</td>
+<td>50</td>
+</tr>
+<tr>
+<td>3</td>
+<td>101</td>
+<td>200</td>
+</tr>
+<tr>
+<td>3</td>
+<td>103</td>
+<td>100</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<ol start="3">
+<li><strong>第三正規形（3NF）：</strong></li>
+</ol>
+<ul>
+<li><p>一個資料表應該符合第二正規形也就是要符合： 2NF，並且非主鍵欄位不應該相互依賴。</p>
+</li>
+<li><p>如果有一個包含顧客地址的資料表，應該將這些資訊拆分成不同的資料表，<br>以確保每個欄位都只依賴於主鍵。</p>
+<p>假設有一個未正規化的訂單資料表如下：</p>
+<p><strong>未正規化的訂單資料表</strong></p>
+<table>
+<thead>
+<tr>
+<th>訂單ID</th>
+<th>顧客名稱</th>
+<th>顧客地址</th>
+<th>產品ID</th>
+<th>產品名稱</th>
+<th>價格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Viii</td>
+<td>220 自由市</td>
+<td>101</td>
+<td>商品A</td>
+<td>200</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Viii</td>
+<td>220 自由市</td>
+<td>102</td>
+<td>商品B</td>
+<td>150</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Mark</td>
+<td>300 勝利市</td>
+<td>101</td>
+<td>商品A</td>
+<td>200</td>
+</tr>
+</tbody></table>
+<p><em>將其轉為第三正規化</em></p>
+</li>
+<li><p>建立 “顧客” 資料表，包含顧客相關的信息，並使用顧客 ID 作為主鍵。</p>
+<p> <strong>顧客資料表 (Customer)</strong></p>
+<table>
+<thead>
+<tr>
+<th>顧客ID</th>
+<th>顧客名稱</th>
+<th>顧客地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>Viii</td>
+<td>220 自由市</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Mark</td>
+<td>300 勝利市</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>建立 “產品” 資料表，包含產品相關的信息，並使用產品 ID 作為主鍵。</p>
+<p> <strong>產品資料表 (Product)</strong></p>
+<table>
+<thead>
+<tr>
+<th>產品ID</th>
+<th>產品名稱</th>
+<th>價格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>101</td>
+<td>商品A</td>
+<td>200</td>
+</tr>
+<tr>
+<td>102</td>
+<td>商品B</td>
+<td>150</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>建立 “訂單” 資料表，包含訂單相關的信息，並使用訂單 ID 作為主鍵，同時包含顧客 ID 和產品 ID 作為外鍵，以建立與 “顧客” 和 “產品” 資料表之間的關聯。</p>
+<p> <strong>訂單資料表 (Order)</strong></p>
+<table>
+<thead>
+<tr>
+<th>訂單ID</th>
+<th>顧客ID</th>
+<th>產品ID</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>1</td>
+<td>101</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>102</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>101</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h3 id="為何需要正規化？"><a href="#為何需要正規化？" class="headerlink" title="為何需要正規化？"></a>為何需要正規化？</h3><p>來總結一下為什麼我們需要正規化資料庫吧！<br>正規化有助於：</p>
+<ul>
+<li>改進資料結構，將資料拆分成更小的、原子性的單元，並在需要時使用關聯進行連接，節省儲存空間。</li>
+<li>當資料在一個地方更新，但在其他地方未更新，可能導致資料不一致。通過正規化，每個資料片段只存在於一個地方，從而確保資料的一致性。</li>
+<li>當資料未正規化時，可能出現插入、更新和刪除資料時的異常情況。這些異常情況可能導致資料不一致，甚至嚴重影響應用程式的正確運作。正規化可以減少這些異常情況的發生。</li>
+<li>正規化可以改善查詢效能且更容易維護和擴展，因為資料被拆分成較小的表格，使查詢變得更簡單且效率更高。當需要查詢某個資料片段時，只需訪問相關的表格，而不必掃描整個資料庫。</li>
+<li>正規化使資料庫能夠支援多種不同的關聯性，包括一對一、一對多和多對多關聯。</li>
+</ul>
+<p>今天就到這，我們下篇見！</p>
+<hr>
+<p><em>References:</em><br><em>- <a target="_blank" rel="noopener" href="https://www.explainthis.io/zh-hant/swe/database-normalization">什麼是資料庫正規化？為什麼需要正規化？</a></em><br><em>- <a target="_blank" rel="noopener" href="https://blog.build-school.com/2022/07/22/%E8%B3%87%E6%96%99%E5%BA%AB%E6%AD%A3%E8%A6%8F%E5%8C%96%E7%AD%86%E8%A8%98/">資料庫正規化筆記</a></em></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B3%87%E6%96%99%E5%BA%AB%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">資料庫是什麼？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B3%87%E6%96%99%E5%BA%AB%E7%B3%BB%E7%B5%B1%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">資料庫系統是什麼？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%A8%AD%E8%A8%88%E8%B3%87%E6%96%99%E5%BA%AB"><span class="toc-number">3.</span> <span class="toc-text">如何設計資料庫?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A8%AD%E8%A8%88%E8%B3%87%E6%96%99%E8%A1%A8"><span class="toc-number">3.1.</span> <span class="toc-text">設計資料表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B3%87%E6%96%99%E5%9E%8B%E6%85%8B"><span class="toc-number">3.1.1.</span> <span class="toc-text">資料型態</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B%E8%B3%87%E6%96%99%E8%A1%A8%EF%BC%9A"><span class="toc-number">3.2.</span> <span class="toc-text">建立資料表：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E8%A6%8F%E5%8C%96%E8%B3%87%E6%96%99%E5%BA%AB"><span class="toc-number">3.3.</span> <span class="toc-text">正規化資料庫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%82%BA%E4%BD%95%E9%9C%80%E8%A6%81%E6%AD%A3%E8%A6%8F%E5%8C%96%EF%BC%9F"><span class="toc-number">3.4.</span> <span class="toc-text">為何需要正規化？</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231011-what-is-database/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231011-what-is-database/&text=Viiisit Database - 資料庫是什麼？"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231011-what-is-database/&is_video=false&description=Viiisit Database - 資料庫是什麼？"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Database - 資料庫是什麼？&body=Check out this article: https://viiisit.com/20231011-what-is-database/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231011-what-is-database/&name=Viiisit Database - 資料庫是什麼？&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231011-what-is-database/&t=Viiisit Database - 資料庫是什麼？"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Zinni Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
