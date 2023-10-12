@@ -9,12 +9,12 @@
     <meta name="description" content="今天來點資料庫正規化與反正規化！ 正規化資料庫 正規化是資料庫設計的一個關鍵概念，旨在減少資料的冗余和確保資料的一致性。 使用正規化規則來分解資料表，以達到最佳的資料結構，透過將資料拆分成多個相關的資料表，並使用關聯連接在一起，以減少減少數據存儲和更新時的異常情況。    正規化通常分為不同的正規化級別，通常以正規形（NF）表示，如下：  第一正規形（1NF）：   每個資料表的每個欄位都應該是不">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Viiisit Database - 資料庫正規化與反正規化！">
-<meta property="og:url" content="https://viiisit.com/20231012-what-is-database-2/index.html">
+<meta property="og:url" content="https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/index.html">
 <meta property="og:site_name" content="Viiisit!">
 <meta property="og:description" content="今天來點資料庫正規化與反正規化！ 正規化資料庫 正規化是資料庫設計的一個關鍵概念，旨在減少資料的冗余和確保資料的一致性。 使用正規化規則來分解資料表，以達到最佳的資料結構，透過將資料拆分成多個相關的資料表，並使用關聯連接在一起，以減少減少數據存儲和更新時的異常情況。    正規化通常分為不同的正規化級別，通常以正規形（NF）表示，如下：  第一正規形（1NF）：   每個資料表的每個欄位都應該是不">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-12T09:17:21.000Z">
-<meta property="article:modified_time" content="2023-10-12T12:45:19.687Z">
+<meta property="article:modified_time" content="2023-10-12T12:46:28.790Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="Database">
 <meta name="twitter:card" content="summary">
@@ -100,17 +100,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231012-what-is-database-2/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231012-what-is-database-2/&text=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231012-what-is-database-2/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231012-what-is-database-2/&is_video=false&description=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Database - 資料庫正規化與反正規化！&body=Check out this article: https://viiisit.com/20231012-what-is-database-2/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231012-what-is-database-2/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231012-what-is-database-2/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231012-what-is-database-2/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231012-what-is-database-2/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231012-what-is-database-2/&name=Viiisit Database - 資料庫正規化與反正規化！&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231012-what-is-database-2/&t=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/&text=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/&is_video=false&description=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Database - 資料庫正規化與反正規化！&body=Check out this article: https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/&name=Viiisit Database - 資料庫正規化與反正規化！&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/&t=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -547,12 +547,12 @@
 <tbody><tr>
 <td>1</td>
 <td>Viii</td>
-<td><a href="mailto:&#118;&#x69;&#105;&#x69;&#x40;&#x65;&#x78;&#x61;&#109;&#x70;&#108;&#101;&#46;&#99;&#111;&#109;">&#118;&#x69;&#105;&#x69;&#x40;&#x65;&#x78;&#x61;&#109;&#x70;&#108;&#101;&#46;&#99;&#111;&#109;</a></td>
+<td><a href="mailto:&#118;&#105;&#105;&#105;&#x40;&#101;&#x78;&#97;&#109;&#112;&#108;&#x65;&#x2e;&#x63;&#x6f;&#x6d;">&#118;&#105;&#105;&#105;&#x40;&#101;&#x78;&#97;&#109;&#112;&#108;&#x65;&#x2e;&#x63;&#x6f;&#x6d;</a></td>
 </tr>
 <tr>
 <td>2</td>
 <td>Mark</td>
-<td><a href="mailto:&#x6d;&#x61;&#x72;&#x6b;&#64;&#x65;&#120;&#x61;&#x6d;&#112;&#108;&#x65;&#46;&#99;&#111;&#x6d;">&#x6d;&#x61;&#x72;&#x6b;&#64;&#x65;&#120;&#x61;&#x6d;&#112;&#108;&#x65;&#46;&#99;&#111;&#x6d;</a></td>
+<td><a href="mailto:&#x6d;&#97;&#114;&#107;&#x40;&#x65;&#x78;&#x61;&#x6d;&#112;&#x6c;&#101;&#46;&#99;&#x6f;&#x6d;">&#x6d;&#97;&#114;&#107;&#x40;&#x65;&#x78;&#x61;&#x6d;&#112;&#x6c;&#101;&#46;&#99;&#x6f;&#x6d;</a></td>
 </tr>
 </tbody></table>
 </li>
@@ -595,14 +595,14 @@
 <td>1</td>
 <td>Viii</td>
 <td>2023-10-01</td>
-<td><a href="mailto:&#118;&#105;&#x69;&#105;&#x40;&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#x65;&#46;&#99;&#111;&#109;">&#118;&#105;&#x69;&#105;&#x40;&#101;&#x78;&#x61;&#x6d;&#112;&#x6c;&#x65;&#46;&#99;&#111;&#109;</a></td>
+<td><a href="mailto:&#x76;&#x69;&#105;&#105;&#64;&#x65;&#120;&#x61;&#109;&#x70;&#x6c;&#x65;&#x2e;&#99;&#111;&#x6d;">&#x76;&#x69;&#105;&#105;&#64;&#x65;&#120;&#x61;&#109;&#x70;&#x6c;&#x65;&#x2e;&#99;&#111;&#x6d;</a></td>
 </tr>
 <tr>
 <td>102</td>
 <td>2</td>
 <td>Mark</td>
 <td>2023-10-02</td>
-<td><a href="mailto:&#x6d;&#x61;&#114;&#x6b;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#111;&#x6d;">&#x6d;&#x61;&#114;&#x6b;&#64;&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#111;&#x6d;</a></td>
+<td><a href="mailto:&#x6d;&#x61;&#114;&#107;&#64;&#101;&#x78;&#x61;&#109;&#x70;&#x6c;&#x65;&#46;&#x63;&#111;&#109;">&#x6d;&#x61;&#114;&#107;&#64;&#101;&#x78;&#x61;&#109;&#x70;&#x6c;&#x65;&#46;&#x63;&#111;&#109;</a></td>
 </tr>
 </tbody></table>
 </li>
@@ -701,17 +701,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231012-what-is-database-2/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231012-what-is-database-2/&text=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231012-what-is-database-2/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231012-what-is-database-2/&is_video=false&description=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Database - 資料庫正規化與反正規化！&body=Check out this article: https://viiisit.com/20231012-what-is-database-2/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231012-what-is-database-2/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231012-what-is-database-2/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231012-what-is-database-2/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231012-what-is-database-2/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231012-what-is-database-2/&name=Viiisit Database - 資料庫正規化與反正規化！&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231012-what-is-database-2/&t=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/&text=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/&is_video=false&description=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Database - 資料庫正規化與反正規化！&body=Check out this article: https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/&title=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/&name=Viiisit Database - 資料庫正規化與反正規化！&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231012-what-is-database-normalization-and-denormalization/&t=Viiisit Database - 資料庫正規化與反正規化！"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
