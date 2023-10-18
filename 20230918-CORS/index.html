@@ -14,7 +14,7 @@
 <meta property="og:description" content="before_action :about_same_origin_policy在講述 CORS（Cross-Origin Resource Sharing 跨來源資源共享）之前，我們必須了解 Same-Origin Policy (同源政策)，Let’s go! Same-Origin Policy 同源政策Same-Origin Policy (同源政策) 是一種網頁瀏覽器安全機制，用於保護網頁">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-18T12:13:30.000Z">
-<meta property="article:modified_time" content="2023-09-22T06:07:09.891Z">
+<meta property="article:modified_time" content="2023-10-18T16:59:36.519Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="CORS">
 <meta name="twitter:card" content="summary">
@@ -196,7 +196,7 @@
 <hr>
 <p>回顧當初在使用 jspdf 套件，進行 pdf 轉檔功能時，<br>使用 Base64 編碼解決 <code>jspdf</code> 中 <code>toDataURL()</code> 方法的錯誤，<br>此種方式可以視為解決 CORS 問題的一種方法，特別是當你在網頁中處理圖像或資源。</p>
 <p>通常，當你使用 <code>toDataURL()</code> 方法將畫布內容轉換為 DataURL 時，<br>該 DataURL 包含對畫布上的圖像或資源的引用。<br>如果這些圖像或資源來自不同的源（例如，不同的域名），並且該源未設置 CORS 支持，則在使用 <code>toDataURL()</code> 時可能會觸發 CORS 錯誤，因為該操作被視為跨源請求。</p>
-<p>通過將圖像或資源轉換為 Base64 編碼，然後使用 Base64 編碼的資料 URL 嵌入到網頁中，可以避免 CORS（跨來源資源共享）問題。<br>這是因為該資源不再是通過瀏覽器的 HTTP 請求來載入的，而是直接內嵌在網頁中，因此不需要跨源請求，也不受同源政策的限制。</p>
+<p>通過將圖像或資源的 URL 轉換為 Base64 編碼，然後使用 Base64 編碼的資料 URL 嵌入到網頁中，可以避免 CORS（跨來源資源共享）問題。<br>這是因為該資源不再是通過瀏覽器的 HTTP 請求來載入的，瀏覽器不需要發出跨域請求來獲取圖像，而是直接內嵌在網頁中，因此不需要跨源請求，也不受同源政策的限制。</p>
 <blockquote>
 <p>設置 CORS 標頭是一種解決 CORS 問題的方法，但它要求你有控制權限的伺服器，能夠配置伺服器以允許跨源請求。<br>然而，如果你無法控制來源伺服器或無法更改其 CORS 設置，那麼使用 Base64 編碼是一種繞過 CORS 問題的有效方法，因為資源是在網頁內部處理的，不需要跨源請求的許可權。</p>
 </blockquote>
