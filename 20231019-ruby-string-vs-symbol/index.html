@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="字串與符號的差異？字串（String）： 字串是一種數據類型，用於表示文本數據，例如字母、數字、符號和空格。 字串是由一系列字符組成，這些字符可以包括字母、數字、標點符號等。 字串通常用引號（單引號或雙引號）括起來，例如：”Hello, World!”。 字串可以包含多個字符，並且可以進行各種操作，如連接、分割、查找、替換等。  Ruby string methods 連接（Concatenati">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Viiisit Interview Questions - String vs Symbol！">
+<meta property="og:url" content="https://viiisit.com/20231019-ruby-string-vs-symbol/index.html">
+<meta property="og:site_name" content="Viiisit!">
+<meta property="og:description" content="字串與符號的差異？字串（String）： 字串是一種數據類型，用於表示文本數據，例如字母、數字、符號和空格。 字串是由一系列字符組成，這些字符可以包括字母、數字、標點符號等。 字串通常用引號（單引號或雙引號）括起來，例如：”Hello, World!”。 字串可以包含多個字符，並且可以進行各種操作，如連接、分割、查找、替換等。  Ruby string methods 連接（Concatenati">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-10-19T05:17:19.000Z">
+<meta property="article:modified_time" content="2023-10-23T05:54:17.923Z">
+<meta property="article:author" content="Zinni Chang">
+<meta property="article:tag" content="Interview">
+<meta property="article:tag" content="Ruby">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png">
+        
+      
+    
+    <!-- title -->
+    <title>Viiisit Interview Questions - String vs Symbol！</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/20231018-ruby-class-and-module/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231019-ruby-string-vs-symbol/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231019-ruby-string-vs-symbol/&text=Viiisit Interview Questions - String vs Symbol！"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231019-ruby-string-vs-symbol/&title=Viiisit Interview Questions - String vs Symbol！"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231019-ruby-string-vs-symbol/&is_video=false&description=Viiisit Interview Questions - String vs Symbol！"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Interview Questions - String vs Symbol！&body=Check out this article: https://viiisit.com/20231019-ruby-string-vs-symbol/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231019-ruby-string-vs-symbol/&title=Viiisit Interview Questions - String vs Symbol！"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231019-ruby-string-vs-symbol/&title=Viiisit Interview Questions - String vs Symbol！"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231019-ruby-string-vs-symbol/&title=Viiisit Interview Questions - String vs Symbol！"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231019-ruby-string-vs-symbol/&title=Viiisit Interview Questions - String vs Symbol！"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231019-ruby-string-vs-symbol/&name=Viiisit Interview Questions - String vs Symbol！&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231019-ruby-string-vs-symbol/&t=Viiisit Interview Questions - String vs Symbol！"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E4%B8%B2%E8%88%87%E7%AC%A6%E8%99%9F%E7%9A%84%E5%B7%AE%E7%95%B0%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">字串與符號的差異？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E4%B8%B2%EF%BC%88String%EF%BC%89%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">字串（String）：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ruby-string-methods"><span class="toc-number">1.1.1.</span> <span class="toc-text">Ruby string methods</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E8%99%9F%EF%BC%88Symbol%EF%BC%89%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">符號（Symbol）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Brief-Summary"><span class="toc-number">1.3.</span> <span class="toc-text">Brief Summary</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Viiisit Interview Questions - String vs Symbol！
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Zinni Chang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-10-19T05:17:19.000Z" class="dt-published" itemprop="datePublished">2023-10-19</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Keep-Learning/">Keep Learning</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Interview/" rel="tag">Interview</a>, <a class="p-category" href="/tags/Ruby/" rel="tag">Ruby</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="字串與符號的差異？"><a href="#字串與符號的差異？" class="headerlink" title="字串與符號的差異？"></a>字串與符號的差異？</h2><h3 id="字串（String）："><a href="#字串（String）：" class="headerlink" title="字串（String）："></a>字串（String）：</h3><ul>
+<li>字串是一種數據類型，用於表示文本數據，例如字母、數字、符號和空格。</li>
+<li>字串是由一系列字符組成，這些字符可以包括字母、數字、標點符號等。</li>
+<li>字串通常用引號（單引號或雙引號）括起來，例如：”Hello, World!”。</li>
+<li>字串可以包含多個字符，並且可以進行各種操作，如連接、分割、查找、替換等。</li>
+</ul>
+<h4 id="Ruby-string-methods"><a href="#Ruby-string-methods" class="headerlink" title="Ruby string methods"></a>Ruby string methods</h4><ul>
+<li>連接（Concatenation）：<ul>
+<li>使用 <code>+</code> 運算符或 <code>&lt;&lt;</code> 運算符將兩個字符串連接在一起。</li>
+</ul>
+</li>
+</ul>
+   <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">&quot;Hello&quot;</span></span><br><span class="line">str2 = <span class="string">&quot;World&quot;</span></span><br><span class="line">result = str1 + <span class="string">&quot; &quot;</span> + str2</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">result = str1 &lt;&lt; <span class="string">&quot; &quot;</span> &lt;&lt; str2</span><br><span class="line">puts result <span class="comment"># 輸出：Hello World</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>分割（Split）：<ul>
+<li>使用 <code>split</code> 方法來將字串根據指定的分隔符，分割成一個字串 Array。</li>
+</ul>
+</li>
+</ul>
+   <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">&quot;Apple, Banana, Cherry&quot;</span></span><br><span class="line">items = text.split(<span class="string">&quot;, &quot;</span>)</span><br><span class="line">puts items <span class="comment"># 輸出：[&quot;Apple&quot;, &quot;Banana&quot;, &quot;Cherry&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>查找：</p>
+<ul>
+<li>使用 <code>include?</code> 方法來檢查字串是否包含特定的字。</li>
+</ul>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">&quot;Hello, World!&quot;</span></span><br><span class="line"><span class="keyword">if</span> text.<span class="keyword">include</span>?(<span class="string">&quot;World&quot;</span>)</span><br><span class="line">  puts <span class="string">&quot;包含 &#x27;World&#x27;&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>index</code> 方法來查找位置。</li>
+</ul>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">&quot;Hello, World!&quot;</span></span><br><span class="line">position = text.index(<span class="string">&quot;World&quot;</span>)</span><br><span class="line">puts <span class="string">&quot;位置：<span class="subst">#&#123;position&#125;</span>&quot;</span> <span class="comment"># 輸出：位置：7</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>替換（Replace）：</p>
+<ul>
+<li>使用 <code>sub</code> 或 <code>gsub</code> 方法來替換字串中的指定字串。</li>
+</ul>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">&quot;Hello, World!&quot;</span></span><br><span class="line">new_text = text.sub(<span class="string">&quot;World&quot;</span>, <span class="string">&quot;Ruby&quot;</span>)</span><br><span class="line">puts new_text <span class="comment"># 輸出：Hello, Ruby!</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>sub</code> 只替換第一個匹配的字串，而 <code>gsub</code> 會替換所有匹配的字串。</li>
+</ul>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">&quot;Hello, World! World is great.&quot;</span></span><br><span class="line">new_text = text.gsub(<span class="string">&quot;World&quot;</span>, <span class="string">&quot;Ruby&quot;</span>)</span><br><span class="line">puts new_text <span class="comment"># 輸出：Hello, Ruby! Ruby is great.</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="符號（Symbol）："><a href="#符號（Symbol）：" class="headerlink" title="符號（Symbol）："></a>符號（Symbol）：</h3><ul>
+<li>符號是一種特殊的數據類型，通常用於代表獨一無二的標識符號或常數。</li>
+<li>符號通常不用引號括起來，而是直接以符號的名稱表示，例如：<code>:symbol_name</code>。</li>
+</ul>
+<h3 id="Brief-Summary"><a href="#Brief-Summary" class="headerlink" title="Brief Summary"></a>Brief Summary</h3><p>String 字串，主要用於表示 Text Data Type，是可變動的，可以在運行時更改。<br>而 Symbol 符號主要用於表示靜態或唯一的標識符，通常用於代表程式碼中的實體或概念，並且在整個程序運行期間保持不變。符號的主要優勢之一是它們的唯一性，可以減少內存使用，因為僅能創建一次並重複使用。</p>
+<ul>
+<li>可以透過 <code>object_id</code> 來觀察兩者差異：<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">&quot;Hello&quot;</span></span><br><span class="line">str2 = <span class="string">&quot;Hello&quot;</span></span><br><span class="line">sym1 = <span class="symbol">:hello</span></span><br><span class="line">sym2 = <span class="symbol">:hello</span></span><br><span class="line"></span><br><span class="line">puts <span class="string">&quot;String 1 object_id: <span class="subst">#&#123;str1.object_id&#125;</span>&quot;</span></span><br><span class="line">puts <span class="string">&quot;String 2 object_id: <span class="subst">#&#123;str2.object_id&#125;</span>&quot;</span></span><br><span class="line">puts <span class="string">&quot;Symbol 1 object_id: <span class="subst">#&#123;sym1.object_id&#125;</span>&quot;</span></span><br><span class="line">puts <span class="string">&quot;Symbol 2 object_id: <span class="subst">#&#123;sym2.object_id&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># String 1 object_id: 60</span></span><br><span class="line"><span class="comment"># String 2 object_id: 80</span></span><br><span class="line"><span class="comment"># Symbol 1 object_id: 1194588</span></span><br><span class="line"><span class="comment"># Symbol 2 object_id: 1194588</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p><strong>可以發現 string 在每新增一次都會產生一個新的記憶位置，<br>而在建立同一個 symbol 時，所指向的記憶體位置都相同。</strong></p>
+</blockquote>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E4%B8%B2%E8%88%87%E7%AC%A6%E8%99%9F%E7%9A%84%E5%B7%AE%E7%95%B0%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">字串與符號的差異？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E4%B8%B2%EF%BC%88String%EF%BC%89%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">字串（String）：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ruby-string-methods"><span class="toc-number">1.1.1.</span> <span class="toc-text">Ruby string methods</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E8%99%9F%EF%BC%88Symbol%EF%BC%89%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">符號（Symbol）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Brief-Summary"><span class="toc-number">1.3.</span> <span class="toc-text">Brief Summary</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231019-ruby-string-vs-symbol/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231019-ruby-string-vs-symbol/&text=Viiisit Interview Questions - String vs Symbol！"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231019-ruby-string-vs-symbol/&title=Viiisit Interview Questions - String vs Symbol！"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231019-ruby-string-vs-symbol/&is_video=false&description=Viiisit Interview Questions - String vs Symbol！"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit Interview Questions - String vs Symbol！&body=Check out this article: https://viiisit.com/20231019-ruby-string-vs-symbol/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231019-ruby-string-vs-symbol/&title=Viiisit Interview Questions - String vs Symbol！"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231019-ruby-string-vs-symbol/&title=Viiisit Interview Questions - String vs Symbol！"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231019-ruby-string-vs-symbol/&title=Viiisit Interview Questions - String vs Symbol！"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231019-ruby-string-vs-symbol/&title=Viiisit Interview Questions - String vs Symbol！"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231019-ruby-string-vs-symbol/&name=Viiisit Interview Questions - String vs Symbol！&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231019-ruby-string-vs-symbol/&t=Viiisit Interview Questions - String vs Symbol！"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Zinni Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
