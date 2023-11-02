@@ -8,13 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="在 Active Record 裡，有一個滿常見的功能，Enum，這功能該如何使用，今天就來點 Enum 吧！ Enum 是什麼？Enum（Enumeration的縮寫）稱為列舉，是一種程式設計中常見的資料型別，用於定義一組具有固定名稱的整數常數。這些名稱通常用作代表特定狀態、選項、或類別的符號，使我們在程式上更易於閱讀、理解和維護。 讓我們來看看 Rails 裡該如何使用 Enum 吧！ Enu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Viiisit Ruby on Rails - Active Record Query - Enum!">
+<meta property="og:title" content="Viiisit [Ruby on Rails] - Active Record Query - Enum!">
 <meta property="og:url" content="https://viiisit.com/20231010-rails-active-record-query-enum/index.html">
 <meta property="og:site_name" content="Viiisit!">
 <meta property="og:description" content="在 Active Record 裡，有一個滿常見的功能，Enum，這功能該如何使用，今天就來點 Enum 吧！ Enum 是什麼？Enum（Enumeration的縮寫）稱為列舉，是一種程式設計中常見的資料型別，用於定義一組具有固定名稱的整數常數。這些名稱通常用作代表特定狀態、選項、或類別的符號，使我們在程式上更易於閱讀、理解和維護。 讓我們來看看 Rails 裡該如何使用 Enum 吧！ Enu">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-10T04:17:21.000Z">
-<meta property="article:modified_time" content="2023-10-10T08:15:37.868Z">
+<meta property="article:modified_time" content="2023-11-02T08:15:57.090Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="Ruby on Rails">
 <meta property="article:tag" content="Active Record">
@@ -39,7 +39,7 @@
       
     
     <!-- title -->
-    <title>Viiisit Ruby on Rails - Active Record Query - Enum!</title>
+    <title>Viiisit [Ruby on Rails] - Active Record Query - Enum!</title>
     <!-- async scripts -->
     <!-- Google Analytics -->
 
@@ -105,16 +105,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231010-rails-active-record-query-enum/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231010-rails-active-record-query-enum/&text=Viiisit Ruby on Rails - Active Record Query - Enum!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit Ruby on Rails - Active Record Query - Enum!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231010-rails-active-record-query-enum/&is_video=false&description=Viiisit Ruby on Rails - Active Record Query - Enum!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - Active Record Query - Enum!&body=Check out this article: https://viiisit.com/20231010-rails-active-record-query-enum/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit Ruby on Rails - Active Record Query - Enum!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit Ruby on Rails - Active Record Query - Enum!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit Ruby on Rails - Active Record Query - Enum!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit Ruby on Rails - Active Record Query - Enum!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231010-rails-active-record-query-enum/&name=Viiisit Ruby on Rails - Active Record Query - Enum!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231010-rails-active-record-query-enum/&t=Viiisit Ruby on Rails - Active Record Query - Enum!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231010-rails-active-record-query-enum/&text=Viiisit [Ruby on Rails] - Active Record Query - Enum!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit [Ruby on Rails] - Active Record Query - Enum!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231010-rails-active-record-query-enum/&is_video=false&description=Viiisit [Ruby on Rails] - Active Record Query - Enum!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [Ruby on Rails] - Active Record Query - Enum!&body=Check out this article: https://viiisit.com/20231010-rails-active-record-query-enum/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit [Ruby on Rails] - Active Record Query - Enum!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit [Ruby on Rails] - Active Record Query - Enum!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit [Ruby on Rails] - Active Record Query - Enum!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit [Ruby on Rails] - Active Record Query - Enum!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231010-rails-active-record-query-enum/&name=Viiisit [Ruby on Rails] - Active Record Query - Enum!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231010-rails-active-record-query-enum/&t=Viiisit [Ruby on Rails] - Active Record Query - Enum!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -134,7 +134,7 @@
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
-        Viiisit Ruby on Rails - Active Record Query - Enum!
+        Viiisit [Ruby on Rails] - Active Record Query - Enum!
     </h1>
 
 
@@ -277,16 +277,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231010-rails-active-record-query-enum/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231010-rails-active-record-query-enum/&text=Viiisit Ruby on Rails - Active Record Query - Enum!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit Ruby on Rails - Active Record Query - Enum!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231010-rails-active-record-query-enum/&is_video=false&description=Viiisit Ruby on Rails - Active Record Query - Enum!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - Active Record Query - Enum!&body=Check out this article: https://viiisit.com/20231010-rails-active-record-query-enum/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit Ruby on Rails - Active Record Query - Enum!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit Ruby on Rails - Active Record Query - Enum!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit Ruby on Rails - Active Record Query - Enum!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit Ruby on Rails - Active Record Query - Enum!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231010-rails-active-record-query-enum/&name=Viiisit Ruby on Rails - Active Record Query - Enum!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231010-rails-active-record-query-enum/&t=Viiisit Ruby on Rails - Active Record Query - Enum!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231010-rails-active-record-query-enum/&text=Viiisit [Ruby on Rails] - Active Record Query - Enum!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit [Ruby on Rails] - Active Record Query - Enum!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231010-rails-active-record-query-enum/&is_video=false&description=Viiisit [Ruby on Rails] - Active Record Query - Enum!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [Ruby on Rails] - Active Record Query - Enum!&body=Check out this article: https://viiisit.com/20231010-rails-active-record-query-enum/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit [Ruby on Rails] - Active Record Query - Enum!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit [Ruby on Rails] - Active Record Query - Enum!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit [Ruby on Rails] - Active Record Query - Enum!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231010-rails-active-record-query-enum/&title=Viiisit [Ruby on Rails] - Active Record Query - Enum!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231010-rails-active-record-query-enum/&name=Viiisit [Ruby on Rails] - Active Record Query - Enum!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231010-rails-active-record-query-enum/&t=Viiisit [Ruby on Rails] - Active Record Query - Enum!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

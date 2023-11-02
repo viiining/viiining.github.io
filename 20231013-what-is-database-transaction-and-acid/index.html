@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="今天來點資料庫 Transaction 與 ACID！ 前情提要 當我們試圖新增、修改或建立資料，並在進行這些操作時發生無法將資料存入資料庫的情況，資料庫會發生什麼事？  我用 Rails 建立的註冊功能，當要在使用者資料表中新增一個新的使用者，可能由於某種原因（例如，唯一性約束違反或欄位的格式錯誤），無法成功將新使用者的資料存入資料庫，就會出現這樣： 仔細看會發現到我們觸發 Transactio">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Viiisit Database - 資料庫 Transaction 與 ACID！">
+<meta property="og:title" content="Viiisit [Database] - 資料庫 Transaction 與 ACID！">
 <meta property="og:url" content="https://viiisit.com/20231013-what-is-database-transaction-and-acid/index.html">
 <meta property="og:site_name" content="Viiisit!">
 <meta property="og:description" content="今天來點資料庫 Transaction 與 ACID！ 前情提要 當我們試圖新增、修改或建立資料，並在進行這些操作時發生無法將資料存入資料庫的情況，資料庫會發生什麼事？  我用 Rails 建立的註冊功能，當要在使用者資料表中新增一個新的使用者，可能由於某種原因（例如，唯一性約束違反或欄位的格式錯誤），無法成功將新使用者的資料存入資料庫，就會出現這樣： 仔細看會發現到我們觸發 Transactio">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://viiisit.com/assets/images/transaction-and-rollback.png">
 <meta property="article:published_time" content="2023-10-13T09:17:21.000Z">
-<meta property="article:modified_time" content="2023-10-12T14:29:19.088Z">
+<meta property="article:modified_time" content="2023-11-02T08:15:42.588Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="Database">
 <meta name="twitter:card" content="summary">
@@ -39,7 +39,7 @@
       
     
     <!-- title -->
-    <title>Viiisit Database - 資料庫 Transaction 與 ACID！</title>
+    <title>Viiisit [Database] - 資料庫 Transaction 與 ACID！</title>
     <!-- async scripts -->
     <!-- Google Analytics -->
 
@@ -105,16 +105,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231013-what-is-database-transaction-and-acid/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&text=Viiisit Database - 資料庫 Transaction 與 ACID！"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit Database - 資料庫 Transaction 與 ACID！"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&is_video=false&description=Viiisit Database - 資料庫 Transaction 與 ACID！"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Database - 資料庫 Transaction 與 ACID！&body=Check out this article: https://viiisit.com/20231013-what-is-database-transaction-and-acid/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit Database - 資料庫 Transaction 與 ACID！"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit Database - 資料庫 Transaction 與 ACID！"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit Database - 資料庫 Transaction 與 ACID！"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit Database - 資料庫 Transaction 與 ACID！"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&name=Viiisit Database - 資料庫 Transaction 與 ACID！&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&t=Viiisit Database - 資料庫 Transaction 與 ACID！"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&text=Viiisit [Database] - 資料庫 Transaction 與 ACID！"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit [Database] - 資料庫 Transaction 與 ACID！"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&is_video=false&description=Viiisit [Database] - 資料庫 Transaction 與 ACID！"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [Database] - 資料庫 Transaction 與 ACID！&body=Check out this article: https://viiisit.com/20231013-what-is-database-transaction-and-acid/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit [Database] - 資料庫 Transaction 與 ACID！"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit [Database] - 資料庫 Transaction 與 ACID！"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit [Database] - 資料庫 Transaction 與 ACID！"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit [Database] - 資料庫 Transaction 與 ACID！"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&name=Viiisit [Database] - 資料庫 Transaction 與 ACID！&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&t=Viiisit [Database] - 資料庫 Transaction 與 ACID！"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -134,7 +134,7 @@
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
-        Viiisit Database - 資料庫 Transaction 與 ACID！
+        Viiisit [Database] - 資料庫 Transaction 與 ACID！
     </h1>
 
 
@@ -249,16 +249,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231013-what-is-database-transaction-and-acid/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&text=Viiisit Database - 資料庫 Transaction 與 ACID！"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit Database - 資料庫 Transaction 與 ACID！"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&is_video=false&description=Viiisit Database - 資料庫 Transaction 與 ACID！"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Database - 資料庫 Transaction 與 ACID！&body=Check out this article: https://viiisit.com/20231013-what-is-database-transaction-and-acid/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit Database - 資料庫 Transaction 與 ACID！"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit Database - 資料庫 Transaction 與 ACID！"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit Database - 資料庫 Transaction 與 ACID！"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit Database - 資料庫 Transaction 與 ACID！"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&name=Viiisit Database - 資料庫 Transaction 與 ACID！&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&t=Viiisit Database - 資料庫 Transaction 與 ACID！"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&text=Viiisit [Database] - 資料庫 Transaction 與 ACID！"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit [Database] - 資料庫 Transaction 與 ACID！"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&is_video=false&description=Viiisit [Database] - 資料庫 Transaction 與 ACID！"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [Database] - 資料庫 Transaction 與 ACID！&body=Check out this article: https://viiisit.com/20231013-what-is-database-transaction-and-acid/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit [Database] - 資料庫 Transaction 與 ACID！"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit [Database] - 資料庫 Transaction 與 ACID！"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit [Database] - 資料庫 Transaction 與 ACID！"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&title=Viiisit [Database] - 資料庫 Transaction 與 ACID！"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&name=Viiisit [Database] - 資料庫 Transaction 與 ACID！&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231013-what-is-database-transaction-and-acid/&t=Viiisit [Database] - 資料庫 Transaction 與 ACID！"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

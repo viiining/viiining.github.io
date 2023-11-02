@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="今天來點 Routes     在 Viiisit Ruby on Rails - CoC &amp; DRY!有提到 REST 與 RESTful 概念，我們再複習一次： RESTREST (Representational State Transfer) 是一種軟體架構風格， 主要用於設計網路應用程式的 API(幫助世界各地不同軟體、程式在網際網路中能夠互相傳遞訊息)它基於資源（Resourc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Viiisit Ruby on Rails - Route!">
+<meta property="og:title" content="Viiisit [Ruby on Rails] - Route!">
 <meta property="og:url" content="https://viiisit.com/20231001-rails-routes/index.html">
 <meta property="og:site_name" content="Viiisit!">
 <meta property="og:description" content="今天來點 Routes     在 Viiisit Ruby on Rails - CoC &amp; DRY!有提到 REST 與 RESTful 概念，我們再複習一次： RESTREST (Representational State Transfer) 是一種軟體架構風格， 主要用於設計網路應用程式的 API(幫助世界各地不同軟體、程式在網際網路中能夠互相傳遞訊息)它基於資源（Resourc">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://ithelp.ithome.com.tw/upload/images/20230930/20161764YQPprUetsK.png">
 <meta property="article:published_time" content="2023-10-01T14:05:28.000Z">
-<meta property="article:modified_time" content="2023-10-02T03:14:24.154Z">
+<meta property="article:modified_time" content="2023-11-02T08:16:59.210Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="Ruby on Rails">
 <meta name="twitter:card" content="summary">
@@ -39,7 +39,7 @@
       
     
     <!-- title -->
-    <title>Viiisit Ruby on Rails - Route!</title>
+    <title>Viiisit [Ruby on Rails] - Route!</title>
     <!-- async scripts -->
     <!-- Google Analytics -->
 
@@ -105,16 +105,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231001-rails-routes/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231001-rails-routes/&text=Viiisit Ruby on Rails - Route!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit Ruby on Rails - Route!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231001-rails-routes/&is_video=false&description=Viiisit Ruby on Rails - Route!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - Route!&body=Check out this article: https://viiisit.com/20231001-rails-routes/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit Ruby on Rails - Route!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit Ruby on Rails - Route!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit Ruby on Rails - Route!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit Ruby on Rails - Route!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231001-rails-routes/&name=Viiisit Ruby on Rails - Route!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231001-rails-routes/&t=Viiisit Ruby on Rails - Route!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231001-rails-routes/&text=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231001-rails-routes/&is_video=false&description=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [Ruby on Rails] - Route!&body=Check out this article: https://viiisit.com/20231001-rails-routes/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231001-rails-routes/&name=Viiisit [Ruby on Rails] - Route!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231001-rails-routes/&t=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -134,7 +134,7 @@
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
-        Viiisit Ruby on Rails - Route!
+        Viiisit [Ruby on Rails] - Route!
     </h1>
 
 
@@ -320,16 +320,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231001-rails-routes/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231001-rails-routes/&text=Viiisit Ruby on Rails - Route!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit Ruby on Rails - Route!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231001-rails-routes/&is_video=false&description=Viiisit Ruby on Rails - Route!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Ruby on Rails - Route!&body=Check out this article: https://viiisit.com/20231001-rails-routes/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit Ruby on Rails - Route!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit Ruby on Rails - Route!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit Ruby on Rails - Route!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit Ruby on Rails - Route!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231001-rails-routes/&name=Viiisit Ruby on Rails - Route!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231001-rails-routes/&t=Viiisit Ruby on Rails - Route!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231001-rails-routes/&text=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231001-rails-routes/&is_video=false&description=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [Ruby on Rails] - Route!&body=Check out this article: https://viiisit.com/20231001-rails-routes/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231001-rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231001-rails-routes/&name=Viiisit [Ruby on Rails] - Route!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231001-rails-routes/&t=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

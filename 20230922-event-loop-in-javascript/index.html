@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="今天，我想來點 Event Loop （事件循環）! 為什麼會有 Event Loop (事件循環)？在正式說明之前，先來理解一下，為何會有 Event Loop (事件循環) 吧！ JavaScript 是一種單執行緒（single-threaded）的程式語言，也就是在任何給定的時間只能執行一個任務。換句話說，當 JavaScript 執行一段代碼時，其他的代碼或任務必須等待。這個單執行緒在某">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Viiisit JavaScript - Event Loop!">
+<meta property="og:title" content="Viiisit [JavaScript] - Event Loop!">
 <meta property="og:url" content="https://viiisit.com/20230922-event-loop-in-javascript/index.html">
 <meta property="og:site_name" content="Viiisit!">
 <meta property="og:description" content="今天，我想來點 Event Loop （事件循環）! 為什麼會有 Event Loop (事件循環)？在正式說明之前，先來理解一下，為何會有 Event Loop (事件循環) 吧！ JavaScript 是一種單執行緒（single-threaded）的程式語言，也就是在任何給定的時間只能執行一個任務。換句話說，當 JavaScript 執行一段代碼時，其他的代碼或任務必須等待。這個單執行緒在某">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop/the_javascript_runtime_environment_example.svg">
 <meta property="article:published_time" content="2023-09-22T05:12:42.000Z">
-<meta property="article:modified_time" content="2023-09-22T04:18:58.658Z">
+<meta property="article:modified_time" content="2023-11-02T08:18:11.538Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
@@ -39,7 +39,7 @@
       
     
     <!-- title -->
-    <title>Viiisit JavaScript - Event Loop!</title>
+    <title>Viiisit [JavaScript] - Event Loop!</title>
     <!-- async scripts -->
     <!-- Google Analytics -->
 
@@ -105,16 +105,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20230922-event-loop-in-javascript/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20230922-event-loop-in-javascript/&text=Viiisit JavaScript - Event Loop!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit JavaScript - Event Loop!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20230922-event-loop-in-javascript/&is_video=false&description=Viiisit JavaScript - Event Loop!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit JavaScript - Event Loop!&body=Check out this article: https://viiisit.com/20230922-event-loop-in-javascript/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit JavaScript - Event Loop!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit JavaScript - Event Loop!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit JavaScript - Event Loop!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit JavaScript - Event Loop!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20230922-event-loop-in-javascript/&name=Viiisit JavaScript - Event Loop!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20230922-event-loop-in-javascript/&t=Viiisit JavaScript - Event Loop!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20230922-event-loop-in-javascript/&text=Viiisit [JavaScript] - Event Loop!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit [JavaScript] - Event Loop!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20230922-event-loop-in-javascript/&is_video=false&description=Viiisit [JavaScript] - Event Loop!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [JavaScript] - Event Loop!&body=Check out this article: https://viiisit.com/20230922-event-loop-in-javascript/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit [JavaScript] - Event Loop!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit [JavaScript] - Event Loop!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit [JavaScript] - Event Loop!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit [JavaScript] - Event Loop!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20230922-event-loop-in-javascript/&name=Viiisit [JavaScript] - Event Loop!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20230922-event-loop-in-javascript/&t=Viiisit [JavaScript] - Event Loop!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -134,7 +134,7 @@
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
-        Viiisit JavaScript - Event Loop!
+        Viiisit [JavaScript] - Event Loop!
     </h1>
 
 
@@ -277,16 +277,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20230922-event-loop-in-javascript/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20230922-event-loop-in-javascript/&text=Viiisit JavaScript - Event Loop!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit JavaScript - Event Loop!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20230922-event-loop-in-javascript/&is_video=false&description=Viiisit JavaScript - Event Loop!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit JavaScript - Event Loop!&body=Check out this article: https://viiisit.com/20230922-event-loop-in-javascript/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit JavaScript - Event Loop!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit JavaScript - Event Loop!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit JavaScript - Event Loop!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit JavaScript - Event Loop!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20230922-event-loop-in-javascript/&name=Viiisit JavaScript - Event Loop!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20230922-event-loop-in-javascript/&t=Viiisit JavaScript - Event Loop!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20230922-event-loop-in-javascript/&text=Viiisit [JavaScript] - Event Loop!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit [JavaScript] - Event Loop!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20230922-event-loop-in-javascript/&is_video=false&description=Viiisit [JavaScript] - Event Loop!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [JavaScript] - Event Loop!&body=Check out this article: https://viiisit.com/20230922-event-loop-in-javascript/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit [JavaScript] - Event Loop!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit [JavaScript] - Event Loop!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit [JavaScript] - Event Loop!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20230922-event-loop-in-javascript/&title=Viiisit [JavaScript] - Event Loop!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20230922-event-loop-in-javascript/&name=Viiisit [JavaScript] - Event Loop!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20230922-event-loop-in-javascript/&t=Viiisit [JavaScript] - Event Loop!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

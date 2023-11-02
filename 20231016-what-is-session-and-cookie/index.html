@@ -8,16 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="面試大哉問之超常見的 Session 與 Cookie，本篇就來聊聊一些基礎與相關知識！Let’s go! 為什麼會有 Session 與 Cookie？大家是否好奇為什麼會有 Session 與 Cookie？他們之所以會存在是因為 HTTP 是一種無狀態協議（Stateless Protocol），無狀態協議換句話說就是每次從客戶端（Client）對伺服器（Server）發出的請求都是獨立的，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Viiisit Interview Questions - Session 與 Cookie 是什麼！">
+<meta property="og:title" content="Viiisit [Internet] - Session 與 Cookie 是什麼！">
 <meta property="og:url" content="https://viiisit.com/20231016-what-is-session-and-cookie/index.html">
 <meta property="og:site_name" content="Viiisit!">
 <meta property="og:description" content="面試大哉問之超常見的 Session 與 Cookie，本篇就來聊聊一些基礎與相關知識！Let’s go! 為什麼會有 Session 與 Cookie？大家是否好奇為什麼會有 Session 與 Cookie？他們之所以會存在是因為 HTTP 是一種無狀態協議（Stateless Protocol），無狀態協議換句話說就是每次從客戶端（Client）對伺服器（Server）發出的請求都是獨立的，">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-16T08:17:19.000Z">
-<meta property="article:modified_time" content="2023-10-18T08:46:57.410Z">
+<meta property="article:modified_time" content="2023-11-02T08:14:06.761Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="Interview">
-<meta property="article:tag" content="Internet Basics">
+<meta property="article:tag" content="Internet">
 <meta name="twitter:card" content="summary">
     
     
@@ -38,7 +38,7 @@
       
     
     <!-- title -->
-    <title>Viiisit Interview Questions - Session 與 Cookie 是什麼！</title>
+    <title>Viiisit [Internet] - Session 與 Cookie 是什麼！</title>
     <!-- async scripts -->
     <!-- Google Analytics -->
 
@@ -104,16 +104,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231016-what-is-session-and-cookie/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231016-what-is-session-and-cookie/&text=Viiisit Interview Questions - Session 與 Cookie 是什麼！"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit Interview Questions - Session 與 Cookie 是什麼！"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231016-what-is-session-and-cookie/&is_video=false&description=Viiisit Interview Questions - Session 與 Cookie 是什麼！"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Interview Questions - Session 與 Cookie 是什麼！&body=Check out this article: https://viiisit.com/20231016-what-is-session-and-cookie/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit Interview Questions - Session 與 Cookie 是什麼！"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit Interview Questions - Session 與 Cookie 是什麼！"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit Interview Questions - Session 與 Cookie 是什麼！"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit Interview Questions - Session 與 Cookie 是什麼！"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231016-what-is-session-and-cookie/&name=Viiisit Interview Questions - Session 與 Cookie 是什麼！&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231016-what-is-session-and-cookie/&t=Viiisit Interview Questions - Session 與 Cookie 是什麼！"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231016-what-is-session-and-cookie/&text=Viiisit [Internet] - Session 與 Cookie 是什麼！"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit [Internet] - Session 與 Cookie 是什麼！"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231016-what-is-session-and-cookie/&is_video=false&description=Viiisit [Internet] - Session 與 Cookie 是什麼！"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [Internet] - Session 與 Cookie 是什麼！&body=Check out this article: https://viiisit.com/20231016-what-is-session-and-cookie/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit [Internet] - Session 與 Cookie 是什麼！"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit [Internet] - Session 與 Cookie 是什麼！"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit [Internet] - Session 與 Cookie 是什麼！"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit [Internet] - Session 與 Cookie 是什麼！"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231016-what-is-session-and-cookie/&name=Viiisit [Internet] - Session 與 Cookie 是什麼！&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231016-what-is-session-and-cookie/&t=Viiisit [Internet] - Session 與 Cookie 是什麼！"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -133,7 +133,7 @@
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
-        Viiisit Interview Questions - Session 與 Cookie 是什麼！
+        Viiisit [Internet] - Session 與 Cookie 是什麼！
     </h1>
 
 
@@ -161,7 +161,7 @@
       
     <div class="article-tag">
         <i class="fa-solid fa-tag"></i>
-        <a class="p-category" href="/tags/Internet-Basics/" rel="tag">Internet Basics</a>, <a class="p-category" href="/tags/Interview/" rel="tag">Interview</a>
+        <a class="p-category" href="/tags/Internet/" rel="tag">Internet</a>, <a class="p-category" href="/tags/Interview/" rel="tag">Interview</a>
     </div>
 
 
@@ -254,16 +254,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231016-what-is-session-and-cookie/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231016-what-is-session-and-cookie/&text=Viiisit Interview Questions - Session 與 Cookie 是什麼！"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit Interview Questions - Session 與 Cookie 是什麼！"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231016-what-is-session-and-cookie/&is_video=false&description=Viiisit Interview Questions - Session 與 Cookie 是什麼！"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Interview Questions - Session 與 Cookie 是什麼！&body=Check out this article: https://viiisit.com/20231016-what-is-session-and-cookie/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit Interview Questions - Session 與 Cookie 是什麼！"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit Interview Questions - Session 與 Cookie 是什麼！"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit Interview Questions - Session 與 Cookie 是什麼！"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit Interview Questions - Session 與 Cookie 是什麼！"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231016-what-is-session-and-cookie/&name=Viiisit Interview Questions - Session 與 Cookie 是什麼！&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231016-what-is-session-and-cookie/&t=Viiisit Interview Questions - Session 與 Cookie 是什麼！"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231016-what-is-session-and-cookie/&text=Viiisit [Internet] - Session 與 Cookie 是什麼！"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit [Internet] - Session 與 Cookie 是什麼！"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231016-what-is-session-and-cookie/&is_video=false&description=Viiisit [Internet] - Session 與 Cookie 是什麼！"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [Internet] - Session 與 Cookie 是什麼！&body=Check out this article: https://viiisit.com/20231016-what-is-session-and-cookie/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit [Internet] - Session 與 Cookie 是什麼！"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit [Internet] - Session 與 Cookie 是什麼！"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit [Internet] - Session 與 Cookie 是什麼！"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231016-what-is-session-and-cookie/&title=Viiisit [Internet] - Session 與 Cookie 是什麼！"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231016-what-is-session-and-cookie/&name=Viiisit [Internet] - Session 與 Cookie 是什麼！&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231016-what-is-session-and-cookie/&t=Viiisit [Internet] - Session 與 Cookie 是什麼！"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

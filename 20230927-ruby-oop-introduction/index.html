@@ -8,13 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="在之前都是分享 JavaScript 相關的內容，接著想分享自己學習 Ruby 與 Ruby on Rails 時，了解到的重要知識，都會再接下來的文章中出現唷！ Ruby 是什麼？ A dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant s">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!">
+<meta property="og:title" content="Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!">
 <meta property="og:url" content="https://viiisit.com/20230927-ruby-oop-introduction/index.html">
 <meta property="og:site_name" content="Viiisit!">
 <meta property="og:description" content="在之前都是分享 JavaScript 相關的內容，接著想分享自己學習 Ruby 與 Ruby on Rails 時，了解到的重要知識，都會再接下來的文章中出現唷！ Ruby 是什麼？ A dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant s">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-27T14:12:42.000Z">
-<meta property="article:modified_time" content="2023-09-28T08:17:30.865Z">
+<meta property="article:modified_time" content="2023-11-02T08:17:46.183Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="Ruby">
 <meta property="article:tag" content="OOP">
@@ -38,7 +38,7 @@
       
     
     <!-- title -->
-    <title>Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!</title>
+    <title>Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!</title>
     <!-- async scripts -->
     <!-- Google Analytics -->
 
@@ -104,16 +104,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20230927-ruby-oop-introduction/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20230927-ruby-oop-introduction/&text=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20230927-ruby-oop-introduction/&is_video=false&description=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!&body=Check out this article: https://viiisit.com/20230927-ruby-oop-introduction/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20230927-ruby-oop-introduction/&name=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20230927-ruby-oop-introduction/&t=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20230927-ruby-oop-introduction/&text=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20230927-ruby-oop-introduction/&is_video=false&description=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!&body=Check out this article: https://viiisit.com/20230927-ruby-oop-introduction/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20230927-ruby-oop-introduction/&name=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20230927-ruby-oop-introduction/&t=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -133,7 +133,7 @@
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
-        Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!
+        Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!
     </h1>
 
 
@@ -268,16 +268,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20230927-ruby-oop-introduction/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20230927-ruby-oop-introduction/&text=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20230927-ruby-oop-introduction/&is_video=false&description=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!&body=Check out this article: https://viiisit.com/20230927-ruby-oop-introduction/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20230927-ruby-oop-introduction/&name=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20230927-ruby-oop-introduction/&t=Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20230927-ruby-oop-introduction/&text=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20230927-ruby-oop-introduction/&is_video=false&description=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!&body=Check out this article: https://viiisit.com/20230927-ruby-oop-introduction/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20230927-ruby-oop-introduction/&title=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20230927-ruby-oop-introduction/&name=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20230927-ruby-oop-introduction/&t=Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

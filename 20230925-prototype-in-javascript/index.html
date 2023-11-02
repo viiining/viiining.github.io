@@ -8,13 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="今天來點 JavaScript 的原型與繼承！ Prototype（原型）是什麼？當我們在 JavaScript 中建立物件時，每個物件都有一個隱含屬性 [[Prototype]]，叫做 prototype（原型）。原型就像是物件的「模板」，決定了物件的一些基本特性和方法。 藉由以下例子，來看看 prototype 與 __proto__： 假設我們有一個建構式叫做 Person，我們用來建立一個">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!">
+<meta property="og:title" content="Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!">
 <meta property="og:url" content="https://viiisit.com/20230925-prototype-in-javascript/index.html">
 <meta property="og:site_name" content="Viiisit!">
 <meta property="og:description" content="今天來點 JavaScript 的原型與繼承！ Prototype（原型）是什麼？當我們在 JavaScript 中建立物件時，每個物件都有一個隱含屬性 [[Prototype]]，叫做 prototype（原型）。原型就像是物件的「模板」，決定了物件的一些基本特性和方法。 藉由以下例子，來看看 prototype 與 __proto__： 假設我們有一個建構式叫做 Person，我們用來建立一個">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-09-25T14:12:42.000Z">
-<meta property="article:modified_time" content="2023-09-25T14:44:02.834Z">
+<meta property="article:modified_time" content="2023-11-02T08:17:58.725Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content=" Prototype">
@@ -38,7 +38,7 @@
       
     
     <!-- title -->
-    <title>Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!</title>
+    <title>Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!</title>
     <!-- async scripts -->
     <!-- Google Analytics -->
 
@@ -104,16 +104,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20230925-prototype-in-javascript/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20230925-prototype-in-javascript/&text=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20230925-prototype-in-javascript/&is_video=false&description=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!&body=Check out this article: https://viiisit.com/20230925-prototype-in-javascript/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20230925-prototype-in-javascript/&name=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20230925-prototype-in-javascript/&t=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20230925-prototype-in-javascript/&text=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20230925-prototype-in-javascript/&is_video=false&description=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!&body=Check out this article: https://viiisit.com/20230925-prototype-in-javascript/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20230925-prototype-in-javascript/&name=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20230925-prototype-in-javascript/&t=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -133,7 +133,7 @@
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
-        Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!
+        Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!
     </h1>
 
 
@@ -261,16 +261,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20230925-prototype-in-javascript/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20230925-prototype-in-javascript/&text=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20230925-prototype-in-javascript/&is_video=false&description=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!&body=Check out this article: https://viiisit.com/20230925-prototype-in-javascript/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20230925-prototype-in-javascript/&name=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20230925-prototype-in-javascript/&t=Viiisit JavaScript - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20230925-prototype-in-javascript/&text=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20230925-prototype-in-javascript/&is_video=false&description=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!&body=Check out this article: https://viiisit.com/20230925-prototype-in-javascript/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20230925-prototype-in-javascript/&title=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20230925-prototype-in-javascript/&name=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20230925-prototype-in-javascript/&t=Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

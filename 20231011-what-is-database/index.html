@@ -8,13 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="在之前透過 Active Record Query 去探索在 Rails 裡是如何對資料庫找資料的，想想發現對於資料庫的基本觀念似乎還沒有講述，今天來點資料庫吧！ 資料庫是什麼？簡單來說，資料庫是用於有效地存儲、檢索和管理所有資料！平時在詳列出自己的購物清單明細，其實這樣列點式出來就很像一個小型的資料庫，一張紙上列出一筆筆購物項目，可以新增修改刪除。而在電腦上的資料庫就是儲存在電腦系統上的資料資訊">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Viiisit Database - 資料庫是什麼？">
+<meta property="og:title" content="Viiisit [Database] - 資料庫是什麼？">
 <meta property="og:url" content="https://viiisit.com/20231011-what-is-database/index.html">
 <meta property="og:site_name" content="Viiisit!">
 <meta property="og:description" content="在之前透過 Active Record Query 去探索在 Rails 裡是如何對資料庫找資料的，想想發現對於資料庫的基本觀念似乎還沒有講述，今天來點資料庫吧！ 資料庫是什麼？簡單來說，資料庫是用於有效地存儲、檢索和管理所有資料！平時在詳列出自己的購物清單明細，其實這樣列點式出來就很像一個小型的資料庫，一張紙上列出一筆筆購物項目，可以新增修改刪除。而在電腦上的資料庫就是儲存在電腦系統上的資料資訊">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-11T04:17:21.000Z">
-<meta property="article:modified_time" content="2023-10-12T12:42:03.639Z">
+<meta property="article:modified_time" content="2023-11-02T08:15:50.800Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="Database">
 <meta name="twitter:card" content="summary">
@@ -37,7 +37,7 @@
       
     
     <!-- title -->
-    <title>Viiisit Database - 資料庫是什麼？</title>
+    <title>Viiisit [Database] - 資料庫是什麼？</title>
     <!-- async scripts -->
     <!-- Google Analytics -->
 
@@ -103,16 +103,16 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231011-what-is-database/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231011-what-is-database/&text=Viiisit Database - 資料庫是什麼？"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231011-what-is-database/&is_video=false&description=Viiisit Database - 資料庫是什麼？"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Database - 資料庫是什麼？&body=Check out this article: https://viiisit.com/20231011-what-is-database/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231011-what-is-database/&name=Viiisit Database - 資料庫是什麼？&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231011-what-is-database/&t=Viiisit Database - 資料庫是什麼？"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231011-what-is-database/&text=Viiisit [Database] - 資料庫是什麼？"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit [Database] - 資料庫是什麼？"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231011-what-is-database/&is_video=false&description=Viiisit [Database] - 資料庫是什麼？"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [Database] - 資料庫是什麼？&body=Check out this article: https://viiisit.com/20231011-what-is-database/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit [Database] - 資料庫是什麼？"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit [Database] - 資料庫是什麼？"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit [Database] - 資料庫是什麼？"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit [Database] - 資料庫是什麼？"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231011-what-is-database/&name=Viiisit [Database] - 資料庫是什麼？&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231011-what-is-database/&t=Viiisit [Database] - 資料庫是什麼？"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -132,7 +132,7 @@
   <header>
     
     <h1 class="posttitle p-name" itemprop="name headline">
-        Viiisit Database - 資料庫是什麼？
+        Viiisit [Database] - 資料庫是什麼？
     </h1>
 
 
@@ -489,16 +489,16 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231011-what-is-database/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231011-what-is-database/&text=Viiisit Database - 資料庫是什麼？"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231011-what-is-database/&is_video=false&description=Viiisit Database - 資料庫是什麼？"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit Database - 資料庫是什麼？&body=Check out this article: https://viiisit.com/20231011-what-is-database/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit Database - 資料庫是什麼？"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231011-what-is-database/&name=Viiisit Database - 資料庫是什麼？&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231011-what-is-database/&t=Viiisit Database - 資料庫是什麼？"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231011-what-is-database/&text=Viiisit [Database] - 資料庫是什麼？"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit [Database] - 資料庫是什麼？"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231011-what-is-database/&is_video=false&description=Viiisit [Database] - 資料庫是什麼？"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [Database] - 資料庫是什麼？&body=Check out this article: https://viiisit.com/20231011-what-is-database/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit [Database] - 資料庫是什麼？"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit [Database] - 資料庫是什麼？"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit [Database] - 資料庫是什麼？"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231011-what-is-database/&title=Viiisit [Database] - 資料庫是什麼？"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231011-what-is-database/&name=Viiisit [Database] - 資料庫是什麼？&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231011-what-is-database/&t=Viiisit [Database] - 資料庫是什麼？"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
