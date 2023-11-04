@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="DNS 是什麼？DNS (Domain Name System) 將人們可讀取的網域名稱 (www.example.com) 轉換為機器可讀取的 IP 地址 (192.0.1.234)。當開啟 Web 瀏覽器進入網站時，不需要記住這些冗長的數字 （IP 地址）進行輸入，而是輸入像 example.com 這樣的網域名稱就可以連接到正確的位置。  簡單來說就是名字與身分證的概念，每個網域名 (Dom">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Viiisit [Internet] - DNS 跟 IP 是什麼！">
+<meta property="og:url" content="https://viiisit.com/20231016/20231016-what-is-dns-and-ip/index.html">
+<meta property="og:site_name" content="Viiisit!">
+<meta property="og:description" content="DNS 是什麼？DNS (Domain Name System) 將人們可讀取的網域名稱 (www.example.com) 轉換為機器可讀取的 IP 地址 (192.0.1.234)。當開啟 Web 瀏覽器進入網站時，不需要記住這些冗長的數字 （IP 地址）進行輸入，而是輸入像 example.com 這樣的網域名稱就可以連接到正確的位置。  簡單來說就是名字與身分證的概念，每個網域名 (Dom">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://viiisit.com/assets/images/dns-lookup.webp">
+<meta property="article:published_time" content="2023-10-16T05:17:19.000Z">
+<meta property="article:modified_time" content="2023-11-02T08:11:58.411Z">
+<meta property="article:author" content="Zinni Chang">
+<meta property="article:tag" content="Interview">
+<meta property="article:tag" content="Internet">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://viiisit.com/assets/images/dns-lookup.webp">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png">
+        
+      
+    
+    <!-- title -->
+    <title>Viiisit [Internet] - DNS 跟 IP 是什麼！</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/20231016/20231016-what-is-http-and-https/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/20231014/20231014-git/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/&text=Viiisit [Internet] - DNS 跟 IP 是什麼！"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/&title=Viiisit [Internet] - DNS 跟 IP 是什麼！"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/&is_video=false&description=Viiisit [Internet] - DNS 跟 IP 是什麼！"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [Internet] - DNS 跟 IP 是什麼！&body=Check out this article: https://viiisit.com/20231016/20231016-what-is-dns-and-ip/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/&title=Viiisit [Internet] - DNS 跟 IP 是什麼！"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/&title=Viiisit [Internet] - DNS 跟 IP 是什麼！"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/&title=Viiisit [Internet] - DNS 跟 IP 是什麼！"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/&title=Viiisit [Internet] - DNS 跟 IP 是什麼！"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/&name=Viiisit [Internet] - DNS 跟 IP 是什麼！&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/&t=Viiisit [Internet] - DNS 跟 IP 是什麼！"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS-%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">DNS 是什麼？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP-%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">IP 是什麼？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS-%E7%9A%84%E9%81%8B%E4%BD%9C%E6%B5%81%E7%A8%8B%EF%BC%81"><span class="toc-number">3.</span> <span class="toc-text">DNS 的運作流程！</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Viiisit [Internet] - DNS 跟 IP 是什麼！
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Zinni Chang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-10-16T05:17:19.000Z" class="dt-published" itemprop="datePublished">2023-10-16</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Keep-Learning/">Keep Learning</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Internet/" rel="tag">Internet</a>, <a class="p-category" href="/tags/Interview/" rel="tag">Interview</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="DNS-是什麼？"><a href="#DNS-是什麼？" class="headerlink" title="DNS 是什麼？"></a>DNS 是什麼？</h2><p>DNS (Domain Name System) 將人們可讀取的網域名稱 (<a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a>) 轉換為機器可讀取的 IP 地址 (192.0.1.234)。當開啟 Web 瀏覽器進入網站時，不需要記住這些冗長的數字 （IP 地址）進行輸入，而是輸入像 example.com 這樣的網域名稱就可以連接到正確的位置。</p>
+<blockquote>
+<p>簡單來說就是名字與身分證的概念，<br>每個網域名 (Domain Name) 都會用 DNS 來控制使用者如何找到網站。</p>
+</blockquote>
+<p>當我們想要在瀏覽器輸入網址前往某個網站時，電腦並不知道那個網站是儲存在哪一台主機裡面，<br>如果想要知道網站在哪一台主機中，就會向 DNS 詢問該網站的主機在哪？<br>接著 DNS 會回覆我們該網站所在的 IP 地址，<br>之後電腦才有辦法依照 IP 地址找到存放該網站內容的主機，拜訪後顯示網站於瀏覽器中。</p>
+<h2 id="IP-是什麼？"><a href="#IP-是什麼？" class="headerlink" title="IP 是什麼？"></a>IP 是什麼？</h2><p>IP 是 Internet Protocol 的縮寫，網際網路上的所有電腦，從智慧型手機或筆記型電腦到為大量零售網站提供內容服務的伺服器，都是使用數字找到彼此並互相通訊，而這些數字稱為 IP 地址。</p>
+<h2 id="DNS-的運作流程！"><a href="#DNS-的運作流程！" class="headerlink" title="DNS 的運作流程！"></a>DNS 的運作流程！</h2><p>可以試想一下，今天要將東西寄出，是不是要去尋找相對應的地址以及相關資訊，過程中會透過一層一層的搜尋去查到對應的正確地址，而這樣多層次的搜尋概念就像 DNS 在運作的方式！</p>
+<p>當使用者在瀏覽器輸入 URL，電腦就會需要解析網址 (<a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a>) ，以獲取相關的 IP 地址<br>-&gt; <strong>首先，查找本地 DNS 快取，如果找到相應的 IP 地址，則直接解析完成。</strong></p>
+<blockquote>
+<p>本地 DNS 快取是一個臨時的儲存區，通常由操作系統或網絡服務提供商（如 ISP ）維護，<br>用於存儲最近查詢過的域名和相應的 IP 地址。</p>
+</blockquote>
+<p>-&gt; <strong>如果域名的解析訊息不在本地 DNS 快取中，<br>電腦就會向 ISP （Internet Service Provider）的 DNS 伺服器發出查詢請求。</strong></p>
+<p>-&gt; <strong>如果 ISP 的 DNS 伺服器也不知道域名的 IP 地址，將繼續向更高層次的 DNS 伺服器發出查詢請求。首先，將向根域名伺服器查詢，以獲得頂級域名（例如.com、.org、.net等）的 DNS 伺服器的 IP 地址。</strong></p>
+<p>-&gt; <strong>根域名伺服器返回頂級域名（TLD）伺服器的 IP 地址，然後 ISP 的 DNS 伺服器將查詢發給適當的 TLD 伺服器。例如，如果域名是 example.com，那麼查詢將發送給 .com頂級域名伺服器。</strong></p>
+<p>-&gt; <strong>TLD 伺服器返回包含目標域名的權威 DNS 伺服器的 IP 地址。ISP 的 DNS 伺服器繼續查詢，這一次將查詢發給權威 DNS 伺服器，該伺服器最終返回域名的 IP 地址。</strong></p>
+<p>-&gt; <strong>一旦 ISP 的 DNS 伺服器收到域名的 IP 地址，將返回給電腦。設備將使用此 IP 地址建立連接，以便訪問目標網站或伺服器。</strong></p>
+<blockquote>
+<p>過程涉及多個層次的 DNS 伺服器，每個層次都有不同的責任，最終都是將域名解析為相應的IP地址，使電腦能夠與目標伺服器建立通信。</p>
+</blockquote>
+<p><img src="/../assets/images/dns-lookup.webp" alt="DNS Lookup"></p>
+<p><em>References:</em><br><em>- <a target="_blank" rel="noopener" href="https://www.cloudflare.com/learning/dns/what-is-dns/">What is DNS?</a></em><br><em>- <a target="_blank" rel="noopener" href="https://tech-blog.cymetrics.io/posts/crystal/dns-hacking-1/">DNS Hacking 之 基礎知識：DNS 運作與紀錄類型</a></em></p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS-%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">DNS 是什麼？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IP-%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">IP 是什麼？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS-%E7%9A%84%E9%81%8B%E4%BD%9C%E6%B5%81%E7%A8%8B%EF%BC%81"><span class="toc-number">3.</span> <span class="toc-text">DNS 的運作流程！</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/&text=Viiisit [Internet] - DNS 跟 IP 是什麼！"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/&title=Viiisit [Internet] - DNS 跟 IP 是什麼！"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/&is_video=false&description=Viiisit [Internet] - DNS 跟 IP 是什麼！"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [Internet] - DNS 跟 IP 是什麼！&body=Check out this article: https://viiisit.com/20231016/20231016-what-is-dns-and-ip/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/&title=Viiisit [Internet] - DNS 跟 IP 是什麼！"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/&title=Viiisit [Internet] - DNS 跟 IP 是什麼！"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/&title=Viiisit [Internet] - DNS 跟 IP 是什麼！"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/&title=Viiisit [Internet] - DNS 跟 IP 是什麼！"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/&name=Viiisit [Internet] - DNS 跟 IP 是什麼！&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231016/20231016-what-is-dns-and-ip/&t=Viiisit [Internet] - DNS 跟 IP 是什麼！"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Zinni Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'viiining/viiining.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-light';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>
