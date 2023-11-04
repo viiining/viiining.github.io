@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="面試上很常見的費氏數列，來看看如何用 Ruby 的方法來定義吧！ 費波那契數 Successione di Fibonacci在數學上，費波那契數是以遞迴的方法來定義：123F0 &#x3D; 0; F1 &#x3D; 1; Fn &#x3D; F(n-1) + F(n-2) (n &gt;&#x3D; 2) 0, 1, 1, 2, 3, 5, 8, 13…用文字來說，就是費氏數列由0和1開始，之後的費波那契數就是由之前的兩數相加而得出">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Viiisit [code practice] - 費波那契數 Successione di Fibonacci！">
+<meta property="og:url" content="https://viiisit.com/posts/ruby-method-for-fibonacci/index.html">
+<meta property="og:site_name" content="Viiisit!">
+<meta property="og:description" content="面試上很常見的費氏數列，來看看如何用 Ruby 的方法來定義吧！ 費波那契數 Successione di Fibonacci在數學上，費波那契數是以遞迴的方法來定義：123F0 &#x3D; 0; F1 &#x3D; 1; Fn &#x3D; F(n-1) + F(n-2) (n &gt;&#x3D; 2) 0, 1, 1, 2, 3, 5, 8, 13…用文字來說，就是費氏數列由0和1開始，之後的費波那契數就是由之前的兩數相加而得出">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://viiisit.com/assets/images/Fib.jpeg">
+<meta property="article:published_time" content="2023-10-17T13:17:19.000Z">
+<meta property="article:modified_time" content="2023-11-02T08:15:21.321Z">
+<meta property="article:author" content="Zinni Chang">
+<meta property="article:tag" content="Interview">
+<meta property="article:tag" content="Ruby">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://viiisit.com/assets/images/Fib.jpeg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png">
+        
+      
+    
+    <!-- title -->
+    <title>Viiisit [code practice] - 費波那契數 Successione di Fibonacci！</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/posts/ruby-class-and-module/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/posts/session-and-cookie/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/posts/ruby-method-for-fibonacci/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/posts/ruby-method-for-fibonacci/&text=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/posts/ruby-method-for-fibonacci/&title=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/posts/ruby-method-for-fibonacci/&is_video=false&description=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！&body=Check out this article: https://viiisit.com/posts/ruby-method-for-fibonacci/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/posts/ruby-method-for-fibonacci/&title=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/posts/ruby-method-for-fibonacci/&title=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/posts/ruby-method-for-fibonacci/&title=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/posts/ruby-method-for-fibonacci/&title=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/posts/ruby-method-for-fibonacci/&name=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/posts/ruby-method-for-fibonacci/&t=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B2%BB%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B8-Successione-di-Fibonacci"><span class="toc-number">1.</span> <span class="toc-text">費波那契數 Successione di Fibonacci</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E6%95%B8%E5%AD%B8%E4%B8%8A%EF%BC%8C%E8%B2%BB%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B8%E6%98%AF%E4%BB%A5%E9%81%9E%E8%BF%B4%E7%9A%84%E6%96%B9%E6%B3%95%E4%BE%86%E5%AE%9A%E7%BE%A9%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">在數學上，費波那契數是以遞迴的方法來定義：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Remark"><span class="toc-number">1.1.1.</span> <span class="toc-text">Remark</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Viiisit [code practice] - 費波那契數 Successione di Fibonacci！
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Zinni Chang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-10-17T13:17:19.000Z" class="dt-published" itemprop="datePublished">2023-10-17</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Keep-Learning/">Keep Learning</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Interview/" rel="tag">Interview</a>, <a class="p-category" href="/tags/Ruby/" rel="tag">Ruby</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>面試上很常見的費氏數列，來看看如何用 Ruby 的方法來定義吧！</p>
+<h2 id="費波那契數-Successione-di-Fibonacci"><a href="#費波那契數-Successione-di-Fibonacci" class="headerlink" title="費波那契數 Successione di Fibonacci"></a>費波那契數 Successione di Fibonacci</h2><h3 id="在數學上，費波那契數是以遞迴的方法來定義："><a href="#在數學上，費波那契數是以遞迴的方法來定義：" class="headerlink" title="在數學上，費波那契數是以遞迴的方法來定義："></a>在數學上，費波那契數是以遞迴的方法來定義：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">F0 = 0; </span><br><span class="line">F1 = 1; </span><br><span class="line">Fn = F(n-1) + F(n-2) (n &gt;= 2)</span><br></pre></td></tr></table></figure>
+<p>0, 1, 1, 2, 3, 5, 8, 13…<br><strong>用文字來說，就是費氏數列由0和1開始，之後的費波那契數就是由之前的兩數相加而得出。</strong></p>
+<p><img src="/../assets/images/Fib.jpeg" alt="Fib"></p>
+<blockquote>
+<p>遞迴 (Recursive) 是自己呼叫自己的函式，目的是要使用相同的方法，解決重複性的問題。</p>
+</blockquote>
+<h4 id="Remark"><a href="#Remark" class="headerlink" title="Remark"></a>Remark</h4><p>遞迴通常用於解決問題的特點是可以被分解為相同結構的子問題，每個子問題都可以使用相同的方法解決。這樣的方法常常以簡單的基本情況為終止條件（例如：設定最小單位），以確保遞迴不會無限運行，也就是說，要用遞迴函式必須確定最小單位是什麼！否則，會發生 stackoverflow 堆疊滿出來的情形!!!</p>
+<ul>
+<li><p>Method 1</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">fib</span>(<span class="params">n</span>)</span><br><span class="line">  n &gt; <span class="number">1</span> ? fib(n-<span class="number">1</span>) + fib(n-<span class="number">2</span>) : n</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">puts fib(<span class="number">1</span>)</span><br><span class="line">puts fib(<span class="number">6</span>)</span><br><span class="line">puts fib(<span class="number">36</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[Running]</span><br><span class="line">1</span><br><span class="line">8</span><br><span class="line">14930352</span><br><span class="line"></span><br><span class="line">[Done] exited with code=0 in 1.072 seconds</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Method 1 使用遞迴方法來計算斐波那契數列。<br>計算方式是通過不斷地對 n-1 和 n-2 調用自身來計算第 n 項的斐波那契數。<br>這個方法在處理小的 n 值時效率還可以，但對於較大的 n 值，效率會降低，<br>因為在計算中多次重複運行相同的子問題，導致指數級的計算時間增長。<br>這就是為什麼 Method 1 在處理 n&#x3D;36 時運行時間較長。 </p>
+</blockquote>
+</li>
+<li><p>Method 2</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">fib</span>(<span class="params">n</span>)</span><br><span class="line">  fib_array = [<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> n &lt; <span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> fib_array[n]</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  (<span class="number">2</span>..n).each <span class="keyword">do</span> |<span class="params">i</span>|</span><br><span class="line">    fib_array[i] = fib_array[i - <span class="number">1</span>] + fib_array[i - <span class="number">2</span>]</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> fib_array[n]</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">puts fib(<span class="number">1</span>)</span><br><span class="line">puts fib(<span class="number">6</span>)</span><br><span class="line">puts fib(<span class="number">36</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[Running]</span><br><span class="line">1</span><br><span class="line">8</span><br><span class="line">14930352</span><br><span class="line"></span><br><span class="line">[Done] exited with code=0 in 0.059 seconds</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>Method 2 使用動態方法，在計算過程中避免重複計算，<br>運用陣列 <code>fib_array</code> 來存已經計算過的斐波那契數值。<br>Method 2 僅計算一次每個斐波那契數，然後重複使用這些值，因此性能較高。此方法的計算時間是線性，因此不會像 Method 1 那樣出現指數級的計算時間增長。</p>
+</blockquote>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B2%BB%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B8-Successione-di-Fibonacci"><span class="toc-number">1.</span> <span class="toc-text">費波那契數 Successione di Fibonacci</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E6%95%B8%E5%AD%B8%E4%B8%8A%EF%BC%8C%E8%B2%BB%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B8%E6%98%AF%E4%BB%A5%E9%81%9E%E8%BF%B4%E7%9A%84%E6%96%B9%E6%B3%95%E4%BE%86%E5%AE%9A%E7%BE%A9%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">在數學上，費波那契數是以遞迴的方法來定義：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Remark"><span class="toc-number">1.1.1.</span> <span class="toc-text">Remark</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/posts/ruby-method-for-fibonacci/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/posts/ruby-method-for-fibonacci/&text=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/posts/ruby-method-for-fibonacci/&title=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/posts/ruby-method-for-fibonacci/&is_video=false&description=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！&body=Check out this article: https://viiisit.com/posts/ruby-method-for-fibonacci/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/posts/ruby-method-for-fibonacci/&title=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/posts/ruby-method-for-fibonacci/&title=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/posts/ruby-method-for-fibonacci/&title=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/posts/ruby-method-for-fibonacci/&title=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/posts/ruby-method-for-fibonacci/&name=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/posts/ruby-method-for-fibonacci/&t=Viiisit [code practice] - 費波那契數 Successione di Fibonacci！"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Zinni Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'viiining/viiining.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-light';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>
