@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="在 Rails 查詢資料上，除了先前所介紹的 find, where 的抓取資料的方式之外，還有一個很特別的方式 - Scope! 但是，今天我想先來點 Scope 前情提要 Block、Proc 和 Lambda！ 前情提要 Block、Proc 和 Lambda！在正式說明 Rails 查詢資料上在 Model 可以設定的 Scope 方法之前，先來理解 Ruby 的 Block、Proc 和">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!">
+<meta property="og:url" content="https://viiisit.com/20231008/ruby-block-proc-lambda/index.html">
+<meta property="og:site_name" content="Viiisit!">
+<meta property="og:description" content="在 Rails 查詢資料上，除了先前所介紹的 find, where 的抓取資料的方式之外，還有一個很特別的方式 - Scope! 但是，今天我想先來點 Scope 前情提要 Block、Proc 和 Lambda！ 前情提要 Block、Proc 和 Lambda！在正式說明 Rails 查詢資料上在 Model 可以設定的 Scope 方法之前，先來理解 Ruby 的 Block、Proc 和">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-10-08T07:17:21.000Z">
+<meta property="article:modified_time" content="2023-11-02T08:16:06.546Z">
+<meta property="article:author" content="Zinni Chang">
+<meta property="article:tag" content="Ruby on Rails">
+<meta property="article:tag" content="Active Record">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png">
+        
+      
+    
+    <!-- title -->
+    <title>Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/20231009/rails-active-record-query-scope/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/20231007/rails-active-record-query-part2/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231008/ruby-block-proc-lambda/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231008/ruby-block-proc-lambda/&text=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231008/ruby-block-proc-lambda/&title=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231008/ruby-block-proc-lambda/&is_video=false&description=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!&body=Check out this article: https://viiisit.com/20231008/ruby-block-proc-lambda/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231008/ruby-block-proc-lambda/&title=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231008/ruby-block-proc-lambda/&title=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231008/ruby-block-proc-lambda/&title=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231008/ruby-block-proc-lambda/&title=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231008/ruby-block-proc-lambda/&name=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231008/ruby-block-proc-lambda/&t=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81-Block%E3%80%81Proc-%E5%92%8C-Lambda%EF%BC%81"><span class="toc-number">1.</span> <span class="toc-text">前情提要 Block、Proc 和 Lambda！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8B-Block"><span class="toc-number">2.</span> <span class="toc-text">如何建立 Block?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8%E6%96%B9%E6%B3%95%E8%A3%A1%E5%9F%B7%E8%A1%8C-Block"><span class="toc-number">3.</span> <span class="toc-text">如何在方法裡執行 Block?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E4%BB%A5%E5%82%B3%E9%81%9E%E5%8F%83%E6%95%B8%E7%B5%A6-Block"><span class="toc-number">4.</span> <span class="toc-text">可以傳遞參數給 Block?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-pipe-%E5%82%B3%E9%81%9E%E5%8F%83%E6%95%B8%E7%B5%A6-Block"><span class="toc-number">4.1.</span> <span class="toc-text">使用 pipe | 傳遞參數給 Block!</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#yield-gt-Block-gt-yield-%E5%9B%9E%E5%82%B3%E5%80%BC"><span class="toc-number">5.</span> <span class="toc-text">yield -&gt; Block -&gt; yield 回傳值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%AE%93-Block-%E7%89%A9%E4%BB%B6%E5%8C%96%EF%BC%9F"><span class="toc-number">6.</span> <span class="toc-text">如何讓 Block 物件化？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%B1%E8%AE%93-Proc-%E8%88%87-Lambda-%E4%BE%86%E7%89%A9%E4%BB%B6%E5%8C%96-Block-%E5%90%A7%EF%BC%81"><span class="toc-number">6.1.</span> <span class="toc-text">就讓 Proc 與 Lambda 來物件化 Block 吧！</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Proc"><span class="toc-number">6.2.</span> <span class="toc-text">Proc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lambda"><span class="toc-number">6.3.</span> <span class="toc-text">Lambda</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E5%87%BD%E5%BC%8F%E4%B8%AD%E4%BD%BF%E7%94%A8-Proc-Lambda"><span class="toc-number">7.</span> <span class="toc-text">在函式中使用 Proc Lambda</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Proc-Lambda-%E5%B7%AE%E7%95%B0"><span class="toc-number">8.</span> <span class="toc-text">Proc Lambda 差異</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Zinni Chang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-10-08T07:17:21.000Z" class="dt-published" itemprop="datePublished">2023-10-08</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Keep-Learning/">Keep Learning</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Active-Record/" rel="tag">Active Record</a>, <a class="p-category" href="/tags/Ruby-on-Rails/" rel="tag">Ruby on Rails</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p><em>在 Rails 查詢資料上，除了先前所介紹的 <code>find</code>, <code>where</code> 的抓取資料的方式之外，<br>還有一個很特別的方式 - <strong>Scope</strong>! 但是，今天我想先來點 Scope 前情提要 Block、Proc 和 Lambda！</em></p>
+<h2 id="前情提要-Block、Proc-和-Lambda！"><a href="#前情提要-Block、Proc-和-Lambda！" class="headerlink" title="前情提要 Block、Proc 和 Lambda！"></a>前情提要 Block、Proc 和 Lambda！</h2><p>在正式說明 Rails 查詢資料上在 Model 可以設定的 Scope 方法之前，先來理解 Ruby 的 Block、Proc 和 Lambda！</p>
+<p>之前有說 Ruby 是物件導向程式語言，幾乎所有東西都是物件，<br>但其實還是有例外，<strong>Block 就不是物件</strong>。<br>因此，Block 沒有辦法單獨存在，也不能像其他物件一樣被單獨指定給變數，<br>下方寫法會造成語法錯誤（Syntax Error）:</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 這將導致語法錯誤</span></span><br><span class="line">my_block = &#123; puts <span class="string">&quot;Viiisit!&quot;</span> &#125;</span><br></pre></td></tr></table></figure>
+<p><strong>通常會將 Block 傳遞給方法使用，並在該方法內部執行，或者使用 Proc 或 Lambda 將程式碼封裝為可調用的物件。（等等就會介紹了！）</strong></p>
+<h2 id="如何建立-Block"><a href="#如何建立-Block" class="headerlink" title="如何建立 Block?"></a>如何建立 Block?</h2><p>既然剛剛說到 Block 沒有辦法單獨存在，也不能像其他物件一樣被單獨指定給變數，<br>那時實際上要如何建立 Block 呢？</p>
+<p>有兩種方式可以建立 Block：</p>
+<ol>
+<li>使用 <code>do...end</code>：<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span>.times <span class="keyword">do</span> |<span class="params">i</span>|</span><br><span class="line">  puts <span class="string">&quot;Viiisit!&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment"># Viiisit!</span></span><br><span class="line"><span class="comment"># Viiisit!</span></span><br></pre></td></tr></table></figure></li>
+<li>使用 <code>&#123; &#125;</code> (braces) 花括號：<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span>.times &#123; |<span class="params">i</span>| puts <span class="string">&quot;Viiisit!&quot;</span> &#125;</span><br><span class="line"><span class="comment"># Viiisit!</span></span><br><span class="line"><span class="comment"># Viiisit!</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<blockquote>
+<p>Ruby 中的 Blocks 可以使用 <code>do-end</code> 或花括號 <code>&#123;&#125;</code> 來包。<br><code>do-end</code> 通常用於跨越多行的 Blocks，而 <code>&#123;&#125;</code> 則用於單行 Block。</p>
+</blockquote>
+<h2 id="如何在方法裡執行-Block"><a href="#如何在方法裡執行-Block" class="headerlink" title="如何在方法裡執行 Block?"></a>如何在方法裡執行 Block?</h2><p>還記得前情提要有說：<strong>通常會將 Block 傳遞給方法使用，並在該方法內部執行</strong>，那要如何執行呢？</p>
+<p>使用自定義方法將 Block 傳遞進去：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">visit_my_blog</span></span><br><span class="line">  puts <span class="string">&quot;Welcome to my blog - Viiisit!&quot;</span></span><br><span class="line">  <span class="keyword">yield</span> <span class="keyword">if</span> block_given?  <span class="comment"># 執行傳遞進來的 Block，如果有的話</span></span><br><span class="line">  puts <span class="string">&quot;Thank you for visiting!&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用方法 visit_my_blog 並傳遞一個 Block</span></span><br><span class="line">visit_my_blog <span class="keyword">do</span></span><br><span class="line">  puts <span class="string">&quot;This is a new blog post.&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Welcome to my blog - Viiisit!</span></span><br><span class="line"><span class="comment"># This is a new blog post.</span></span><br><span class="line"><span class="comment"># Thank you for visiting!</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>大家有發現，在這裡有使用一個特別的關鍵字：<code>yield</code>嗎！<br>在方法呼叫時，<code>yield</code> 關鍵字與 Block 一起使用，可以傳遞一組額外的指令，<br><code>yield</code> 就像是暫時把控制權交棒給 Block，等待 Block 程式碼執行結束後再把控制權交回來。</p>
+</blockquote>
+<h2 id="可以傳遞參數給-Block"><a href="#可以傳遞參數給-Block" class="headerlink" title="可以傳遞參數給 Block?"></a>可以傳遞參數給 Block?</h2><h3 id="使用-pipe-傳遞參數給-Block"><a href="#使用-pipe-傳遞參數給-Block" class="headerlink" title="使用 pipe | 傳遞參數給 Block!"></a>使用 pipe <code>|</code> 傳遞參數給 Block!</h3><p>在 Ruby 中，可以使用 pipe <code>|</code> 將參數傳遞給一個 Block，可以在 Block 內部使用參數。<br>這樣可以在方法調用或迭代過程中將數據傳遞給 Block，讓 Block 可以處理參數。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定義一個方法，接受一個 Block 作為參數，並將一個數字傳遞給 Block</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">process_number</span></span><br><span class="line">  number = <span class="number">5</span></span><br><span class="line">  <span class="keyword">yield</span>(number) <span class="keyword">if</span> block_given?</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 調用方法，並在 Block 中使用 pipe `|` 接收參數</span></span><br><span class="line">process_number <span class="keyword">do</span> |<span class="params">num</span>|</span><br><span class="line">  puts <span class="string">&quot;處理數字 <span class="subst">#&#123;num&#125;</span>&quot;</span></span><br><span class="line">  puts <span class="string">&quot;數字的平方為 <span class="subst">#&#123;num * num&#125;</span>&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 處理數字 5</span></span><br><span class="line"><span class="comment"># 數字的平方是 25</span></span><br></pre></td></tr></table></figure>
+<p>當呼叫 <code>process_number</code> 方法時，Block 會透過 <code>yield</code> 被傳遞進去，而 Block 在內部使用 <code>|num|</code> 來接收方法中傳遞的數字，<br>接著便可以在 Block 內部處理這個數字，並輸出平方值。</p>
+<h2 id="yield-gt-Block-gt-yield-回傳值"><a href="#yield-gt-Block-gt-yield-回傳值" class="headerlink" title="yield -&gt; Block -&gt; yield 回傳值"></a><code>yield</code> -&gt; Block -&gt; <code>yield</code> 回傳值</h2><p><code>yield</code> 除了將控制權暫時交給 Block 之外，<code>yield</code> 還具有一個特別的性質，<br>他會將 Block 的最後一行執行的結果自動變為 <code>yield</code> 方法的返回值。<br>使得 Block 可以用作一個判斷內容或者計算一些值，然後將該值返回給調用他的方法。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">calculate</span></span><br><span class="line">  result = <span class="keyword">yield</span>(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">  puts <span class="string">&quot;The result is: <span class="subst">#&#123;result&#125;</span>&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">calculate <span class="keyword">do</span> |<span class="params">a, b</span>|</span><br><span class="line">  sum = a + b</span><br><span class="line">  sum * <span class="number">2</span>  <span class="comment"># 最後一行的結果將成為 yield 方法的回傳值</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># The result is: 14</span></span><br></pre></td></tr></table></figure>
+<p>整段過程就像是：<br>當呼叫 <code>calculate</code> 方法時，就會執行 Block，Block 接受兩個參數 <code>a</code> 和 <code>b</code>，計算兩者的總和並將結果乘以 2，然後將 Block 的回傳值存在 <code>result</code> 變數中，最後打印出結果：<code>The result is: 14</code>，可以發現 Block 的最後一行的執行結果 <code>14</code> 成為了 <code>yield</code> 方法的回傳值，然後我們在 <code>calculate</code> 方法中使用這個回傳值進行額外的操作。這使得 Block 可以用於動態生成值，且可以很容易地將 Block 的結果傳遞給調用他的方法，以便進一步處理或使用。</p>
+<hr>
+<h2 id="如何讓-Block-物件化？"><a href="#如何讓-Block-物件化？" class="headerlink" title="如何讓 Block 物件化？"></a>如何讓 Block 物件化？</h2><p>還記得前情提要有說：<strong>Block 就不是物件</strong>，需要依附在方法或物件後面，那要如何讓 Block 物件化？</p>
+<h3 id="就讓-Proc-與-Lambda-來物件化-Block-吧！"><a href="#就讓-Proc-與-Lambda-來物件化-Block-吧！" class="headerlink" title="就讓 Proc 與 Lambda 來物件化 Block 吧！"></a>就讓 <code>Proc</code> 與 <code>Lambda</code> 來物件化 Block 吧！</h3><blockquote>
+<p>使用 Proc 或 Lambda 將程式碼封裝為可調用的物件，這樣的好處不外乎就是提高程式碼的可讀性、重用性和靈活性，同時也更容易維護和測試，我們可以避免重複撰寫功能類似的 Block</p>
+</blockquote>
+<h3 id="Proc"><a href="#Proc" class="headerlink" title="Proc"></a>Proc</h3><ul>
+<li>建立： my_proc &#x3D; Proc.new <code>Block</code></li>
+<li>執行： my_proc.call or my_proc.call(參數)<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># example 1: 使用 do...end</span></span><br><span class="line">my_blog = <span class="title class_">Proc</span>.new <span class="keyword">do</span></span><br><span class="line">  puts <span class="string">&quot;Viiisit!&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">my_blog.call <span class="comment"># Viiisit!</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># example 2: 使用 &#123;&#125;</span></span><br><span class="line">my_blog = <span class="title class_">Proc</span>.new &#123; puts <span class="string">&quot;Viiisit!&quot;</span> &#125;</span><br><span class="line">my_blog.call <span class="comment"># Viiisit!</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># example 3: 代入參數</span></span><br><span class="line">greeting = <span class="title class_">Proc</span>.new &#123; |<span class="params">name</span>| puts <span class="string">&quot;Hello，<span class="subst">#&#123;name&#125;</span>&quot;</span>&#125;</span><br><span class="line">greeting.call(<span class="string">&quot;Viii&quot;</span>) <span class="comment"># Hello，Viii!</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Lambda"><a href="#Lambda" class="headerlink" title="Lambda"></a>Lambda</h3><ul>
+<li>建立： my_lambda &#x3D; lambda <code>Block</code></li>
+<li>執行： my_lambda.call or my_lambda.call(參數)<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># example 1: 使用 do...end</span></span><br><span class="line">my_blog = <span class="built_in">lambda</span> <span class="keyword">do</span></span><br><span class="line">  puts <span class="string">&quot;Viiisit!&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">my_blog.call <span class="comment"># Viiisit!</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># example 2: 使用 &#123;&#125;</span></span><br><span class="line">my_blog = <span class="built_in">lambda</span> &#123; puts <span class="string">&quot;Viiisit!&quot;</span> &#125;</span><br><span class="line">my_blog.call <span class="comment"># Viiisit!</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># example 3: 代入參數</span></span><br><span class="line">greeting = <span class="built_in">lambda</span> &#123; |<span class="params">name</span>| puts <span class="string">&quot;Hello，<span class="subst">#&#123;name&#125;</span>!&quot;</span>&#125;</span><br><span class="line">greeting.call(<span class="string">&quot;Viii&quot;</span>) <span class="comment"># Hello，Viii!</span></span><br></pre></td></tr></table></figure>
+
+<strong>lambda 可以使用 <code>-&gt;</code> 來建立：</strong><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># example 1: 使用 do...end</span></span><br><span class="line">my_lambda = -&gt; <span class="keyword">do</span></span><br><span class="line">  puts <span class="string">&quot;Viiisit!&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">my_lambda.call <span class="comment"># Viiisit!</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># example 2: 使用 &#123;&#125;</span></span><br><span class="line">my_lambda = -&gt; &#123; puts <span class="string">&quot;Viiisit!&quot;</span> &#125;</span><br><span class="line">my_lambda.call <span class="comment"># Viiisit!</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># example 3: 代入參數</span></span><br><span class="line">greeting = -&gt; (name) &#123; puts <span class="string">&quot;Hello, <span class="subst">#&#123;name&#125;</span>!&quot;</span> &#125;</span><br><span class="line">greeting.call(<span class="string">&quot;Viii&quot;</span>) <span class="comment"># Hello, Viii!</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="在函式中使用-Proc-Lambda"><a href="#在函式中使用-Proc-Lambda" class="headerlink" title="在函式中使用 Proc Lambda"></a>在函式中使用 <code>Proc</code> <code>Lambda</code></h2><p>要在函式中使用 <code>Proc</code> <code>Lambda</code>，<br>需要透過 <strong><code>&amp;</code> 符號將 Proc 或 Lambda 轉換為一個被方法接受的 Block</strong>。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">greeting</span>(<span class="params">&amp;block</span>)</span><br><span class="line">  puts <span class="string">&quot;Hello, before the block!&quot;</span></span><br><span class="line">  block.call <span class="keyword">if</span> block_given?</span><br><span class="line">  puts <span class="string">&quot;Hello, after the block!&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 Proc</span></span><br><span class="line">my_proc = <span class="title class_">Proc</span>.new &#123; puts <span class="string">&quot;This is a Proc block!&quot;</span> &#125;</span><br><span class="line">greeting(&amp;my_proc)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 Lambda</span></span><br><span class="line">my_lambda = <span class="built_in">lambda</span> &#123; puts <span class="string">&quot;This is a Lambda block!&quot;</span> &#125;</span><br><span class="line">greeting(&amp;my_lambda)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Hello, before the block!</span></span><br><span class="line"><span class="comment"># This is a Proc block!</span></span><br><span class="line"><span class="comment"># Hello, after the block!</span></span><br><span class="line"><span class="comment"># Hello, before the block!</span></span><br><span class="line"><span class="comment"># This is a Lambda block!</span></span><br><span class="line"><span class="comment"># Hello, after the block!</span></span><br></pre></td></tr></table></figure>
+<h2 id="Proc-Lambda-差異"><a href="#Proc-Lambda-差異" class="headerlink" title="Proc Lambda 差異"></a><code>Proc</code> <code>Lambda</code> 差異</h2><ol>
+<li><strong>arguments（引數）檢查的嚴格程度：</strong></li>
+</ol>
+<ul>
+<li><code>Proc</code> 的檢查較不嚴格，如果引數數目不正確，通常會忽略多餘的引數或填充 <code>nil</code>。</li>
+<li><code>Lambda</code> 的檢查比較嚴格，如果你傳遞給 <code>Lambda</code> 的引數數目不正確，會引發一個錯誤。</li>
+</ul>
+<ol start="2">
+<li><strong>遇到 return 行為：</strong></li>
+</ol>
+<ul>
+<li>在 <code>Proc</code> 中，執行到 <code>return</code> 不會回到呼叫他的方法，而是立即跳出該方法。</li>
+<li>在 <code>Lambda</code> 中，執行到 <code>return</code> 會將控制權交回呼叫他的方法。</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># arguments（引數）檢查的嚴格程度</span></span><br><span class="line">proc_example = <span class="title class_">Proc</span>.new &#123; |<span class="params">x, y</span>| puts <span class="string">&quot;<span class="subst">#&#123;x&#125;</span>, <span class="subst">#&#123;y&#125;</span>&quot;</span> &#125;</span><br><span class="line">proc_example.call(<span class="number">2</span>) <span class="comment"># 返回 2, nil (忽略多餘的引數)</span></span><br><span class="line"></span><br><span class="line">lambda_example = <span class="built_in">lambda</span> &#123; |<span class="params">x, y</span>| x + y &#125;</span><br><span class="line">lambda_example.call(<span class="number">2</span>) <span class="comment"># 會引發 wrong number of arguments (given 1, expected 2) (ArgumentError)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 遇到 return 行為：使用 Proc</span></span><br><span class="line">my_proc = <span class="title class_">Proc</span>.new &#123; |<span class="params">x</span>| <span class="keyword">return</span> x * <span class="number">2</span> &#125;</span><br><span class="line">result = my_proc.call(<span class="number">3</span>) <span class="comment"># unexpected return (LocalJumpError) 立即跳出該方法</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 遇到 return 行為：使用 lambda</span></span><br><span class="line">my_lambda = <span class="built_in">lambda</span> &#123; |<span class="params">x</span>| <span class="keyword">return</span> x * <span class="number">2</span> &#125;</span><br><span class="line">result = my_lambda.call(<span class="number">3</span>)</span><br><span class="line">puts result <span class="comment"># 6</span></span><br></pre></td></tr></table></figure>
+
+<p>今天建立好這些基礎之後，下篇將說明在 Rails 中如何使用 Scope，下篇見～！</p>
+<hr>
+<p><em>References:</em><br><em>- <a target="_blank" rel="noopener" href="https://guides.rubyonrails.org/active_record_querying.html">Active Record Query Interface</a></em><br><em>- <a target="_blank" rel="noopener" href="https://rails.ruby.tw/active_record_querying.html">Active Record 查詢</a></em><br><em>- <a target="_blank" rel="noopener" href="https://pjchender.dev/ruby-on-rails/ruby-on-rails-active-record-query/">PJCHENder - [Rails] Active Record Query（SQL Query &amp; Model 資料查詢）</a></em><br><em>- <a target="_blank" rel="noopener" href="https://5xruby.tw/posts/ruby-on-rails-scope">資料查找，原來 Ruby on Rails 的 Scope 是這樣用的！</a></em><br><em>- <a target="_blank" rel="noopener" href="https://pjchender.dev/ruby-on-rails/ruby-block-proc-lambda/">PJCHENder - [Ruby] block, Proc 和 Lambda</a></em></p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E6%83%85%E6%8F%90%E8%A6%81-Block%E3%80%81Proc-%E5%92%8C-Lambda%EF%BC%81"><span class="toc-number">1.</span> <span class="toc-text">前情提要 Block、Proc 和 Lambda！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8B-Block"><span class="toc-number">2.</span> <span class="toc-text">如何建立 Block?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8%E6%96%B9%E6%B3%95%E8%A3%A1%E5%9F%B7%E8%A1%8C-Block"><span class="toc-number">3.</span> <span class="toc-text">如何在方法裡執行 Block?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E4%BB%A5%E5%82%B3%E9%81%9E%E5%8F%83%E6%95%B8%E7%B5%A6-Block"><span class="toc-number">4.</span> <span class="toc-text">可以傳遞參數給 Block?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-pipe-%E5%82%B3%E9%81%9E%E5%8F%83%E6%95%B8%E7%B5%A6-Block"><span class="toc-number">4.1.</span> <span class="toc-text">使用 pipe | 傳遞參數給 Block!</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#yield-gt-Block-gt-yield-%E5%9B%9E%E5%82%B3%E5%80%BC"><span class="toc-number">5.</span> <span class="toc-text">yield -&gt; Block -&gt; yield 回傳值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%AE%93-Block-%E7%89%A9%E4%BB%B6%E5%8C%96%EF%BC%9F"><span class="toc-number">6.</span> <span class="toc-text">如何讓 Block 物件化？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%B1%E8%AE%93-Proc-%E8%88%87-Lambda-%E4%BE%86%E7%89%A9%E4%BB%B6%E5%8C%96-Block-%E5%90%A7%EF%BC%81"><span class="toc-number">6.1.</span> <span class="toc-text">就讓 Proc 與 Lambda 來物件化 Block 吧！</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Proc"><span class="toc-number">6.2.</span> <span class="toc-text">Proc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lambda"><span class="toc-number">6.3.</span> <span class="toc-text">Lambda</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E5%87%BD%E5%BC%8F%E4%B8%AD%E4%BD%BF%E7%94%A8-Proc-Lambda"><span class="toc-number">7.</span> <span class="toc-text">在函式中使用 Proc Lambda</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Proc-Lambda-%E5%B7%AE%E7%95%B0"><span class="toc-number">8.</span> <span class="toc-text">Proc Lambda 差異</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231008/ruby-block-proc-lambda/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231008/ruby-block-proc-lambda/&text=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231008/ruby-block-proc-lambda/&title=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231008/ruby-block-proc-lambda/&is_video=false&description=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!&body=Check out this article: https://viiisit.com/20231008/ruby-block-proc-lambda/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231008/ruby-block-proc-lambda/&title=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231008/ruby-block-proc-lambda/&title=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231008/ruby-block-proc-lambda/&title=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231008/ruby-block-proc-lambda/&title=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231008/ruby-block-proc-lambda/&name=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231008/ruby-block-proc-lambda/&t=Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Zinni Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'viiining/viiining.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-light';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="上篇簡單講述了閉包的特性之後，今天來點不同的舉例來加深印象！ 先來看看以下程式碼： 12345678910111213141516171819function createFunctionArray() &amp;#123;  var functionArray &#x3D; []; &#x2F;&#x2F; 創建一個函式陣列，用於存放多個函式  for (var i &#x3D; 0; i &lt; 5; i++) &amp;#123;    &#x2F;&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Viiisit [JavaScript] - Closure!">
+<meta property="og:url" content="https://viiisit.com/20230919/javascript-closure/index.html">
+<meta property="og:site_name" content="Viiisit!">
+<meta property="og:description" content="上篇簡單講述了閉包的特性之後，今天來點不同的舉例來加深印象！ 先來看看以下程式碼： 12345678910111213141516171819function createFunctionArray() &amp;#123;  var functionArray &#x3D; []; &#x2F;&#x2F; 創建一個函式陣列，用於存放多個函式  for (var i &#x3D; 0; i &lt; 5; i++) &amp;#123;    &#x2F;&#x2F;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-09-19T12:12:42.000Z">
+<meta property="article:modified_time" content="2023-11-02T08:18:25.459Z">
+<meta property="article:author" content="Zinni Chang">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png">
+        
+      
+    
+    <!-- title -->
+    <title>Viiisit [JavaScript] - Closure!</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/20230920/javascript-first-class-function-and-callback-function/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/20230918/internet-cors/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20230919/javascript-closure/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20230919/javascript-closure/&text=Viiisit [JavaScript] - Closure!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20230919/javascript-closure/&title=Viiisit [JavaScript] - Closure!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20230919/javascript-closure/&is_video=false&description=Viiisit [JavaScript] - Closure!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [JavaScript] - Closure!&body=Check out this article: https://viiisit.com/20230919/javascript-closure/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20230919/javascript-closure/&title=Viiisit [JavaScript] - Closure!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20230919/javascript-closure/&title=Viiisit [JavaScript] - Closure!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20230919/javascript-closure/&title=Viiisit [JavaScript] - Closure!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20230919/javascript-closure/&title=Viiisit [JavaScript] - Closure!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20230919/javascript-closure/&name=Viiisit [JavaScript] - Closure!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20230919/javascript-closure/&t=Viiisit [JavaScript] - Closure!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%AF%E4%B8%8D%E6%98%AF%E6%9C%83%E5%BE%88%E5%A5%BD%E5%A5%87%EF%BC%8C%E7%82%BA%E4%BB%80%E9%BA%BC%E8%BC%B8%E5%87%BA%E9%83%BD%E6%98%AF-5%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">是不是會很好奇，為什麼輸出都是 5？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%82%A3%E9%BA%BC%E8%A6%81%E5%A6%82%E4%BD%95%E8%AE%93%E4%B8%8A%E9%9D%A2%E7%9A%84%E8%BC%B8%E5%87%BA%E7%B5%90%E6%9E%9C%E6%98%AF-0%E3%80%811%E5%91%A2%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">那麼要如何讓上面的輸出結果是 0、1呢？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%96%89%E5%8C%85%E5%AF%A6%E9%9A%9B%E6%87%89%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">閉包實際應用</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Viiisit [JavaScript] - Closure!
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Zinni Chang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-09-19T12:12:42.000Z" class="dt-published" itemprop="datePublished">2023-09-19</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Keep-Learning/">Keep Learning</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/JavaScript/" rel="tag">JavaScript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p><em>上篇簡單講述了閉包的特性之後，今天來點不同的舉例來加深印象！</em></p>
+<p>先來看看以下程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createFunctionArray</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> functionArray = []; <span class="comment">// 創建一個函式陣列，用於存放多個函式</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="comment">// 在迴圈中，我們創建一個匿名函式，該函式將輸出目前的索引值</span></span><br><span class="line">    functionArray.<span class="title function_">push</span>(</span><br><span class="line">      <span class="keyword">function</span> <span class="title function_">printIndex</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">      &#125;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> functionArray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> functions = <span class="title function_">createFunctionArray</span>(); <span class="comment">// 創建一個包含多個函式的陣列</span></span><br><span class="line"></span><br><span class="line">functions[<span class="number">0</span>](); <span class="comment">// 呼叫陣列中的第一個函式，將輸出 5</span></span><br><span class="line">functions[<span class="number">1</span>](); <span class="comment">// 呼叫陣列中的第二個函式，將輸出 5</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="是不是會很好奇，為什麼輸出都是-5？"><a href="#是不是會很好奇，為什麼輸出都是-5？" class="headerlink" title="是不是會很好奇，為什麼輸出都是 5？"></a>是不是會很好奇，為什麼輸出都是 <code>5</code>？</h4><p>回想一下閉包的特性，雖然上面的程式碼似乎應該依次輸出 <code>0</code>、<code>1</code>，<br>但實際上它們都輸出 <code>5</code> 的原因是因為在迴圈中創建的匿名函式捕獲了變數 <code>i</code> 的引用，而不是其值。</p>
+<p>在 <code>createFunctionArray</code> 函式中，我們創建了一個函式陣列 <code>functionArray</code>，<br>並使用一個迴圈來添加匿名函式到這個陣列中。這些匿名函式都捕獲了外部作用域的變數 <code>i</code>。</p>
+<p>當迴圈完成並退出後，<code>i</code> 的值等於 <code>5</code>，因為這是使迴圈停止的條件。<br>由於這些匿名函式仍然引用相同的 <code>i</code>，當呼叫這些函式時，都將使用當前的 <code>i</code> 值，即 <code>5</code>。<br>這就是為什麼無論呼叫 <code>functions[0]()</code> 還是 <code>functions[1]()</code>，都輸出 <code>5</code> 的原因。</p>
+<hr>
+<h4 id="那麼要如何讓上面的輸出結果是-0、1呢？"><a href="#那麼要如何讓上面的輸出結果是-0、1呢？" class="headerlink" title="那麼要如何讓上面的輸出結果是 0、1呢？"></a>那麼要如何讓上面的輸出結果是 <code>0</code>、<code>1</code>呢？</h4><p>我們可以<strong>在每次迴圈迭代時創建一個新的作用域，這樣每個匿名函式都會捕獲不同的 <code>i</code> 值。</strong></p>
+<ul>
+<li>方式一：<strong>使用 <code>let</code> 來產生區塊作用域</strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createFunctionArray</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> functionArray = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123; <span class="comment">// 使用 let 創建區塊作用域</span></span><br><span class="line">    functionArray.<span class="title function_">push</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> functionArray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> functions = <span class="title function_">createFunctionArray</span>();</span><br><span class="line"></span><br><span class="line">functions[<span class="number">0</span>](); <span class="comment">// 輸出 0</span></span><br><span class="line">functions[<span class="number">1</span>](); <span class="comment">// 輸出 1</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>使用 <code>let</code> 創建的 <code>i</code> 變數在每次迴圈迭代時都有自己的區塊作用域，<br>因此每個匿名函式都能正確地捕獲到其自己的 <code>i</code> 值。</p>
+<ul>
+<li>方式二：<strong>IIFE (Immediately Invoked Function Expression)（立即呼叫函式表示法）</strong></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createFunctionArray</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> functionArray = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    (<span class="keyword">function</span> (<span class="params">index</span>) &#123; <span class="comment">// 使用IIFE創建新的作用域</span></span><br><span class="line">      functionArray.<span class="title function_">push</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(index);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;)(i); <span class="comment">// 將i作為參數傳遞給IIFE</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> functionArray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> functions = <span class="title function_">createFunctionArray</span>();</span><br><span class="line"></span><br><span class="line">functions[<span class="number">0</span>](); <span class="comment">// 輸出 0</span></span><br><span class="line">functions[<span class="number">1</span>](); <span class="comment">// 輸出 1</span></span><br></pre></td></tr></table></figure>
+
+<p>這樣做之後，每個匿名函式都捕獲了它自己的 <code>index</code> 值，使得輸出正確。</p>
+<blockquote>
+<p>IIFE 通常用於</p>
+<ul>
+<li><strong>創建私有作用域</strong>： IIFE 創建了一個獨立的作用域，其中的變數在函式執行後會被銷毀。<br>這有助於防止變數污染全域作用域。</li>
+<li><strong>模組化程式碼</strong>： IIFE 可用於創建模組化的程式碼區塊，其中可以定義私有變數和函式，<br>並通過返回公共接口來封裝它們，以供外部使用。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="閉包實際應用"><a href="#閉包實際應用" class="headerlink" title="閉包實際應用"></a>閉包實際應用</h4><ol>
+<li><p><strong>封裝私有變數和函式：</strong><br>閉包可以用來創建具有私有變數的函式，以增加安全性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createCounter</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">increment</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      count++;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">getCount</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> counter = <span class="title function_">createCounter</span>();</span><br><span class="line">counter.<span class="title function_">increment</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(counter.<span class="title function_">getCount</span>()); <span class="comment">// 輸出 1</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>事件處理程序：</strong><br>閉包可用於處理事件。當使用者點擊按鈕時，可以使用閉包來記錄點擊次數。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> button = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;likeButton&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> clickCount = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">button.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  clickCount++;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`點擊次數：<span class="subst">$&#123;clickCount&#125;</span>`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>setTimeout 和 setInterval：</strong><br>使用閉包可以創建具有狀態的定時任務。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createTimer</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> seconds = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    seconds++;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`過去秒數：<span class="subst">$&#123;seconds&#125;</span>`</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> timer = <span class="title function_">createTimer</span>();</span><br><span class="line"><span class="built_in">setInterval</span>(timer, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>模組模式：</strong><br>閉包可用於創建模組，將相關的函式和數據封裝在一起，以提供更好的代碼組織。<br>假設我們正在建立一個計數器模組：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">CounterModule</span> = (<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 私有變數</span></span><br><span class="line">  <span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 增加</span></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">increment</span>(<span class="params"></span>) &#123;</span><br><span class="line">    count++;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 減少</span></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">decrement</span>(<span class="params"></span>) &#123;</span><br><span class="line">    count--;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 獲取當前值</span></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">getCount</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 公開的部分</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">increment</span>: increment,</span><br><span class="line">    <span class="attr">decrement</span>: decrement,</span><br><span class="line">    <span class="attr">getCount</span>: getCount</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用計數器模組</span></span><br><span class="line"><span class="title class_">CounterModule</span>.<span class="title function_">increment</span>();</span><br><span class="line"><span class="title class_">CounterModule</span>.<span class="title function_">increment</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">CounterModule</span>.<span class="title function_">getCount</span>()); <span class="comment">// 輸出 2</span></span><br><span class="line"><span class="title class_">CounterModule</span>.<span class="title function_">decrement</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">CounterModule</span>.<span class="title function_">getCount</span>()); <span class="comment">// 輸出 1</span></span><br></pre></td></tr></table></figure>
+
+<p> 在這個例子中，<code>CounterModule</code> 是一個使用閉包實現的模組，<br> 包含了私有變數 <code>count</code> 和三個公開方法：<code>increment</code>、<code>decrement</code> 和 <code>getCount</code>。<br> 這樣，我們可以使用模組來管理計數器的狀態，同時保護了 <code>count</code> 變數，<br> 使其無法被外部直接訪問或修改，提供了更好的代碼組織和隔離。</p>
+</li>
+<li><p><strong>快取：</strong><br>閉包可用於創建簡單的快取，以避免重複計算。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createCache</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> cache = &#123;&#125;;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">key</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (key <span class="keyword">in</span> cache) &#123;</span><br><span class="line">      <span class="keyword">return</span> cache[key];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> result = <span class="comment">/* 計算結果 */</span>;</span><br><span class="line">      cache[key] = result;</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> getValue = <span class="title function_">createCache</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">getValue</span>(<span class="string">&#x27;data&#x27;</span>)); <span class="comment">// 計算並快取結果</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">getValue</span>(<span class="string">&#x27;data&#x27;</span>)); <span class="comment">// 直接使用快取的結果</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>深入了解不同的例子與閉包實際應用之後，相信大家有對閉包留下深刻的印象！<br>今天就先分享到這，我們下篇見！</p>
+<hr>
+<p><em>References:</em><br><em>- <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures">MDN - Closures</a></em><br><em>- <a target="_blank" rel="noopener" href="https://jianline.com/javascript-closure/">[筆記]-JavaScript 閉包(Closure)是什麼?關於閉包的3件事</a></em><br><em>- <a target="_blank" rel="noopener" href="https://pjchender.blogspot.com/2016/05/javascriptclosure.html">[筆記] 談談JavaScript中closure的概念 – Part 2</a></em><br><em>- <a target="_blank" rel="noopener" href="https://pjchender.dev/javascript/js-closure/">[JS] 深入淺出 JavaScript 閉包（closure）</a></em></p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%AF%E4%B8%8D%E6%98%AF%E6%9C%83%E5%BE%88%E5%A5%BD%E5%A5%87%EF%BC%8C%E7%82%BA%E4%BB%80%E9%BA%BC%E8%BC%B8%E5%87%BA%E9%83%BD%E6%98%AF-5%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">是不是會很好奇，為什麼輸出都是 5？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%82%A3%E9%BA%BC%E8%A6%81%E5%A6%82%E4%BD%95%E8%AE%93%E4%B8%8A%E9%9D%A2%E7%9A%84%E8%BC%B8%E5%87%BA%E7%B5%90%E6%9E%9C%E6%98%AF-0%E3%80%811%E5%91%A2%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">那麼要如何讓上面的輸出結果是 0、1呢？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%96%89%E5%8C%85%E5%AF%A6%E9%9A%9B%E6%87%89%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">閉包實際應用</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20230919/javascript-closure/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20230919/javascript-closure/&text=Viiisit [JavaScript] - Closure!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20230919/javascript-closure/&title=Viiisit [JavaScript] - Closure!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20230919/javascript-closure/&is_video=false&description=Viiisit [JavaScript] - Closure!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [JavaScript] - Closure!&body=Check out this article: https://viiisit.com/20230919/javascript-closure/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20230919/javascript-closure/&title=Viiisit [JavaScript] - Closure!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20230919/javascript-closure/&title=Viiisit [JavaScript] - Closure!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20230919/javascript-closure/&title=Viiisit [JavaScript] - Closure!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20230919/javascript-closure/&title=Viiisit [JavaScript] - Closure!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20230919/javascript-closure/&name=Viiisit [JavaScript] - Closure!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20230919/javascript-closure/&t=Viiisit [JavaScript] - Closure!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Zinni Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'viiining/viiining.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-light';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>

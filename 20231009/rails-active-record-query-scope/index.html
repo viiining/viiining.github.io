@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="在 Rails 查詢資料上，除了先前所介紹的 find, where 的抓取資料的方式之外，還有一個很特別的方式 - scope! 今天真的來點 scope！ scope 是什麼？在 Rails 中，scope（作用域）是一種特殊的查詢方法，scope 查詢方法常見用途是用於按狀態、日期、日期範圍、排序、分組等進行過濾，可以使用之前介紹過的所有方法，例如 where, includes, join">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Viiisit [Ruby on Rails] - Active Record Query - scope!">
+<meta property="og:url" content="https://viiisit.com/20231009/rails-active-record-query-scope/index.html">
+<meta property="og:site_name" content="Viiisit!">
+<meta property="og:description" content="在 Rails 查詢資料上，除了先前所介紹的 find, where 的抓取資料的方式之外，還有一個很特別的方式 - scope! 今天真的來點 scope！ scope 是什麼？在 Rails 中，scope（作用域）是一種特殊的查詢方法，scope 查詢方法常見用途是用於按狀態、日期、日期範圍、排序、分組等進行過濾，可以使用之前介紹過的所有方法，例如 where, includes, join">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-10-08T18:17:21.000Z">
+<meta property="article:modified_time" content="2023-11-02T08:16:01.456Z">
+<meta property="article:author" content="Zinni Chang">
+<meta property="article:tag" content="Ruby on Rails">
+<meta property="article:tag" content="Active Record">
+<meta property="article:tag" content="Scope">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png">
+        
+      
+    
+    <!-- title -->
+    <title>Viiisit [Ruby on Rails] - Active Record Query - scope!</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/20231010/rails-active-record-query-enum/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/20231008/ruby-block-proc-lambda/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231009/rails-active-record-query-scope/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231009/rails-active-record-query-scope/&text=Viiisit [Ruby on Rails] - Active Record Query - scope!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231009/rails-active-record-query-scope/&title=Viiisit [Ruby on Rails] - Active Record Query - scope!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231009/rails-active-record-query-scope/&is_video=false&description=Viiisit [Ruby on Rails] - Active Record Query - scope!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [Ruby on Rails] - Active Record Query - scope!&body=Check out this article: https://viiisit.com/20231009/rails-active-record-query-scope/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231009/rails-active-record-query-scope/&title=Viiisit [Ruby on Rails] - Active Record Query - scope!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231009/rails-active-record-query-scope/&title=Viiisit [Ruby on Rails] - Active Record Query - scope!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231009/rails-active-record-query-scope/&title=Viiisit [Ruby on Rails] - Active Record Query - scope!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231009/rails-active-record-query-scope/&title=Viiisit [Ruby on Rails] - Active Record Query - scope!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231009/rails-active-record-query-scope/&name=Viiisit [Ruby on Rails] - Active Record Query - scope!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231009/rails-active-record-query-scope/&t=Viiisit [Ruby on Rails] - Active Record Query - scope!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#scope-%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">scope 是什麼？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%82%B3%E9%81%9E%E5%8F%83%E6%95%B8%E7%9A%84-scope"><span class="toc-number">2.</span> <span class="toc-text">傳遞參數的 scope</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B5%84%E5%90%88%E6%8A%80%EF%BC%81%E8%A9%A6%E8%A9%A6-method-chaining"><span class="toc-number">2.1.</span> <span class="toc-text">組合技！試試 method chaining</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Default-Scope-%E9%BB%98%E8%AA%8D%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">3.</span> <span class="toc-text">Default Scope 默認作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%99%A4-Default-Scope-%E9%BB%98%E8%AA%8D%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">解除 Default Scope 默認作用域？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scope-%E5%85%B6%E5%AF%A6%E5%B0%B1%E6%98%AF%E4%B8%80%E7%A8%AE%E9%A1%9E%E5%88%A5%E6%96%B9%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">Scope 其實就是一種類別方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Scope%EF%BC%88%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%89%E8%88%87-Class-Methods%EF%BC%88%E9%A1%9E%E5%88%A5%E6%96%B9%E6%B3%95%EF%BC%89%E5%B7%AE%E7%95%B0"><span class="toc-number">5.1.</span> <span class="toc-text">Scope（作用域）與 Class Methods（類別方法）差異</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Viiisit [Ruby on Rails] - Active Record Query - scope!
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Zinni Chang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-10-08T18:17:21.000Z" class="dt-published" itemprop="datePublished">2023-10-09</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Keep-Learning/">Keep Learning</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/Active-Record/" rel="tag">Active Record</a>, <a class="p-category" href="/tags/Ruby-on-Rails/" rel="tag">Ruby on Rails</a>, <a class="p-category" href="/tags/Scope/" rel="tag">Scope</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p><em>在 Rails 查詢資料上，除了先前所介紹的 <code>find</code>, <code>where</code> 的抓取資料的方式之外，<br>還有一個很特別的方式 - <strong>scope</strong>! 今天真的來點 scope！</em></p>
+<h2 id="scope-是什麼？"><a href="#scope-是什麼？" class="headerlink" title="scope 是什麼？"></a>scope 是什麼？</h2><p>在 Rails 中，scope（作用域）是一種特殊的查詢方法，<br>scope 查詢方法常見用途是用於<strong>按狀態、日期、日期範圍、排序、分組</strong>等進行過濾，<br>可以使用之前介紹過的所有方法，例如 <code>where</code>, <code>includes</code>, <code>joins</code>，<br>所有作用域會返回一個 ActiveRecord::Relation 或 nil，讓我們能進一步調用其他作用域的方法。</p>
+<blockquote>
+<p>ActiveRecord::Relation 是一個 Class，代表資料庫表的查詢，<br>可以通過 method chaining （方法鏈）進行進一步的篩選、排序和操作，最終將查詢轉化為 SQL 語句並執行。Active Record::Relation 具有 “惰性加載”（lazy loading）的特性！</p>
+<blockquote>
+<p>惰性加載的概念是，當建立一個 Active Record::Relation 時，他不會立即執行與資料庫的實際查詢。相反，他會等到確實需要數據時（例如，當要訪問某結果集合內的資料時），才會生成和執行 SQL 查詢。這個好處是他保留了彈性和可擴展性，能夠動態構建和修改查詢，而不需要立即觸發數據庫查詢。</p>
+</blockquote>
+</blockquote>
+<p>簡單來說，我們可以在 Model 裡自行定義 scope 查詢方法，以便可以輕鬆地在模型或關聯上調用，而不需要每次都重複相同的查詢邏輯。</p>
+<p>使用 scope 時，首先需注意參數問題，每個 Scope 涵蓋兩個參數：</p>
+<ul>
+<li>在 controller 裡要呼叫的 scope 名稱 <code>:active</code></li>
+<li>在查詢方法裡的 lambda （要執行的程式碼）<code> -&gt; &#123; where(status: &#39;active&#39;) &#125;</code></li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  scope <span class="symbol">:active</span>, -&gt; &#123; where(<span class="symbol">status:</span> <span class="string">&#x27;active&#x27;</span>) &#125;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>透過定義 <code>:active</code> 的作用域，將查詢所有 <code>status</code> 狀態為 <code>active</code> 的用戶。<br>在 controller 的首頁中調用 User 模型的 active 作用域：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">UsersController</span> &lt; <span class="title class_ inherited__">ApplicationController</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">index</span></span><br><span class="line">    <span class="variable">@active_users</span> = <span class="title class_">User</span>.active</span><br><span class="line">    <span class="comment"># 現在，<span class="doctag">@active</span>_users 包含所有狀態為 &#x27;active&#x27; 的用戶</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="傳遞參數的-scope"><a href="#傳遞參數的-scope" class="headerlink" title="傳遞參數的 scope"></a>傳遞參數的 scope</h2><p>scope 可以在定義方法時，傳遞參數 (arguments)！</p>
+<p><strong>不帶參數的 scope：</strong></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Book</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  scope <span class="symbol">:published</span>, -&gt; &#123; where(<span class="symbol">published:</span> <span class="literal">true</span>) &#125;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">BooksController</span> &lt; <span class="title class_ inherited__">ApplicationController</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">index</span></span><br><span class="line">    <span class="variable">@published_books</span> = <span class="title class_">Book</span>.published</span><br><span class="line">    <span class="comment"># <span class="doctag">@published</span>_books 包含所有已發布的書籍</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>帶參數的 scope：</strong></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Book</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  scope <span class="symbol">:by_category</span>, -&gt;(category) &#123; where(<span class="symbol">category:</span> category) &#125;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">BooksController</span> &lt; <span class="title class_ inherited__">ApplicationController</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">index</span></span><br><span class="line">    <span class="variable">@science_books</span> = <span class="title class_">Book</span>.by_category(<span class="string">&#x27;Science&#x27;</span>)</span><br><span class="line">    <span class="comment"># <span class="doctag">@science</span>_books 包含所有類別為 &#x27;Science&#x27; 的書籍</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="組合技！試試-method-chaining"><a href="#組合技！試試-method-chaining" class="headerlink" title="組合技！試試 method chaining"></a>組合技！試試 method chaining</h3><p>我們來試試組合技！使用方法鏈接（method chaining）來結合這兩個作用域：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Book</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  scope <span class="symbol">:published</span>, -&gt; &#123; where(<span class="symbol">published:</span> <span class="literal">true</span>) &#125;</span><br><span class="line">  scope <span class="symbol">:by_category</span>, -&gt;(category) &#123; where(<span class="symbol">category:</span> category) &#125;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>這樣一來我們就可以用來查找已發布的特定類別的書籍！</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">BooksController</span> &lt; <span class="title class_ inherited__">ApplicationController</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">index</span></span><br><span class="line">    <span class="variable">@science_books</span> = <span class="title class_">Book</span>.published.by_category(<span class="string">&#x27;Science&#x27;</span>)</span><br><span class="line">    <span class="comment"># <span class="doctag">@science</span>_books 包含所有已發布且類別為 &#x27;Science&#x27; 的書籍</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="Default-Scope-默認作用域"><a href="#Default-Scope-默認作用域" class="headerlink" title="Default Scope 默認作用域"></a>Default Scope 默認作用域</h2><p>Default Scope 默認作用域是一種會自動應用於 Model 的所有查詢操作，默認作用域可用於篩選或預設排序 Model 的記錄，以確保在每次查詢時都應用相同的條件。</p>
+<p>繼續用 <code>Book</code> Model 來說明，想要在每次查詢中只顯示已發布的書籍，我們可以這樣做：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Book</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  default_scope &#123; where(<span class="symbol">published:</span> <span class="literal">true</span>) &#125;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><strong>上述的 scope 無論何時查詢 <code>Book</code> 模型，默認作用域都會自動應用，只顯示已發布的書籍。</strong><br>我們就不需要額外的操作，每次查詢 <code>Book</code> 模型時都會自動應用這個作用域：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查詢所有書籍，只顯示已發布的書籍</span></span><br><span class="line">all_books = <span class="title class_">Book</span>.all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查詢特定類別的書籍，同樣只顯示已發布的書籍</span></span><br><span class="line">science_books = <span class="title class_">Book</span>.where(<span class="symbol">category:</span> <span class="string">&#x27;Science&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><em>雖然默認作用域非常方便，但在某些情況下可能需要謹慎使用，因為它會影響模型的所有查詢，包括關聯的查詢。</em></p>
+<h2 id="解除-Default-Scope-默認作用域？"><a href="#解除-Default-Scope-默認作用域？" class="headerlink" title="解除 Default Scope 默認作用域？"></a>解除 Default Scope 默認作用域？</h2><p>要解除 Default Scope 默認作用域，可以使用 <code>unscoped</code> 方法，這個方法將移除默認作用域進行未被作用域影響的查詢。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Book</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  default_scope &#123; where(<span class="symbol">published:</span> <span class="literal">true</span>) &#125;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>如果您想解除默認作用域，不受 <code>published: true</code> 條件約束的查詢，可以使用 <code>unscoped</code> 方法：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 解除默認作用域</span></span><br><span class="line">all_books = <span class="title class_">Book</span>.unscoped.all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在解除作用域的情況下查詢特定類別的書籍，不受 published: true 條件約束</span></span><br><span class="line">all_science_books = <span class="title class_">Book</span>.unscoped.where(<span class="symbol">category:</span> <span class="string">&#x27;Science&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>通過使用 <code>unscoped</code>，可以解除默認作用域的影響，進行不受約束的查詢。但也有可能會導致檢索到未經過濾的記錄，因此應謹慎使用，確保需要解除作用域的原因是合理的。</p>
+<p><strong>也就是說，要知道自己是為什麼要用！</strong></p>
+<h2 id="Scope-其實就是一種類別方法"><a href="#Scope-其實就是一種類別方法" class="headerlink" title="Scope 其實就是一種類別方法"></a>Scope 其實就是一種類別方法</h2><p>Scope（作用域）實際上跟 Class Methods（類別方法）一樣，<br>Active Record 將 Scope（作用域）轉換為 Class Methods（類別方法），<br>兩者在本質上是相同的，只是在語法上有些不同。<br>概念上，Scope（作用域）定義可重用的查詢片段，而這些查詢片段可以像 Class Methods（類別方法）一樣被調用。</p>
+<h3 id="Scope（作用域）與-Class-Methods（類別方法）差異"><a href="#Scope（作用域）與-Class-Methods（類別方法）差異" class="headerlink" title="Scope（作用域）與 Class Methods（類別方法）差異"></a>Scope（作用域）與 Class Methods（類別方法）差異</h3><p><strong>Scope（作用域）：</strong></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Book</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  scope <span class="symbol">:published</span>, -&gt; &#123; where(<span class="symbol">published:</span> <span class="literal">true</span>) &#125;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 controllers 中使用作用域</span></span><br><span class="line">published_books = <span class="title class_">Book</span>.published</span><br></pre></td></tr></table></figure>
+
+<p><strong>Class Methods（類別方法）：</strong></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Book</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">self</span>.published</span><br><span class="line">    where(<span class="symbol">published:</span> <span class="literal">true</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 controllers 中使用類方法</span></span><br><span class="line">published_books = <span class="title class_">Book</span>.published</span><br></pre></td></tr></table></figure>
+<p>會發現兩者都具有相同的功能且可以在控制器中使用，不過可以透過以下敘述來看看差異的地方：</p>
+<ul>
+<li>Scope（作用域）的好處是具有可讀性，並且可以輕鬆鏈接到其他作用域，當需要接多個查詢條件時，Scope（作用域）是不錯的選擇！</li>
+<li>經 Scope 出來一定是 ActiveRecord::Relation，但 Class Methods（類別方法）不一定是。(可以回頭看一下 ActiveRecord::Relation 小知識)</li>
+<li>Class Methods（類別方法）使用 <code>def self.method_name</code> 的語法定義。在功能上等效於Scope（作用域），但語法稍微冗長。</li>
+</ul>
+<blockquote>
+<p>Scope 在使用上可以將常用的查詢條件先宣告起來，以備隨時都可以取用，進一步提升可讀性與可維護性，可以實現 DRY（Don’t Repeat Yourself）的原則，在 Active Record 調用中避免重複的代碼，更好的是還可以組合技！</p>
+</blockquote>
+<p>今天就先到這啦～！希望大家都能學習到 scope 的好用之處！我們下篇見！</p>
+<hr>
+<p><em>References:</em><br><em>- <a target="_blank" rel="noopener" href="https://guides.rubyonrails.org/active_record_querying.html">Active Record Query Interface</a></em><br><em>- <a target="_blank" rel="noopener" href="https://rails.ruby.tw/active_record_querying.html">Active Record 查詢</a></em><br><em>- <a target="_blank" rel="noopener" href="https://pjchender.dev/ruby-on-rails/ruby-on-rails-active-record-query/">PJCHENder - [Rails] Active Record Query（SQL Query &amp; Model 資料查詢）</a></em><br><em>- <a target="_blank" rel="noopener" href="https://5xruby.tw/posts/ruby-on-rails-scope">資料查找，原來 Ruby on Rails 的 Scope 是這樣用的！</a></em><br><em>- <a target="_blank" rel="noopener" href="https://akladyous.medium.com/ruby-on-rails-scopes-35e3565d8d79">Ruby on Rails: Scopes</a></em><br><em>- <a target="_blank" rel="noopener" href="https://blog.plataformatec.com.br/2013/02/active-record-scopes-vs-class-methods/">Active Record scopes vs class methods</a></em></p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#scope-%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">scope 是什麼？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%82%B3%E9%81%9E%E5%8F%83%E6%95%B8%E7%9A%84-scope"><span class="toc-number">2.</span> <span class="toc-text">傳遞參數的 scope</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B5%84%E5%90%88%E6%8A%80%EF%BC%81%E8%A9%A6%E8%A9%A6-method-chaining"><span class="toc-number">2.1.</span> <span class="toc-text">組合技！試試 method chaining</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Default-Scope-%E9%BB%98%E8%AA%8D%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">3.</span> <span class="toc-text">Default Scope 默認作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%99%A4-Default-Scope-%E9%BB%98%E8%AA%8D%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">解除 Default Scope 默認作用域？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scope-%E5%85%B6%E5%AF%A6%E5%B0%B1%E6%98%AF%E4%B8%80%E7%A8%AE%E9%A1%9E%E5%88%A5%E6%96%B9%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text">Scope 其實就是一種類別方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Scope%EF%BC%88%E4%BD%9C%E7%94%A8%E5%9F%9F%EF%BC%89%E8%88%87-Class-Methods%EF%BC%88%E9%A1%9E%E5%88%A5%E6%96%B9%E6%B3%95%EF%BC%89%E5%B7%AE%E7%95%B0"><span class="toc-number">5.1.</span> <span class="toc-text">Scope（作用域）與 Class Methods（類別方法）差異</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/20231009/rails-active-record-query-scope/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/20231009/rails-active-record-query-scope/&text=Viiisit [Ruby on Rails] - Active Record Query - scope!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/20231009/rails-active-record-query-scope/&title=Viiisit [Ruby on Rails] - Active Record Query - scope!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/20231009/rails-active-record-query-scope/&is_video=false&description=Viiisit [Ruby on Rails] - Active Record Query - scope!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [Ruby on Rails] - Active Record Query - scope!&body=Check out this article: https://viiisit.com/20231009/rails-active-record-query-scope/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/20231009/rails-active-record-query-scope/&title=Viiisit [Ruby on Rails] - Active Record Query - scope!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/20231009/rails-active-record-query-scope/&title=Viiisit [Ruby on Rails] - Active Record Query - scope!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/20231009/rails-active-record-query-scope/&title=Viiisit [Ruby on Rails] - Active Record Query - scope!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/20231009/rails-active-record-query-scope/&title=Viiisit [Ruby on Rails] - Active Record Query - scope!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/20231009/rails-active-record-query-scope/&name=Viiisit [Ruby on Rails] - Active Record Query - scope!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/20231009/rails-active-record-query-scope/&t=Viiisit [Ruby on Rails] - Active Record Query - scope!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Zinni Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'viiining/viiining.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-light';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>
