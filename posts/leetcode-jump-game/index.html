@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Keep learning, keep coding!  Question: Jump GameYou are given an integer array nums. You are initially positioned at the array’s first index, and each element in the array represents your maximum jum">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Viiisit [LeetCode] - 009 Jump Game">
+<meta property="og:url" content="https://viiisit.com/posts/leetcode-jump-game/index.html">
+<meta property="og:site_name" content="Viiisit!">
+<meta property="og:description" content="Keep learning, keep coding!  Question: Jump GameYou are given an integer array nums. You are initially positioned at the array’s first index, and each element in the array represents your maximum jum">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-11-12T07:17:19.000Z">
+<meta property="article:modified_time" content="2023-11-12T09:03:28.179Z">
+<meta property="article:author" content="Zinni Chang">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Ruby">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png">
+        
+      
+    
+    <!-- title -->
+    <title>Viiisit [LeetCode] - 009 Jump Game</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/posts/leetcode-best-time-to-buy-and-sell-stock-II/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/posts/leetcode-jump-game/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/posts/leetcode-jump-game/&text=Viiisit [LeetCode] - 009 Jump Game"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/posts/leetcode-jump-game/&title=Viiisit [LeetCode] - 009 Jump Game"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/posts/leetcode-jump-game/&is_video=false&description=Viiisit [LeetCode] - 009 Jump Game"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [LeetCode] - 009 Jump Game&body=Check out this article: https://viiisit.com/posts/leetcode-jump-game/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/posts/leetcode-jump-game/&title=Viiisit [LeetCode] - 009 Jump Game"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/posts/leetcode-jump-game/&title=Viiisit [LeetCode] - 009 Jump Game"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/posts/leetcode-jump-game/&title=Viiisit [LeetCode] - 009 Jump Game"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/posts/leetcode-jump-game/&title=Viiisit [LeetCode] - 009 Jump Game"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/posts/leetcode-jump-game/&name=Viiisit [LeetCode] - 009 Jump Game&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/posts/leetcode-jump-game/&t=Viiisit [LeetCode] - 009 Jump Game"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Question-Jump-Game"><span class="toc-number">1.</span> <span class="toc-text">Question: Jump Game</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BF%BB%E8%AD%AF%E8%92%9F%E8%92%BB"><span class="toc-number">1.1.</span> <span class="toc-text">翻譯蒟蒻</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Answer-JavaScript"><span class="toc-number">2.</span> <span class="toc-text">Answer - JavaScript</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Answer-Ruby"><span class="toc-number">3.</span> <span class="toc-text">Answer - Ruby</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Viiisit [LeetCode] - 009 Jump Game
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Zinni Chang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-11-12T07:17:19.000Z" class="dt-published" itemprop="datePublished">2023-11-12</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/LeetCode/">LeetCode</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/JavaScript/" rel="tag">JavaScript</a>, <a class="p-category" href="/tags/Ruby/" rel="tag">Ruby</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <blockquote>
+<p>Keep learning, keep coding!</p>
+</blockquote>
+<h2 id="Question-Jump-Game"><a href="#Question-Jump-Game" class="headerlink" title="Question: Jump Game"></a>Question: Jump Game</h2><p>You are given an integer array nums. You are initially positioned at the array’s first index, and each element in the array represents your maximum jump length at that position.</p>
+<p>Return true if you can reach the last index, or false otherwise.</p>
+<h3 id="翻譯蒟蒻"><a href="#翻譯蒟蒻" class="headerlink" title="翻譯蒟蒻"></a>翻譯蒟蒻</h3><p><strong>從給定的整數陣列 nums 的第一個索引出發，按照每個索引處的數字所表示的最大跳躍長度，最終達到陣列的最後一個索引。每個陣列元素代表你在該位置可以跳躍的最大步數。</strong></p>
+<ul>
+<li><p>Example 1:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: nums = [2,3,1,1,4]</span><br><span class="line">Output: true</span><br><span class="line">Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Example 2:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: nums = [3,2,1,0,4]</span><br><span class="line">Output: false</span><br><span class="line">Explanation: You will always arrive at index 3 no matter what. Its maximum jump length is 0, which makes it impossible to reach the last index.</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Answer-JavaScript"><a href="#Answer-JavaScript" class="headerlink" title="Answer - JavaScript"></a>Answer - JavaScript</h2><p>Method 1:<br>(RunTime - 52ms)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number[]</span>&#125; <span class="variable">nums</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">boolean</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> canJump = <span class="keyword">function</span>(<span class="params">nums</span>) &#123;</span><br><span class="line">  <span class="comment">// 初始化最大可達距離為 0</span></span><br><span class="line">  <span class="keyword">let</span> maxLength = <span class="number">0</span>; </span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; nums.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i &gt; maxLength) &#123;</span><br><span class="line">      <span class="comment">// 如果當前索引 i 超過了最大可達距離 maxLength，</span></span><br><span class="line">      <span class="comment">// 表示無法到達這個索引，直接返回 false</span></span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新最大可達距離，取當前最大可達距離和（i + nums[i]）的較大值，確保在每一步中，選擇最大的可達距離。</span></span><br><span class="line">    maxLength = <span class="title class_">Math</span>.<span class="title function_">max</span>(maxLength, i + nums[i]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (maxLength &gt;= nums.<span class="property">length</span> - <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="comment">// 如果目前的最大可達距離已經超過或等於最後一個索引，則可以到達最後一個索引</span></span><br><span class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 如果結束後都沒有返回 true，表示無法到達最後一個索引，返回 false</span></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Method 1 是使用貪婪演算法（greedy algorithm），從左至右遍歷陣列，<br>維護一個變數 maxLength 表示當前所能達到的最遠距離。</p>
+<blockquote>
+<p>貪婪演算法（greedy algorithm），是一種在每一步選擇中都採取在當前狀態下最好或最佳（即最有利）的選擇，從而希望導致結果是最好或最佳的演算法。</p>
+</blockquote>
+</blockquote>
+<ul>
+<li>過程：<ul>
+<li>對於每一個位置 i，檢查是否超過了當前的最大可達距離 maxLength。</li>
+<li>如果超過，表示無法到達這個索引，直接返回 false。</li>
+<li>否則，更新 maxLength 為 i + nums[i] 的較大值，確保每一步都選擇最大的可達距離。</li>
+</ul>
+</li>
+</ul>
+<p>Method 2:<br>(RunTime - 56ms)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number[]</span>&#125; <span class="variable">nums</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">boolean</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> canJump = <span class="keyword">function</span>(<span class="params">nums</span>) &#123;</span><br><span class="line">  <span class="comment">// 初始化最後一個能夠到達終點的位置為最後一個索引</span></span><br><span class="line">  <span class="keyword">let</span> lastPosition = nums.<span class="property">length</span> - <span class="number">1</span>; </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = nums.<span class="property">length</span> - <span class="number">2</span>; i &gt;= <span class="number">0</span> ; i--) &#123;</span><br><span class="line">    <span class="keyword">if</span> (i + nums[i] &gt;= lastPosition) &#123;</span><br><span class="line">      <span class="comment">// 如果當前位置 i 能夠到達或超過最後一個能夠到達的位置 lastPosition，</span></span><br><span class="line">      <span class="comment">// 則更新 lastPosition 為當前位置 i</span></span><br><span class="line">      lastPosition = i;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 最終檢查 lastPosition 是否為 0，如果是，表示能夠到達最後一個索引</span></span><br><span class="line">  <span class="keyword">return</span> lastPosition === <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Method 2 是使用反向的迴圈，從最後一個索引開始，維護一個變數 lastPosition 表示最後一個能夠到達終點的位置。</p>
+</blockquote>
+<ul>
+<li>過程：<ul>
+<li>從最後一個索引開始，對於每一個位置 i，檢查 i + nums[i] 是否大於等於 lastPosition。</li>
+<li>如果是，表示當前位置 i 可以跳到最後一個位置，則將 lastPosition 更新為 i。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Answer-Ruby"><a href="#Answer-Ruby" class="headerlink" title="Answer - Ruby"></a>Answer - Ruby</h2><p>Method 1:<br>(RunTime - 99ms)</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">can_jump</span>(<span class="params">nums</span>)</span><br><span class="line">  max_length = <span class="number">0</span></span><br><span class="line">  nums.each_with_index <span class="keyword">do</span> |<span class="params">num, i</span>|</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span> <span class="keyword">if</span> i &gt; max_length</span><br><span class="line"></span><br><span class="line">    max_length = [max_length, i + nums[i]].max</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span> <span class="keyword">if</span> max_length &gt;= nums.length - <span class="number">1</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="literal">false</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>Method 2:<br>(RunTime - 103ms)</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">can_jump</span>(<span class="params">nums</span>)</span><br><span class="line">  last_position = nums.length - <span class="number">1</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 從倒數第二個數字開始到 0 為止</span></span><br><span class="line">  (nums.length - <span class="number">2</span>).downto(<span class="number">0</span>) <span class="keyword">do</span> |<span class="params">i</span>|</span><br><span class="line">    last_position = i <span class="keyword">if</span> i + nums[i] &gt;= last_position</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  last_position == <span class="number">0</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><a target="_blank" rel="noopener" href="https://leetcode.com/problems/jump-game/?envType=study-plan-v2&envId=top-interview-150">LeetCode 傳送門 - Jump Game</a></strong></p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Question-Jump-Game"><span class="toc-number">1.</span> <span class="toc-text">Question: Jump Game</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BF%BB%E8%AD%AF%E8%92%9F%E8%92%BB"><span class="toc-number">1.1.</span> <span class="toc-text">翻譯蒟蒻</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Answer-JavaScript"><span class="toc-number">2.</span> <span class="toc-text">Answer - JavaScript</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Answer-Ruby"><span class="toc-number">3.</span> <span class="toc-text">Answer - Ruby</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/posts/leetcode-jump-game/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/posts/leetcode-jump-game/&text=Viiisit [LeetCode] - 009 Jump Game"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/posts/leetcode-jump-game/&title=Viiisit [LeetCode] - 009 Jump Game"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/posts/leetcode-jump-game/&is_video=false&description=Viiisit [LeetCode] - 009 Jump Game"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [LeetCode] - 009 Jump Game&body=Check out this article: https://viiisit.com/posts/leetcode-jump-game/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/posts/leetcode-jump-game/&title=Viiisit [LeetCode] - 009 Jump Game"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/posts/leetcode-jump-game/&title=Viiisit [LeetCode] - 009 Jump Game"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/posts/leetcode-jump-game/&title=Viiisit [LeetCode] - 009 Jump Game"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/posts/leetcode-jump-game/&title=Viiisit [LeetCode] - 009 Jump Game"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/posts/leetcode-jump-game/&name=Viiisit [LeetCode] - 009 Jump Game&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/posts/leetcode-jump-game/&t=Viiisit [LeetCode] - 009 Jump Game"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Zinni Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'viiining/viiining.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-light';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>
