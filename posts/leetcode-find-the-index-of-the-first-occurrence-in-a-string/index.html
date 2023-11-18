@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Keep learning, keep coding!  Question: Find the Index of the First Occurrence in a StringGiven two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String">
+<meta property="og:url" content="https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/index.html">
+<meta property="og:site_name" content="Viiisit!">
+<meta property="og:description" content="Keep learning, keep coding!  Question: Find the Index of the First Occurrence in a StringGiven two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 i">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-11-18T14:00:00.000Z">
+<meta property="article:modified_time" content="2023-11-18T16:47:13.668Z">
+<meta property="article:author" content="Zinni Chang">
+<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Ruby">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png">
+        
+      
+    
+    <!-- title -->
+    <title>Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/posts/leetcode-longest-common-prefix/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/&text=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/&title=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/&is_video=false&description=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String&body=Check out this article: https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/&title=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/&title=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/&title=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/&title=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/&name=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/&t=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Question-Find-the-Index-of-the-First-Occurrence-in-a-String"><span class="toc-number">1.</span> <span class="toc-text">Question: Find the Index of the First Occurrence in a String</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BF%BB%E8%AD%AF%E8%92%9F%E8%92%BB"><span class="toc-number">1.1.</span> <span class="toc-text">翻譯蒟蒻</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Answer-JavaScript"><span class="toc-number">2.</span> <span class="toc-text">Answer - JavaScript</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Answer-Ruby"><span class="toc-number">3.</span> <span class="toc-text">Answer - Ruby</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Answer-PHP"><span class="toc-number">4.</span> <span class="toc-text">Answer - PHP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%86%E8%A8%98"><span class="toc-number">4.0.1.</span> <span class="toc-text">筆記:</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#return-%E5%80%BC"><span class="toc-number">4.0.1.1.</span> <span class="toc-text">return 值</span></a></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Zinni Chang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-11-18T14:00:00.000Z" class="dt-published" itemprop="datePublished">2023-11-18</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/LeetCode/">LeetCode</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/JavaScript/" rel="tag">JavaScript</a>, <a class="p-category" href="/tags/PHP/" rel="tag">PHP</a>, <a class="p-category" href="/tags/Ruby/" rel="tag">Ruby</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <blockquote>
+<p>Keep learning, keep coding!</p>
+</blockquote>
+<h2 id="Question-Find-the-Index-of-the-First-Occurrence-in-a-String"><a href="#Question-Find-the-Index-of-the-First-Occurrence-in-a-String" class="headerlink" title="Question: Find the Index of the First Occurrence in a String"></a>Question: Find the Index of the First Occurrence in a String</h2><p>Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.</p>
+<h3 id="翻譯蒟蒻"><a href="#翻譯蒟蒻" class="headerlink" title="翻譯蒟蒻"></a>翻譯蒟蒻</h3><p><strong>在一個字串（haystack）中尋找另一個字串（needle）第一次出現的位置</strong></p>
+<ul>
+<li><p>Example 1:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: haystack = &quot;sadbutsad&quot;, needle = &quot;sad&quot;</span><br><span class="line">Output: 0</span><br><span class="line">Explanation: &quot;sad&quot; occurs at index 0 and 6.</span><br><span class="line">The first occurrence is at index 0, so we return 0.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Example 2:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: haystack = &quot;leetcode&quot;, needle = &quot;leeto&quot;</span><br><span class="line">Output: -1</span><br><span class="line">Explanation: &quot;leeto&quot; did not occur in &quot;leetcode&quot;, so we return -1.</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Answer-JavaScript"><a href="#Answer-JavaScript" class="headerlink" title="Answer - JavaScript"></a>Answer - JavaScript</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">haystack</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">needle</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">number</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> strStr = <span class="keyword">function</span>(<span class="params">haystack, needle</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> index = haystack.<span class="title function_">indexOf</span>(needle);</span><br><span class="line">  <span class="keyword">return</span> index</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Answer-Ruby"><a href="#Answer-Ruby" class="headerlink" title="Answer - Ruby"></a>Answer - Ruby</h2><figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">str_str</span>(<span class="params">haystack, needle</span>)</span><br><span class="line">  index = haystack.index(needle)</span><br><span class="line">  <span class="comment"># 確保在 null 的情況下回傳 -1</span></span><br><span class="line">  index.<span class="literal">nil</span>? ? -<span class="number">1</span> : index</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Answer-PHP"><a href="#Answer-PHP" class="headerlink" title="Answer - PHP"></a>Answer - PHP</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">strStr</span>(<span class="params"><span class="variable">$haystack</span>, <span class="variable">$needle</span></span>) </span>&#123;</span><br><span class="line">  <span class="variable">$index</span> = <span class="title function_ invoke__">strpos</span>(<span class="variable">$haystack</span>, <span class="variable">$needle</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="variable">$index</span> !== <span class="literal">false</span> ? <span class="variable">$index</span> : -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$haystack</span> = <span class="string">&quot;sadbutsad&quot;</span>;</span><br><span class="line"><span class="variable">$needle</span> = <span class="string">&quot;sad&quot;</span>;</span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">strStrCustom</span>(<span class="variable">$haystack</span>, <span class="variable">$needle</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$result</span>;  <span class="comment">// 0</span></span><br></pre></td></tr></table></figure>
+<h4 id="筆記"><a href="#筆記" class="headerlink" title="筆記:"></a>筆記:</h4><ul>
+<li><code>.strpos</code> 函數是 PHP 中用來在字串中尋找子字串第一次出現位置的內建函數。  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> <span class="title function_ invoke__">strpos</span> ( <span class="keyword">string</span> <span class="variable">$haystack</span> , <span class="keyword">mixed</span> <span class="variable">$needle</span> [, <span class="keyword">int</span> <span class="variable">$offset</span> = <span class="number">0</span> ] )</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>$haystack</code>: 被搜索的主字串。</li>
+<li><code>$needle</code>: 要尋找的子字串。</li>
+<li><code>$offset</code>（optional）: 搜尋的起始位置。如果指定了此參數，則 <code>strpos</code> 會從指定位置開始尋找。如果未指定，則從字串的開頭開始尋找。</li>
+</ul>
+</li>
+</ul>
+<h5 id="return-值"><a href="#return-值" class="headerlink" title="return 值"></a>return 值</h5><ul>
+<li>如果找到了子字串，返回子字串在主字串中的第一次出現位置的索引（位置的索引是從 0 開始的數字）。</li>
+<li>如果未找到子字串，返回 <code>false</code>。</li>
+</ul>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$haystack</span> = <span class="string">&quot;Hello, world!&quot;</span>;</span><br><span class="line"><span class="variable">$needle</span> = <span class="string">&quot;world&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$position</span> = <span class="title function_ invoke__">strpos</span>(<span class="variable">$haystack</span>, <span class="variable">$needle</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$position</span> !== <span class="literal">false</span>) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;子字串 &#x27;<span class="subst">$needle</span>&#x27; 在主字串 &#x27;<span class="subst">$haystack</span>&#x27; 中的位置是 <span class="subst">$position</span>。&quot;</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;未找到子字串 &#x27;<span class="subst">$needle</span>&#x27; 在主字串 &#x27;<span class="subst">$haystack</span>&#x27; 中。&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Output: &quot;子字串 &#x27;world&#x27; 在主字串 &#x27;Hello, world!&#x27; 中的位置是 7。&quot; </span></span><br><span class="line"><span class="comment">// 如果未找到子字串，返回值將是 `false`。</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><a target="_blank" rel="noopener" href="https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/?envType=study-plan-v2&envId=top-interview-150">LeetCode 傳送門 - Find the Index of the First Occurrence in a String</a></strong></p>
+
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/tags/">Tag</a></li>
+        
+          <li><a href="/categories/">Category</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Question-Find-the-Index-of-the-First-Occurrence-in-a-String"><span class="toc-number">1.</span> <span class="toc-text">Question: Find the Index of the First Occurrence in a String</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BF%BB%E8%AD%AF%E8%92%9F%E8%92%BB"><span class="toc-number">1.1.</span> <span class="toc-text">翻譯蒟蒻</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Answer-JavaScript"><span class="toc-number">2.</span> <span class="toc-text">Answer - JavaScript</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Answer-Ruby"><span class="toc-number">3.</span> <span class="toc-text">Answer - Ruby</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Answer-PHP"><span class="toc-number">4.</span> <span class="toc-text">Answer - PHP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AD%86%E8%A8%98"><span class="toc-number">4.0.1.</span> <span class="toc-text">筆記:</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#return-%E5%80%BC"><span class="toc-number">4.0.1.1.</span> <span class="toc-text">return 值</span></a></li></ol></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/&text=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/&title=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/&is_video=false&description=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String&body=Check out this article: https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/&title=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/&title=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/&title=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/&title=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/&name=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/&t=Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2023
+    Zinni Chang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/tags/">Tag</a></li><!--
+     --><!--
+       --><li><a href="/categories/">Category</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'viiining/viiining.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-light';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>
