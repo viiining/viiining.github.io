@@ -14,7 +14,7 @@
 <meta property="og:description" content="Keep learning, keep coding!  Question: Valid PalindromeA phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it read">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-19T05:00:00.000Z">
-<meta property="article:modified_time" content="2023-11-19T06:20:15.495Z">
+<meta property="article:modified_time" content="2023-11-19T06:45:04.598Z">
 <meta property="article:author" content="Zinni Chang">
 <meta property="article:tag" content="PHP">
 <meta property="article:tag" content="JavaScript">
@@ -196,20 +196,29 @@
 <h2 id="Answer-PHP"><a href="#Answer-PHP" class="headerlink" title="Answer - PHP"></a>Answer - PHP</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPalindrome</span>(<span class="params"><span class="variable">$s</span></span>) </span>&#123;</span><br><span class="line">    <span class="variable">$filteredString</span> = <span class="title function_ invoke__">strtolower</span>(<span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/[^a-zA-Z\d]/&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="variable">$s</span>));</span><br><span class="line"></span><br><span class="line">    <span class="variable">$reversedString</span> = <span class="title function_ invoke__">strrev</span>(<span class="variable">$filteredString</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$filteredString</span> === <span class="variable">$reversedString</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$s</span> = <span class="string">&quot;A man, a plan, a canal: Panama&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">isPalindrome</span>(<span class="variable">$s</span>)</span><br></pre></td></tr></table></figure>
 
 <h4 id="PHP-方法筆記"><a href="#PHP-方法筆記" class="headerlink" title="PHP 方法筆記"></a>PHP 方法筆記</h4><ul>
-<li><code>strtolower</code> 進行小寫轉換。</li>
-<li><code>preg_replace</code> 進行正則表達式替換。</li>
-</ul>
-<p>  函數的基本語法如下：<br>  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">strtolower</span>(<span class="keyword">string</span> <span class="variable">$string</span>): <span class="keyword">string</span></span><br><span class="line"><span class="comment">// 接受一個字串作為參數。</span></span><br></pre></td></tr></table></figure><br>  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">preg_replace</span>(pattern, replacement, subject);</span><br><span class="line"><span class="comment">// `pattern`：是一個正則表達式，用來匹配字串中的模式。</span></span><br><span class="line"><span class="comment">// `replacement`：是用來替換匹配的內容。</span></span><br><span class="line"><span class="comment">// `subject`：是原始字串，也就是要進行替換的字串。</span></span><br></pre></td></tr></table></figure></p>
+<li><p><code>strtolower</code> 進行小寫轉換。</p>
+</li>
+<li><p><code>preg_replace</code> 進行正則表達式替換。</p>
+<p>函數的基本語法如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">strtolower</span>(<span class="keyword">string</span> <span class="variable">$string</span>): <span class="keyword">string</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 接受一個字串作為參數。</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">preg_replace</span>(pattern, replacement, subject);</span><br><span class="line"></span><br><span class="line"><span class="comment">// `pattern`：是一個正則表達式，用來匹配字串中的模式。</span></span><br><span class="line"><span class="comment">// `replacement`：是用來替換匹配的內容。</span></span><br><span class="line"><span class="comment">// `subject`：是原始字串，也就是要進行替換的字串。</span></span><br></pre></td></tr></table></figure>
+
 <p>在剛剛的解法裡：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$filteredString</span> = <span class="title function_ invoke__">strtolower</span>(<span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/[^a-zA-Z\d]/&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="variable">$s</span>));</span><br></pre></td></tr></table></figure>
 <p>這裡的正則表達式 <code>/[^a-zA-Z\d]/</code> 匹配任何不是字母（包括大小寫）和數字的字。然後，這些匹配的字符被替換為空字符串 <code>&#39;&#39;</code>，即被移除。最終，<code>$filteredString</code> 包含的是原始字串 <code>$s</code> 中的所有字母和數字，並透過 <code>strtolower</code> 轉換為小寫。</p>
-<ul>
-<li><code>strrev</code> 進行將字串反轉（順序顛倒）。</li>
+</li>
 </ul>
-<p>  函數的基本語法如下：<br>  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">strrev</span>(<span class="keyword">string</span> <span class="variable">$string</span>): <span class="keyword">string</span></span><br><span class="line"><span class="comment">// 接受一個字串作為參數，並返回一個新的字串，其中的字符順序是原始字串的相反。</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<ul>
+<li><p><code>strrev</code> 進行將字串反轉（順序顛倒）。</p>
+<p>函數的基本語法如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">strrev</span>(<span class="keyword">string</span> <span class="variable">$string</span>): <span class="keyword">string</span></span><br><span class="line"><span class="comment">// 接受一個字串作為參數，並返回一個新的字串，其中的字符順序是原始字串的相反。</span></span><br></pre></td></tr></table></figure>
+
 <p>在剛剛的解法裡：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$reversedString</span> = <span class="title function_ invoke__">strrev</span>(<span class="variable">$filteredString</span>);</span><br></pre></td></tr></table></figure>
-<p><code>strrev</code> 被用來將經過正則表達式處理後的字串 <code>$filteredString</code> 進行反轉。這樣就可以判斷原始字串是否跟反轉字串相同，一種判斷使否為回文的方法。</p>
+<p><code>strrev</code> 被用來將經過正則表達式處理後的字串 <code>$filteredString</code> 進行反轉。<br>這樣就可以判斷原始字串是否跟反轉字串相同，一種判斷使否為回文的方法。</p>
+</li>
+</ul>
 <p><strong><a target="_blank" rel="noopener" href="https://leetcode.com/problems/valid-palindrome/?envType=study-plan-v2&envId=top-interview-150">LeetCode 傳送門 - Valid Palindrome</a></strong></p>
 
   </div>
