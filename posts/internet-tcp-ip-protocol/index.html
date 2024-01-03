@@ -1,177 +1,158 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="當使用者輸入網址後按下 enter 鍵後，實際上發生了什麼事情呢？在網路基礎的面試題當中，這一題真的是必須要會的題目！當使用者在瀏覽器中輸入網址並按下 Enter 鍵時： Step 1. 使用者輸入 URL：使用者在瀏覽器中輸入網站的 URL，例如 https:&#x2F;&#x2F;www.example.com Step 2. 域名解析：瀏覽器將 URL 中的域名 www.example.com 解析為對應的 I">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Viiisit [Internet] - TCP&#x2F;IP 協定是什麼！">
-<meta property="og:url" content="https://viiisit.com/posts/internet-tcp-ip-protocol/index.html">
-<meta property="og:site_name" content="Viiisit!">
-<meta property="og:description" content="當使用者輸入網址後按下 enter 鍵後，實際上發生了什麼事情呢？在網路基礎的面試題當中，這一題真的是必須要會的題目！當使用者在瀏覽器中輸入網址並按下 Enter 鍵時： Step 1. 使用者輸入 URL：使用者在瀏覽器中輸入網站的 URL，例如 https:&#x2F;&#x2F;www.example.com Step 2. 域名解析：瀏覽器將 URL 中的域名 www.example.com 解析為對應的 I">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://viiisit.com/assets/images/OSI-vs.-TCPIP-models.jpg">
-<meta property="article:published_time" content="2023-10-26T02:17:19.000Z">
-<meta property="article:modified_time" content="2023-11-03T05:51:46.416Z">
-<meta property="article:author" content="Zinni Chang">
-<meta property="article:tag" content="Internet">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://viiisit.com/assets/images/OSI-vs.-TCPIP-models.jpg">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png">
-        
-      
-    
-    <!-- title -->
-    <title>Viiisit [Internet] - TCP/IP 協定是什麼！</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
-
-
-    <!-- Umami Analytics -->
-
-
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">Home</a></li><!--
-     --><!--
-       --><li><a href="/about/">About</a></li><!--
-     --><!--
-       --><li><a href="/tags/">Tag</a></li><!--
-     --><!--
-       --><li><a href="/categories/">Category</a></li><!--
-     --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="Previous post" href="/posts/leetcode-merge-sorted-array/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="Next post" href="/posts/ruby-string-vs-symbol/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/posts/internet-tcp-ip-protocol/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/posts/internet-tcp-ip-protocol/&text=Viiisit [Internet] - TCP/IP 協定是什麼！"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/posts/internet-tcp-ip-protocol/&title=Viiisit [Internet] - TCP/IP 協定是什麼！"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/posts/internet-tcp-ip-protocol/&is_video=false&description=Viiisit [Internet] - TCP/IP 協定是什麼！"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit [Internet] - TCP/IP 協定是什麼！&body=Check out this article: https://viiisit.com/posts/internet-tcp-ip-protocol/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/posts/internet-tcp-ip-protocol/&title=Viiisit [Internet] - TCP/IP 協定是什麼！"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/posts/internet-tcp-ip-protocol/&title=Viiisit [Internet] - TCP/IP 協定是什麼！"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/posts/internet-tcp-ip-protocol/&title=Viiisit [Internet] - TCP/IP 協定是什麼！"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/posts/internet-tcp-ip-protocol/&title=Viiisit [Internet] - TCP/IP 協定是什麼！"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/posts/internet-tcp-ip-protocol/&name=Viiisit [Internet] - TCP/IP 協定是什麼！&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/posts/internet-tcp-ip-protocol/&t=Viiisit [Internet] - TCP/IP 協定是什麼！"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%95%B6%E4%BD%BF%E7%94%A8%E8%80%85%E8%BC%B8%E5%85%A5%E7%B6%B2%E5%9D%80%E5%BE%8C%E6%8C%89%E4%B8%8B-enter-%E9%8D%B5%E5%BE%8C%EF%BC%8C%E5%AF%A6%E9%9A%9B%E4%B8%8A%E7%99%BC%E7%94%9F%E4%BA%86%E4%BB%80%E9%BA%BC%E4%BA%8B%E6%83%85%E5%91%A2%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">當使用者輸入網址後按下 enter 鍵後，實際上發生了什麼事情呢？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8%E7%B6%B2%E8%B7%AF%E5%9F%BA%E7%A4%8E%E7%9A%84%E9%9D%A2%E8%A9%A6%E9%A1%8C%E7%95%B6%E4%B8%AD%EF%BC%8C%E9%80%99%E4%B8%80%E9%A1%8C%E7%9C%9F%E7%9A%84%E6%98%AF%E5%BF%85%E9%A0%88%E8%A6%81%E6%9C%83%E7%9A%84%E9%A1%8C%E7%9B%AE%EF%BC%81"><span class="toc-number">1.0.1.</span> <span class="toc-text">在網路基礎的面試題當中，這一題真的是必須要會的題目！</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E6%AD%B8%E6%9C%AC%E7%AB%A0%E4%B8%BB%E9%A1%8C%EF%BC%9ATCP-x2F-IP-%E5%8D%94%E5%AE%9A"><span class="toc-number">2.</span> <span class="toc-text">回歸本章主題：TCP&#x2F;IP 協定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-x2F-IP-%E5%8D%94%E5%AE%9A%E7%9A%84%E5%9B%9B%E5%80%8B%E5%B1%A4%E7%B4%9A"><span class="toc-number">2.1.</span> <span class="toc-text">TCP&#x2F;IP 協定的四個層級</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%87%89%E7%94%A8%E5%B1%A4%EF%BC%88Application-Layer%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text"># 應用層（Application Layer）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%82%B3%E8%BC%B8%E5%B1%A4%EF%BC%88Transport-Layer%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text"># 傳輸層（Transport Layer）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B6%B2%E7%B5%A1%E5%B1%A4%EF%BC%88Internet-Layer%EF%BC%89"><span class="toc-number">2.4.</span> <span class="toc-text"># 網絡層（Internet Layer）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B6%B2%E7%B5%A1%E6%8E%A5%E5%8F%A3%E5%B1%A4%EF%BC%88Network-Access-Layer%EF%BC%89"><span class="toc-number">2.5.</span> <span class="toc-text"># 網絡接口層（Network Access Layer）</span></a></li></ol></li></ol>
-      </div>
-    
-  </span>
-</div>
-
-    
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle p-name" itemprop="name headline">
-        Viiisit [Internet] - TCP/IP 協定是什麼！
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">Zinni Chang</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2023-10-26T02:17:19.000Z" class="dt-published" itemprop="datePublished">2023-10-26</time>
-        
-      
-    </div>
-
-
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/Keep-Learning/">Keep Learning</a>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fa-solid fa-tag"></i>
-        <a class="p-category" href="/tags/Internet/" rel="tag">Internet</a>
-    </div>
-
-
-    </div>
-  </header>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Internet] - TCP/IP 協定是什麼！ - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
   
 
-  <div class="content e-content" itemprop="articleBody">
-    <h2 id="當使用者輸入網址後按下-enter-鍵後，實際上發生了什麼事情呢？"><a href="#當使用者輸入網址後按下-enter-鍵後，實際上發生了什麼事情呢？" class="headerlink" title="當使用者輸入網址後按下 enter 鍵後，實際上發生了什麼事情呢？"></a>當使用者輸入網址後按下 enter 鍵後，實際上發生了什麼事情呢？</h2><h4 id="在網路基礎的面試題當中，這一題真的是必須要會的題目！"><a href="#在網路基礎的面試題當中，這一題真的是必須要會的題目！" class="headerlink" title="在網路基礎的面試題當中，這一題真的是必須要會的題目！"></a>在網路基礎的面試題當中，這一題真的是必須要會的題目！</h4><p>當使用者在瀏覽器中輸入網址並按下 Enter 鍵時：</p>
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Internet] - TCP/IP 協定是什麼！ - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/internet-tcp-ip-protocol/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-10-26T02:17:19.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="light"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/Keep-Learning/">Keep Learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>26,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Internet] - TCP/IP 協定是什麼！</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <h2 id="當使用者輸入網址後按下-enter-鍵後，實際上發生了什麼事情呢？"><a href="#當使用者輸入網址後按下-enter-鍵後，實際上發生了什麼事情呢？" class="headerlink" title="當使用者輸入網址後按下 enter 鍵後，實際上發生了什麼事情呢？"></a>當使用者輸入網址後按下 enter 鍵後，實際上發生了什麼事情呢？</h2><h4 id="在網路基礎的面試題當中，這一題真的是必須要會的題目！"><a href="#在網路基礎的面試題當中，這一題真的是必須要會的題目！" class="headerlink" title="在網路基礎的面試題當中，這一題真的是必須要會的題目！"></a>在網路基礎的面試題當中，這一題真的是必須要會的題目！</h4><p>當使用者在瀏覽器中輸入網址並按下 Enter 鍵時：</p>
 <p>Step 1. <strong>使用者輸入 URL</strong>：使用者在瀏覽器中輸入網站的 URL，例如 <a target="_blank" rel="noopener" href="https://www.example.com/">https://www.example.com</a></p>
 <p>Step 2. <strong>域名解析</strong>：瀏覽器將 URL 中的域名 <a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a> 解析為對應的 IP 地址。<br>通常涉及到 DNS（域名系統）查詢，瀏覽器向 DNS 伺服器發送請求以獲取目標網站的 IP 地址。<br>更詳細的介紹可以參考：<a href="https://viiisit.com/20231016-what-is-dns-and-ip/#DNS-%E7%9A%84%E9%81%8B%E4%BD%9C%E6%B5%81%E7%A8%8B%EF%BC%81">DNS 的運作流程！</a></p>
 <p>Step 3. <strong>建立 TCP 連接</strong>：瀏覽器使用目標網站的 IP 地址和 HTTP 或 HTTPS port（通常是 80 或 443）建立一個 TCP 連接。這是通過使用 TCP&#x2F;IP 協定的三次握手過程來實現的，確保了客戶端和伺服器之間的可靠通信。</p>
@@ -256,177 +237,123 @@
 <p><em>References:</em></p>
 <p><em>- <a target="_blank" rel="noopener" href="https://www.imperva.com/learn/application-security/osi-model/">OSI Model vs TCP&#x2F;IP Model</a></em><br><em>- <a target="_blank" rel="noopener" href="https://hackmd.io/@Pang-Chang/BkQK8_tjF#OSI%E4%B8%83%E5%B1%A4%E6%9E%B6%E6%A7%8B-%E5%92%8C-TCPIP%E9%80%9A%E8%A8%8A%E5%8D%94%E5%AE%9A-%E7%9A%84%E6%AF%94%E8%BC%83">OSI七層架構 和 TCP&#x2F;IP通訊協定 的比較</a></em><br><em>- <a target="_blank" rel="noopener" href="https://medium.com/@lagom247/%E7%B6%B2%E8%B7%AF%E6%9E%B6%E6%A7%8B-tcp-ip-%E5%9B%9B%E5%B1%A4%E6%9E%B6%E6%A7%8B-osi%E4%B8%83%E5%B1%A4%E6%9E%B6%E6%A7%8B-e2c92c9cdc32">《 網路架構 》TCP&#x2F;IP 四層架構 &amp; OSI七層架構</a></em><br><em>- <a target="_blank" rel="noopener" href="https://hulitw.medium.com/learning-tcp-ip-http-via-sending-letter-5d3299203660">從傳紙條輕鬆學習基本網路概念</a></em><br><em>- <a target="_blank" rel="noopener" href="https://www.yasssssblog.com/2020/10/03/ithome-30-20-tcp-ip/">[知識篇]TCP&#x2F;IP</a></em><br><em>- <a target="_blank" rel="noopener" href="https://miahsuwork.medium.com/%E7%AC%AC%E5%85%AD%E9%80%B1-%E7%B6%B2%E8%B7%AF%E5%9F%BA%E7%A4%8E-tcp-ip-f89cc09f1f36">[第六週] 網路基礎 — TCP&#x2F; IP</a></em></p>
 
-  </div>
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/Internet/" class="tag">#Internet</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/leetcode-merge-sorted-array/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [LeetCode] - 001 Merge Sorted Array</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/ruby-string-vs-symbol/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby] - String vs Symbol！</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
 </article>
 
-
-    <div class="blog-post-comments">
-        <div id="utterances_thread">
-            <noscript>Please enable JavaScript to view the comments.</noscript>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+                <a href="/search" class="item">Search</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
         </div>
+        <span>&copy; 2024 Zinni Chang<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
     </div>
-
-
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">Home</a></li>
-        
-          <li><a href="/about/">About</a></li>
-        
-          <li><a href="/tags/">Tag</a></li>
-        
-          <li><a href="/categories/">Category</a></li>
-        
-          <li><a href="/archives/">Writing</a></li>
-        
-          <li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%95%B6%E4%BD%BF%E7%94%A8%E8%80%85%E8%BC%B8%E5%85%A5%E7%B6%B2%E5%9D%80%E5%BE%8C%E6%8C%89%E4%B8%8B-enter-%E9%8D%B5%E5%BE%8C%EF%BC%8C%E5%AF%A6%E9%9A%9B%E4%B8%8A%E7%99%BC%E7%94%9F%E4%BA%86%E4%BB%80%E9%BA%BC%E4%BA%8B%E6%83%85%E5%91%A2%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">當使用者輸入網址後按下 enter 鍵後，實際上發生了什麼事情呢？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%A8%E7%B6%B2%E8%B7%AF%E5%9F%BA%E7%A4%8E%E7%9A%84%E9%9D%A2%E8%A9%A6%E9%A1%8C%E7%95%B6%E4%B8%AD%EF%BC%8C%E9%80%99%E4%B8%80%E9%A1%8C%E7%9C%9F%E7%9A%84%E6%98%AF%E5%BF%85%E9%A0%88%E8%A6%81%E6%9C%83%E7%9A%84%E9%A1%8C%E7%9B%AE%EF%BC%81"><span class="toc-number">1.0.1.</span> <span class="toc-text">在網路基礎的面試題當中，這一題真的是必須要會的題目！</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9E%E6%AD%B8%E6%9C%AC%E7%AB%A0%E4%B8%BB%E9%A1%8C%EF%BC%9ATCP-x2F-IP-%E5%8D%94%E5%AE%9A"><span class="toc-number">2.</span> <span class="toc-text">回歸本章主題：TCP&#x2F;IP 協定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-x2F-IP-%E5%8D%94%E5%AE%9A%E7%9A%84%E5%9B%9B%E5%80%8B%E5%B1%A4%E7%B4%9A"><span class="toc-number">2.1.</span> <span class="toc-text">TCP&#x2F;IP 協定的四個層級</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%87%89%E7%94%A8%E5%B1%A4%EF%BC%88Application-Layer%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text"># 應用層（Application Layer）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%82%B3%E8%BC%B8%E5%B1%A4%EF%BC%88Transport-Layer%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text"># 傳輸層（Transport Layer）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B6%B2%E7%B5%A1%E5%B1%A4%EF%BC%88Internet-Layer%EF%BC%89"><span class="toc-number">2.4.</span> <span class="toc-text"># 網絡層（Internet Layer）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B6%B2%E7%B5%A1%E6%8E%A5%E5%8F%A3%E5%B1%A4%EF%BC%88Network-Access-Layer%EF%BC%89"><span class="toc-number">2.5.</span> <span class="toc-text"># 網絡接口層（Network Access Layer）</span></a></li></ol></li></ol>
-      </div>
-    
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/posts/internet-tcp-ip-protocol/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/posts/internet-tcp-ip-protocol/&text=Viiisit [Internet] - TCP/IP 協定是什麼！"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/posts/internet-tcp-ip-protocol/&title=Viiisit [Internet] - TCP/IP 協定是什麼！"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/posts/internet-tcp-ip-protocol/&is_video=false&description=Viiisit [Internet] - TCP/IP 協定是什麼！"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit [Internet] - TCP/IP 協定是什麼！&body=Check out this article: https://viiisit.com/posts/internet-tcp-ip-protocol/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/posts/internet-tcp-ip-protocol/&title=Viiisit [Internet] - TCP/IP 協定是什麼！"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/posts/internet-tcp-ip-protocol/&title=Viiisit [Internet] - TCP/IP 協定是什麼！"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/posts/internet-tcp-ip-protocol/&title=Viiisit [Internet] - TCP/IP 協定是什麼！"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/posts/internet-tcp-ip-protocol/&title=Viiisit [Internet] - TCP/IP 協定是什麼！"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/posts/internet-tcp-ip-protocol/&name=Viiisit [Internet] - TCP/IP 協定是什麼！&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/posts/internet-tcp-ip-protocol/&t=Viiisit [Internet] - TCP/IP 協定是什麼！"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
-  </div>
-</div>
-
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2023
-    Zinni Chang
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">Home</a></li><!--
-     --><!--
-       --><li><a href="/about/">About</a></li><!--
-     --><!--
-       --><li><a href="/tags/">Tag</a></li><!--
-     --><!--
-       --><li><a href="/categories/">Category</a></li><!--
-     --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
-     -->
-      </ul>
-    </nav>
-  </div>
 </footer>
 
-    </div>
-    <!-- styles -->
 
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
-
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
-  
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Copied!");
-      e.clearSelection();
-    })
-  })
-  </script>
-
-
+        
 <script src="/js/main.js"></script>
 
-<!-- search -->
+        
+        
+        
 
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Disqus Comments -->
-
-<!-- utterances Comments -->
-
-    <script type="text/javascript">
-      var utterances_repo = 'viiining/viiining.github.io';
-      var utterances_issue_term = 'pathname';
-      var utterances_label = 'Comment';
-      var utterances_theme = 'github-light';
-
-      (function(){
-          var script = document.createElement('script');
-
-          script.src = 'https://utteranc.es/client.js';
-          script.setAttribute('repo', utterances_repo);
-          script.setAttribute('issue-term', 'pathname');
-          script.setAttribute('label', utterances_label);
-          script.setAttribute('theme', utterances_theme);
-          script.setAttribute('crossorigin', 'anonymous');
-          script.async = true;
-          (document.getElementById('utterances_thread')).appendChild(script);
-      }());
-  </script>
-
-</body>
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
 </html>

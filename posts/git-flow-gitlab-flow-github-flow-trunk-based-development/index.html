@@ -1,178 +1,158 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="Git 是在軟體開發上常用的版本控制工具，要如何有效對分支進行管理以及使用 Git 進行協作和開發呢？以下分享四種常見的 Flow 分別為 Git Flow, GitHub Flow, GitLab Flow, Trunk-based development，在往後的團隊合作上可以好好的利用！  Git Flow:  Git Flow 明確定義特定分支的責任，例如將 main&#x2F;maste">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!">
-<meta property="og:url" content="https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/index.html">
-<meta property="og:site_name" content="Viiisit!">
-<meta property="og:description" content="Git 是在軟體開發上常用的版本控制工具，要如何有效對分支進行管理以及使用 Git 進行協作和開發呢？以下分享四種常見的 Flow 分別為 Git Flow, GitHub Flow, GitLab Flow, Trunk-based development，在往後的團隊合作上可以好好的利用！  Git Flow:  Git Flow 明確定義特定分支的責任，例如將 main&#x2F;maste">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://viiisit.com/assets/images/git-flow.png">
-<meta property="og:image" content="https://viiisit.com/assets/images/github-flow.png">
-<meta property="og:image" content="https://viiisit.com/assets/images/gitlab-flow.webp">
-<meta property="og:image" content="https://viiisit.com/assets/images/Trunk-Based-Development.avif">
-<meta property="article:published_time" content="2023-11-11T11:40:48.000Z">
-<meta property="article:modified_time" content="2023-11-14T12:50:58.030Z">
-<meta property="article:author" content="Zinni Chang">
-<meta property="article:tag" content="Git">
-<meta property="article:tag" content="GitHub">
-<meta property="article:tag" content="GitLab">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://viiisit.com/assets/images/git-flow.png">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png">
-        
-      
-    
-    <!-- title -->
-    <title>Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
-
-
-    <!-- Umami Analytics -->
-
-
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">Home</a></li><!--
-     --><!--
-       --><li><a href="/about/">About</a></li><!--
-     --><!--
-       --><li><a href="/tags/">Tag</a></li><!--
-     --><!--
-       --><li><a href="/categories/">Category</a></li><!--
-     --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="Previous post" href="/posts/leetcode-jump-game/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="Next post" href="/posts/leetcode-best-time-to-buy-and-sell-stock-II/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/&text=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/&title=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/&is_video=false&description=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!&body=Check out this article: https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/&title=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/&title=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/&title=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/&title=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/&name=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/&t=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-  </span>
-</div>
-
-    
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle p-name" itemprop="name headline">
-        Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">Zinni Chang</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2023-11-11T11:40:48.000Z" class="dt-published" itemprop="datePublished">2023-11-11</time>
-        
-      
-    </div>
-
-
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/Keep-Learning/">Keep Learning</a>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fa-solid fa-tag"></i>
-        <a class="p-category" href="/tags/Git/" rel="tag">Git</a>, <a class="p-category" href="/tags/GitHub/" rel="tag">GitHub</a>, <a class="p-category" href="/tags/GitLab/" rel="tag">GitLab</a>
-    </div>
-
-
-    </div>
-  </header>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
   
 
-  <div class="content e-content" itemprop="articleBody">
-    <p>Git 是在軟體開發上常用的版本控制工具，要如何有效對分支進行管理以及使用 Git 進行協作和開發呢？<br>以下分享四種常見的 Flow 分別為 Git Flow, GitHub Flow, GitLab Flow, Trunk-based development，在往後的團隊合作上可以好好的利用！</p>
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-11-11T11:40:48.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="light"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/Keep-Learning/">Keep Learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>November</span>
+            <span>11,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <p>Git 是在軟體開發上常用的版本控制工具，要如何有效對分支進行管理以及使用 Git 進行協作和開發呢？<br>以下分享四種常見的 Flow 分別為 Git Flow, GitHub Flow, GitLab Flow, Trunk-based development，在往後的團隊合作上可以好好的利用！</p>
 <ol>
 <li><p><strong>Git Flow:</strong><br>  Git Flow 明確定義特定分支的責任，例如將 main&#x2F;master 分支用於 production，使用 develop 分支進行主開發，feature 分支用於開發新功能，release 分支作為通往production 之前把關的閘門，以及 hotfix 分支用於解決緊急問題。</p>
 <p> 優點：</p>
@@ -249,171 +229,123 @@
 <hr>
 <p><em>References:</em><br><em>- <a target="_blank" rel="noopener" href="https://blog.jetbrains.com/space/2023/04/18/space-git-flow/">Introducing the Space Git Flow</a></em><br><em>- <a target="_blank" rel="noopener" href="https://medium.com/@sreekanth.thummala/choosing-the-right-git-branching-strategy-a-comparative-analysis-f5e635443423">Choosing the Right Git Branching Strategy: A Comparative Analysis</a></em><br><em>- <a target="_blank" rel="noopener" href="https://gitlab-book.tw/ithelp/gitlab-workflow/workflow/">初探 GitLab Workflow &amp; GitLab Flow</a></em><br><em>- <a target="_blank" rel="noopener" href="https://blog.logrocket.com/product-management/a-guide-to-trunk-based-development/#trunkbaseddevelopmentkeyprinciplesandpractices">A guide to trunk-based development</a></em></p>
 
-  </div>
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/Git/" class="tag">#Git</a><a href="/tags/GitHub/" class="tag">#GitHub</a><a href="/tags/GitLab/" class="tag">#GitLab</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/leetcode-jump-game/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [LeetCode] - 009 Jump Game</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/leetcode-best-time-to-buy-and-sell-stock-II/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [LeetCode] - 008 Best Time to Buy and Sell Stock II</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
 </article>
 
-
-    <div class="blog-post-comments">
-        <div id="utterances_thread">
-            <noscript>Please enable JavaScript to view the comments.</noscript>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+                <a href="/search" class="item">Search</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
         </div>
+        <span>&copy; 2024 Zinni Chang<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
     </div>
-
-
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">Home</a></li>
-        
-          <li><a href="/about/">About</a></li>
-        
-          <li><a href="/tags/">Tag</a></li>
-        
-          <li><a href="/categories/">Category</a></li>
-        
-          <li><a href="/archives/">Writing</a></li>
-        
-          <li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/&text=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/&title=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/&is_video=false&description=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!&body=Check out this article: https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/&title=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/&title=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/&title=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/&title=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/&name=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/&t=Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
-  </div>
-</div>
-
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2023
-    Zinni Chang
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">Home</a></li><!--
-     --><!--
-       --><li><a href="/about/">About</a></li><!--
-     --><!--
-       --><li><a href="/tags/">Tag</a></li><!--
-     --><!--
-       --><li><a href="/categories/">Category</a></li><!--
-     --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
-     -->
-      </ul>
-    </nav>
-  </div>
 </footer>
 
-    </div>
-    <!-- styles -->
 
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
-
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
-  
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Copied!");
-      e.clearSelection();
-    })
-  })
-  </script>
-
-
+        
 <script src="/js/main.js"></script>
 
-<!-- search -->
+        
+        
+        
 
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Disqus Comments -->
-
-<!-- utterances Comments -->
-
-    <script type="text/javascript">
-      var utterances_repo = 'viiining/viiining.github.io';
-      var utterances_issue_term = 'pathname';
-      var utterances_label = 'Comment';
-      var utterances_theme = 'github-light';
-
-      (function(){
-          var script = document.createElement('script');
-
-          script.src = 'https://utteranc.es/client.js';
-          script.setAttribute('repo', utterances_repo);
-          script.setAttribute('issue-term', 'pathname');
-          script.setAttribute('label', utterances_label);
-          script.setAttribute('theme', utterances_theme);
-          script.setAttribute('crossorigin', 'anonymous');
-          script.async = true;
-          (document.getElementById('utterances_thread')).appendChild(script);
-      }());
-  </script>
-
-</body>
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
 </html>

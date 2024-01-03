@@ -1,175 +1,158 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="繼上篇提到的宣告變數與常數後，透過上篇的總結表格，來聊聊變數提升以及作用域！ Hoisting在說明 Block Scope (區塊作用域) &amp; Function Scope (函式作用域) 之前，先來提及 Hoisting (提升)，了解 Hoisting (提升) 可以幫助我們更加了解 JavcaScript！ What is hoisting?Hoisting (提升) 是 Java">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Viiisit [JavaScript] - Hoisting &amp; Scope!">
-<meta property="og:url" content="https://viiisit.com/posts/javascript-hoisting-and-scope/index.html">
-<meta property="og:site_name" content="Viiisit!">
-<meta property="og:description" content="繼上篇提到的宣告變數與常數後，透過上篇的總結表格，來聊聊變數提升以及作用域！ Hoisting在說明 Block Scope (區塊作用域) &amp; Function Scope (函式作用域) 之前，先來提及 Hoisting (提升)，了解 Hoisting (提升) 可以幫助我們更加了解 JavcaScript！ What is hoisting?Hoisting (提升) 是 Java">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-07-02T12:12:42.000Z">
-<meta property="article:modified_time" content="2023-11-02T08:19:48.434Z">
-<meta property="article:author" content="Zinni Chang">
-<meta property="article:tag" content="JavaScript">
-<meta name="twitter:card" content="summary">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png">
-        
-      
-    
-    <!-- title -->
-    <title>Viiisit [JavaScript] - Hoisting &amp; Scope!</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
-
-
-    <!-- Umami Analytics -->
-
-
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">Home</a></li><!--
-     --><!--
-       --><li><a href="/about/">About</a></li><!--
-     --><!--
-       --><li><a href="/tags/">Tag</a></li><!--
-     --><!--
-       --><li><a href="/categories/">Category</a></li><!--
-     --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="Previous post" href="/posts/ruby-constant-variable/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="Next post" href="/posts/ruby-brief-introduction/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/posts/javascript-hoisting-and-scope/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/posts/javascript-hoisting-and-scope/&text=Viiisit [JavaScript] - Hoisting &amp; Scope!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/posts/javascript-hoisting-and-scope/&title=Viiisit [JavaScript] - Hoisting &amp; Scope!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/posts/javascript-hoisting-and-scope/&is_video=false&description=Viiisit [JavaScript] - Hoisting &amp; Scope!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit [JavaScript] - Hoisting &amp; Scope!&body=Check out this article: https://viiisit.com/posts/javascript-hoisting-and-scope/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/posts/javascript-hoisting-and-scope/&title=Viiisit [JavaScript] - Hoisting &amp; Scope!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/posts/javascript-hoisting-and-scope/&title=Viiisit [JavaScript] - Hoisting &amp; Scope!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/posts/javascript-hoisting-and-scope/&title=Viiisit [JavaScript] - Hoisting &amp; Scope!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/posts/javascript-hoisting-and-scope/&title=Viiisit [JavaScript] - Hoisting &amp; Scope!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/posts/javascript-hoisting-and-scope/&name=Viiisit [JavaScript] - Hoisting &amp; Scope!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/posts/javascript-hoisting-and-scope/&t=Viiisit [JavaScript] - Hoisting &amp; Scope!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hoisting"><span class="toc-number">1.</span> <span class="toc-text">Hoisting</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#What-is-hoisting"><span class="toc-number">1.0.1.</span> <span class="toc-text">What is hoisting?</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%83%E9%80%A0%E6%88%90%E4%BB%A5%E4%B8%8A%E7%9A%84%E5%8E%9F%E5%9B%A0%EF%BC%8C%E8%A6%81%E4%BA%86%E8%A7%A3-JavaScript-%E5%9C%A8%E9%81%8B%E4%BD%9C%E4%B8%8A%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BA%86%E4%BB%80%E9%BA%BC%E4%BA%8B%EF%BC%81%E2%98%9F"><span class="toc-number">1.1.</span> <span class="toc-text">會造成以上的原因，要了解 JavaScript 在運作上到底是做了什麼事！☟</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Creation-Phase%EF%BC%88%E5%89%B5%E5%BB%BA%E6%9C%9F%EF%BC%89-amp-Execution-Phase%EF%BC%88%E5%9F%B7%E8%A1%8C%E6%9C%9F%EF%BC%89"><span class="toc-number">1.1.1.</span> <span class="toc-text">Creation Phase（創建期） &amp; Execution Phase（執行期）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scope-%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">2.</span> <span class="toc-text">Scope 作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#What-is-Scope%EF%BC%9F"><span class="toc-number">2.0.1.</span> <span class="toc-text">What is Scope？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JavaScript-%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">2.0.2.</span> <span class="toc-text">JavaScript 作用域有哪些？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Global-Scope-%E5%85%A8%E5%9F%9F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">2.0.3.</span> <span class="toc-text">Global Scope 全域作用域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Function-Scope-%E5%87%BD%E5%BC%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">2.0.4.</span> <span class="toc-text">Function Scope 函式作用域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Block-Scope-%E5%8D%80%E5%A1%8A%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">2.0.5.</span> <span class="toc-text">Block Scope 區塊作用域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Brief-Summary"><span class="toc-number">2.0.6.</span> <span class="toc-text">Brief Summary:</span></a></li></ol></li></ol></li></ol>
-      </div>
-    
-  </span>
-</div>
-
-    
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle p-name" itemprop="name headline">
-        Viiisit [JavaScript] - Hoisting &amp; Scope!
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">Zinni Chang</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2023-07-02T12:12:42.000Z" class="dt-published" itemprop="datePublished">2023-07-02</time>
-        
-      
-    </div>
-
-
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/Keep-Learning/">Keep Learning</a>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fa-solid fa-tag"></i>
-        <a class="p-category" href="/tags/JavaScript/" rel="tag">JavaScript</a>
-    </div>
-
-
-    </div>
-  </header>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [JavaScript] - Hoisting &amp; Scope! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
   
 
-  <div class="content e-content" itemprop="articleBody">
-    <p><em>繼上篇提到的宣告變數與常數後，透過上篇的總結表格，來聊聊變數提升以及作用域！</em></p>
+  
+  
+  
+  <meta property="og:title" content="Viiisit [JavaScript] - Hoisting &amp; Scope! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/javascript-hoisting-and-scope/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-07-02T12:12:42.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="light"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/Keep-Learning/">Keep Learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>July</span>
+            <span>2,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [JavaScript] - Hoisting &amp; Scope!</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <p><em>繼上篇提到的宣告變數與常數後，透過上篇的總結表格，來聊聊變數提升以及作用域！</em></p>
 <h2 id="Hoisting"><a href="#Hoisting" class="headerlink" title="Hoisting"></a>Hoisting</h2><p>在說明 Block Scope (區塊作用域) &amp; Function Scope (函式作用域) 之前，<br>先來提及 Hoisting (提升)，了解 Hoisting (提升) 可以幫助我們更加了解 JavcaScript！</p>
 <h4 id="What-is-hoisting"><a href="#What-is-hoisting" class="headerlink" title="What is hoisting?"></a>What is hoisting?</h4><p><strong>Hoisting (提升) 是 Javascript 在程式的編譯階段，<br>會先把宣告的變數和函式放在程式的頂端，等到實際執行時在賦予其值。</strong></p>
 <p>在 JavaScript，如果試圖對一個還沒宣告的變數取值，會發生：<br><strong><code>Uncaught ReferenceError: i is not defined</code></strong><br>這是因為沒有宣告，JavaScript 也找不到這個變數！</p>
@@ -255,177 +238,123 @@
 <hr>
 <p><em>References:</em><br><em>- <a target="_blank" rel="noopener" href="https://www.programfarmer.com/articles/2020/javascript-var-let-const-for-loop">JS 宣告變數， var 與 let &#x2F; const 差異</a></em><br><em>- <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Glossary/Scope">MDN</a></em><br><em>- <a target="_blank" rel="noopener" href="https://jianline.com/javascript-scope-and-scope-chain/">ㄚ建的技能樹</a></em></p>
 
-  </div>
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/JavaScript/" class="tag">#JavaScript</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/ruby-constant-variable/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby] - Constant &amp; Variable!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/ruby-brief-introduction/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby] - Intro!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
 </article>
 
-
-    <div class="blog-post-comments">
-        <div id="utterances_thread">
-            <noscript>Please enable JavaScript to view the comments.</noscript>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+                <a href="/search" class="item">Search</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
         </div>
+        <span>&copy; 2024 Zinni Chang<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
     </div>
-
-
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">Home</a></li>
-        
-          <li><a href="/about/">About</a></li>
-        
-          <li><a href="/tags/">Tag</a></li>
-        
-          <li><a href="/categories/">Category</a></li>
-        
-          <li><a href="/archives/">Writing</a></li>
-        
-          <li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hoisting"><span class="toc-number">1.</span> <span class="toc-text">Hoisting</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#What-is-hoisting"><span class="toc-number">1.0.1.</span> <span class="toc-text">What is hoisting?</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%83%E9%80%A0%E6%88%90%E4%BB%A5%E4%B8%8A%E7%9A%84%E5%8E%9F%E5%9B%A0%EF%BC%8C%E8%A6%81%E4%BA%86%E8%A7%A3-JavaScript-%E5%9C%A8%E9%81%8B%E4%BD%9C%E4%B8%8A%E5%88%B0%E5%BA%95%E6%98%AF%E5%81%9A%E4%BA%86%E4%BB%80%E9%BA%BC%E4%BA%8B%EF%BC%81%E2%98%9F"><span class="toc-number">1.1.</span> <span class="toc-text">會造成以上的原因，要了解 JavaScript 在運作上到底是做了什麼事！☟</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Creation-Phase%EF%BC%88%E5%89%B5%E5%BB%BA%E6%9C%9F%EF%BC%89-amp-Execution-Phase%EF%BC%88%E5%9F%B7%E8%A1%8C%E6%9C%9F%EF%BC%89"><span class="toc-number">1.1.1.</span> <span class="toc-text">Creation Phase（創建期） &amp; Execution Phase（執行期）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scope-%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">2.</span> <span class="toc-text">Scope 作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#What-is-Scope%EF%BC%9F"><span class="toc-number">2.0.1.</span> <span class="toc-text">What is Scope？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JavaScript-%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">2.0.2.</span> <span class="toc-text">JavaScript 作用域有哪些？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Global-Scope-%E5%85%A8%E5%9F%9F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">2.0.3.</span> <span class="toc-text">Global Scope 全域作用域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Function-Scope-%E5%87%BD%E5%BC%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">2.0.4.</span> <span class="toc-text">Function Scope 函式作用域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Block-Scope-%E5%8D%80%E5%A1%8A%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-number">2.0.5.</span> <span class="toc-text">Block Scope 區塊作用域</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Brief-Summary"><span class="toc-number">2.0.6.</span> <span class="toc-text">Brief Summary:</span></a></li></ol></li></ol></li></ol>
-      </div>
-    
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/posts/javascript-hoisting-and-scope/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/posts/javascript-hoisting-and-scope/&text=Viiisit [JavaScript] - Hoisting &amp; Scope!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/posts/javascript-hoisting-and-scope/&title=Viiisit [JavaScript] - Hoisting &amp; Scope!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/posts/javascript-hoisting-and-scope/&is_video=false&description=Viiisit [JavaScript] - Hoisting &amp; Scope!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit [JavaScript] - Hoisting &amp; Scope!&body=Check out this article: https://viiisit.com/posts/javascript-hoisting-and-scope/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/posts/javascript-hoisting-and-scope/&title=Viiisit [JavaScript] - Hoisting &amp; Scope!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/posts/javascript-hoisting-and-scope/&title=Viiisit [JavaScript] - Hoisting &amp; Scope!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/posts/javascript-hoisting-and-scope/&title=Viiisit [JavaScript] - Hoisting &amp; Scope!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/posts/javascript-hoisting-and-scope/&title=Viiisit [JavaScript] - Hoisting &amp; Scope!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/posts/javascript-hoisting-and-scope/&name=Viiisit [JavaScript] - Hoisting &amp; Scope!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/posts/javascript-hoisting-and-scope/&t=Viiisit [JavaScript] - Hoisting &amp; Scope!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
-  </div>
-</div>
-
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2023
-    Zinni Chang
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">Home</a></li><!--
-     --><!--
-       --><li><a href="/about/">About</a></li><!--
-     --><!--
-       --><li><a href="/tags/">Tag</a></li><!--
-     --><!--
-       --><li><a href="/categories/">Category</a></li><!--
-     --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
-     -->
-      </ul>
-    </nav>
-  </div>
 </footer>
 
-    </div>
-    <!-- styles -->
 
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
-
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
-  
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Copied!");
-      e.clearSelection();
-    })
-  })
-  </script>
-
-
+        
 <script src="/js/main.js"></script>
 
-<!-- search -->
+        
+        
+        
 
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Disqus Comments -->
-
-<!-- utterances Comments -->
-
-    <script type="text/javascript">
-      var utterances_repo = 'viiining/viiining.github.io';
-      var utterances_issue_term = 'pathname';
-      var utterances_label = 'Comment';
-      var utterances_theme = 'github-light';
-
-      (function(){
-          var script = document.createElement('script');
-
-          script.src = 'https://utteranc.es/client.js';
-          script.setAttribute('repo', utterances_repo);
-          script.setAttribute('issue-term', 'pathname');
-          script.setAttribute('label', utterances_label);
-          script.setAttribute('theme', utterances_theme);
-          script.setAttribute('crossorigin', 'anonymous');
-          script.async = true;
-          (document.getElementById('utterances_thread')).appendChild(script);
-      }());
-  </script>
-
-</body>
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
 </html>

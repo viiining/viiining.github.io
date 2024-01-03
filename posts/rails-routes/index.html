@@ -1,177 +1,158 @@
 <!DOCTYPE html>
-<html lang=en>
-<head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="今天來點 Routes     在 Viiisit Ruby on Rails - CoC &amp; DRY!有提到 REST 與 RESTful 概念，我們再複習一次： RESTREST (Representational State Transfer) 是一種軟體架構風格， 主要用於設計網路應用程式的 API(幫助世界各地不同軟體、程式在網際網路中能夠互相傳遞訊息)它基於資源（Resourc">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Viiisit [Ruby on Rails] - Route!">
-<meta property="og:url" content="https://viiisit.com/posts/rails-routes/index.html">
-<meta property="og:site_name" content="Viiisit!">
-<meta property="og:description" content="今天來點 Routes     在 Viiisit Ruby on Rails - CoC &amp; DRY!有提到 REST 與 RESTful 概念，我們再複習一次： RESTREST (Representational State Transfer) 是一種軟體架構風格， 主要用於設計網路應用程式的 API(幫助世界各地不同軟體、程式在網際網路中能夠互相傳遞訊息)它基於資源（Resourc">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://ithelp.ithome.com.tw/upload/images/20230930/20161764YQPprUetsK.png">
-<meta property="article:published_time" content="2023-10-01T14:05:28.000Z">
-<meta property="article:modified_time" content="2023-11-02T08:16:59.210Z">
-<meta property="article:author" content="Zinni Chang">
-<meta property="article:tag" content="Ruby on Rails">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://ithelp.ithome.com.tw/upload/images/20230930/20161764YQPprUetsK.png">
-    
-    
-      
-        
-          <link rel="shortcut icon" href="/images/favicon.ico">
-        
-      
-      
-        
-          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
-        
-      
-      
-        
-          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-180x180.png">
-        
-      
-    
-    <!-- title -->
-    <title>Viiisit [Ruby on Rails] - Route!</title>
-    <!-- async scripts -->
-    <!-- Google Analytics -->
-
-
-    <!-- Umami Analytics -->
-
-
-    <!-- styles -->
-    
-<link rel="stylesheet" href="/css/style.css">
-
-    <!-- persian styles -->
-    
-    <!-- rss -->
-    
-    
-	<!-- mathjax -->
-	
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-        <!--
-       --><li><a href="/">Home</a></li><!--
-     --><!--
-       --><li><a href="/about/">About</a></li><!--
-     --><!--
-       --><li><a href="/tags/">Tag</a></li><!--
-     --><!--
-       --><li><a href="/categories/">Category</a></li><!--
-     --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
-     -->
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" aria-label="Previous post" href="/posts/rails-controller-action-view/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" aria-label="Next post" href="/posts/development-about-mvc/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/posts/rails-routes/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/posts/rails-routes/&text=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/posts/rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/posts/rails-routes/&is_video=false&description=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit [Ruby on Rails] - Route!&body=Check out this article: https://viiisit.com/posts/rails-routes/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/posts/rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/posts/rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/posts/rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/posts/rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/posts/rails-routes/&name=Viiisit [Ruby on Rails] - Route!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/posts/rails-routes/&t=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    
-    
-      <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#REST"><span class="toc-number">1.</span> <span class="toc-text">REST</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RESTful"><span class="toc-number">2.</span> <span class="toc-text">RESTful</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CRUD"><span class="toc-number">3.</span> <span class="toc-text">CRUD</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%B0%8D%E6%87%89%E7%9A%84-SQL-%E8%AA%9E%E6%B3%95%E3%80%81HTTP-%E8%AB%8B%E6%B1%82%E3%80%81REST-%E8%A1%A8%E7%8F%BE%E5%B1%A4%E7%8B%80%E6%85%8B%E8%BD%89%E6%8F%9B"><span class="toc-number">3.1.</span> <span class="toc-text">相對應的 SQL 語法、HTTP 請求、REST 表現層狀態轉換</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B-Route"><span class="toc-number"></span> <span class="toc-text">建立 Route</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%A6%E4%BD%9C-GO-GO"><span class="toc-number">0.1.</span> <span class="toc-text">實作 GO! GO!</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%8D%B7%E5%BE%91%EF%BC%81-gt-resources"><span class="toc-number">1.</span> <span class="toc-text">快速捷徑！ -&gt; resources</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A2%E7%8B%80%E5%BC%8F%E7%9A%84%E8%B7%AF%E5%BE%91"><span class="toc-number">3.</span> <span class="toc-text">巢狀式的路徑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shallow-Nesting"><span class="toc-number">4.</span> <span class="toc-text">Shallow Nesting</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#collection-vs-member"><span class="toc-number">5.</span> <span class="toc-text">collection vs member</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%99%E5%85%A9%E7%A8%AE%E8%B7%AF%E5%BE%91%E7%9A%84%E4%B8%BB%E8%A6%81%E5%B7%AE%E7%95%B0%E5%9C%A8%E6%96%BC%E7%94%9F%E6%88%90%E7%9A%84-URL-%E6%9C%89%E7%84%A1-id%E3%80%82"><span class="toc-number">5.1.</span> <span class="toc-text">這兩種路徑的主要差異在於生成的 URL 有無 :id。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#collection"><span class="toc-number">5.2.</span> <span class="toc-text">collection</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#member"><span class="toc-number">5.3.</span> <span class="toc-text">member</span></a></li></ol></li></ol>
-      </div>
-    
-  </span>
-</div>
-
-    
-    <div class="content index py4 ">
-        
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle p-name" itemprop="name headline">
-        Viiisit [Ruby on Rails] - Route!
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span class="p-name" itemprop="name">Zinni Chang</span>
-      </span>
-      
-    <div class="postdate">
-      
-        <time datetime="2023-10-01T14:05:28.000Z" class="dt-published" itemprop="datePublished">2023-10-01</time>
-        
-      
-    </div>
-
-
-      
-    <div class="article-category">
-        <i class="fa-solid fa-archive"></i>
-        <a class="category-link" href="/categories/Keep-Learning/">Keep Learning</a>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fa-solid fa-tag"></i>
-        <a class="p-category" href="/tags/Ruby-on-Rails/" rel="tag">Ruby on Rails</a>
-    </div>
-
-
-    </div>
-  </header>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby on Rails] - Route! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
   
 
-  <div class="content e-content" itemprop="articleBody">
-    <p><em>今天來點 Routes</em></p>
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby on Rails] - Route! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/rails-routes/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-10-01T14:05:28.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="light"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/Keep-Learning/">Keep Learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>1,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby on Rails] - Route!</h1>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+        <p><em>今天來點 Routes</em></p>
 <p>   <img src="https://ithelp.ithome.com.tw/upload/images/20230930/20161764YQPprUetsK.png" alt="https://ithelp.ithome.com.tw/upload/images/20230930/20161764YQPprUetsK.png"></p>
 <p>在 <a href="https://viiisit.com/20230929-ruby-on-rails-intro-of-coc-and-dry/">Viiisit Ruby on Rails - CoC &amp; DRY!</a><br>有提到 REST 與 RESTful 概念，我們再複習一次：</p>
 <h3 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h3><p>REST (Representational State Transfer) 是一種軟體架構風格，<br> <mark>主要用於設計網路應用程式的 API(幫助世界各地不同軟體、程式在網際網路中能夠互相傳遞訊息)</mark><br>它基於資源（Resource）的概念，每個資源都有唯一的識別符號（URI），<br>並且可以透過不同的 HTTP 方法（GET、POST、PUT、DELETE 等）來執行相應的操作。</p>
@@ -277,177 +258,123 @@
 <hr>
 <p><em>References:</em><br><em>- <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E5%A2%9E%E5%88%AA%E6%9F%A5%E6%94%B9">增刪查改</a></em><br><em>- <a target="_blank" rel="noopener" href="https://railsbook.tw/chapters/11-routes">為你自己學 Ruby on Rails - Routes</a></em></p>
 
-  </div>
+    </div>
+
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/Ruby-on-Rails/" class="tag">#Ruby on Rails</a>
+        </p>
+        
+    </div>
+    
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/rails-controller-action-view/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Controller, Action, View!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/development-about-mvc/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Development] - MVC!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
 </article>
 
-
-    <div class="blog-post-comments">
-        <div id="utterances_thread">
-            <noscript>Please enable JavaScript to view the comments.</noscript>
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+                <a href="/search" class="item">Search</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
         </div>
+        <span>&copy; 2024 Zinni Chang<br>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
     </div>
-
-
-        
-          <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-        
-          <li><a href="/">Home</a></li>
-        
-          <li><a href="/about/">About</a></li>
-        
-          <li><a href="/tags/">Tag</a></li>
-        
-          <li><a href="/categories/">Category</a></li>
-        
-          <li><a href="/archives/">Writing</a></li>
-        
-          <li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li>
-        
-      </ul>
-    </div>
-
-    
-    
-      <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#REST"><span class="toc-number">1.</span> <span class="toc-text">REST</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RESTful"><span class="toc-number">2.</span> <span class="toc-text">RESTful</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CRUD"><span class="toc-number">3.</span> <span class="toc-text">CRUD</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E5%B0%8D%E6%87%89%E7%9A%84-SQL-%E8%AA%9E%E6%B3%95%E3%80%81HTTP-%E8%AB%8B%E6%B1%82%E3%80%81REST-%E8%A1%A8%E7%8F%BE%E5%B1%A4%E7%8B%80%E6%85%8B%E8%BD%89%E6%8F%9B"><span class="toc-number">3.1.</span> <span class="toc-text">相對應的 SQL 語法、HTTP 請求、REST 表現層狀態轉換</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E7%AB%8B-Route"><span class="toc-number"></span> <span class="toc-text">建立 Route</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%A6%E4%BD%9C-GO-GO"><span class="toc-number">0.1.</span> <span class="toc-text">實作 GO! GO!</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%8D%B7%E5%BE%91%EF%BC%81-gt-resources"><span class="toc-number">1.</span> <span class="toc-text">快速捷徑！ -&gt; resources</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A2%E7%8B%80%E5%BC%8F%E7%9A%84%E8%B7%AF%E5%BE%91"><span class="toc-number">3.</span> <span class="toc-text">巢狀式的路徑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shallow-Nesting"><span class="toc-number">4.</span> <span class="toc-text">Shallow Nesting</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#collection-vs-member"><span class="toc-number">5.</span> <span class="toc-text">collection vs member</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%99%E5%85%A9%E7%A8%AE%E8%B7%AF%E5%BE%91%E7%9A%84%E4%B8%BB%E8%A6%81%E5%B7%AE%E7%95%B0%E5%9C%A8%E6%96%BC%E7%94%9F%E6%88%90%E7%9A%84-URL-%E6%9C%89%E7%84%A1-id%E3%80%82"><span class="toc-number">5.1.</span> <span class="toc-text">這兩種路徑的主要差異在於生成的 URL 有無 :id。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#collection"><span class="toc-number">5.2.</span> <span class="toc-text">collection</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#member"><span class="toc-number">5.3.</span> <span class="toc-text">member</span></a></li></ol></li></ol>
-      </div>
-    
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://viiisit.com/posts/rails-routes/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://viiisit.com/posts/rails-routes/&text=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://viiisit.com/posts/rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://viiisit.com/posts/rails-routes/&is_video=false&description=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Viiisit [Ruby on Rails] - Route!&body=Check out this article: https://viiisit.com/posts/rails-routes/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://viiisit.com/posts/rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://viiisit.com/posts/rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://viiisit.com/posts/rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://viiisit.com/posts/rails-routes/&title=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://viiisit.com/posts/rails-routes/&name=Viiisit [Ruby on Rails] - Route!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://viiisit.com/posts/rails-routes/&t=Viiisit [Ruby on Rails] - Route!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        
-          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
-  </div>
-</div>
-
-        
-        <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy;
-    
-    
-    2023
-    Zinni Chang
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-        <!--
-       --><li><a href="/">Home</a></li><!--
-     --><!--
-       --><li><a href="/about/">About</a></li><!--
-     --><!--
-       --><li><a href="/tags/">Tag</a></li><!--
-     --><!--
-       --><li><a href="/categories/">Category</a></li><!--
-     --><!--
-       --><li><a href="/archives/">Writing</a></li><!--
-     --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a></li><!--
-     -->
-      </ul>
-    </nav>
-  </div>
 </footer>
 
-    </div>
-    <!-- styles -->
 
-
-
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
-
-
-    <!-- jquery -->
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-
-
-
-
-<!-- clipboard -->
-
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
-  
-  <script type="text/javascript">
-  $(function() {
-    // copy-btn HTML
-    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
-    btn += '<i class="fa-regular fa-clone"></i>';
-    btn += '</span>';
-    // mount it!
-    $(".highlight table").before(btn);
-    var clip = new ClipboardJS('.btn-copy', {
-      text: function(trigger) {
-        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
-      }
-    });
-    clip.on('success', function(e) {
-      e.trigger.setAttribute('aria-label', "Copied!");
-      e.clearSelection();
-    })
-  })
-  </script>
-
-
+        
 <script src="/js/main.js"></script>
 
-<!-- search -->
+        
+        
+        
 
-<!-- Baidu Analytics -->
-
-<!-- Cloudflare Analytics -->
-
-<!-- Disqus Comments -->
-
-<!-- utterances Comments -->
-
-    <script type="text/javascript">
-      var utterances_repo = 'viiining/viiining.github.io';
-      var utterances_issue_term = 'pathname';
-      var utterances_label = 'Comment';
-      var utterances_theme = 'github-light';
-
-      (function(){
-          var script = document.createElement('script');
-
-          script.src = 'https://utteranc.es/client.js';
-          script.setAttribute('repo', utterances_repo);
-          script.setAttribute('issue-term', 'pathname');
-          script.setAttribute('label', utterances_label);
-          script.setAttribute('theme', utterances_theme);
-          script.setAttribute('crossorigin', 'anonymous');
-          script.async = true;
-          (document.getElementById('utterances_thread')).appendChild(script);
-      }());
-  </script>
-
-</body>
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
 </html>
