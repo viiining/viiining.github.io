@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   
-  <title>Viiisit [LeetCode] - 010 Jump Game II - Viiisit!</title>
+  <title>Viiisit [leetcode] - 010 Jump Game II - Viiisit!</title>
   
     <link rel="shortcut icon" href="/favicon.png">
   
@@ -16,7 +16,7 @@
   
   
   
-  <meta property="og:title" content="Viiisit [LeetCode] - 010 Jump Game II - Viiisit!" />
+  <meta property="og:title" content="Viiisit [leetcode] - 010 Jump Game II - Viiisit!" />
   
   <meta property="og:type" content="article" />
   
@@ -105,7 +105,7 @@
             <a class="nav-item nav-item-home" href="/">Home</a>
             
             
-            <a class="nav-item" href="/archives">Archives</a>
+            <a class="nav-item" href="/archives">Posts</a>
             
             
             
@@ -113,7 +113,7 @@
             
             
             
-            <a class="nav-item" href="/about">About</a>
+            <a class="nav-item" href="/about">About me</a>
             
             
             
@@ -121,7 +121,7 @@
             
             
             
-            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
             
             
         </div>
@@ -133,7 +133,7 @@
         
         <div class="categories text-uppercase">
         
-            <a href="/categories/LeetCode/">LeetCode</a>
+            <a href="/categories/leetcode/">leetcode</a>
         
         </div>
         
@@ -146,14 +146,26 @@
         </div>
         
 
-        <h1 class="title">Viiisit [LeetCode] - 010 Jump Game II</h1>
+        <h1 class="title">Viiisit [leetcode] - 010 Jump Game II</h1>
     </div>
+
+    <!--  -->
+        <div class="about">
+            
+            <p class="tags">
+                
+                <i class="icon"></i>
+                <a href="/tags/JavaScript/" class="tag">#JavaScript</a><a href="/tags/Ruby/" class="tag">#Ruby</a>
+            </p>
+            
+        </div>
+    <!--  -->
 
     <div class="divider"></div>
 
     <div class="content">
         <blockquote>
-<p>Keep learning, keep coding!</p>
+<p>keep learning, keep coding!</p>
 </blockquote>
 <h2 id="Question-Jump-Game-II"><a href="#Question-Jump-Game-II" class="headerlink" title="Question: Jump Game II"></a>Question: Jump Game II</h2><p>You are given a 0-indexed array of integers nums of length n. You are initially positioned at nums[0].</p>
 <p>Each element nums[i] represents the maximum length of a forward jump from index i. In other words, if you are at nums[i], you can jump to any nums[i + j] where:</p>
@@ -170,10 +182,10 @@
 
 <h2 id="Answer-Ruby"><a href="#Answer-Ruby" class="headerlink" title="Answer - Ruby"></a>Answer - Ruby</h2><figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">jump</span>(<span class="params">nums</span>)</span><br><span class="line">  current_position = <span class="number">0</span></span><br><span class="line">  max_position = <span class="number">0</span></span><br><span class="line">  steps = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 使用迴圈遍歷 nums 中的元素，只迭代到倒數第二個元素</span></span><br><span class="line">  (nums.length - <span class="number">1</span>).times <span class="keyword">do</span> |<span class="params">i</span>|</span><br><span class="line">    current_position = [current_position, i + nums[i]].max</span><br><span class="line">    <span class="keyword">if</span> i == max_position</span><br><span class="line">      max_position = current_position</span><br><span class="line">      steps += <span class="number">1</span>                      </span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  steps</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
-<p><strong><a target="_blank" rel="noopener" href="https://leetcode.com/problems/jump-game-ii/?envType=study-plan-v2&envId=top-interview-150">LeetCode 傳送門 - Jump Game II</a></strong></p>
+<p><strong><a target="_blank" rel="noopener" href="https://leetcode.com/problems/jump-game-ii/?envType=study-plan-v2&envId=top-interview-150">leetcode 傳送門 - Jump Game II</a></strong></p>
 
     </div>
-
+<!-- 
     
     <div class="about">
         <h1>About this Post</h1>
@@ -188,7 +200,7 @@
         </p>
         
     </div>
-    
+     -->
 
     <div class="container post-prev-next">
         
@@ -196,7 +208,7 @@
             <div>
                 <div class="text">
                     <p class="label">Next</p>
-                    <h3 class="title">Viiisit [LeetCode] - 011 H-Index</h3>
+                    <h3 class="title">Viiisit [leetcode] - 011 H-Index</h3>
                 </div>
             </div>
         </a>
@@ -206,7 +218,7 @@
             <div>
                 <div class="text">
                     <p class="label">Previous</p>
-                    <h3 class="title">Viiisit [LeetCode] - 009 Jump Game</>
+                    <h3 class="title">Viiisit [leetcode] - 009 Jump Game</>
                 </div>
             </div>
         </a>
@@ -228,13 +240,11 @@
                 
                 <a href="/" class="item">Home</a>
                 
-                <a href="/archives" class="item">Archives</a>
+                <a href="/archives" class="item">Posts</a>
                 
                 <a href="/tags" class="item">Tags</a>
                 
                 <a href="/categories" class="item">Categories</a>
-                
-                <a href="/search" class="item">Search</a>
                 
             </div>
             

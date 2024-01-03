@@ -21,7 +21,7 @@ blockquote {
 }
 
 pre, code {
-    font-family: 'JetBrains Mono', 'Courier New', Courier, monospace;
+    /* font-family: 'JetBrains Mono', 'Courier New', Courier, monospace; */
 }
 
 pre {
@@ -29,7 +29,7 @@ pre {
 }
 
 code {
-    font-size: 12px;
+    font-size: 14px;
     background-color: var(--white-1);
     padding: 2px 4px;
     border-radius: 4px;

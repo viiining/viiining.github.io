@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   
-  <title>Viiisit [LeetCode] - 017 Is Subsequence - Viiisit!</title>
+  <title>Viiisit [leetcode] - 017 Is Subsequence - Viiisit!</title>
   
     <link rel="shortcut icon" href="/favicon.png">
   
@@ -16,7 +16,7 @@
   
   
   
-  <meta property="og:title" content="Viiisit [LeetCode] - 017 Is Subsequence - Viiisit!" />
+  <meta property="og:title" content="Viiisit [leetcode] - 017 Is Subsequence - Viiisit!" />
   
   <meta property="og:type" content="article" />
   
@@ -105,7 +105,7 @@
             <a class="nav-item nav-item-home" href="/">Home</a>
             
             
-            <a class="nav-item" href="/archives">Archives</a>
+            <a class="nav-item" href="/archives">Posts</a>
             
             
             
@@ -113,7 +113,7 @@
             
             
             
-            <a class="nav-item" href="/about">About</a>
+            <a class="nav-item" href="/about">About me</a>
             
             
             
@@ -121,7 +121,7 @@
             
             
             
-            <a class="nav-item nav-item-search nav-item-icon" href="/search" target="_blank" aria-label="Search">&nbsp;</a>
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
             
             
         </div>
@@ -133,7 +133,7 @@
         
         <div class="categories text-uppercase">
         
-            <a href="/categories/LeetCode/">LeetCode</a>
+            <a href="/categories/leetcode/">leetcode</a>
         
         </div>
         
@@ -146,14 +146,26 @@
         </div>
         
 
-        <h1 class="title">Viiisit [LeetCode] - 017 Is Subsequence</h1>
+        <h1 class="title">Viiisit [leetcode] - 017 Is Subsequence</h1>
     </div>
+
+    <!--  -->
+        <div class="about">
+            
+            <p class="tags">
+                
+                <i class="icon"></i>
+                <a href="/tags/PHP/" class="tag">#PHP</a><a href="/tags/JavaScript/" class="tag">#JavaScript</a><a href="/tags/Ruby/" class="tag">#Ruby</a>
+            </p>
+            
+        </div>
+    <!--  -->
 
     <div class="divider"></div>
 
     <div class="content">
         <blockquote>
-<p>Keep learning, keep coding!</p>
+<p>keep learning, keep coding!</p>
 </blockquote>
 <h2 id="Question-Is-Subsequence"><a href="#Question-Is-Subsequence" class="headerlink" title="Question: Is Subsequence"></a>Question: Is Subsequence</h2><p>Given two strings s and t, return true if s is a subsequence of t, or false otherwise.</p>
 <p>A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., “ace” is a subsequence of “abcde” while “aec” is not).</p>
@@ -171,10 +183,10 @@
 
 <h2 id="Answer-PHP"><a href="#Answer-PHP" class="headerlink" title="Answer - PHP"></a>Answer - PHP</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isSubsequence</span>(<span class="params"><span class="variable">$s</span>, <span class="variable">$t</span></span>) </span>&#123;</span><br><span class="line">  <span class="variable">$sLen</span> = <span class="title function_ invoke__">strlen</span>(<span class="variable">$s</span>);</span><br><span class="line">  <span class="variable">$tLen</span> = <span class="title function_ invoke__">strlen</span>(<span class="variable">$t</span>);</span><br><span class="line">  <span class="variable">$i</span> = <span class="number">0</span>;</span><br><span class="line">  <span class="variable">$j</span> = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span> (<span class="variable">$i</span> &lt; <span class="variable">$sLen</span> &amp;&amp; <span class="variable">$j</span> &lt; <span class="variable">$tLen</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="variable">$s</span>[<span class="variable">$i</span>] == <span class="variable">$t</span>[<span class="variable">$j</span>]) &#123;</span><br><span class="line">          <span class="variable">$i</span>++;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="variable">$j</span>++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable">$i</span> == <span class="variable">$sLen</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong><a target="_blank" rel="noopener" href="https://leetcode.com/problems/is-subsequence/?envType=study-plan-v2&envId=top-interview-150">LeetCode 傳送門 - Is Subsequence</a></strong></p>
+<p><strong><a target="_blank" rel="noopener" href="https://leetcode.com/problems/is-subsequence/?envType=study-plan-v2&envId=top-interview-150">leetcode 傳送門 - Is Subsequence</a></strong></p>
 
     </div>
-
+<!-- 
     
     <div class="about">
         <h1>About this Post</h1>
@@ -189,7 +201,7 @@
         </p>
         
     </div>
-    
+     -->
 
     <div class="container post-prev-next">
         
@@ -197,7 +209,7 @@
             <div>
                 <div class="text">
                     <p class="label">Next</p>
-                    <h3 class="title">Viiisit [LeetCode] - 018 Ransom Note</h3>
+                    <h3 class="title">Viiisit [leetcode] - 018 Ransom Note</h3>
                 </div>
             </div>
         </a>
@@ -229,13 +241,11 @@
                 
                 <a href="/" class="item">Home</a>
                 
-                <a href="/archives" class="item">Archives</a>
+                <a href="/archives" class="item">Posts</a>
                 
                 <a href="/tags" class="item">Tags</a>
                 
                 <a href="/categories" class="item">Categories</a>
-                
-                <a href="/search" class="item">Search</a>
                 
             </div>
             

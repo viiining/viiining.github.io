@@ -24,12 +24,12 @@ body {
 }
 
 .meta .title {
-  font-size: 48px;
+  font-size: 40px;
   margin-top: 16px;
 }
 
 .content {
-  font-size: 19px;
+  font-size: 16px;
   line-height: 1.4211;
   font-weight: 400;
   letter-spacing: 0.012em;
@@ -193,6 +193,7 @@ hr,
 .tags {
   display: flex;
   flex-wrap: wrap;
+  margin-right: 18px;
 }
 
 .tags .icon {
@@ -221,18 +222,18 @@ body[data-color-scheme="dark"] .tags .icon {
 }
 
 .tags .tag {
-  font-size: 14px;
+  font-size: 18px;
   display: block;
-  height: 14px;
+  height: 18px;
   margin-right: 4px;
 }
 
 .about {
-  border-radius: 7px;
-  background-color: var(--card-bg);
-  max-width: calc(800px - 16px * 2);
-  padding: 16px;
-  margin: 64px auto;
+  /* border-radius: 7px; */
+  /* background-color: var(--card-bg); */
+  /* max-width: calc(800px - 16px * 2); */
+  /* padding: 16px; */
+  /* margin: 64px auto; */
 }
 
 @media screen and (max-width: 800px) {
@@ -288,27 +289,27 @@ body[data-color-scheme="dark"] .tags .icon {
 }
 
 .content > h1 {
-  font-size: 36px;
+  font-size: 28px;
 }
 
 .content > h2 {
-  font-size: 30px;
-}
-
-.content > h3 {
   font-size: 26px;
 }
 
+.content > h3 {
+  font-size: 24px;
+}
+
 .content > h4 {
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .content > h5 {
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .content > h6 {
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .post-prev-next {
