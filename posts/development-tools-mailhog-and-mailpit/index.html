@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Development] - MailHog vs mailpit！ - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Development] - MailHog vs mailpit！ - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/development-tools-mailhog-and-mailpit/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2024-02-06T08:00:20.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>February</span>
+            <span>6,</span>
+            <span>2024</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Development] - MailHog vs mailpit！</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/web-development/" class="tag">#web development</a><a href="/tags/development-tools/" class="tag">#development tools</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <h2 id="What-is-MailHog"><a href="#What-is-MailHog" class="headerlink" title="What is MailHog?"></a>What is MailHog?</h2><p>MailHog 是針對開發上的電子郵件測試工具。</p>
+<ul>
+<li>使用 MailHog 進行 SMTP 郵件發送。</li>
+<li>可以透過 Web UI 查看郵件，或使用 JSON API 擷取郵件。</li>
+<li>可選擇將郵件釋放到真實的 SMTP 伺服器以進行實際發送。</li>
+</ul>
+<h2 id="What-is-mailpit"><a href="#What-is-mailpit" class="headerlink" title="What is mailpit?"></a>What is mailpit?</h2><p>mailpit 同樣也是針對開發上的電子郵件測試工具，作用上與 MailHog 相同，<br>因為目前 MailHog 已不再維護，因此在 <code>Laravel 10.x</code> 開始，<br><code>Laravel Homestead</code> 將 mailpit 涵蓋於預設的 Mail 測試工具中。</p>
+<h2 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h2><p>本身使用的環境：</p>
+<blockquote>
+<p>Mac OS (Apple chip M2)<br>Laravel version - 10.x<br>Homestead version - v14.2.0 (Vagrant + Parallels)<br>Ubuntu 20.04.5 &#x2F; aarch64(arm64)<br>Go version - &#96;go version go1.17.4 linux&#x2F;arm64</p>
+</blockquote>
+<hr>
+<h3 id="MailHog"><a href="#MailHog" class="headerlink" title="MailHog"></a>MailHog</h3><blockquote>
+<p>假設已經安裝了 <code>Laravel Homestead</code></p>
+</blockquote>
+<ul>
+<li>setup the <code>.env</code> file<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MAIL_MAILER=smtp</span><br><span class="line">MAIL_HOST=mailhog</span><br><span class="line">MAIL_PORT=1025</span><br><span class="line">MAIL_USERNAME=null</span><br><span class="line">MAIL_PASSWORD=null</span><br><span class="line">MAIL_ENCRYPTION=null</span><br><span class="line">MAIL_FROM_ADDRESS=from@example.com</span><br><span class="line">MAIL_FROM_NAME=&quot;$&#123;APP_NAME&#125;&quot;</span><br></pre></td></tr></table></figure></li>
+<li>setup the <code>Homestead.yaml</code> file<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ports:</span><br><span class="line">	- send: 33060 # MySQL/MariaDB</span><br><span class="line">	to: 3306</span><br><span class="line">	- send: 8025 # Mailhog</span><br><span class="line">	to: 8025</span><br></pre></td></tr></table></figure>
+都設定好之後，<code>cd ~/Homestead</code>，<br>接著透過 <code>vagrant ssh</code>，進入到 Homestead 虛擬機中，</li>
+</ul>
+<h4 id="安裝-MailHog-在虛擬機中"><a href="#安裝-MailHog-在虛擬機中" class="headerlink" title="安裝 MailHog 在虛擬機中"></a>安裝 MailHog 在虛擬機中</h4><p>進入到虛擬機之後，依照 MailHog 的文件說明，用以下指令安裝 MailHog：</p>
+<ul>
+<li>Debian &#x2F; Ubuntu Go &lt; v1.18<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get -y install golang-go</span><br><span class="line">go get github.com/mailhog/MailHog</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>以 <code>MailHog</code> 指令連線！<br><img src="/../assets/images/mailhog.png" alt="MailHog"><br>透過 <a target="_blank" rel="noopener" href="http://localhost:8025/">http://localhost:8025/</a> 看到以下畫面就是成功啦！୧ʕ•̀ᴥ•́ʔ୨<br><img src="/../assets/images/mailhog-ui.png" alt="mailhog-ui"></p>
+<h3 id="mailpit"><a href="#mailpit" class="headerlink" title="mailpit"></a>mailpit</h3><blockquote>
+<p>假設已經安裝了 <code>Laravel Homestead</code></p>
+</blockquote>
+<ul>
+<li>setup the <code>.env</code> file<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MAIL_MAILER=smtp</span><br><span class="line">MAIL_HOST=app_url_without_http #這裡記得要改！</span><br><span class="line">MAIL_PORT=1025</span><br><span class="line">MAIL_USERNAME=null</span><br><span class="line">MAIL_PASSWORD=null</span><br><span class="line">MAIL_ENCRYPTION=null</span><br><span class="line">MAIL_FROM_ADDRESS=from@example.com</span><br><span class="line">MAIL_FROM_NAME=&quot;$&#123;APP_NAME&#125;&quot;</span><br></pre></td></tr></table></figure></li>
+<li>setup the <code>Homestead.yaml</code> file<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ports:</span><br><span class="line">	- send: 33060 # MySQL/MariaDB</span><br><span class="line">	to: 3306</span><br><span class="line">	- send: 8025 # mailpit</span><br><span class="line">	to: 8025</span><br></pre></td></tr></table></figure>
+都設定好之後，<code>cd ~/Homestead</code>，<br>接著透過 <code>vagrant ssh</code>，進入到 Homestead 虛擬機中，</li>
+</ul>
+<h4 id="安裝-mailpit-在虛擬機中"><a href="#安裝-mailpit-在虛擬機中" class="headerlink" title="安裝 mailpit 在虛擬機中"></a>安裝 mailpit 在虛擬機中</h4><p>進入到虛擬機之後，依照 mailpit 的文件說明，用以下指令安裝 mailpit：</p>
+<ul>
+<li>Linux &amp; Mac users can install it directly to &#x2F;usr&#x2F;local&#x2F;bin&#x2F;mailpit with:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo bash &lt; &lt;(curl -sL https://raw.githubusercontent.com/axllent/mailpit/develop/install.sh)</span><br></pre></td></tr></table></figure>
+這會將 mailpit 安裝在 <code>/usr/local/bin/mailpit</code>。</li>
+</ul>
+<p>以 <code>mailpit</code> 指令連線！<br><img src="/../assets/images/mailpit.png" alt="mailpit"><br>透過 <a target="_blank" rel="noopener" href="http://localhost:8025/">http://localhost:8025/</a> 看到以下畫面就是成功啦！୧ʕ•̀ᴥ•́ʔ୨<br><img src="/../assets/images/mailpit-ui.png" alt="mailpit-ui"></p>
+<hr>
+<h4 id="在使用-MailHog-遇到的問題"><a href="#在使用-MailHog-遇到的問題" class="headerlink" title="在使用 MailHog 遇到的問題"></a>在使用 MailHog 遇到的問題</h4><h6 id="如果-port-已經被使用了，該怎麼辦？"><a href="#如果-port-已經被使用了，該怎麼辦？" class="headerlink" title="如果 port 已經被使用了，該怎麼辦？"></a>如果 port 已經被使用了，該怎麼辦？</h6><ul>
+<li><p>在預設的 port (:8025) 已經被使用的情況下，就會在下 <code>MailHog</code> 指令時出現以下錯誤訊息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MailHog</span><br><span class="line">2023/12/05 20:02:15 Using in-memory storage</span><br><span class="line">[HTTP] Binding to address: 0.0.0.0:8025</span><br><span class="line">2023/12/05 20:02:15 Serving under http://0.0.0.0:8025/</span><br><span class="line">2023/12/05 20:02:15 [SMTP] Binding to address: 0.0.0.0:1025</span><br><span class="line">Creating API v1 with WebPath: </span><br><span class="line">Creating API v2 with WebPath: </span><br><span class="line">[HTTP] Error binding to address 0.0.0.0:8025: listen tcp 0.0.0.0:8025: bind: address already in use</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解決辦法：<br>用 <code>lsof -i :8025</code> 指令找正在使用的 <strong>PID</strong>，<br>接著，以 <code>kill PID</code> (PID 要改為上一步驟中所出現的數字)指令移除，<br>再重新下 <code>MailHog</code> 就可以連上了唷！</p>
+</li>
+</ul>
+<h6 id="如果發生-application-無法連上-MailHog-的錯誤？"><a href="#如果發生-application-無法連上-MailHog-的錯誤？" class="headerlink" title="如果發生 application 無法連上 MailHog 的錯誤？"></a>如果發生 application 無法連上 MailHog 的錯誤？</h6><ul>
+<li>解決辦法：<br>透過 <code>sudo vim /etc/hosts</code>，加上 <code>127.0.0.1 mailhog</code>，<br>可參考：<a target="_blank" rel="noopener" href="https://dev.to/iankumu/laravel-mail-how-to-send-emails-easily-in-laravel-35jc">Laravel Mail: How to Send Emails Easily in Laravel</a></li>
+</ul>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://laravel.com/docs/10.x/homestead#configuring-mailpit">Laravel Homestead - Configuring mailpit</a><br>➫ <a target="_blank" rel="noopener" href="https://github.com/axllent/mailpit">mailpit</a><br>➫ <a target="_blank" rel="noopener" href="https://mailpit.axllent.org/">mailpit doc</a><br>➫ <a target="_blank" rel="noopener" href="https://chriswiegman.com/2023/03/mailpit-an-updated-alternative-to-mailhog/">Mailpit, an updated alternative to Mailhog</a><br>➫ <a target="_blank" rel="noopener" href="https://github.com/mailhog/MailHog">MailHog</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/web-development/" class="tag">#web development</a><a href="/tags/development-tools/" class="tag">#development tools</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        <a class="next"></a>
+        
+        <a href="/posts/leetcode-search-insert-position/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [LeetCode] - 038 Search Insert Position</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>
