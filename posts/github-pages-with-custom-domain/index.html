@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Custom Domain - 從零到有，成功建置 viiisit.com! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Custom Domain - 從零到有，成功建置 viiisit.com! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/github-pages-with-custom-domain/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-07-12T15:14:28.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-sharing/">keep sharing</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>July</span>
+            <span>12,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Custom Domain - 從零到有，成功建置 viiisit.com!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/dns/" class="tag">#dns</a><a href="/tags/hexo/" class="tag">#hexo</a><a href="/tags/github-pages/" class="tag">#github pages</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p>OMG!!! 終於成功了！（灑花～<br><em>過程真的一波三折，但是看到成功的瞬間，內心真的灑下一百種花，先為自己鼓掌一下！！！</em></p>
+<blockquote>
+<p>這裡分享以 Hexo + GitHub Pages + gandi + Cloudflare 上架！</p>
+</blockquote>
+<h2 id="before-action-mindset"><a href="#before-action-mindset" class="headerlink" title="before_action :mindset"></a>before_action :mindset</h2><p>一開始我只是單純使用 Hexo 來建置自己的部落格，再透過 GitHub Pages 將靜態網頁呈現。<br>但，單純使用 GitHub Pages 是指直接將靜態網站文件（例如 HTML、CSS、JavaScript 文件）部署到 GitHub 上，並使用 GitHub Pages 呈現。</p>
+<p><em>GitHub Pages 提供一個簡單且免費的方式來部署和發佈靜態網站，但它主要針對單純的靜態網站內容。</em></p>
+<p>因此，在這次的過程裡，了解到：將 GitHub Pages 與 Cloudflare 的代管服務結合使用時，可以獲得 CDN 加速、安全防護、SSL&#x2F;TLS 加密和性能優化等額外的優勢。有助於提升網站的性能、安全性和可用性，並提供更好的用戶體驗。</p>
+<p><em>其實 gandi 也有網頁代管服務，但是 cloudflare 在服務範圍、全球網絡、免費方案的特色下，比較符合我現階段的需求，且資源豐富也容易上手。</em></p>
+<p>梳理完建置前的小知識，回歸正題！</p>
+<p><strong>要將 GitHub Pages 的部落格更改為自己購買的網域，需要完成以下步驟：</strong></p>
+<ol>
+<li><p>綁定網域：首先要將所購買的網域與部落格網站綁定。這通常要在所選擇的網域註冊商或 DNS 服務提供商的管理界面進行設定，且需要創建兩個 DNS 紀錄（A 紀錄和 CNAME 紀錄），將自己的網域指向自己的部落格網站的 IP 地址或域名。</p>
+</li>
+<li><p>更新 Hexo 配置：在 Hexo 的設置文件中更新網站的 URL。打開您的 Hexo 項目中的 <code>_config.yml</code> 文件，尋找 URL 選項，將其值修改為自己購買的網域名稱。</p>
+</li>
+<li><p>重新生成網站：修改完 <code>_config.yml</code> 文件後，在 Terminal 裡，執行 hexo clean （清除緩存），然後執行 hexo generate （重新生成網站的靜態文件）。</p>
+</li>
+<li><p>部署網站：最後，在 Terminal 裡，執行 hexo deploy （我是用 GitHub Pages 部署）</p>
+</li>
+</ol>
+<p>完成上述步驟後，部落格網址應該已成功更改為自己購買的網域。<br>但！DNS 設置需要一些時間生效（DNS 傳播時間），等待一段時間才能在全球範圍內看到更改後的結果。</p>
+<blockquote>
+<p>萬事起頭難，最難真的是第一步綁定網域的部分!<br>因此，以下整理出我透過 gandi + Cloudflare 的設置流程：</p>
+</blockquote>
+<h2 id="gandi-購買網域"><a href="#gandi-購買網域" class="headerlink" title="gandi 購買網域"></a>gandi 購買網域</h2><p><em>要先購買網域才有辦法綁定自己想要的網域！</em></p>
+<p>透過龍哥的介紹，根本跳過前面爬文篩選可以買網域的關卡 ୧ʕ•̀ᴥ•́ʔ୨<br>直接使用 <a target="_blank" rel="noopener" href="https://www.gandi.net/zh-Hant">gandi</a> 作為我購買人生第一個網域的地方！</p>
+<ul>
+<li>進入 <a target="_blank" rel="noopener" href="https://www.gandi.net/zh-Hant">gandi</a> 註冊帳號，如同常見的註冊方式，輸入資訊並驗證信箱，回到 gandi 就正式來買網域囉！</li>
+<li>前往 <a target="_blank" rel="noopener" href="https://www.gandi.net/zh-Hant">gandi</a> 首頁，在搜索欄輸入想要的單字或是網域名，進行搜索，如果沒有人使用過，就會顯示出數種可以用的網域名，其中包括 <code>.me</code> <code>.com</code> <code>.tw</code>，依據每個域名而有不同的價格，可以依照個人需求挑選。</li>
+<li>選購且付款成功之後，gandi 會寄送相關信件。</li>
+</ul>
+<p><em>接著搭配 cloudflare 來綁定自己的網域</em></p>
+<h2 id="cloudflare-綁定自己的網域"><a href="#cloudflare-綁定自己的網域" class="headerlink" title="cloudflare 綁定自己的網域"></a>cloudflare 綁定自己的網域</h2><p><em>透過在 gandi 買完的網域名稱，要來使用 cloudflare 來管理。</em></p>
+<p>我跟著 <mark><a target="_blank" rel="noopener" href="https://www.imjanehsieh.com/cloudflare-teaching/">小豆說故事</a></mark> 的步驟，完成把自己購買好的網域交由 cloudflare 來管理！</p>
+<ul>
+<li>進入 <a target="_blank" rel="noopener" href="https://www.cloudflare.com/">cloudflare</a> 註冊帳號，如同常見的註冊方式，輸入資訊並驗證信箱。</li>
+<li>接著就會需要輸入你想透過 cloudflare 保護的網域名稱，也就是先前購買好的網域。</li>
+<li>選擇 cloudflare 免費方案 （對目前的我來說滿夠用），依照小豆說故事的步驟，<br>會看到有兩個由 cloudflare 提供的 DNS Server 名稱，<br>分別複製 Cloudflare 的兩個名稱伺服器，再另開分頁，進入 gandi。</li>
+<li>點選<code>域名</code> -&gt; <code>名稱伺服器</code> -&gt; 變更伺服器名稱，分別將兩個 cloudflare 提供的伺服器名稱貼上，成功更新名稱伺服器之後，回到 cloudflare。</li>
+<li>點選<code>完成檢查名稱伺服器</code>按鈕，他會導向到快速設定畫面，先點稍後設定，<br>跳轉到下一畫面之後，按下<code>檢查名稱伺服器 Check nameservers</code>，<br>請求 Cloudflare 檢查名稱伺服器的變更。</li>
+<li>接著就是等待 DNS 設置了！（可能需要 24 小時）</li>
+<li>DNS 設置完成後，coudfalre 綁好的網域應該會有 <code>Active</code> 或 <code>使用中</code> 字樣，這樣就綁定成功了！</li>
+</ul>
+<p>等待 DNS 設置好之後，如果跟我一樣是用 GitHub Pages 來部署的話，可以在 cloudflare 的 DNS 紀錄頁面中，新增以下 DNS Records:</p>
+<ul>
+<li>新增兩個 A Records，指向 GitHub IP<ul>
+<li>Type: <code>A</code> Name: <code>購買的網域名稱</code> IPv4 address: <code>192.30.252.153</code></li>
+<li>Type: <code>A</code> Name: <code>購買的網域名稱</code> IPv4 address: <code>192.30.252.154</code></li>
+</ul>
+</li>
+<li>新增 CNAME<ul>
+<li>Type: <code>CNAME</code> Name: <code>www</code> IPv4 address: <code>Github帳號名稱.github.io</code></li>
+</ul>
+</li>
+</ul>
+<p>另外，可以到 SSL&#x2F;TLS 頁面加密模式勾選為 <code>完整</code>，再到邊緣憑證頁面，將一律使用 HTTPS 打開。</p>
+<h2 id="GitHub-Settings"><a href="#GitHub-Settings" class="headerlink" title="GitHub Settings"></a>GitHub Settings</h2><p><em>接著終於來到最後一部分了，設置自己的網域到 GitHub Pages 上！</em><br><em>GitHub Pages 要如何設定，可以透過 GitHub 提供的 <a target="_blank" rel="noopener" href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">Creating a GitHub Pages site</a> 來設定</em></p>
+<ul>
+<li>進入 GitHub Repository: <code>Github帳號名稱.github.io</code><br><em>(當初我是直接用 <code>Github帳號名稱.github.io</code> 來建立 GitHub Pages)</em></li>
+<li>點擊 <code>Settings</code>，尋找左邊欄位的 <code>Pages</code>，並在 <code>Custom domain</code> 裡填入已經設置成功的網域名</li>
+<li>等待 GitHub 檢查 DNS 就可以成功使用囉～～～！</li>
+</ul>
+<p>♡˙︶˙♡（內心歡呼！）♡˙︶˙♡</p>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://www.imjanehsieh.com/cloudflare-teaching/">小豆說故事</a><br>➫ <a target="_blank" rel="noopener" href="https://riverye.com/2019/10/23/%E5%BE%9E%E7%84%A1%E5%88%B0%E6%9C%89%E7%9A%84-Blog-%E5%BB%BA%E7%BD%AE%E6%95%99%E5%AD%B8-%E5%90%AB-domain-%E8%B3%BC%E8%B2%B7%E8%BD%89%E5%9D%80/#null">從無到有的 Blog 建置教學 (含 domain 購買轉址)</a><br>➫ <a target="_blank" rel="noopener" href="https://wualnz.com/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-Hexo-Github-Page-%E7%94%A8-Cloudflare-%E7%B6%81%E5%AE%9A%E5%80%8B%E4%BA%BA%E7%B6%B2%E5%9D%80/">如何使用 Hexo + Github Page 用 Cloudflare 綁定個人網址</a><br>➫ <a target="_blank" rel="noopener" href="https://n.sfs.tw/content/index/12086?noframe=true">[DNS 管理系統] 各種記錄的設定方式</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/dns/" class="tag">#dns</a><a href="/tags/hexo/" class="tag">#hexo</a><a href="/tags/github-pages/" class="tag">#github pages</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/rails-basic/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - 先備知識!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/ruby-constant-variable/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby] - Constant &amp; Variable!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

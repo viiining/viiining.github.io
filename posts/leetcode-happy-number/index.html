@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [LeetCode] - 023 Happy Number - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [LeetCode] - 023 Happy Number - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/leetcode-happy-number/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-12-14T09:00:00.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/leetcode/">leetcode</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>December</span>
+            <span>14,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [LeetCode] - 023 Happy Number</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/php/" class="tag">#php</a><a href="/tags/javascript/" class="tag">#javascript</a><a href="/tags/ruby/" class="tag">#ruby</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <blockquote>
+<p>keep learning, keep coding!</p>
+</blockquote>
+<h2 id="Problem-Happy-Number"><a href="#Problem-Happy-Number" class="headerlink" title="Problem - Happy Number"></a>Problem - Happy Number</h2><p>Write an algorithm to determine if a number n is happy.</p>
+<p>A happy number is a number defined by the following process:</p>
+<p>Starting with any positive integer, replace the number by the sum of the squares of its digits.<br>Repeat the process until the number equals 1 (where it will stay), or it loops endlessly in a cycle which does not include 1.<br>Those numbers for which this process ends in 1 are happy.<br>Return true if n is a happy number, and false if not.</p>
+<h3 id="翻譯蒟蒻"><a href="#翻譯蒟蒻" class="headerlink" title="翻譯蒟蒻"></a>翻譯蒟蒻</h3><p><strong>給定一個數字，每位數平方後相加，大於 1 則重複每位數開平方相加的動作，如果最後得到 1 的話，就是happy number，如果進入無限迴圈，這個數就不是 happy number。</strong></p>
+<ul>
+<li><p>Example 1:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input: n = 19</span><br><span class="line">Output: true</span><br><span class="line">Explanation:</span><br><span class="line">1^2 + 9^2 = 82</span><br><span class="line">8^2 + 2^2 = 68</span><br><span class="line">6^2 + 8^2 = 100</span><br><span class="line">1^2 + 0^2 + 0^2 = 1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Example 2:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: n = 2</span><br><span class="line">Output: false</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="Solution-JavaScript"><a href="#Solution-JavaScript" class="headerlink" title="Solution - JavaScript"></a>Solution - JavaScript</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; <span class="variable">n</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">boolean</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> isHappy = <span class="keyword">function</span>(<span class="params">n</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> seen = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 檢查當前數字是否等於 1 或者是否已經在 seen 中</span></span><br><span class="line">    <span class="keyword">while</span> (n !== <span class="number">1</span> &amp;&amp; !seen[n]) &#123;</span><br><span class="line">        <span class="comment">// 將當前數字加入 seen 中</span></span><br><span class="line">        seen[n] = <span class="literal">true</span>;</span><br><span class="line">        <span class="comment">// 將數字轉為字串，再將字串轉為陣列，最後將陣列中的每個數字平方後相加</span></span><br><span class="line">        n = n.<span class="title function_">toString</span>().<span class="title function_">split</span>(<span class="string">&#x27;&#x27;</span>).<span class="title function_">reduce</span>(<span class="function">(<span class="params">acc, cur</span>) =&gt;</span> acc + cur * cur, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> n === <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Solution-Ruby"><a href="#Solution-Ruby" class="headerlink" title="Solution - Ruby"></a>Solution - Ruby</h2><p>Method 1:</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">is_happy</span>(<span class="params">n</span>)</span><br><span class="line">  seen = &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> n != <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span> <span class="keyword">if</span> seen[n]</span><br><span class="line">    seen[n] = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">    n = n.to_s.chars.map(&amp;<span class="symbol">:to_i</span>).map &#123; |<span class="params">x</span>| x**<span class="number">2</span> &#125;.sum</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  n == <span class="number">1</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>Method 2:</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">is_happy</span>(<span class="params">n</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span> <span class="keyword">if</span> n &lt;= <span class="number">0</span></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span> <span class="keyword">if</span> n == <span class="number">1</span></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span> <span class="keyword">if</span> n == <span class="number">4</span></span><br><span class="line">  sum = <span class="number">0</span></span><br><span class="line">  <span class="keyword">while</span> n &gt; <span class="number">0</span></span><br><span class="line">    sum += (n % <span class="number">10</span>) ** <span class="number">2</span></span><br><span class="line">    n /= <span class="number">10</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  is_happy(sum)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>為了避免無限循環，函數提前處理了一些特殊情況：如果 n 小於等於 0，返回 false；如果 n 等於 1，返回 true；如果 n 等於 4，返回 false。<br>使用 (n % 10) 獲取最後一位數字，計算其平方加到 sum 中，然後將 n 除以 10 去掉最後一位。這樣迭代直到 n 變成 0，然後遞迴調用 is_happy 函數檢查新的數字。</p>
+</blockquote>
+<h2 id="Solution-PHP"><a href="#Solution-PHP" class="headerlink" title="Solution - PHP"></a>Solution - PHP</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isHappy</span>(<span class="params"><span class="variable">$n</span></span>) </span>&#123;</span><br><span class="line">    <span class="variable">$seen</span> = [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="variable">$n</span> != <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="variable">$sum</span> = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 將數字的每一位數字的平方加到 $sum 中</span></span><br><span class="line">        <span class="keyword">while</span> (<span class="variable">$n</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="variable">$digit</span> = <span class="variable">$n</span> % <span class="number">10</span>;</span><br><span class="line">            <span class="variable">$sum</span> += <span class="variable">$digit</span> * <span class="variable">$digit</span>;</span><br><span class="line">            <span class="variable">$n</span> = <span class="title function_ invoke__">intval</span>(<span class="variable">$n</span> / <span class="number">10</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果在計算過程中發現已經存在，返回 false</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$seen</span>[<span class="variable">$sum</span>])) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="variable">$seen</span>[<span class="variable">$sum</span>] = <span class="literal">true</span>;</span><br><span class="line">        <span class="variable">$n</span> = <span class="variable">$sum</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="PHP-方法筆記"><a href="#PHP-方法筆記" class="headerlink" title="PHP 方法筆記"></a>PHP 方法筆記</h4><ul>
+<li><p><code>intval</code> 是一個用來取得變數的整數值的函數。</p>
+<p>函數的基本語法如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">intval</span>(<span class="keyword">mixed</span> <span class="variable">$var</span>, <span class="keyword">int</span> <span class="variable">$base</span> = <span class="number">10</span>): <span class="keyword">int</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// `$var` 是要轉換的變數。</span></span><br><span class="line"><span class="comment">// `$base` 是轉換使用的進位制數（預設是 10）。</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>return 值：<ul>
+<li>將輸入轉換為整數。</li>
+<li>如果 $var 是浮點數，它會被截斷為整數。如果 $var 是字串，會嘗試從字串中讀取整數，並忽略開頭的非數字字符。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$number</span> = <span class="number">123.45</span>;</span><br><span class="line"><span class="variable">$result</span> = <span class="title function_ invoke__">intval</span>(<span class="variable">$number</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$result</span>;  <span class="comment">// 輸出: 123</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$stringNumber</span> = <span class="string">&quot;456abc&quot;</span>;</span><br><span class="line"><span class="variable">$resultFromString</span> = <span class="title function_ invoke__">intval</span>(<span class="variable">$stringNumber</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$resultFromString</span>;  <span class="comment">// 輸出: 456</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$hexNumber</span> = <span class="string">&quot;1a&quot;</span>;</span><br><span class="line"><span class="variable">$resultHex</span> = <span class="title function_ invoke__">intval</span>(<span class="variable">$hexNumber</span>, <span class="number">16</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$resultHex</span>;  <span class="comment">// 輸出: 26</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://leetcode.com/problems/happy-number/?envType=study-plan-v2&envId=top-interview-150">LeetCode 傳送門 - Happy Number</a></strong></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/php/" class="tag">#php</a><a href="/tags/javascript/" class="tag">#javascript</a><a href="/tags/ruby/" class="tag">#ruby</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/leetcode-contains-duplicate-II/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [LeetCode] - 024 Contains Duplicate II</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/leetcode-two-sum/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [LeetCode] - 022 Two Sum</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

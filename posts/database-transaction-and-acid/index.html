@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Database] - 資料庫 Transaction 與 ACID！ - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Database] - 資料庫 Transaction 與 ACID！ - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/database-transaction-and-acid/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-10-13T09:17:21.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>13,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Database] - 資料庫 Transaction 與 ACID！</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/database/" class="tag">#database</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p><em>今天來點資料庫 Transaction 與 ACID！</em></p>
+<h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><blockquote>
+<p>當我們試圖新增、修改或建立資料，並在進行這些操作時發生無法將資料存入資料庫的情況，<br>資料庫會發生什麼事？</p>
+</blockquote>
+<p>我用 Rails 建立的註冊功能，當要在使用者資料表中新增一個新的使用者，可能由於某種原因（例如，唯一性約束違反或欄位的格式錯誤），無法成功將新使用者的資料存入資料庫，就會出現這樣：<br><img src="/../assets/images/transaction-and-rollback.png" alt="Transaction Rollback"></p>
+<p>仔細看會發現到<strong>我們觸發 Transaction 的回滾（Rollback）！</strong><br><strong>但是，為什麼會這樣？我們接著往下看：</strong></p>
+<h2 id="Database-Transaction-交易（事務）"><a href="#Database-Transaction-交易（事務）" class="headerlink" title="Database Transaction 交易（事務）"></a>Database Transaction 交易（事務）</h2><p>Database Transaction 稱為資料庫交易或者事務，以下直接用 Transaction 來表示。</p>
+<p>Transaction 是資料庫管理系統中的重要概念，用於確保資料庫操作的一致性、完整性和持久性，<br>而<strong>在資料庫操作中，Transaction 是一組相關的操作被視為一個不可分割的工作，要麼全部成功執行，要麼全部失敗，不允許中途取消或中斷。</strong></p>
+<p>Transaction 這個工作單元可以包含一個或多個資料庫操作，例如讀取資料、寫入資料或更新資料，而這些操作必須以原子性的方式執行。<strong>原子性意味著無論何時，這個工作單元的操作要麼全部完成並永久保存到資料庫，要麼全部回滾並恢復到操作之前的狀態。</strong></p>
+<p>透過簡單的轉帳功能來看看 Transaction 的整體操作：</p>
+<ul>
+<li>Step 01:<br>當 Transaction 開始，就需要讀取帳戶 A 和帳戶 B 的當前餘額，<br>以確保進行轉帳之前的餘額狀態。</li>
+<li>Step 02:<br>確認之後開始執行轉帳，Transaction 扣減帳戶 A 的餘額，並增加帳戶 B 的餘額，<br>以完成轉帳操作，其中也包括更新資料庫中的帳戶 A 和帳戶 B 的餘額。</li>
+<li>Step 03:<br>Transaction 確保轉帳後，總帳戶餘額保持不變。這是確保操作的一致性的關鍵部分。<br>如果帳戶餘額不平衡，可能由於錯誤，Transaction 會 Rollback（回滾），並不執行。</li>
+<li>Step 04:<br>如果一切順利，Transaction 會 Commit（提交），<br>確保帳戶餘額的更改永久保存到資料庫中，這樣才能實現Transaction的持久性，<br>也 Transaction 確保了轉帳操作的可靠性和安全性。</li>
+</ul>
+<blockquote>
+<p>如果在 Transaction 的任何階段出現問題，例如帳戶餘額不足或系統故障，Transaction 會被 Rollback（回滾），這意味著所有操作都會取消，以確保帳戶的一致性和完整性。這個過程確保了即使在不確定情況下，轉帳操作也不會導致資料庫狀態的混亂或錯誤。</p>
+</blockquote>
+<h2 id="Transaction-四大特性：ACID"><a href="#Transaction-四大特性：ACID" class="headerlink" title="Transaction 四大特性：ACID"></a>Transaction 四大特性：ACID</h2><p>在資料庫管理中，確保數據的完整性和可靠性是很重要的，<br>因此，我們需要謹慎管理資料庫操作，<strong>特別是當多個操作需要以原子方式執行時。</strong><br>這就是接下來要說明的 Transaction 四大特性 - ACID：</p>
+<ul>
+<li><p><strong>原子性（Atomicity）</strong><br>這表示 Transaction 中的所有操作要麼全部成功執行，要麼全部失敗，<br>不會留下部分完成的操作。<br>如果有一個操作失敗，整個 Transaction 都會被 Rollback（回滾）到最初的狀態，<br>並保持資料的一致性。</p>
+</li>
+<li><p><strong>一致性（Consistency）</strong><br>這表示 Transaction 在執行前和執行後，資料庫都必須保持一致的狀態。<br>這意味著 Transaction 的執行不會破壞資料庫的完整性約束和規則。</p>
+</li>
+<li><p><strong>隔離性（Isolation）</strong><br>這指的是多個 Transaction 在同時執行時，彼此互不影響，<br>每個 Transaction 都好像在單獨使用資料庫一樣。<br>這防止了一個 Transaction 的修改對其他 Transaction 可見，直到他完成。</p>
+</li>
+<li><p><strong>持久性（Durability）</strong><br>這表示一旦 Transaction 成功完成，其對資料庫的修改將被永久保存，<br>即使在系統發生故障或重啟後也是如此。<br>這確保了資料的持久性，不會因系統錯誤而丟失。</p>
+</li>
+</ul>
+<p>這些特性確保每個 Transaction 都能夠安全、可靠地執行。<br>Transaction 的使用對於保證資料庫的完整性和可靠性非常重要，<br>特別是在多用戶環境下，其中多個用戶可以同時訪問和修改資料庫。<br>當一組操作需要以原子方式執行，以確保資料的一致性時，Transaction 成為一個關鍵的概念。</p>
+<p>今天就到這啦！下篇見～！</p>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://lance.coderbridge.io/2021/04/24/short-what-is-acid/">[極短篇] 資料庫的 ACID 是什麼？</a><br>➫ <a target="_blank" rel="noopener" href="https://www.explainthis.io/zh-hant/swe/acid-intro">ACID 是什麼？請解釋 ACID 特性？</a><br>➫ <a target="_blank" rel="noopener" href="https://oldmo860617.medium.com/database-transaction-acid-156a3b75845e">Database Transaction &amp; ACID</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/database/" class="tag">#database</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/git-basic/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Git] - Time Machine!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/database-normalization-and-denormalization/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Database] - 資料庫正規化與反正規化！</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

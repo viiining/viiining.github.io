@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby] - Class &amp; Module！ - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby] - Class &amp; Module！ - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/ruby-class-and-module/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-10-18T09:17:19.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>18,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby] - Class &amp; Module！</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/interview/" class="tag">#interview</a><a href="/tags/ruby/" class="tag">#ruby</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p>在 <a href="https://viiisit.com/20230927-ruby-oop-introduction/">Viiisit Ruby - Ruby 的物件導向程式語言基礎概念!</a><br>有提到 Ruby 是一個物件導向的程式語言，在 Ruby 中，所有的東西幾乎都是物件，為什麼說是幾乎？<br>因為像之前有一篇 <a href="https://viiisit.com/20231008-ruby-block-proc-lambda/">Viiisit Ruby on Rails - Scope 前情提要 Block、Proc 和 Lambda!</a><br>裡頭有說明 Block 就不是物件！</p>
+<p>那麼在物件導向程式裡的特色就是物件，什麼是物件？</p>
+<h2 id="物件（Object）是什麼？"><a href="#物件（Object）是什麼？" class="headerlink" title="物件（Object）是什麼？"></a>物件（Object）是什麼？</h2><blockquote>
+<p>物件（object） &#x3D; 狀態（state） + 行為（behavior）</p>
+</blockquote>
+<p>在現實生活中，你我他，看得到、摸得到的都可通稱為之物件（Object）。<br>物件會有狀態跟行為，例如我有「黑色頭髮」、「黃色皮膚」等狀態，也有「吃飯」、「睡覺」等行為。</p>
+<p>而，我們要如何在物件導向程式語言定義這些狀態與行為？</p>
+<p>就要來開啟認識類別（Class）之路了！</p>
+<h2 id="類別（Class）是什麼？"><a href="#類別（Class）是什麼？" class="headerlink" title="類別（Class）是什麼？"></a>類別（Class）是什麼？</h2><blockquote>
+<p>類別是一個程式碼的模板，用來建立具體的物件（實例）。</p>
+</blockquote>
+<p>可以透過關鍵字 <code>class</code> 來定義類別！</p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>初始化通常是透過一個特殊的方法稱為 <code>initialize</code> 來執行的，<br>這個方法會在建立該類別的實例時被呼叫。<br>當一個新的實例被創建時，<code>initialize</code> 方法用於設置實例的初始狀態。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">name, age</span>)</span><br><span class="line">    <span class="variable">@name</span> = name</span><br><span class="line">    <span class="variable">@age</span> = age</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立一個 Person 實例</span></span><br><span class="line">person1 = <span class="title class_">Person</span>.new(<span class="string">&quot;Alice&quot;</span>, <span class="number">30</span>)</span><br><span class="line">person2 = <span class="title class_">Person</span>.new(<span class="string">&quot;Bob&quot;</span>, <span class="number">25</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>initialize</code> 方法接受兩個參數 <code>name</code> 和 <code>age</code>，<br>並使用這些參數來設置 <code>Person</code> 實例的初始狀態。<br>當我們建立 <code>Person</code> 實例時，我們傳遞相應的參數給 <code>new</code> 方法，這將觸發 <code>initialize</code> 方法。</p>
+<p>一旦實例被初始化，我們可以使用實體變數（instance variables）來存儲和訪問實例的狀態。<br>在 Ruby 中，實體變數以 <code>@</code> 符號開頭，並且可以在整個類別的方法中訪問。</p>
+<h3 id="如何使用實體變數？"><a href="#如何使用實體變數？" class="headerlink" title="如何使用實體變數？"></a>如何使用實體變數？</h3><p>Ruby 的實體變數沒辦法直接從外部取用，<br>因為實例變數的封裝性以及 Ruby 並沒有「屬性」（property&#x2F;attribute）這樣的設計，<br>因此只允許通過方法來取用實體變數！</p>
+<p>定義兩個方法 <code>get_name</code> 和 <code>get_age</code>，<br>允許我們從 <code>Person</code> 實例中訪問 <code>@name</code> 和 <code>@age</code> 實體變數。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">name, age</span>)</span><br><span class="line">    <span class="variable">@name</span> = name</span><br><span class="line">    <span class="variable">@age</span> = age</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">get_name</span></span><br><span class="line">    <span class="variable">@name</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">get_age</span></span><br><span class="line">    <span class="variable">@age</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">person = <span class="title class_">Person</span>.new(<span class="string">&quot;Alice&quot;</span>, <span class="number">30</span>)</span><br><span class="line"></span><br><span class="line">puts <span class="string">&quot;Name: <span class="subst">#&#123;person.get_name&#125;</span>&quot;</span>  <span class="comment"># 輸出：Name: Alice</span></span><br><span class="line">puts <span class="string">&quot;Age: <span class="subst">#&#123;person.get_age&#125;</span>&quot;</span>    <span class="comment"># 輸出：Age: 30</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="attr-系列讓你輕鬆建立屬性！"><a href="#attr-系列讓你輕鬆建立屬性！" class="headerlink" title="attr_ 系列讓你輕鬆建立屬性！"></a>attr_ 系列讓你輕鬆建立屬性！</h3><p>前面提及每次要這樣取用或設定實體變數的值都要建立方法，好像有點麻煩？</p>
+<p>別擔心！Ruby 的 <code>attr_</code> 系列方法可以簡化實例變數的訪問和設置，<br>這些方法可以自動創建 getter 和 setter 方法，以允許對實例變數的訪問！</p>
+<ul>
+<li><p><strong><code>attr_reader</code></strong> ：用於建立 getter 方法，允許訪問實例變數的值。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">  <span class="built_in">attr_reader</span> <span class="symbol">:name</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">name</span>)</span><br><span class="line">    <span class="variable">@name</span> = name</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">person = <span class="title class_">Person</span>.new(<span class="string">&quot;Alice&quot;</span>)</span><br><span class="line">puts person.name <span class="comment"># 可以訪問實例變數 <span class="doctag">@name</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>attr_writer</code></strong> ：用於建立 setter 方法，允許設置實例變數的值。</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">  <span class="built_in">attr_writer</span> <span class="symbol">:name</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">name</span>)</span><br><span class="line">    <span class="variable">@name</span> = name</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">person = <span class="title class_">Person</span>.new(<span class="string">&quot;Alice&quot;</span>)</span><br><span class="line">person.name = <span class="string">&quot;Bob&quot;</span> <span class="comment"># 可以設置實例變數 <span class="doctag">@name</span> 的值</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>attr_accessor</code></strong> ：用於同時建立 getter 和 setter 方法。</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">  <span class="built_in">attr_accessor</span> <span class="symbol">:name</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">name</span>)</span><br><span class="line">    <span class="variable">@name</span> = name</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">person = <span class="title class_">Person</span>.new(<span class="string">&quot;Alice&quot;</span>)</span><br><span class="line">puts person.name    <span class="comment"># 可以訪問實例變數 <span class="doctag">@name</span></span></span><br><span class="line">person.name = <span class="string">&quot;Bob&quot;</span> <span class="comment"># 可以設置實例變數 <span class="doctag">@name</span> 的值</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="實體方法與類別方法"><a href="#實體方法與類別方法" class="headerlink" title="實體方法與類別方法"></a>實體方法與類別方法</h2><ul>
+<li><p><strong>實體方法（Instance Methods）</strong>：</p>
+<ul>
+<li>實體方法是與類別的實例（物件）關聯的方法，可以訪問和操作實例變數，並且通常用於對特定實例執行操作或訪問其狀態。</li>
+<li>實體方法通常定義在類別中，並且通過類別的實例來呼叫。這些方法在操作實例時具有存取實例變數的能力，因為有關聯到特定的實例。</li>
+<li>在定義實體方法時，你可以使用 <code>def</code> 關鍵字，而不需要特殊的修飾詞。</li>
+</ul>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">name</span>)</span><br><span class="line">    <span class="variable">@name</span> = name</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">greet</span></span><br><span class="line">    <span class="string">&quot;Hello, my name is <span class="subst">#&#123;<span class="variable">@name</span>&#125;</span>.&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">person = <span class="title class_">Person</span>.new(<span class="string">&quot;Alice&quot;</span>)</span><br><span class="line">puts person.greet <span class="comment"># 輸出：Hello, my name is Alice.</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>類別方法（Class Methods）</strong>：</p>
+<ul>
+<li>類別方法是與類別本身關聯的方法，而不是與實例相關聯。通常用於執行與整個類別相關的操作，而不是與單個實例相關。</li>
+<li>類別方法在類別級別上定義，通常使用 <code>self.</code> 關鍵字，或者類別名稱來定義。</li>
+<li>類別方法可以在不需要實例的情況下呼叫，因為它們與類別本身關聯，而不是與實例變數關聯。</li>
+</ul>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MathUtility</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">self</span>.square(x)</span><br><span class="line">    x * x</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">self</span>.cube(x)</span><br><span class="line">    x * x * x</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">puts <span class="title class_">MathUtility</span>.square(<span class="number">2</span>) <span class="comment"># 輸出：4</span></span><br><span class="line">puts <span class="title class_">MathUtility</span>.cube(<span class="number">3</span>)   <span class="comment"># 輸出：27</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="方法的存取控制"><a href="#方法的存取控制" class="headerlink" title="方法的存取控制"></a>方法的存取控制</h2><p>類別的方法存取限制常見的主要有三種：<code>public</code>、<code>protected</code> 以及 <code>private</code>。</p>
+<ul>
+<li><p><strong><code>public</code> 方法</strong>：在類別內部和外部都可訪問，通常用於定義對外部世界可見的介面，以便外部程式碼可以直接訪問這些方法。</p>
+</li>
+<li><p><strong><code>private</code> 方法</strong>：只能在定義他們的類別內部訪問，通常用於實現類別的內部邏輯，以避免外部程式碼干擾或誤用這些方法。</p>
+</li>
+<li><p><strong><code>protected</code> 方法</strong>：類似於私有方法，但可以在同一個類別的不同實例之間訪問，通常用於實現特定的類別內部協作，例如當不同實例需要互相訪問彼此的某些方法時。</p>
+</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">name</span>)</span><br><span class="line">    <span class="variable">@name</span> = name</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 公開方法</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">speak</span></span><br><span class="line">    puts <span class="string">&quot;<span class="subst">#&#123;<span class="variable">@name</span>&#125;</span> 發出聲音。&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 保護方法</span></span><br><span class="line">  <span class="keyword">protected</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">sleep</span></span><br><span class="line">    puts <span class="string">&quot;<span class="subst">#&#123;<span class="variable">@name</span>&#125;</span> 正在休息。&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 私有方法</span></span><br><span class="line">  <span class="keyword">private</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">eat</span></span><br><span class="line">    puts <span class="string">&quot;<span class="subst">#&#123;<span class="variable">@name</span>&#125;</span> 正在進食。&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> &lt; <span class="title class_ inherited__">Animal</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">wag_tail</span></span><br><span class="line">    <span class="comment"># 子類別可以訪問保護方法</span></span><br><span class="line">    sleep</span><br><span class="line">    puts <span class="string">&quot;<span class="subst">#&#123;<span class="variable">@name</span>&#125;</span> 開心地搖尾巴。&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">feed</span></span><br><span class="line">    <span class="comment"># 子類別可以訪問私有方法</span></span><br><span class="line">    eat</span><br><span class="line">    puts <span class="string">&quot;<span class="subst">#&#123;<span class="variable">@name</span>&#125;</span> 吃得很開心。&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">animal = <span class="title class_">Animal</span>.new(<span class="string">&quot;動物&quot;</span>)</span><br><span class="line">animal.speak <span class="comment"># 動物 發出聲音。</span></span><br><span class="line"></span><br><span class="line">dog = <span class="title class_">Dog</span>.new(<span class="string">&quot;狗&quot;</span>)</span><br><span class="line">dog.speak     <span class="comment"># 狗 發出聲音。</span></span><br><span class="line">dog.wag_tail  <span class="comment"># 狗 開心地搖尾巴。</span></span><br><span class="line">dog.feed      <span class="comment"># 狗 吃得很開心。</span></span><br></pre></td></tr></table></figure>
+
+<p>定義一個 <code>Animal</code> 類別，<br>有一個公開方法 <code>speak</code>、一個保護方法 <code>sleep</code> 和一個私有方法 <code>eat</code>。<br>然後，建立一個 <code>Dog</code> 類別，<br>他是繼承自 <code>Animal</code> 類別的子類別，並且可以訪問父類別中的保護和私有方法。</p>
+<p>公開方法 <code>speak</code> 可以從任何地方訪問，<br>保護方法 <code>sleep</code> 可以在 <code>Dog</code> 類別中訪問，而私有方法 <code>eat</code> 也可以在 <code>Dog</code> 類別中訪問。</p>
+<h2 id="模組（Module）是什麼？"><a href="#模組（Module）是什麼？" class="headerlink" title="模組（Module）是什麼？"></a>模組（Module）是什麼？</h2><p>在 Ruby 中，模組（Modules）在某種程度上類似於類別（Classes），<br>他們都可以包含方法，就像類別一樣。</p>
+<p>然而，模組無法被實例化。也就是說，無法從模組建立物件。<br>因此，模組不像類別一樣具有 <code>new</code> 方法。<br>除此之外，模組也無法像類別有繼承的效果，也無法建立子類別。</p>
+<p>那，模組實際上的作用到底是什麼？</p>
+<h3 id="模組的作用"><a href="#模組的作用" class="headerlink" title="模組的作用"></a>模組的作用</h3><p>透過 <code>module</code> 關鍵字來定義模組！</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> <span class="title class_">Greetable</span></span><br><span class="line">  </span><br><span class="line">  A = <span class="string">&quot;Hi!&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">greet</span></span><br><span class="line">    <span class="string">&quot;Hello!&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">  <span class="keyword">include</span>  <span class="title class_">Greetable</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">puts <span class="title class_">Greetable</span><span class="symbol">:</span><span class="symbol">:A</span> <span class="comment"># Hi!</span></span><br><span class="line"></span><br><span class="line">amy = <span class="title class_">Person</span>.new</span><br><span class="line">puts amy.greet <span class="comment"># Hello!</span></span><br></pre></td></tr></table></figure>
+<p>模組（module） 可以透過雙冒號運算符 (::) 來訪問模組中常數的值</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">puts <span class="title class_">Greetable</span><span class="symbol">:</span><span class="symbol">:A</span> <span class="comment"># Hi!</span></span><br></pre></td></tr></table></figure>
+
+<p>模組（module）使用 <code>def</code> 關鍵字定義一個方法，即 <code>def method_name</code>，則該方法為實例方法。<br>我們無法直接使用點運算符（.）呼叫實例方法，因為無法建立模組（module）的實例。</p>
+<p>為了呼叫模組（module）內定義的實例方法，<br>必須將該模組（module）包含（include）在一個類別（class）中，<br>然後使用類別（class）實例來訪問該方法。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">amy = <span class="title class_">Person</span>.new</span><br><span class="line">puts amy.greet <span class="comment"># Hello!</span></span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>include</code> 關鍵字在類別（class）中包含模組（module），<br>這種情況下，模組（module）的作用類似於一個 <code>namespace</code>。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">  <span class="keyword">include</span>  <span class="title class_">Greetable</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">amy = <span class="title class_">Person</span>.new</span><br><span class="line">puts amy.greet <span class="comment"># Hello!</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="補充：Namespace-用意"><a href="#補充：Namespace-用意" class="headerlink" title="補充：Namespace 用意"></a>補充：Namespace 用意</h4><p><code>Namespace</code> 是一個在程式設計中常用的概念，用於區分和組織變數、函數、類別和其他命名實體，<br>以避免命名衝突，確保代碼的結構化和可讀性。</p>
+<blockquote>
+<p>當在類別（class）中使用 <code>include</code> 關鍵字將一個模組（module）包含在其中時，<br>這個模組（module）的內容變成該類別（class）的一部分，<br>可以在該類別（class）中訪問模組（module）中的方法和變數，同時避免了命名衝突。<br>這就是命名空間的一個實際應用場景。</p>
+</blockquote>
+<h3 id="include-vs-extend"><a href="#include-vs-extend" class="headerlink" title="include vs extend"></a>include vs extend</h3><p>在 Ruby 中，<code>include</code> 和 <code>extend</code> 是用於引入模組（module）的兩種不同方法。</p>
+<ul>
+<li><p><strong><code>include</code>：</strong></p>
+<ul>
+<li>使用 <code>include</code> 關鍵字時，模組（module）的方法被引入到類別（class）的實例中。</li>
+<li>引入模組（module）的方法可以直接在類別（class）的實例上調用，<br> 並且這些方法對該實例的每個對象都有效。</li>
+</ul>
+</li>
+<li><p><strong><code>extend</code>：</strong></p>
+<ul>
+<li>使用 <code>extend</code> 關鍵字時，模組（module）的方法被引入為<strong>類別方法</strong>，而不是實例方法。</li>
+<li>引入模組（module）的方法只能在類別（class）本身上調用，<br> 而無法在該類別（class）的實例上調用。</li>
+</ul>
+</li>
+</ul>
+<p>簡而言之，<code>include</code> 用於向類別（class）加上的實例方法，<br>而 <code>extend</code> 用於向類別（class）本身添加方法，這些方法在類別（class）級別上可用。</p>
+<p>透過簡單的舉例，來看看 <code>include</code> 與 <code>extend</code> 的實際應用吧！</p>
+<ul>
+<li><strong>使用 <code>include</code>：</strong></li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> <span class="title class_">Greeting</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">say_hello</span></span><br><span class="line">    puts <span class="string">&quot;Hello!&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">  <span class="keyword">include</span> <span class="title class_">Greeting</span></span><br><span class="line">  <span class="built_in">attr_reader</span> <span class="symbol">:name</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">name</span>)</span><br><span class="line">    <span class="variable">@name</span> = name</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">person = <span class="title class_">Person</span>.new(<span class="string">&quot;Alice&quot;</span>)</span><br><span class="line">puts person.say_hello <span class="comment"># 可以在實例上調用 Greeting 模組中的方法 # Hello!</span></span><br></pre></td></tr></table></figure>
+
+<p><code>include Greeting</code> 將 <code>Greeting</code> 模組的方法加到 <code>Person</code> 類的實例中。<br>因此，<code>person</code> 實例可以調用 <code>say_hello</code> 方法。</p>
+<ul>
+<li><strong>使用 <code>extend</code>：</strong></li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> <span class="title class_">MathFunctions</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">square</span>(<span class="params">num</span>)</span><br><span class="line">    num * num</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Calculator</span></span><br><span class="line">  <span class="keyword">extend</span> <span class="title class_">MathFunctions</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">result = <span class="title class_">Calculator</span>.square(<span class="number">5</span>) <span class="comment"># 可以在類別級別調用 MathFunctions 模組中的方法</span></span><br><span class="line">puts result <span class="comment"># 25</span></span><br></pre></td></tr></table></figure>
+
+<p><code>extend MathFunctions</code> 將 <code>MathFunctions</code> 模組的方法<br>加上 <code>Calculator</code> 類別的類別方法。<br>因此，我們可以直接在類別調用 <code>Calculator.square</code> 方法，而不需要建立類別的實例。</p>
+<h2 id="Brief-Summary"><a href="#Brief-Summary" class="headerlink" title="Brief Summary"></a>Brief Summary</h2><ul>
+<li><p>物件（Object）</p>
+<ul>
+<li>Ruby 是一個物件導向的程式語言，其中幾乎所有東西都是物件，但 Block 不是物件。</li>
+<li>物件（Object）在 Ruby 中被定義為擁有狀態（state）和行為（behavior）的實體，<br>就像生活中的事物一樣。</li>
+</ul>
+</li>
+<li><p>類別（Class）</p>
+<ul>
+<li>類別（Class）是一個建立具體的物件（實例）模板。<br>可以透過 <code>class</code> 關鍵字來定義類別，並使用 <code>initialize</code> 方法來初始化物件的狀態。</li>
+<li>在 Ruby 中，有不同的方法來訪問和設置實例變數： <code>attr_reader</code>、<code>attr_writer</code> 和 <code>attr_accessor</code>。</li>
+<li>方法可分為實體方法和類別方法，實體方法是與類別的實例相關聯的，<br>而類別方法是與類別本身相關聯的。</li>
+<li>方法具有不同的存取控制，包括 <code>public</code>、<code>protected</code> 和 <code>private</code>，<br>以控制它們的可見性和存取權限。</li>
+</ul>
+</li>
+<li><p>模組（Module）  </p>
+<ul>
+<li>模組（Module）類似於類別，但不能被實例化，<br>並且通常用於將方法和常數組織在一個命名空間（namespace）中，以避免命名衝突。</li>
+<li><code>include</code> 用於將模組的方法添加到類別的實例中，<br>而 <code>extend</code> 用於將模組的方法添加為類別方法。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/ruby-module/?ref=lbp">Ruby | Module</a><br>➫ <a target="_blank" rel="noopener" href="https://railsbook.tw/chapters/08-ruby-basic-4">類別（Class）與模組（Module）</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/interview/" class="tag">#interview</a><a href="/tags/ruby/" class="tag">#ruby</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/ruby-string-vs-symbol/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby] - String vs Symbol！</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/ruby-method-for-fibonacci/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby] - 費波那契數 Successione di Fibonacci！</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

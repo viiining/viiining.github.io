@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/javascript-prototype/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-09-25T14:12:42.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>September</span>
+            <span>25,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/javascript/" class="tag">#javascript</a><a href="/tags/prototype/" class="tag"># prototype</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p><em>今天來點 JavaScript 的原型與繼承！</em></p>
+<h2 id="Prototype（原型）是什麼？"><a href="#Prototype（原型）是什麼？" class="headerlink" title="Prototype（原型）是什麼？"></a>Prototype（原型）是什麼？</h2><p>當我們在 JavaScript 中建立物件時，每個物件都有一個隱含屬性 <code>[[Prototype]]</code>，<br>叫做 prototype（原型）。原型就像是物件的「模板」，決定了物件的一些基本特性和方法。</p>
+<p>藉由以下例子，來看看 <code>prototype</code> 與 <code>__proto__</code>：</p>
+<p>假設我們有一個建構式叫做 <code>Person</code>，我們用來建立一個人的物件。<br>這個 <code>Person</code> 建構函式有一個原型且此原型包含了一些方法和屬性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>) &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 透過 prototype 方式，查看 Person 的原型</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>); <span class="comment">// &#123;constructor: ƒ&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>當你在 console 印出 <code>console.log(Person.prototype)</code>，你會看到：<br>   <figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;constructor: ƒ&#125;</span><br><span class="line">  constructor: ƒ Person()</span><br><span class="line">  [[Prototype]]: Object</span><br></pre></td></tr></table></figure><br>   <strong>以上其實就顯示了 <code>Person.prototype</code> 物件的屬性和原型鏈。</strong></p>
+<p>   <code>&#123;constructor: ƒ&#125;</code>：這表示 <code>Person.prototype</code> 物件本身的屬性。<br>   在這裡，你看到一個 <code>constructor</code> 屬性，指向建構子 <code>Person</code>。<br>   這個屬性告訴 JavaScript，用來建立這個物件的建構子是 <code>Person</code>。</p>
+<p>   <code>constructor: ƒ Person()</code>：這是 <code>constructor</code> 屬性的具體內容。<br>   顯示了 <code>constructor</code> 是一個函數，函數名稱是 <code>Person</code>，<br>   這表示這個物件是由 <code>Person</code> 建構函數建立的。</p>
+<p>   <code>[[Prototype]]: Object</code>：這表示 <code>Person.prototype</code> 物件的原型鏈。<br>   <code>Person.prototype</code> 的原型是 <code>Object</code>。<br>   這是因為在 JavaScript 中，幾乎所有物件都繼承自 <code>Object</code>，因此 <code>Object</code> 是原型鏈的頂端。</p>
+<p>   在這個範例中，<code>Person.prototype</code> 繼承自 <code>Object.prototype</code>，<br>   而 <code>constructor</code> 屬性告訴我們與之關聯的建構子是 <code>Person</code>。</p>
+<hr>
+<p>接著，我們看一下透過 <code>Person</code>，建立一個 <code>person1</code> 物件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>) &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person1 = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 透過 __proto__ 方式，查看 person1 的原型</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person1.<span class="property">__proto__</span>); <span class="comment">// &#123;constructor: ƒ&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>當我們使用 <code>new Person()</code> 建立一個具體的人的物件時，<br>這個物件會自動連接到 <code>Person</code> 建構函數的原型。<br>這意味著這個人的物件可以繼承（就像繼承父母的特徵一樣）原型中的方法和屬性。</p>
+<blockquote>
+<p>這個概念有點像家族。<br>建構函式就像是家族的創始人，原型就像是家族的傳統，而物件就像是家族的成員，他們可以繼承和分享這些傳統。</p>
+</blockquote>
+<p>透過 <code>person1.__proto__</code> 或 <code>Person.prototype</code> 存取原型時，<br>你會看到一個對象，其中包含了 <code>constructor</code> 屬性，指向建立這個物件的建構子。</p>
+<blockquote>
+<p><strong><code>__proto__</code></strong> 是一個非標準的方法，<br>通常用於訪問物件的原型，可以用来直接訪問和設置物件的原型。<br><strong>注意！， <code>__proto__</code> 方法並不在 ECMAScript 規範中，<br>實際上要取得物件的原型會使用 <code>Object.getPrototypeOf()</code>。</strong></p>
+</blockquote>
+<hr>
+<h2 id="Prototype-Chain（原型鏈）是什麼？"><a href="#Prototype-Chain（原型鏈）是什麼？" class="headerlink" title="Prototype Chain（原型鏈）是什麼？"></a>Prototype Chain（原型鏈）是什麼？</h2><p>剛剛在 <code>Person.prototype</code> 有提及到原型鏈的概念，在這我們再一次加深印象！</p>
+<p><strong>Prototype Chain（原型鏈）是 JavaScript 中實作繼承和共享屬性&#x2F;方法的重要機制。</strong><br><strong>原型鏈是一個由原型物件連接起來的鏈條，決定了在 JavaScript 中尋找屬性和方法時的搜索順序。<br>當你試圖呼叫一個物件的屬性或方法時，如果該物件本身沒有這個屬性或方法，<br>JavaScript 會沿著原型鏈向上查找，直到找到對應的屬性或方法，<br>或者達到原型鏈的末端 <code>Object.prototype</code>。</strong></p>
+<blockquote>
+<p><code>Object.prototype</code>，這是 JavaScript 中的所有物件原型的根。<br>如果在整個原型鏈上都找不到匹配的屬性或方法，JavaScript 將停止搜尋並傳回 undefined。</p>
+</blockquote>
+<p>因此，透過剛剛建立的 <code>Person</code> 函式，再次觀察物件 <code>person1</code> 與建構函式 <code>Person</code> 之間的原型關係。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params"></span>) &#123; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person1 = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// person1 物件可以透過 __proto__ 方法訪問到他的原型</span></span><br><span class="line">person1.<span class="property">__proto__</span> === <span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>; <span class="comment">// true</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(person1) === <span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>; <span class="comment">// true</span></span><br><span class="line">person1.<span class="property">__proto__</span> === <span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(person1); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Prototype-Inheritance（原型繼承）是什麼？"><a href="#Prototype-Inheritance（原型繼承）是什麼？" class="headerlink" title="Prototype Inheritance（原型繼承）是什麼？"></a>Prototype Inheritance（原型繼承）是什麼？</h2><p><strong>原型繼承是 JavaScript 中的一種繼承機制，允許一個物件繼承另一個物件的屬性和方法。<br>基於原型鏈的概念，子層物件的原型指向父層物件，從而實現屬性和方法的共享和繼承。</strong></p>
+<p>讓我們來看看以下例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定義爸爸層 Person</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在爸爸層原型上添加方法</span></span><br><span class="line"><span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">sayHello</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello, my name is &quot;</span> + <span class="variable language_">this</span>.<span class="property">name</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定義一個兒子層 Student</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Student</span>(<span class="params">name, studentId</span>) &#123;</span><br><span class="line">  <span class="comment">// 使用爸爸層的構造函數，並傳遞名字</span></span><br><span class="line">  <span class="title class_">Person</span>.<span class="title function_">call</span>(<span class="variable language_">this</span>, name);</span><br><span class="line">  <span class="comment">// 定義一個新的屬性，只有 Student 有的屬性</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">studentId</span> = studentId;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 創建兒子層的原型鏈，繼承爸爸層的方法</span></span><br><span class="line"><span class="title class_">Student</span>.<span class="property"><span class="keyword">prototype</span></span> = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="title class_">Person</span>.<span class="property"><span class="keyword">prototype</span></span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指向自己的構造函數</span></span><br><span class="line"><span class="title class_">Student</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">constructor</span> = <span class="title class_">Student</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在兒子層原型上添加自己的 study 方法</span></span><br><span class="line"><span class="title class_">Student</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">learn</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">name</span> + <span class="string">&quot; is learning.&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 創建爸爸層實例</span></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;Viii&quot;</span>);</span><br><span class="line">person.<span class="title function_">sayHello</span>(); <span class="comment">// Hello, my name is Viii</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 創建兒子層實例</span></span><br><span class="line"><span class="keyword">var</span> student = <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;Viii&quot;</span>, <span class="string">&quot;001&quot;</span>);</span><br><span class="line">student.<span class="title function_">sayHello</span>(); <span class="comment">// Hello, my name is Viii</span></span><br><span class="line">student.<span class="title function_">learn</span>();    <span class="comment">// Viii is learning.</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(student.<span class="property">studentId</span>); <span class="comment">// 001</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>關於指向自己的構造函數：<code>Student.prototype.constructor = Student;</code><br>如果建立一個 Student 實例，並嘗試訪問其建構函數，<br>將返回 <code>Person</code> 而不是 <code>Student</code>，這可能會導致混淆和不正確的行為。<br>為了更正這個問題，需要手動將 <code>Student.prototype.constructor</code> 設置為 <code>Student</code>，以確保指向正確的建構函數。這樣，當你建立 <code>Student</code> 的實例時，建構函數引用將正確指向 <code>Student</code>。</p>
+</blockquote>
+<hr>
+<h3 id="Brief-Summary"><a href="#Brief-Summary" class="headerlink" title="Brief Summary"></a>Brief Summary</h3><ul>
+<li>每個物件都有一個原型，決定了物件的基本屬性和方法。</li>
+<li>原型鏈由原型物件構成，用於屬性和方法的查找。</li>
+<li>原型繼承是透過原型鏈來實現的，子層物件可以繼承父層物件的屬性和方法。</li>
+</ul>
+<hr>
+<p><em>References：</em><br>➫ <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Learn/JavaScript/Objects/Object_prototypes">MDN</a><br>➫ <a target="_blank" rel="noopener" href="https://javascript.alphacamp.co/prototype-prototype-chain.html">原型繼承與原型鏈 ｜ALPHA Camp</a><br>➫ <a target="_blank" rel="noopener" href="https://www.muji.dev/2020/01/05/iron30-22/">JS 原力覺醒 Day22 - 原型共享與原型繼承</a><br>➫ <a target="_blank" rel="noopener" href="https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/part4/prototype.html">原型基礎物件導向</a><br>➫ <a target="_blank" rel="noopener" href="https://www.shubo.io/javascript-prototype/#javascript-prototype-%E5%8E%9F%E5%9E%8B">[教學] JavaScript Prototype (原型) 的用法</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/javascript/" class="tag">#javascript</a><a href="/tags/prototype/" class="tag"># prototype</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/javascript-ES6-class/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [JavaScript] - ES6 Class 語法糖!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/javascript-how-to-create-object/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [JavaScript] - How to create Object in JavaScript!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

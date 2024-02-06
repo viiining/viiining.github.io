@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [JavaScript] - ES6 Class 語法糖! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [JavaScript] - ES6 Class 語法糖! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/javascript-ES6-class/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-09-26T14:12:42.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>September</span>
+            <span>26,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [JavaScript] - ES6 Class 語法糖!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/javascript/" class="tag">#javascript</a><a href="/tags/class/" class="tag">#class</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p>在上篇因為 JavaScript 沒有原生的 Class，所以他的繼承方式是以 prototype (原型)，在 ES6 中引入了 Class（類別）語法，他是一種語法糖，提供了更容易使用的方式來建立和管理物件以及實現物件導向程式（OOP）的概念。這種語法糖使得在 JavaScript 中建立和使用類型更加直觀和類似傳統的類型語言（如 Java 或 C++ ）。</p>
+<h2 id="ES5-類似-Class-概念"><a href="#ES5-類似-Class-概念" class="headerlink" title="ES5 類似 Class 概念"></a>ES5 類似 Class 概念</h2><p>在 ES5 中，雖然沒有像 ES6 中的 Class 語法那樣的類別概念，但我們可以使用 Constructor function（建構式函式）和 Prototype（原型）來實現類似的物件和繼承模式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Food</span>(<span class="params">name, type</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">type</span> = type;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在食物的原型上添加一個方法</span></span><br><span class="line"><span class="title class_">Food</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">describe</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`This is <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>, it is a type of <span class="subst">$&#123;<span class="variable language_">this</span>.type&#125;</span> food.`</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 創建食物的實例</span></span><br><span class="line"><span class="keyword">const</span> pizza = <span class="keyword">new</span> <span class="title class_">Food</span>(<span class="string">&quot;Pizza&quot;</span>, <span class="string">&quot;Italian&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> sushi = <span class="keyword">new</span> <span class="title class_">Food</span>(<span class="string">&quot;Sushi&quot;</span>, <span class="string">&quot;Japanese&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用食物的方法</span></span><br><span class="line">pizza.<span class="title function_">describe</span>(); <span class="comment">// This is Pizza, it is a type of Italian food.</span></span><br><span class="line">sushi.<span class="title function_">describe</span>(); <span class="comment">// This is Sushi, it is a type of Japanese food.</span></span><br></pre></td></tr></table></figure>
+
+<p>我們藉由以上的例子，複習一下當時透過 Constructor function（建構式函式）和 Prototype（原型）來實現類似的物件和繼承模式，這邊也可以回頭看看：<a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10326931">Day 11 - 理解 JavaScript，為什麼要知道原型、原型鏈與原型繼承？</a></p>
+<hr>
+<h2 id="ES6-的-Class"><a href="#ES6-的-Class" class="headerlink" title="ES6 的 Class"></a>ES6 的 Class</h2><p>我們將上方例子轉換為 ES6 的 Class 語法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Food</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, type</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">type</span> = type;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">describe</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`This is <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>, it is a type of <span class="subst">$&#123;<span class="variable language_">this</span>.type&#125;</span> food.`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 同樣也使用 new 關鍵字來建立類別的實例</span></span><br><span class="line"><span class="keyword">const</span> pizza = <span class="keyword">new</span> <span class="title class_">Food</span>(<span class="string">&quot;Pizza&quot;</span>, <span class="string">&quot;Italian&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> sushi = <span class="keyword">new</span> <span class="title class_">Food</span>(<span class="string">&quot;Sushi&quot;</span>, <span class="string">&quot;Japanese&quot;</span>);</span><br><span class="line"></span><br><span class="line">pizza.<span class="title function_">describe</span>(); <span class="comment">// This is Pizza, it is a type of Italian food.</span></span><br><span class="line">sushi.<span class="title function_">describe</span>(); <span class="comment">// This is Sushi, it is a type of Japanese food.</span></span><br></pre></td></tr></table></figure>
+
+<p>整理一下 ES5 與 ES6 之間的差異：</p>
+<ul>
+<li><p>類別定義方式：<br>ES5 使用Constructor function（建構式函式）來建立類別，<br>而 ES6 使用 class 關鍵字來定義類別。 </p>
+</li>
+<li><p>建構式函式與初始化：<br>ES5 在建構子內部使用 this 來初始化屬性，<br>而 ES6 使用 constructor 方法來初始化物件的屬性。</p>
+</li>
+<li><p>方法定義：<br>在 ES5 中，方法定義通常發生在原型物件上，使用 prototype。<br>在 ES6 中，方法直接在類別內部使用函數定義，不需要 prototype。</p>
+</li>
+</ul>
+<hr>
+<h2 id="ES6-的-Class-繼承概念"><a href="#ES6-的-Class-繼承概念" class="headerlink" title="ES6 的 Class - 繼承概念"></a>ES6 的 Class - 繼承概念</h2><p>我們已經看到如何使用 ES6 的 Class 語法來定義和創建一個簡單的 <code>Food</code> 類別，<br>以及如何建立食物的實例。<br>接著，我們將繼續探討 ES6 中的類別繼承概念：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Food</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, type</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">type</span> = type;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">describe</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`This is <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>, it is a type of <span class="subst">$&#123;<span class="variable language_">this</span>.type&#125;</span> food.`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dessert</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Food</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, type, flavor</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(name, type); <span class="comment">// 使用 super 來調用父類別的建構子</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">flavor</span> = flavor;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">describe</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`This is <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>, it is a type of <span class="subst">$&#123;<span class="variable language_">this</span>.type&#125;</span> food with a <span class="subst">$&#123;<span class="variable language_">this</span>.flavor&#125;</span> flavor.`</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">enjoy</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Enjoy your <span class="subst">$&#123;<span class="variable language_">this</span>.flavor&#125;</span> <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>!`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cake = <span class="keyword">new</span> <span class="title class_">Dessert</span>(<span class="string">&quot;Cake&quot;</span>, <span class="string">&quot;Dessert&quot;</span>, <span class="string">&quot;chocolate&quot;</span>);</span><br><span class="line">cake.<span class="title function_">describe</span>(); <span class="comment">// This is Cake, it is a type of Dessert food with a chocolate flavor.</span></span><br><span class="line">cake.<span class="title function_">enjoy</span>();   <span class="comment">// Enjoy your chocolate Cake!</span></span><br></pre></td></tr></table></figure>
+
+<p>在以上例子中，將繼承應用到了 <code>Food</code> 類別，並創建了一個 <code>Dessert</code> 類別（<code>Food</code> 的子類別）。<br>可以發覺<strong>我們通過 <code>extends</code> 關鍵字建立一個子類別，並使用 <code>super</code> 關鍵字調用父類別的建構子。</strong></p>
+<ul>
+<li><code>Dessert</code> 類別繼承了 <code>Food</code> 類別，他擁有 <code>Food</code> 的屬性和方法，包括 <code>name</code> 和 <code>type</code> 屬性以及 <code>describe</code> 方法。</li>
+<li>在 <code>Dessert</code> 的建構子中，我們使用 <code>super(name, type)</code> 調用了父類別 <code>Food</code> 的建構子，以確保屬性正確初始化。</li>
+<li><code>Dessert</code> 類別還有自己的 <code>describe</code> 方法，用於描述食物的名稱、類型和口味。</li>
+<li>此外，我們還加了一個獨有的 <code>enjoy</code> 方法，用於特定於甜點的行為。</li>
+</ul>
+<p>最後，我們建立一個 <code>cake</code> 實例，並使用 <code>describe</code> 和 <code>enjoy</code> 方法來展示繼承和子類別獨有的功能。</p>
+<hr>
+<h2 id="ES6-的-Class-靜態方法"><a href="#ES6-的-Class-靜態方法" class="headerlink" title="ES6 的 Class - 靜態方法"></a>ES6 的 Class - 靜態方法</h2><p>我們已經探討了如何使用 ES6 的 Class 語法來定義類別，以及如何使用繼承來建立類別之間的層次結構。<br>現在，我想介紹 ES6 中的類別靜態方法的概念。</p>
+<p><strong>靜態方法是與類別本身相關聯的方法，而不是與類別的實例相關聯，他用於執行與整個類別相關的操作。<br>如果希望做到某個專屬於這個原型的方法，在 ES6 中，你可以使用 <code>static</code> 關鍵字來定義靜態方法。</strong></p>
+<p>繼續銜接上面的 <code>Food</code> 來說明類別靜態方法的使用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Food</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">name, type</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">type</span> = type;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">describe</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`This is <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>, it is a type of <span class="subst">$&#123;<span class="variable language_">this</span>.type&#125;</span> food.`</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">isHealthy</span>(<span class="params">food</span>) &#123;</span><br><span class="line">    <span class="comment">// 靜態方法，判斷一個食物是否健康</span></span><br><span class="line">    <span class="keyword">return</span> food.<span class="property">type</span> === <span class="string">&quot;Healthy&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> salad = <span class="keyword">new</span> <span class="title class_">Food</span>(<span class="string">&quot;Salad&quot;</span>, <span class="string">&quot;Healthy&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> pizza = <span class="keyword">new</span> <span class="title class_">Food</span>(<span class="string">&quot;Pizza&quot;</span>, <span class="string">&quot;Italian&quot;</span>);</span><br><span class="line"></span><br><span class="line">salad.<span class="title function_">describe</span>(); <span class="comment">// This is Salad, it is a type of Healthy food.</span></span><br><span class="line">pizza.<span class="title function_">describe</span>(); <span class="comment">// This is Pizza, it is a type of Italian food.</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Food</span>.<span class="title function_">isHealthy</span>(salad)); <span class="comment">// true，沙拉是健康食物</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Food</span>.<span class="title function_">isHealthy</span>(pizza)); <span class="comment">// false，比薩不是健康食物</span></span><br></pre></td></tr></table></figure>
+
+<p>在 <code>Food</code> 類別中定義了一個靜態方法 <code>isHealthy</code>，該方法接受一個食物對象作為參數，並判斷該食物是否屬於健康食物。這個靜態方法不需要 <code>Food</code> 類別的實例，而是可以直接通過 <code>Food.isHealthy()</code> 調用。</p>
+<p>我們建立了兩個不同類型的食物（沙拉和比薩），並使用 <code>describe</code> 方法。<br>然後，使用 <code>Food.isHealthy()</code> 靜態方法來判斷這些食物是否健康。</p>
+<hr>
+<h3 id="Brief-Summary"><a href="#Brief-Summary" class="headerlink" title="Brief Summary"></a>Brief Summary</h3><p>ES6 中的 Class 語法為 JavaScript 引入更接近傳統物件導向程式設計的方式，使得在 JavaScript 中建立和管理物件更加直觀且容易。今天分享 ES6 Class 的主要概念，包括類別定義、建構子、方法定義、繼承，以及靜態方法，希望大家都能夠理解～！</p>
+<hr>
+<p><em>References：</em><br>➫ <a target="_blank" rel="noopener" href="https://www.explainthis.io/zh-hant/swe/what-is-class">ES6 中的 class 是什麼？</a><br>➫ <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Classes">MDN - Classes</a><br>➫ <a target="_blank" rel="noopener" href="https://medium.com/enjoy-life-enjoy-coding/javascript-es6-%E4%B8%AD%E6%9C%80%E5%AE%B9%E6%98%93%E8%AA%A4%E6%9C%83%E7%9A%84%E8%AA%9E%E6%B3%95%E7%B3%96-class-%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-23e4a4a5e8ed">JavaScript | ES6 中最容易誤會的語法糖 Class - 基本用法</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/javascript/" class="tag">#javascript</a><a href="/tags/class/" class="tag">#class</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/ruby-oop-introduction/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/javascript-prototype/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Information Security] - CORS! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Information Security] - CORS! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/infosec-cors/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-09-18T12:13:30.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>September</span>
+            <span>18,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Information Security] - CORS!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/infosec/" class="tag">#infosec</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <h2 id="before-action-about-same-origin-policy"><a href="#before-action-about-same-origin-policy" class="headerlink" title="before_action :about_same_origin_policy"></a>before_action :about_same_origin_policy</h2><p>在講述 CORS（Cross-Origin Resource Sharing 跨來源資源共享）之前，<br>我們必須了解 Same-Origin Policy (同源政策)，Let’s go!</p>
+<h3 id="Same-Origin-Policy-同源政策"><a href="#Same-Origin-Policy-同源政策" class="headerlink" title="Same-Origin Policy 同源政策"></a>Same-Origin Policy 同源政策</h3><p>Same-Origin Policy (同源政策) 是一種網頁瀏覽器安全機制，<br>用於保護網頁內容的安全性和隱私性。<br>這一政策旨在防止惡意網站從瀏覽器中訪問或修改其他網站的數據。<br><strong>網頁上的腳本只能與其自身來源的資源進行交互，而不能直接訪問其他來源的資源。</strong></p>
+<p><strong>同源政策重點：</strong></p>
+<ul>
+<li><p><strong>同源定義：</strong><br>同一個源被定義為具有相同的協議（例如，都是http或https）、主機（域名）、端口號的網頁。如果這些信息中有一個不同，就被視為不同源。</p>
+</li>
+<li><p><strong>限制跨源請求：</strong><br>同源政策禁止網頁上的 JavaScript 腳本通過 XMLHttpRequest、Fetch API 等方式向不同源的服務器發送 HTTP 請求。<br>這樣可以防止跨站點請求偽造（Cross-Site Request Forgery，CSRF）等攻擊。</p>
+</li>
+<li><p><strong>限制跨文檔對象訪問：</strong><br>同源政策也限制了不同源的網頁上的 JavaScript 腳本訪問對方的文檔對象（DOM）。<br>這意味著一個網頁的腳本不能直接訪問其他網頁的 DOM 元素，這有助於保護用戶的隱私和安全。</p>
+</li>
+<li><p><strong>跨源通信：</strong><br>要實現不同源之間的通信，可以使用一些特殊的技術，<br>如 JSONP（JSON with Padding）、CORS（跨來源資源共享）等。<br>這些技術允許服務器明確地授予網頁的請求許可權，以達到跨源通信的目的。</p>
+</li>
+</ul>
+<blockquote>
+<p>同源政策是基本的保護機制，讓不同源的網站無法存取到資源和資料，<br>有助於確保網頁內容的安全性，防止潛在的攻擊和數據泄露。<br>開發者需理解同源政策，並在開發網頁應用程序時遵守此政策，以確保應用程序的安全性和穩定性。</p>
+</blockquote>
+<h2 id="What-is-CORS"><a href="#What-is-CORS" class="headerlink" title="What is CORS?"></a>What is CORS?</h2><p>已經了解同源政策之後，在實務開發上，幾乎無法避免去請求非同源的資源。<br>在有同源政策的情況下，要怎麼做到非同源請求？<br>這時候就是要透過 <strong>CORS（Cross-Origin Resource Sharing 跨來源資源共享）</strong> 啦！</p>
+<p>CORS（Cross-Origin Resource Sharing 跨來源資源共享）是一種瀏覽器安全機制，<br>允許網頁應用程序在不同源（不同域名、協議或端口號）之間進行跨源 HTTP 請求。<br><strong>CORS 通過特殊的 HTTP 標頭允許或拒絕瀏覽器向其他源發送請求，以確保安全性和隱私。</strong><br>開發者可以配置伺服器以指定哪些來源可以訪問其資源，從而避免潛在的安全風險，同時實現跨源通信。這對於網頁應用程序與外部 API 或資源進行互動非常重要。</p>
+<h3 id="CORS-問題是什麼？"><a href="#CORS-問題是什麼？" class="headerlink" title="CORS 問題是什麼？"></a>CORS 問題是什麼？</h3><p>CORS（Cross-Origin Resource Sharing）問題是一種網頁安全問題，當網頁或瀏覽器在一個網域中請求來自另一個網域的資源時，可能會遇到的限制和安全機制。<br>簡而言之，他涉及當前網頁的來源（域名、協議、端口）與要請求的資源的來源不匹配時，瀏覽器會阻止這種跨源請求，以保護用戶的安全和隱私。</p>
+<p>CORS 問題通常發生在 JavaScript 發起的跨源 HTTP 請求（例如 Ajax 請求）<br>或在 <code>&lt;img&gt;</code>、<code>&lt;script&gt;</code>、<code>&lt;link&gt;</code> 等元素載入外部資源時。</p>
+<blockquote>
+<p>解決CORS問題 - 修改伺服器設定以允許跨源請求、使用代理伺服器、或使用 JSONP 等技術。</p>
+</blockquote>
+<p>CORS問題的存在是為了防止潛在的安全漏洞，例如跨站請求偽造（CSRF）和跨站點腳本攻擊（XSS）。<br>通過實行同源政策和 CORS，瀏覽器可以確保網頁應用程序只能訪問受信任的來源，以減少潛在的風險。</p>
+<hr>
+<p>回顧當初在使用 jspdf 套件，進行 pdf 轉檔功能時，<br>使用 Base64 編碼解決 <code>jspdf</code> 中 <code>toDataURL()</code> 方法的錯誤，<br>此種方式可以視為解決 CORS 問題的一種方法，特別是當你在網頁中處理圖像或資源。</p>
+<p>通常，當你使用 <code>toDataURL()</code> 方法將畫布內容轉換為 DataURL 時，<br>該 DataURL 包含對畫布上的圖像或資源的引用。<br>如果這些圖像或資源來自不同的源（例如，不同的域名），並且該源未設置 CORS 支持，則在使用 <code>toDataURL()</code> 時可能會觸發 CORS 錯誤，因為該操作被視為跨源請求。</p>
+<p>通過將圖像或資源的 URL 轉換為 Base64 編碼，然後使用 Base64 編碼的資料 URL 嵌入到網頁中，可以避免 CORS（跨來源資源共享）問題。<br>這是因為該資源不再是通過瀏覽器的 HTTP 請求來載入的，瀏覽器不需要發出跨域請求來獲取圖像，而是直接內嵌在網頁中，因此不需要跨源請求，也不受同源政策的限制。</p>
+<blockquote>
+<p>設置 CORS 標頭是一種解決 CORS 問題的方法，但它要求你有控制權限的伺服器，能夠配置伺服器以允許跨源請求。<br>然而，如果你無法控制來源伺服器或無法更改其 CORS 設置，那麼使用 Base64 編碼是一種繞過 CORS 問題的有效方法，因為資源是在網頁內部處理的，不需要跨源請求的許可權。</p>
+</blockquote>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://www.explainthis.io/zh-hant/swe/what-is-cors">CORS 是什麼? 為什麼要有 CORS?</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/infosec/" class="tag">#infosec</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/javascript-closure/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [JavaScript] - Closure!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/javascript-scope-chain-and-closure/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [JavaScript] - Scope Chain &amp; Closure!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

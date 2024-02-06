@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby on Rails] - 先備知識! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby on Rails] - 先備知識! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/rails-basic/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-07-13T03:05:28.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>July</span>
+            <span>13,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby on Rails] - 先備知識!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <h2 id="About-Rails"><a href="#About-Rails" class="headerlink" title="About Rails"></a>About Rails</h2><p>Rails 是使用 Ruby 程式語言所開發出來的網站開發框架（Web Framework）<br>由 David Heinemeier Hansson（簡稱 DHH）所開發。</p>
+<p>在 Rails 世界有兩個大重點：</p>
+<ul>
+<li><p>慣例優於設定（Convention over Configuration, CoC）<br>所謂的<strong>慣例</strong>就是當遇到某種情況的時候我們會用特定的方式來解決問題。<br>順著 Rails 的慣例，程式碼可以變得更簡潔，在實作 CRUD 時，感受特別深！<br>在建立資料表的關連、單複數命名都跟 Rails 的慣例離不開，<br>所以在學習階段上也像是在學習 Rails 的慣例。</p>
+</li>
+<li><p>不要做重複的事（Don’t Repeat Yourself, DRY）<br>如果有些程式碼一直重複的出現，就可以把重複的部份抓出來，整理成為一個方法、類別或模組。<br>這樣不僅可以重複使用，也會因此變得比較好維護，有發生問題也比較容易立即處理！</p>
+</li>
+</ul>
+<h2 id="before-action-先備知識"><a href="#before-action-先備知識" class="headerlink" title="before_action :先備知識"></a>before_action :先備知識</h2><p>在實作 CRUD 時，背後牽涉很多基本知識，現在就來看看這些有什麼吧！(⊃･ᴥ･)つ</p>
+<h3 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h3><p>REST (Representational State Transfer) 是一種軟體架構風格，<br> <mark>主要用於設計網路應用程式的 API(幫助世界各地不同軟體、程式在網際網路中能夠互相傳遞訊息)</mark><br>它基於資源（Resource）的概念，每個資源都有唯一的識別符號（URI），<br>並且可以透過不同的 HTTP 方法（GET、POST、PUT、DELETE 等）來執行相應的操作。</p>
+<blockquote>
+<p>每個網頁都可視為一個資源提供使用者使用，而我們就可以透過 URL，也就是這些資源的地址，<br>來取得這些資源並在瀏覽器上使用。</p>
+</blockquote>
+<pre><code>Remark:
+URI - Uniform Resource Identifier，
+其中最常看見的 URL 是 URI 的一種特殊形式，兩者都是用來唯一識別資源的地址。
+</code></pre>
+<h3 id="RESTful"><a href="#RESTful" class="headerlink" title="RESTful"></a>RESTful</h3><p>RESTful 是符合 REST 設計原則的 API。當我們在設計 API 時，遵循 REST 的原則，特別是適當地使用 HTTP 方法、URI 和回應狀態碼，我們就可以稱這個 API 為 RESTful API。</p>
+<pre><code>Remark:
+所謂的 API 是應用程式介面 (application programming interface)，
+網址也是一種應用程式的「介面」，故稱為 API。
+</code></pre>
+<p><mark> RESTful 風格的網址設計強調從路由結構就能看出要對什麼資料、進行什麼操作。 </mark></p>
+<p>Ruby on Rails 在設計上已經將 RESTful 的路由設定架構出來了。透過 Rails 的路徑設定，可以快速地建立符合 RESTful 概念的路由，並使應用程序遵循 RESTful 架構來處理資源的 CRUD 操作。</p>
+<p>在之後 <code>Viiisit Ruby on Rails - Route!</code> 的篇章中，就能看的出來其中的設計理念了！</p>
+<h3 id="CRUD"><a href="#CRUD" class="headerlink" title="CRUD"></a>CRUD</h3><p><strong>CRUD 是 Create, Read, Update, Delete</strong> 四個字母的縮寫，中文是「增刪查改」；<br>這是一連串常見的動作行為，通常是為了針對某個特定資源所作出的舉動，如：建立資料、讀取資料等。<br>這四個行為最常見的用途是在<strong>使用 SQL 資料庫</strong>與<strong>網站的 API 埠口</strong>的時候。</p>
+<h4 id="相對應的-SQL-語法、HTTP-請求、REST-表現層狀態轉換"><a href="#相對應的-SQL-語法、HTTP-請求、REST-表現層狀態轉換" class="headerlink" title="相對應的 SQL 語法、HTTP 請求、REST 表現層狀態轉換"></a>相對應的 SQL 語法、HTTP 請求、REST 表現層狀態轉換</h4><table>
+<thead>
+<tr>
+<th align="center">-</th>
+<th align="center">SQL</th>
+<th align="center">HTTP</th>
+<th align="center">REST 表現層狀態轉換</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Create 建立</td>
+<td align="center">INSERT</td>
+<td align="center">PUT &#x2F; POST</td>
+<td align="center">POST</td>
+</tr>
+<tr>
+<td align="center">Read 讀取</td>
+<td align="center">SELECT</td>
+<td align="center">GET</td>
+<td align="center">GET</td>
+</tr>
+<tr>
+<td align="center">Update 更新</td>
+<td align="center">UPDATE</td>
+<td align="center">PUT &#x2F; POST &#x2F; PATCH</td>
+<td align="center">PUT</td>
+</tr>
+<tr>
+<td align="center">Delete 刪除</td>
+<td align="center">DELETE</td>
+<td align="center">DELETE</td>
+<td align="center">DELETE</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="Route-Controller-View-Model-Migration"><a href="#Route-Controller-View-Model-Migration" class="headerlink" title="Route, Controller, View, Model, Migration"></a>Route, Controller, View, Model, Migration</h3><p>基本了解 CRUD 是什麼之後，接著要開始學習在 Ruby on Rials 裡面，<br>Route, Controller, View, Model, Migration 各自扮演的角色是什麼!</p>
+<p>在 CRUD 實作裡，最常接觸的就是 Route, Controller, View, Model, Migration，<br>以下分別解釋他們的作用：</p>
+<ul>
+<li><p>Route 定義應用程式路徑，將特定的 URL 導向相應的 <code>controller#action</code>。</p>
+</li>
+<li><p>View 呈現資料和生成用戶界面，顯示資料給使用者，以及收集和顯示表單數據。</p>
+</li>
+<li><p>Controller 處理 route 請求，協調 model 與 view 之間的交互作用。<br>接收來自用戶的請求，檢索或修改資料，然後將資料傳遞給 view 進行呈現。</p>
+</li>
+<li><p>Model 定義資料庫結構，包括表格和屬性，並提供對資料的存取和操作。</p>
+</li>
+<li><p>Migration 用於管理資料庫結構變更的工具，可以說是一個<strong>資料庫變更的紀錄檔</strong>。</p>
+<pre><code>Remark:
+Migration 在生成時會自動產生時間戳記，資料庫每執行一次 migration 都會有時間戳記產生，所以資料庫會知道我們執行過哪一個 migration。db:migrate 就是讓資料庫「執行還沒執行過的migration」，執行過的migration則會自動略過。
+</code></pre>
+</li>
+</ul>
+<p><img src="https://railsbook.tw/images/chapter10/mvc.png" alt="Route, Model, View, Controller"><br><em>Image Source: (<a target="_blank" rel="noopener" href="https://railsbook.tw/chapters/13-crud-part-1">https://railsbook.tw/chapters/13-crud-part-1</a>)</em></p>
+<hr>
+<h3 id="建立專案！"><a href="#建立專案！" class="headerlink" title="建立專案！"></a>建立專案！</h3><p>打開終端機，建立一個新的專案，透過下方指令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails new `自定義名稱`</span><br></pre></td></tr></table></figure>
+<p>接著進入到該專案資料夾：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd `自定義名稱`</span><br></pre></td></tr></table></figure>
+<p>後續，我會以建立 Route 作為開端，一一介紹他們各自在 Ruby on Rails 的作用～！</p>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://kaochenlong.com/2022/10/24/railsbook-v2-ruby-ecosystem/">為你自己學 Ruby on Rails（第二版）- 第一章 簡介及生態圈</a><br>➫ <a target="_blank" rel="noopener" href="https://railsbook.tw/chapters/13-crud-part-1">為你自己學 Ruby on Rails</a><br>➫ <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E5%A2%9E%E5%88%AA%E6%9F%A5%E6%94%B9">增刪查改</a><br>➫ <a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2017/02/25/csrf-introduction/">TechBridge 技術共筆部落格</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/rails-model/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Model!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/github-pages-with-custom-domain/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Custom Domain - 從零到有，成功建置 viiisit.com!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

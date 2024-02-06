@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby] - Constant &amp; Variable! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby] - Constant &amp; Variable! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/ruby-constant-variable/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-07-03T07:45:56.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>July</span>
+            <span>3,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby] - Constant &amp; Variable!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby/" class="tag">#ruby</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <blockquote>
+<p>命名方式：<br>常見的命名方式有 snake_case 跟 camelCase 這兩者。<br>在 Ruby 大部分是使用小寫英文字母以及底線來組合變數名稱，<br>例如像是 my_new_post，蛇式命名（snake_case）。</p>
+</blockquote>
+<hr>
+<h2 id="Constant-常數"><a href="#Constant-常數" class="headerlink" title="Constant 常數"></a>Constant 常數</h2><ul>
+<li><p><strong>命名規則：常數是大寫英文字母開頭!</strong></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Name</span> = <span class="string">&quot;apple&quot;</span></span><br><span class="line"><span class="title class_">Height</span> = <span class="number">150</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 類別</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Sky</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 模組</span></span><br><span class="line"><span class="keyword">module</span> <span class="title class_">Cloud</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>在 Ruby，常數的內容是可以修改而且不會發生錯誤：</strong></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Food</span> = <span class="string">&quot;蘋果&quot;</span></span><br><span class="line"><span class="title class_">Food</span> = <span class="string">&quot;香蕉&quot;</span> <span class="comment"># warning: already initialized constant Food</span></span><br></pre></td></tr></table></figure>
+
+<p><em>雖然有 warning 訊息，但還是可以把香蕉指定給帶有蘋果常數 Food</em></p>
+</li>
+<li><p><strong>常數要從後面插入字串也可以：</strong></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Food</span> = <span class="string">&quot;蘋果&quot;</span></span><br><span class="line"><span class="title class_">Food</span> &lt;&lt; <span class="string">&quot;香蕉&quot;</span></span><br><span class="line"><span class="title class_">Food</span> <span class="comment"># &quot;蘋果香蕉&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Variable-變數"><a href="#Variable-變數" class="headerlink" title="Variable 變數"></a>Variable 變數</h2><table>
+<thead>
+<tr>
+<th align="center">Types</th>
+<th align="center">Example</th>
+<th align="center">Default</th>
+<th align="center">Remark</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>Local Variable 區域變數</strong></td>
+<td align="center">name</td>
+<td align="center">none</td>
+<td align="center">非大寫字母開頭</td>
+</tr>
+<tr>
+<td align="center"><strong>Global Variable 全域變數</strong></td>
+<td align="center">$name</td>
+<td align="center">nil</td>
+<td align="center">有 $ 符號</td>
+</tr>
+<tr>
+<td align="center"><strong>Instance Variable 實體變數</strong></td>
+<td align="center">@name</td>
+<td align="center">nil</td>
+<td align="center">有 1 個 @ 符號</td>
+</tr>
+<tr>
+<td align="center"><strong>Class Variable 類別變數</strong></td>
+<td align="center">@@name</td>
+<td align="center">none</td>
+<td align="center">有 2 個 @ 符號</td>
+</tr>
+<tr>
+<td align="center"><strong>Pseudo Variable 虛擬變數</strong></td>
+<td align="center">nil, self, true, false</td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p><strong>虛擬變數通常有特別的用途或意義，內容不能被改變</strong></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">nil</span> = <span class="number">123</span> <span class="comment"># Can&#x27;t change the value of self (SyntaxError)</span></span><br><span class="line"><span class="variable language_">self</span> = <span class="string">&quot;me&quot;</span> <span class="comment"># Can&#x27;t change the value of self (SyntaxError)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>使用變數</strong><br>在 Ruby 使用變數，不需要特別宣告或是指定型態，直接拿來用就可以了。<br>在變數命名規則上，常使用英文字母、數字或底線的組合 （蛇式命名）。或是非英文字母也可以，例如：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">1</span></span><br><span class="line">puts a <span class="comment"># 1</span></span><br><span class="line"></span><br><span class="line">me = <span class="string">&quot;Viii&quot;</span></span><br><span class="line">puts me <span class="comment"># Viii</span></span><br><span class="line"></span><br><span class="line">x, y, z = [<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>] <span class="comment"># 一次指定多個變數需加上[]</span></span><br><span class="line">puts z <span class="comment"># 6</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Available-Scope-有效範圍"><a href="#Available-Scope-有效範圍" class="headerlink" title="Available Scope 有效範圍"></a>Available Scope 有效範圍</h2><p>以區域變數為例子：</p>
+<p><strong>1. 將變數定義在 say_hello 方法裡：</strong></p>
+<pre><code><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">say_hello</span></span><br><span class="line">    name = <span class="string">&quot;Viii&quot;</span></span><br><span class="line">    puts <span class="string">&quot;Hi, This is <span class="subst">#&#123;name&#125;</span>!&quot;</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">say_hello <span class="comment"># Hi, This is Viii!</span></span><br><span class="line">puts name <span class="comment"># undefined local variable or method `name&#x27; for main:Object (NameError)</span></span><br></pre></td></tr></table></figure>
+line 6: 定義在 say_hello 方法裡的 name 變數，在離開 say_hello 方法就失效。
+</code></pre>
+<p><strong>2. 將變數定義在外層：</strong></p>
+<pre><code><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">&quot;Viii&quot;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">say_hello</span></span><br><span class="line">    puts <span class="string">&quot;Hi, This is <span class="subst">#&#123;name&#125;</span>!&quot;</span> <span class="comment"># undefined local variable or method `name&#x27; for main:Object (NameError)</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">puts name <span class="comment"># Viii</span></span><br><span class="line">say_hello</span><br></pre></td></tr></table></figure>
+line 3: 定義在外層的變數 name，在 say_hello 方法裡找不到而失效。
+</code></pre>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://railsbook.tw/chapters/05-ruby-basic-1">變數、常數、流程控制、迴圈</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby/" class="tag">#ruby</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/github-pages-with-custom-domain/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Custom Domain - 從零到有，成功建置 viiisit.com!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/javascript-hoisting-and-scope/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [JavaScript] - Hoisting &amp; Scope!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

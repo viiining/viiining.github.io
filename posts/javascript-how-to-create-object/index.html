@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [JavaScript] - How to create Object in JavaScript! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [JavaScript] - How to create Object in JavaScript! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/javascript-how-to-create-object/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-09-24T13:12:42.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>September</span>
+            <span>24,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [JavaScript] - How to create Object in JavaScript!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/javascript/" class="tag">#javascript</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p><em>物件是 JavaScript 中的核心概念，上篇有提及 <code>new</code>，今天來點如何建立物件吧！</em></p>
+<h2 id="JavaScript-的基本型別"><a href="#JavaScript-的基本型別" class="headerlink" title="JavaScript 的基本型別"></a>JavaScript 的基本型別</h2><p>在之前的篇章中都未提及過的基本型別，在說明建立物件之前，來簡單說明一下：</p>
+<ol>
+<li><strong>數字（Number）：</strong> 用於表示數值。可以是整數或浮點數。例如：<code>42</code>、<code>3.14159</code>。</li>
+<li><strong>字串（String）：</strong> 用於表示文本。字串必須包含在單引號（’）或雙引號（”）之間。<br>例如：<code>&#39;Hello, World!&#39;</code>。</li>
+<li><strong>布林（Boolean）：</strong> 用於表示邏輯值，只有兩個可能的值：<code>true</code> 和<code>false</code>。</li>
+<li><strong>未定義（Undefined）：</strong> 表示變數已宣告但尚未賦值的狀態。宣告一個變數但未初始化時，<br>其值為 <code>undefined</code>。</li>
+<li><strong>空（Null）：</strong> 表示變數的值為空或不存在。通常是在明確指示變數不包含任何有效值時使用。</li>
+<li><strong>符號（Symbol，ES6引入）：</strong> 一種唯一且不可變的數據類型，通常用於定義對象的唯一屬性名稱。</li>
+</ol>
+<p>除了以上這些基本型別以外的類型，都是物件～<br>接著，我們來看看要如何建立物件吧！</p>
+<h2 id="JavaScript-如何建立物件？"><a href="#JavaScript-如何建立物件？" class="headerlink" title="JavaScript 如何建立物件？"></a>JavaScript 如何建立物件？</h2><ul>
+<li><p><strong>Object Literals（物件實字）：</strong><br> 最簡單的方式是使用花括號 <code>&#123;&#125;</code> 來建立物件，並在其中指定屬性和屬性值。</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;Viii&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Constructor（建構式）：</strong><br> 使用建構式來創建多個具有相似結構的物件。<br> 建構式通常以大寫字母開頭，並使用 <code>new</code> 關鍵字來創建物件。</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person1 = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&#x27;Viii&#x27;</span>, <span class="number">18</span>);</span><br><span class="line"><span class="keyword">const</span> person2 = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&#x27;Bob&#x27;</span>, <span class="number">25</span>);</span><br></pre></td></tr></table></figure>
+<p> <strong>如果忘記使用 <code>new</code> 關鍵字…：</strong></p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name</span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不使用 new 關鍵字</span></span><br><span class="line"><span class="keyword">const</span> person3 = <span class="title class_">Person</span>(<span class="string">&#x27;Jay&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person3); <span class="comment">// undefined，因為函數內的 this 參考全域物件，未返回新的物件</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(name); <span class="comment">// &#x27;Jay&#x27;，name 屬性被設置為全域變數</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>Object.create()</code> 方法：</strong></p>
+<p> 先創建一個名為 <code>Person</code> 的物件，<br> 該物件包含 <code>firstName</code>、<code>lastName</code> 屬性和一個 <code>getFullName</code> 方法。</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Person</span> = &#123;</span><br><span class="line">  <span class="attr">firstName</span>: <span class="string">&#x27;Default&#x27;</span>,</span><br><span class="line">  <span class="attr">lastName</span>: <span class="string">&#x27;Default&#x27;</span>,</span><br><span class="line">  <span class="attr">getFullName</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">firstName</span> + <span class="string">&quot; &quot;</span> + <span class="variable language_">this</span>.<span class="property">lastName</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p> 接著使用 <code>Object.create()</code> 方法創建新的物件並基於 <code>Person</code> 物件來繼承他的屬性和方法：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> viii = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="title class_">Person</span>);</span><br><span class="line">viii.<span class="property">firstName</span> = <span class="string">&#x27;Viii&#x27;</span>;</span><br><span class="line">viii.<span class="property">lastName</span> = <span class="string">&#x27;Chang&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(viii.<span class="title function_">getFullName</span>()); <span class="comment">// 輸出：&#x27;Viii Chang&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p> 使用 <code>Object.create(Person)</code> 基於 <code>Person</code> 物件創建了一個名為 <code>viii</code> 的新物件，然後設置了 <code>firstName</code> 和 <code>lastName</code> 屬性的值。最後，我們調用 <code>viii.getFullName()</code> 以獲取完整名字。由於 <code>viii</code> 物件繼承了 <code>getFullName</code> 方法，所以返回完整的名字。</p>
+<blockquote>
+<p>而關於繼承，在 JavaScript 中，<br>物件之間的繼承是通過原型鏈（prototype chain）實現的，<br>這部分將在下篇整理～</p>
+</blockquote>
+<h4 id="關於屬性描述器"><a href="#關於屬性描述器" class="headerlink" title="關於屬性描述器"></a>關於屬性描述器</h4><p> 當使用 <code>Object.create()</code> 創建了一個新物件，可以在建立新物件時，<br> 使用屬性描述器來設定屬性的各種特性，藉由在第二個參數中傳遞一個屬性描述器，<br> 便可以在建立新物件時直接給予預設值：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">Person</span> = &#123;</span><br><span class="line">  <span class="attr">firstName</span>: <span class="string">&#x27;Default&#x27;</span>,</span><br><span class="line">  <span class="attr">lastName</span>: <span class="string">&#x27;Default&#x27;</span>,</span><br><span class="line">  <span class="attr">getFullName</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">firstName</span> + <span class="string">&quot; &quot;</span> + <span class="variable language_">this</span>.<span class="property">lastName</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 創建一個新物件，繼承自 Person，並設定屬性描述器</span></span><br><span class="line"><span class="keyword">const</span> viii = <span class="title class_">Object</span>.<span class="title function_">create</span>(<span class="title class_">Person</span>, &#123;</span><br><span class="line">  <span class="attr">firstName</span>: &#123;</span><br><span class="line">    <span class="attr">value</span>: <span class="string">&#x27;Viii&#x27;</span>,</span><br><span class="line">    <span class="attr">writable</span>: <span class="literal">true</span>, <span class="comment">// 該屬性是否可寫入</span></span><br><span class="line">    <span class="attr">configurable</span>: <span class="literal">true</span> <span class="comment">// 該屬性是否可配置</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(viii.<span class="property">firstName</span>); <span class="comment">// 輸出：&#x27;Viii&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p> 屬性描述器可分為六種：</p>
+<ul>
+<li><code>value</code>：屬性的值，這裡設定為 <code>&#39;Viii&#39;</code>。</li>
+<li><code>writable</code>：指示屬性是否可寫入，這裡設定為 <code>true</code>，表示可以修改該屬性的值。</li>
+<li><code>enumerable</code>：指示屬性是否可透過 <code>for...in</code> 迴圈中迭代列舉。</li>
+<li><code>configurable</code>：指示屬性是否可配置，這裡設定為 <code>true</code>，表示該屬性的描述器可以被修改。</li>
+<li><code>get</code>： getter function。</li>
+<li><code>set</code>： setter function。</li>
+</ul>
+<p> <strong>除了上面的方式，我們也可以透過 <code>Object.defineProperty()</code> 方法！</strong><br> <code>Object.defineProperty()</code> 方法是 JavaScript 中用來定義或修改物件屬性的方法，<br> 並且可以設置屬性的特性，包括 <code>get</code> 和 <code>set</code> 存取器函數。</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj, prop, descriptor);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>obj</code>：要定義或修改屬性的目標物件。</li>
+<li><code>prop</code>：要定義或修改的屬性名稱。</li>
+<li><code>descriptor</code>：一個屬性描述器對象，用來指定屬性的特性，包括 <code>value</code>、<code>writable</code>、<code>enumerable</code>、<code>configurable</code>、<code>get</code> 和 <code>set</code>。</li>
+</ul>
+<p> 現在讓我們看一個具體的例子：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> person = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 Object.defineProperty 定義一個名為 &quot;fullName&quot; 的計算屬性</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(person, <span class="string">&#x27;fullName&#x27;</span>, &#123;</span><br><span class="line">  <span class="comment">// 定義 getter</span></span><br><span class="line">  <span class="attr">get</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">firstName</span> + <span class="string">&#x27; &#x27;</span> + <span class="variable language_">this</span>.<span class="property">lastName</span>;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 定義 setter</span></span><br><span class="line">  <span class="attr">set</span>: <span class="keyword">function</span>(<span class="params">fullName</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> names = fullName.<span class="title function_">split</span>(<span class="string">&#x27; &#x27;</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">firstName</span> = names[<span class="number">0</span>];</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">lastName</span> = names[<span class="number">1</span>];</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 設置 enumerable 特性為 true，使屬性可列舉</span></span><br><span class="line">  <span class="attr">enumerable</span>: <span class="literal">true</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 設置 configurable 特性為 true，使屬性可配置</span></span><br><span class="line">  <span class="attr">configurable</span>: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">person.<span class="property">firstName</span> = <span class="string">&#x27;Viii&#x27;</span>;</span><br><span class="line">person.<span class="property">lastName</span> = <span class="string">&#x27;Chang&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person.<span class="property">fullName</span>); <span class="comment">// 輸出：&#x27;Viii Chang&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 setter 設置 fullName</span></span><br><span class="line">person.<span class="property">fullName</span> = <span class="string">&#x27;Jay Lin&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person.<span class="property">firstName</span>); <span class="comment">// 輸出：&#x27;Jay&#x27;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person.<span class="property">lastName</span>); <span class="comment">// 輸出：&#x27;Lin&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p> 使用 <code>Object.defineProperty()</code> 定義了一個計算屬性 <code>fullName</code>，並為它指定了 <code>get</code> 和 <code>set</code> 存取器函數。<code>get</code> 存取器返回 <code>firstName</code> 和 <code>lastName</code> 的結合，而 <code>set</code> 存取器接受一個完整名字，並將其拆分為 <code>firstName</code> 和 <code>lastName</code>。</p>
+</li>
+</ul>
+<hr>
+<p>透過這些內容，了解到 Object Literals（物件實字）來快速建立物件，或者使用 Constructor（建構式）來建立具有相似結構的多個物件。此外，<code>Object.create()</code> 方法允許我們基於現有物件來創建新的物件，並繼承屬性和方法。還可以使用 <code>Object.defineProperty()</code> 方法來定義或修改物件的屬性，並為這些屬性指定各種特性，包括 <code>get</code> 和 <code>set</code> 存取器函數。</p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/javascript/" class="tag">#javascript</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/javascript-prototype/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [JavaScript] - Prototype, Prototype Chain &amp; Prototype Inheritance in JavaScript!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/javascript-this-function/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [JavaScript] - what is this!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

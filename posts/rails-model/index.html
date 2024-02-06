@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby on Rails] - Model! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby on Rails] - Model! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/rails-model/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-07-16T12:43:29.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>July</span>
+            <span>16,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby on Rails] - Model!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <h2 id="before-action-複習基礎知識"><a href="#before-action-複習基礎知識" class="headerlink" title="before_action :複習基礎知識"></a>before_action :複習基礎知識</h2><h3 id="Route-Controller-View-Model-Migration"><a href="#Route-Controller-View-Model-Migration" class="headerlink" title="Route, Controller, View, Model, Migration"></a>Route, Controller, View, Model, Migration</h3><p>這裡我們來把 Route, Controller, View 扮演的角色再複習一次，<br>並加上 Model, Migration 為整個架構在理解的更透徹！</p>
+<p>在 CRUD 實作裡，最常接觸的就是 Route, Controller, View, Model, Migration，<br>以下是他們的作用：</p>
+<ul>
+<li><p>Route 定義應用程式路徑，將特定的 URL 導向相應的 <code>controller#action</code>。</p>
+</li>
+<li><p>View 呈現資料和生成用戶界面 -&gt; 顯示資料給使用者，以及收集和顯示表單數據。</p>
+</li>
+<li><p>Controller 處理 route 請求，協調 model, view 之間的交互作用。<br>接收來自用戶的請求，檢索或修改資料，然後將資料傳遞給 view 進行呈現。</p>
+</li>
+<li><p>Model 像是翻譯蒟蒻，負責跟實體的資料表溝通。</p>
+</li>
+<li><p>Migration 用於管理資料庫結構變更的工具。</p>
+<pre><code>Remark:
+Migration 是定義資料庫結構的版本控制，提供一種便捷的方式來新增、修改或刪除資料表、欄位、索引等。
+每個 Migration 文件都包含一些操作，用於改變資料庫結構，例如新增欄位、修改欄位類型、建立關聯等。
+Migration 可以跟蹤和管理資料庫結構的變化，並在不影響資料完整性的情況下進行更新。
+</code></pre>
+</li>
+</ul>
+<h3 id="ORM"><a href="#ORM" class="headerlink" title="ORM"></a>ORM</h3><p>ORM 是 Object Relational Mapping 的縮寫，中文翻譯為物件關聯映射。<br>Rails 的 ORM 機制會將 Model 與資料庫表格進行映射，<br>讓我們可以通過操作 Model 來操作資料庫表格中的資料。<br>這使得資料庫操作更加直觀和方便，可以直接使用 Ruby 語法來操作資料庫，<br>而不需要使用 SQL 語句。</p>
+<p>理解基本觀念，接著來看看建立 Model 之後的樣子吧！</p>
+<hr>
+<h2 id="建立-Model"><a href="#建立-Model" class="headerlink" title="建立 Model"></a>建立 Model</h2><blockquote>
+<p>命名慣例：Model 的命名是單數</p>
+</blockquote>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># original</span></span><br><span class="line">rails generate model <span class="title class_">Article</span> <span class="symbol">title:</span>string <span class="symbol">content:</span>text</span><br><span class="line"><span class="comment"># simplify</span></span><br><span class="line">rails g model <span class="title class_">Article</span> title <span class="symbol">content:</span>text</span><br></pre></td></tr></table></figure>
+
+<p>透過上述指令，會生成一個名為 <strong>Article 的 Model</strong>，<br>並在資料庫中建立一個名為 <strong>articles 的資料表（table）</strong>，<br>該資料表包含 <strong>title 和 content 兩個欄位，分別是 string 和 text 型別</strong>。</p>
+<p><strong>app&#x2F;models&#x2F;article.rb</strong></p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Article</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  validates <span class="symbol">:title</span>, <span class="symbol">presence:</span> <span class="literal">true</span> <span class="comment"># 驗證 title 欄位必填</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>在剛剛的指令中也會同時生成一個 Migration 檔案，用於建立資料庫中的相應資料表，<br>檔名會包含時間戳記和表名的相關資訊，且包含 <code>create_table</code> 方法，用於定義資料表的結構。</p>
+<p><strong>db&#x2F;migrate&#x2F;20230713042828_create_articles.rb</strong></p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CreateArticles</span> &lt; <span class="title class_ inherited__">ActiveRecord::Migration</span>[<span class="number">7.0</span>]</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">change</span></span><br><span class="line">    create_table <span class="symbol">:articles</span> <span class="keyword">do</span> |<span class="params">t</span>|</span><br><span class="line">      t.string <span class="symbol">:title</span></span><br><span class="line">      t.text <span class="symbol">:content</span></span><br><span class="line"></span><br><span class="line">      t.timestamps</span><br><span class="line">      <span class="comment"># t.datetime :created_at</span></span><br><span class="line">      <span class="comment"># t.datetime :updated_at # 可以思考這個欄位有無需要更新時間功能</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>確認資料表欄位都符合自己的需求時，要執行 <strong>rails db:migrate</strong><br>才會真正在資料庫中建立相應的資料表！<br><em>沒執行就會看到錯誤訊息：<code>ActiveRecord::PendingMigrationError</code>！</em></p>
+<hr>
+<h2 id="Table-資料表"><a href="#Table-資料表" class="headerlink" title="Table 資料表"></a>Table 資料表</h2><p>在執行 <code>rails db:migrate</code> 後，資料表便隨之產生，</p>
+<pre><code>Remark:
+在 VSCode 安裝一個 Extension，叫做 SQLite Viewer，方便去查看我的資料表以及欄位。
+</code></pre>
+<p>可以料想到資料表會有 title 與 content 兩個欄位，但實際打開資料表會發現，<br>多了 id、created_at 跟 updated_at 這三個欄位。<br>其實在 Migration 檔案中的 t.timestamps，會產生 created_at 跟 updated_at 的時間欄位，分別會在資料「新增」及「更新」的時候，把當下的時間寫入，所以在 Rails 專案中處理資料的時候，大多不太需要煩惱時間的問題。</p>
+<p>id 欄位是 Rails 自動幫每個資料表加的流水編號欄位，<br>這個欄位稱為資料表的主鍵（Primary Key）。<br>如果你不想要這個主鍵，可以在 Migration 加上 id: false 參數：</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CreateArticles</span> &lt; <span class="title class_ inherited__">ActiveRecord::Migration</span>[<span class="number">7.0</span>]</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">change</span></span><br><span class="line">    create_table <span class="symbol">:articles</span>, <span class="symbol">id:</span> <span class="literal">false</span> <span class="keyword">do</span> |<span class="params">t</span>| <span class="comment"># id: false</span></span><br><span class="line">      t.string <span class="symbol">:title</span></span><br><span class="line">      t.text <span class="symbol">:content</span></span><br><span class="line"></span><br><span class="line">      t.timestamps</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="如果想在-Model-再多新增欄位呢？"><a href="#如果想在-Model-再多新增欄位呢？" class="headerlink" title="如果想在 Model 再多新增欄位呢？"></a>如果想在 Model 再多新增欄位呢？</h3><p>想要在既有的 Model 內，再新增欄位的話，<br>透過 <strong>rails g migration add_subtitle_to_article</strong> 新增一個 migration 之後，<br>藉由新生成的 migration，加上 <strong>add_column</strong> 方法，<br>就可以對之前有建立的 Model (Article) 新增欄位！</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AddSubtitleToArticle</span> &lt; <span class="title class_ inherited__">ActiveRecord::Migration</span>[<span class="number">7.0</span>]</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">change</span></span><br><span class="line">    add_column <span class="symbol">:articles</span>, <span class="symbol">:sub_title</span>, <span class="symbol">:string</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>接著再次 <strong>rails db:migrate</strong> 後，就可以發現資料庫裡面新增了 sub_title 欄位了！</p>
+<hr>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>簡單說明 Model 的基本知識以及 Mogration 在產生資料表會有的欄位，<br>下一章會繼續說明重點中的重點！ <strong>Model的關聯性！</strong><br>請詳見 <strong>Viiisit Ruby on Rails - Relationships of Models!</strong></p>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://railsbook.tw/chapters/16-model-basic">為你自己學 Ruby on Rails - Model</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/sql-basic/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit SQL!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/rails-basic/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - 先備知識!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

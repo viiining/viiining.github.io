@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/ruby-oop-introduction/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-09-27T14:12:42.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>September</span>
+            <span>27,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby/" class="tag">#ruby</a><a href="/tags/oop/" class="tag">#oop</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p><em>在之前都是分享 JavaScript 相關的內容，接著想分享自己學習 Ruby 與 Ruby on Rails 時，<br>了解到的重要知識，都會再接下來的文章中出現唷！</em></p>
+<h2 id="Ruby-是什麼？"><a href="#Ruby-是什麼？" class="headerlink" title="Ruby 是什麼？"></a>Ruby 是什麼？</h2><blockquote>
+<p>A dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write.<br>一種動態的開源程式語言，注重簡單性和生產力。具有優雅的語法，易於閱讀且易於編寫。</p>
+</blockquote>
+<p><strong>Ruby 的作者是松本行弘（Yukihiro Matsumoto）</strong>。<br><strong>減少編程不必要的瑣碎時間，令編寫程式的人高興，是設計 Ruby 首要的考量點；<br>其次是良好的介面設計。他強調系統設計必須強調人性化，而不是一味從機器的角度設想</strong></p>
+<h2 id="Ruby-是物件導向程式語言"><a href="#Ruby-是物件導向程式語言" class="headerlink" title="Ruby 是物件導向程式語言"></a>Ruby 是物件導向程式語言</h2><p>在深入說明之前，先來理解<strong>物件導向程式設計（Object-Oriented Programming, OOP）</strong>：</p>
+<ul>
+<li>一種軟體設計的方法論，強調將軟體系統的各個物件組織成相互關聯的對象，每個對象都有特定的狀態（屬性）和行為（方法）。</li>
+<li>主要原則包括<strong>封裝、繼承和多型</strong>。封裝指的是將數據和方法封裝在一個對象中，以保持資料的隱私性和安全性。繼承允許一個類別（或對象）基於另一個類別來定義，以實現代碼的重用。多型允許不同的對象以不同的方式對待相同的方法。</li>
+</ul>
+<p>因此，物件導向程式設計是一種方法論，而物件導向程式語言是實現這種方法論的具體工具。<br>使用物件導向程式語言，開發者可以更容易地實現和應用物件導向程式設計的概念。</p>
+<hr>
+<p>物件導向程式設計（Object-Oriented Programming, OOP）具有以下特點，<br>也透過 Ruby 的語法來舉一些簡單的例子加深印象：</p>
+<ol>
+<li><p><strong>類別（Classes）與物件（Objects）</strong>：<br>類別（Classes）是物件的藍圖或模板，定義了物件的結構和行為。基於類別可以創建多個具體的物件。<br>物件（Objects）是類別的實例（Instance），這些物件具有狀態（屬性）和行為（方法）。</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定義一個狗的類別（Classes）</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">name, breed</span>)</span><br><span class="line">    <span class="variable">@name</span> = name</span><br><span class="line">    <span class="variable">@breed</span> = breed</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 定義一個方法，用於描述狗的行為</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">bark</span></span><br><span class="line">    <span class="string">&quot;Woof Woof!&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 定義一個方法，用於獲取狗的資訊</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">get_info</span></span><br><span class="line">    <span class="string">&quot;I&#x27;m <span class="subst">#&#123;<span class="variable">@name</span>&#125;</span>, a <span class="subst">#&#123;<span class="variable">@breed</span>&#125;</span>.&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立一個名為 Yellow 的狗的物件實例</span></span><br><span class="line">dog1 = <span class="title class_">Dog</span>.new(<span class="string">&quot;Yellow&quot;</span>, <span class="string">&quot;Golden&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立另一個名為 Gogo 的狗的物件實例</span></span><br><span class="line">dog2 = <span class="title class_">Dog</span>.new(<span class="string">&quot;Gogo&quot;</span>, <span class="string">&quot;Husky&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 調用物件的方法來執行操作</span></span><br><span class="line">puts dog1.bark    <span class="comment"># Woof Woof!</span></span><br><span class="line">puts dog2.get_info <span class="comment"># I&#x27;m Gogo, a Husky.</span></span><br></pre></td></tr></table></figure>
+
+<p> 定義了一個 <code>Dog</code> 類別，這個類別有兩個實例變數 <code>@name</code> 和 <code>@breed</code>，分別表示狗的名字和品種。 <code>initialize</code> 方法用來初始化這些屬性，<code>bark</code> 方法用來描述狗叫的行為，<code>get_info</code> 方法用來取得狗的資訊，並創建了兩個物件，分別是 Yellow, Gogo。 每個物件都有自己的屬性（名字和品種），並且可以呼叫方法來執行不同的操作，這說明了物件具有自己的狀態和行為。</p>
+<blockquote>
+<p>在 Ruby 中，<code>initialize</code> 方法通常用於在建立物件實例時進行初始化操作，可以接受參數來設定物件的初始狀態。</p>
+</blockquote>
+</li>
+<li><p><strong>封裝（Encapsulation）</strong>：<br>封裝是指的是將物件的內部狀態（屬性）和行為（方法）包裝在一個單一的單元中，<br>並限制外部對內部的直接訪問。這有助於保護數據的完整性和安全性。</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span></span><br><span class="line">  <span class="comment"># 初始化方法，用於設定狗的屬性</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">name</span>)</span><br><span class="line">    <span class="variable">@name</span> = name</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 定義一個公開的方法 bark，用於讓狗吠</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">bark</span></span><br><span class="line">    <span class="string">&quot;Woof Woof!&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 創建一個名為 Yellow 的狗的物件實例</span></span><br><span class="line">dog = <span class="title class_">Dog</span>.new(<span class="string">&quot;Yellow&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 呼叫公開的方法 bark 來讓狗吠</span></span><br><span class="line">puts dog.bark <span class="comment"># Woof Woof!</span></span><br></pre></td></tr></table></figure>
+
+<p> 在 <code>Dog</code> 類別，其中：</p>
+<ul>
+<li>有一個私有實例變數 <code>@name</code>，表示狗的名字。</li>
+<li>有一個公開的方法 <code>bark</code>，用於讓狗吠。</li>
+</ul>
+<p> 在封裝的概念下，<code>bark</code> 方法是公開的，外部可以通過物件來呼叫這個方法，讓狗吠。<br> 但是，外部的使用者不需要知道狗究竟是如何吠的，這個實現細節被隱藏在類別的內部。</p>
+<p> 總之，封裝的核心思想是將物件的內部狀態和行為隱藏起來，只提供一個公開的介面，讓外部使用者能夠與物件互動，而無需了解物件的內部實現細節。</p>
+</li>
+<li><p><strong>繼承（Inheritance）</strong>：<br>繼承是一種機制，允許一個類別（子類別）基於另一個類別（父類別）來定義，<br>繼承父類別的屬性和方法。<br>這有助於實現代碼重用和建立層次化結構。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">speak</span></span><br><span class="line">    puts <span class="string">&quot;Animal makes a sound.&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> &lt; <span class="title class_ inherited__">Animal</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">speak</span></span><br><span class="line">    puts <span class="string">&quot;Dog barks.&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">dog = <span class="title class_">Dog</span>.new</span><br><span class="line">dog.speak <span class="comment"># Dog barks.</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>多型（Polymorphism）</strong>：<br>多型允許不同的物件使用相同的接口執行不同的操作。<br>提高了程式碼的靈活性和可擴展性，允許處理多種不同的物件類型。</p>
+<p> <strong>每種動物都可以發出聲音，但不同的動物發出不同的聲音。</strong><br> 可以使用多型來實現這個概念：</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">speak</span></span><br><span class="line">    <span class="string">&quot;Animal makes a sound&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> &lt; <span class="title class_ inherited__">Animal</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">speak</span></span><br><span class="line">    <span class="string">&quot;Dog barks: Woof Woof!&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span> &lt; <span class="title class_ inherited__">Animal</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">speak</span></span><br><span class="line">    <span class="string">&quot;Cat meows: Meow Meow!&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Bird</span> &lt; <span class="title class_ inherited__">Animal</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">speak</span></span><br><span class="line">    <span class="string">&quot;Bird chirps: Chirp Chirp!&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立動物的陣列</span></span><br><span class="line">animals = [<span class="title class_">Dog</span>.new, <span class="title class_">Cat</span>.new, <span class="title class_">Bird</span>.new]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 讓每個動物發聲</span></span><br><span class="line">animals.each <span class="keyword">do</span> |<span class="params">animal</span>|</span><br><span class="line">  puts animal.speak</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p> 在這個例子中，我們建了一個基本的 <code>Animal</code> 類別，並讓每種動物（<code>Dog</code>、<code>Cat</code>、<code>Bird</code>）都繼承這個基本類別。然後，我們在每個子類別中重寫 <code>speak</code> 方法，以提供特定動物的聲音。</p>
+<p> 最後，我們創建了一個包含不同動物的陣列，使用迴圈讓每個動物發聲。這就是多型的簡單例子，不同類別的物件可以呼叫相同的方法名稱（<code>speak</code>），但根據物件的實際類別而執行不同的動作。</p>
+</li>
+<li><p><strong>抽象化（Abstraction）</strong>：<br>抽象化是將物件的共通特徵和行為提取出來，形成一個抽象的類別或接口。<br>這有助於減少複雜性並提高可理解性。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">name</span>)</span><br><span class="line">    <span class="variable">@name</span> = name</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">speak</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> &lt; <span class="title class_ inherited__">Animal</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">speak</span></span><br><span class="line">    <span class="string">&quot;<span class="subst">#&#123;<span class="variable">@name</span>&#125;</span> barks: Woof Woof!&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 創建一隻名叫 Yellow 的狗</span></span><br><span class="line">dog = <span class="title class_">Dog</span>.new(<span class="string">&quot;Yellow&quot;</span>)</span><br><span class="line"></span><br><span class="line">puts dog.speak <span class="comment"># Yellow barks: Woof Woof!</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>消息傳遞（Message Passing）</strong>：<br>指一個物件通過接受訊息、處理訊息、傳出訊息或使用其他類別的方法來實作一定功能。<br> 有一個 <code>Dog</code> 類別，每隻狗都可以執行一些特定的動作，例如 <code>bark</code>（叫）和 <code>fetch</code>（撿東西）。</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">bark</span></span><br><span class="line">    <span class="string">&quot;Woof Woof!&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">fetch</span>(<span class="params">item</span>)</span><br><span class="line">    <span class="string">&quot;Fetch the <span class="subst">#&#123;item&#125;</span>!&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 創建一隻名叫大黃的狗</span></span><br><span class="line">dog = <span class="title class_">Dog</span>.new</span><br><span class="line"></span><br><span class="line"><span class="comment"># 發送消息給大黃來執行動作</span></span><br><span class="line"><span class="comment"># 透過呼叫這些方法，實際上是向狗物件發送了相應的訊息，以執行相應的動作。</span></span><br><span class="line">puts dog.bark          <span class="comment"># Woof Woof!</span></span><br><span class="line">puts dog.fetch(<span class="string">&quot;ball&quot;</span>)   <span class="comment"># Fetch the ball！</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>動態性（Dynamic Binding）</strong>：<br>物件導向通常支持動態繫結，指方法會隨著實例動態的改變。這增加了彈性和可擴展性。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">speak</span></span><br><span class="line">    puts <span class="string">&quot;Animal makes a sound.&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> &lt; <span class="title class_ inherited__">Animal</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">speak</span></span><br><span class="line">    puts <span class="string">&quot;Dog barks.&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">animal = <span class="title class_">Animal</span>.new</span><br><span class="line">dog = <span class="title class_">Dog</span>.new</span><br><span class="line"></span><br><span class="line">animal.speak <span class="comment"># &quot;Animal makes a sound.&quot;</span></span><br><span class="line">dog.speak <span class="comment"># &quot;Dog barks.&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1">物件導向程式設計</a><br>➫ <a target="_blank" rel="noopener" href="https://totoroliu.medium.com/%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91-object-oriented-programming-%E6%A6%82%E5%BF%B5-5f205d437fd6">物件導向(Object Oriented Programming)概念</a><br>➫ <a target="_blank" rel="noopener" href="https://medium.com/change-or-die/ruby-%E7%89%A9%E4%BB%B6%E5%B0%8E%E5%90%91%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80-object-oriented-programming-32034e77ac2c">Ruby 物件導向程式語言(Object Oriented Programming)</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby/" class="tag">#ruby</a><a href="/tags/oop/" class="tag">#oop</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/development-solid/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Development] - SOLID!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/javascript-ES6-class/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [JavaScript] - ES6 Class 語法糖!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

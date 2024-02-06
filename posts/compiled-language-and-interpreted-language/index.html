@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Compiled Language vs Interpreted Language! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Compiled Language vs Interpreted Language! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/compiled-language-and-interpreted-language/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-06-24T22:25:00.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-sharing/">keep sharing</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>June</span>
+            <span>25,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Compiled Language vs Interpreted Language!</h1>
+    </div>
+
+    <div class="about">
+        
+    </div>
+
+    <div class="content">
+        <h2 id="什麼是編譯式語言、直譯式語言？"><a href="#什麼是編譯式語言、直譯式語言？" class="headerlink" title="什麼是編譯式語言、直譯式語言？"></a>什麼是編譯式語言、直譯式語言？</h2><p>在軟體開發中，程式語言的執行方式對於開發者來說是基本的概念，<br>編譯式語言和直譯式語言，代表著不同的設計哲學和程式執行的方法。</p>
+<h3 id="編譯式語言-Compiled-Language"><a href="#編譯式語言-Compiled-Language" class="headerlink" title="編譯式語言 Compiled Language"></a>編譯式語言 Compiled Language</h3><p>當我們談及編譯時，我們談的是一個在程式碼執行之前，先將整個源代碼轉換為機器碼或中間碼的過程。這種轉換由編譯器負責，並生成一個可獨立執行的二進制文件。<br>這樣的方法優點是<strong>執行效能通常較高，因為機器碼直接運行在硬體上，無需解釋。</strong></p>
+<p>然而，這也意味著在每次修改程式碼後，都需要重新編譯整個程序，過程可能會較冗長。<br>儘管如此，編譯式語言如 C, C++, Java, C#, Rust, Objective-C, Swift 在許多系統級和應用級的應用中仍然廣泛使用。</p>
+<h3 id="直譯式語言-Interpreted-Language"><a href="#直譯式語言-Interpreted-Language" class="headerlink" title="直譯式語言 Interpreted Language"></a>直譯式語言 Interpreted Language</h3><p>轉而談談直譯式語言，他的運作方式有所不同。<br>直譯器<strong>逐行讀取</strong>並解釋源代碼，使得程式碼可以在運行時即時執行。這種即時性帶來了更大的靈活性，因為開發者可以進行動態調試和交互式開發，並無需等待整個程序重新編譯。</p>
+<p>然而，直譯式語言的執行效能可能相對較低，因為它需要在每次運行時解釋程式碼。<br>典型的直譯式語言包括 Python, JavaScript, PHP, Ruby，他們通常在較高層次的應用開發廣泛應用。</p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/terminal-useful-commands/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Terminal] - Usual Commands and Shortcut!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/hello-world/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Hello World! I&#39;m Viii!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

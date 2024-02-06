@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby on Rails] - Active Record Query (下)! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby on Rails] - Active Record Query (下)! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/rails-active-record-query-part2/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-10-07T07:17:21.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>7,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby on Rails] - Active Record Query (下)!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a><a href="/tags/active-record/" class="tag">#active record</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p><em>繼續來探究 Active Record 在抓取資料上的方法！<br>繼上篇，我們已經學習了如何進行基本的資料查詢。<br>這篇將深入介紹一些查詢方法以及常見的解決 N+1 問題該如何解決，Let’s go!</em></p>
+<h2 id="Grouping"><a href="#Grouping" class="headerlink" title="Grouping"></a>Grouping</h2><p>要在查詢 SQL 中應用 GROUP BY 子句，可以使用 <code>group</code> 方法。</p>
+<blockquote>
+<ul>
+<li>SQL 中的 GROUP BY 子句用於將資料庫中的記錄按照一個或多個欄位的值分組，可以對每個不同組的記錄應用聚合函數，例如計算總和 <code>SUM()</code> 、平均值 <code>AVG()</code> 或計數 <code>COUNT()</code>。</li>
+<li>GROUP BY 子句通常與聚合函數一起使用，以便對分組的記錄執行統計操作，有助於整理和分析資料，並生成有意義的統計結果。</li>
+</ul>
+</blockquote>
+<ul>
+<li><p><strong><code>group</code>, <code>count</code></strong><br>建立一個 <code>User</code> 模型，每個用戶都有一個 <code>role</code>，<br>表示他們的角色 (例如：admin, user, editor)，現在想要統計每個角色的用戶數量。<br>我們便可以使用 <code>group</code>, <code>count</code> 方法！</p>
+  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">User</span>.group(<span class="symbol">:role</span>).count</span><br></pre></td></tr></table></figure>
+
+<p>這個查詢將返回一個 <code>Hash</code>，其中每個 <code>key</code> 代表一個不同的角色，而每個 <code>value</code> 代表該角色的用戶數量。將具有相同 <code>role</code> 值的用戶記錄合併在一起，然後計算每個組的記錄數。<br>生成的 SQL 查詢：<code>SELECT role, COUNT(*) AS count FROM users GROUP BY role</code></p>
+</li>
+<li><p><strong>Having Conditions</strong></p>
+<blockquote>
+<p>SQL 使用 HAVING 子句，用於對 GROUP BY 子句分組後的結果集進行篩選，<br>並返回符合條件的分組結果。</p>
+</blockquote>
+<p>想在 Active Record 查詢中使用 GROUP BY 和 HAVING 條件結合時，<br>可以使用 <code>group</code> 和 <code>having</code> 方法！</p>
+<p>建立一個 <code>User</code> 模型，<strong>要統計每個角色的用戶數量，但只保留那些擁有超過一定數量的用戶的結果</strong>，<br>可以使用 <code>group</code> 和 <code>having</code> 來達到目的：</p>
+  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user_counts = <span class="title class_">User</span>.group(<span class="symbol">:role</span>).having(<span class="string">&quot;COUNT(*) &gt; ?&quot;</span>, <span class="number">3</span>).count</span><br></pre></td></tr></table></figure>
+<p>  先使用 <code>group(:role)</code> 按照 <code>role</code> 分組用戶。<br>  然後，使用 <code>having(&quot;COUNT(*) &gt; ?&quot;, 3)</code> 條件，僅保留那些擁有超過3個用戶的角色。<br>  最後，我們使用 <code>count</code> 方法計算每個符合條件的角色的用戶數量。<br>  生成的 SQL 查詢：</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> role, <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> count</span><br><span class="line"><span class="keyword">FROM</span> users</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> role</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="operator">&gt;</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>SQL 裡，<code>HAVING</code> 子句 與 <code>WHERE</code> 子句 的差別：<br><code>WHERE</code> 子句 用於對原始數據（未分組）進行篩選，並返回符合條件的個別記錄（在查詢之前應用）<br><code>HAVING</code> 子句 用於對 GROUP BY 子句分組後的結果集進行篩選，並返回符合條件的分組結果。（在查詢之後應用）</p>
+</blockquote>
+<p>  假設有一個 <code>orders</code> 表，<br>  其中包含了每筆訂單的紀錄，包括訂單金額（<code>order_amount</code>）和客戶 ID（<code>customer_id</code>）。<br>  找出每個客戶的總訂單金額超過 1000 的客戶。</p>
+<ul>
+<li><p>使用 <code>WHERE</code> 子句-&gt;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customer_id, <span class="built_in">SUM</span>(order_amount) <span class="keyword">AS</span> total_amount</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customer_id</span><br><span class="line"><span class="keyword">WHERE</span> total_amount <span class="operator">&gt;</span> <span class="number">1000</span>;</span><br></pre></td></tr></table></figure>
+<p><code>WHERE</code> 子句直接應用於原始數據，即每筆訂單的記錄。<br>但這樣的查詢會引發錯誤，因為 <code>total_amount</code> 是在 <code>SELECT</code> 子句中定義的，<br>而不是在 <code>WHERE</code> 子句中。</p>
+</li>
+<li><p>改使用 <code>HAVING</code> 子句-&gt;</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customer_id, <span class="built_in">SUM</span>(order_amount) <span class="keyword">AS</span> total_amount</span><br><span class="line"><span class="keyword">FROM</span> orders</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> customer_id</span><br><span class="line"><span class="keyword">HAVING</span> <span class="built_in">SUM</span>(order_amount) <span class="operator">&gt;</span> <span class="number">1000</span>;</span><br></pre></td></tr></table></figure>
+<p><code>HAVING</code> 子句應用於已分組的結果，即每個客戶的總訂單金額。<br>我們在 <code>HAVING</code> 子句中使用 <code>SUM(order_amount)</code> 來篩選總訂單金額超過 1000 的客戶。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Eager-Loading-Associations-預先載入"><a href="#Eager-Loading-Associations-預先載入" class="headerlink" title="Eager Loading Associations 預先載入"></a>Eager Loading Associations 預先載入</h2><p>Eager Loading Associations 是指在一次性查詢中預先載入一個或多個關聯模型的數據，以減少在後續操作中的查詢次數，從而提高應用程式的性能，<strong>通常用於解決 N+1 查詢問題。</strong></p>
+<h3 id="N-1-查詢問題是什麼？"><a href="#N-1-查詢問題是什麼？" class="headerlink" title="N+1 查詢問題是什麼？"></a>N+1 查詢問題是什麼？</h3><p>  N+1 查詢問題是在 Active Record 查詢中常見的效能問題之一，通常出現在處理關聯數據的時候。<br>  現在有兩個 Model <code>User</code> 和 <code>Post</code> ，他們之間有一個一對多的關係。</p>
+<ul>
+<li><p>每個用戶可以發佈多篇貼文：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  has_many <span class="symbol">:posts</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Post</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  belongs_to <span class="symbol">:user</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>列出所有用戶以及每個用戶的貼文。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/controllers/users_controllers.rb</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UsersController</span> &lt; <span class="title class_ inherited__">ApplicationController</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">index</span></span><br><span class="line">    <span class="variable">@users</span> = <span class="title class_">User</span>.all</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># app/views/users/index.html.erb</span><br><span class="line">&lt;% @users.each do |user| %&gt;</span><br><span class="line">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>&lt;%= user.name %&gt;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    &lt;% user.posts.each do |post| %&gt;</span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span>&lt;%= post.title %&gt;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    &lt;% end %&gt;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">hr</span>&gt;</span></span><br><span class="line">&lt;% end %&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>開始列出每個用戶的每個貼文標題時，每次呼叫 <code>user.posts.each</code> 時都會觸發一次額外的資料庫查詢，以獲取該用戶的貼文標題。當去查看 log 就會看到以下訊息，先找到所有 <code>users</code>，然後開始找每個用戶的每篇貼文，數一下就會發現總共做了 11 次查詢。這就是 N+1 查詢問題</strong> <em>（有 10 個用戶，就會先 1（找出 10 個用戶）+ 10（每個貼文都去找關連的用戶）&#x3D; 總共 11 次查詢）</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">User Load (1.3ms)  SELECT &quot;users&quot;.* FROM &quot;users&quot;</span><br><span class="line">  ↳ app/views/users/index.html.erb:1</span><br><span class="line">  Post Load (0.1ms)  SELECT &quot;posts&quot;.* FROM &quot;posts&quot; WHERE &quot;posts&quot;.&quot;user_id&quot; = ?  [[&quot;user_id&quot;, 1]]</span><br><span class="line">  ↳ app/views/users/index.html.erb:4</span><br><span class="line">  Post Load (0.1ms)  SELECT &quot;posts&quot;.* FROM &quot;posts&quot; WHERE &quot;posts&quot;.&quot;user_id&quot; = ?  [[&quot;user_id&quot;, 2]]</span><br><span class="line">  ↳ app/views/users/index.html.erb:4</span><br><span class="line">  Post Load (0.0ms)  SELECT &quot;posts&quot;.* FROM &quot;posts&quot; WHERE &quot;posts&quot;.&quot;user_id&quot; = ?  [[&quot;user_id&quot;, 3]]</span><br><span class="line">  ↳ app/views/users/index.html.erb:4</span><br><span class="line">  Post Load (0.0ms)  SELECT &quot;posts&quot;.* FROM &quot;posts&quot; WHERE &quot;posts&quot;.&quot;user_id&quot; = ?  [[&quot;user_id&quot;, 4]]</span><br><span class="line">  ↳ app/views/users/index.html.erb:4</span><br><span class="line">  Post Load (0.0ms)  SELECT &quot;posts&quot;.* FROM &quot;posts&quot; WHERE &quot;posts&quot;.&quot;user_id&quot; = ?  [[&quot;user_id&quot;, 5]]</span><br><span class="line">  ↳ app/views/users/index.html.erb:4</span><br><span class="line">  Post Load (0.0ms)  SELECT &quot;posts&quot;.* FROM &quot;posts&quot; WHERE &quot;posts&quot;.&quot;user_id&quot; = ?  [[&quot;user_id&quot;, 6]]</span><br><span class="line">  ↳ app/views/users/index.html.erb:4</span><br><span class="line">  Post Load (0.0ms)  SELECT &quot;posts&quot;.* FROM &quot;posts&quot; WHERE &quot;posts&quot;.&quot;user_id&quot; = ?  [[&quot;user_id&quot;, 7]]</span><br><span class="line">  ↳ app/views/users/index.html.erb:4</span><br><span class="line">  Post Load (0.0ms)  SELECT &quot;posts&quot;.* FROM &quot;posts&quot; WHERE &quot;posts&quot;.&quot;user_id&quot; = ?  [[&quot;user_id&quot;, 8]]</span><br><span class="line">  ↳ app/views/users/index.html.erb:4</span><br><span class="line">  Post Load (0.0ms)  SELECT &quot;posts&quot;.* FROM &quot;posts&quot; WHERE &quot;posts&quot;.&quot;user_id&quot; = ?  [[&quot;user_id&quot;, 9]]</span><br><span class="line">  ↳ app/views/users/index.html.erb:4</span><br><span class="line">  Post Load (0.0ms)  SELECT &quot;posts&quot;.* FROM &quot;posts&quot; WHERE &quot;posts&quot;.&quot;user_id&quot; = ?  [[&quot;user_id&quot;, 10]]</span><br><span class="line">  ↳ app/views/users/index.html.erb:4        </span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="解決-N-1-查詢問題的方法"><a href="#解決-N-1-查詢問題的方法" class="headerlink" title="解決 N+1 查詢問題的方法"></a>解決 N+1 查詢問題的方法</h3><p>想要解決這樣的問題就要來應用 Eager Loading Associations，可以使用 <code>includes</code> 方法，讓 Active Record 確保所有指定的關聯，加載的查詢減到最少。除了 <code>includes</code> 方法，以下會說明其他種方式，來避免 N+1 查詢問題。</p>
+<ul>
+<li><p><strong><code>includes</code></strong> （Eager Loading Associations）<br>  將剛剛在 <code>users_controllers.rb</code> 的方法改寫為 <code>@users = User.includes(:posts)</code></p>
+  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/controllers/users_controllers.rb</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UsersController</span> &lt; <span class="title class_ inherited__">ApplicationController</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">index</span></span><br><span class="line">    <span class="variable">@users</span> = <span class="title class_">User</span>.includes(<span class="symbol">:posts</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>  查看 log：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">User Load (0.2ms)  SELECT &quot;users&quot;.* FROM &quot;users&quot;</span><br><span class="line">↳ app/views/users/index.html.erb:1</span><br><span class="line">Post Load (0.5ms)  SELECT &quot;posts&quot;.* FROM &quot;posts&quot; WHERE &quot;posts&quot;.&quot;user_id&quot; IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [[&quot;user_id&quot;, 1], [&quot;user_id&quot;, 2], [&quot;user_id&quot;, 3], [&quot;user_id&quot;, 4], [&quot;user_id&quot;, 5], [&quot;user_id&quot;, 6], [&quot;user_id&quot;, 7], [&quot;user_id&quot;, 8], [&quot;user_id&quot;, 9], [&quot;user_id&quot;, 10]]</span><br><span class="line">↳ app/views/users/index.html.erb:1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以發現 SQL 查詢從 <code>posts</code> 表中查詢的方式不同了！<br>具體來說，裡面使用了 <code>IN</code> 來指定多個可能的 <code>user_id</code>，<br>通過 <code>user_id</code> 來查找屬於用戶 1、2、3、4、5、6、7、8、9 和 10 的貼文，<br>而這些 <code>user_id</code> 是通過問號（<code>?</code>）參數傳遞的，這種參數化的查詢是防止 SQL injection。<br><strong>透過只發出一個 SQL 查詢而不是 N 個，提高效能，解決 N+1 查詢問題。</strong>
+  </p>
+</blockquote>
+</li>
+<li><p><strong><code>preload</code></strong> （Eager Loading Associations）<br>  將剛剛在 <code>users_controllers.rb</code> 的方法改寫為 <code>@users = User.preload(:posts)</code></p>
+  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/controllers/users_controllers.rb</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UsersController</span> &lt; <span class="title class_ inherited__">ApplicationController</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">index</span></span><br><span class="line">    <span class="variable">@users</span> = <span class="title class_">User</span>.preload(<span class="symbol">:posts</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>  查看 log：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">User Load (0.9ms)  SELECT &quot;users&quot;.* FROM &quot;users&quot;</span><br><span class="line">↳ app/views/users/index.html.erb:1</span><br><span class="line">Post Load (0.5ms)  SELECT &quot;posts&quot;.* FROM &quot;posts&quot; WHERE &quot;posts&quot;.&quot;user_id&quot; IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [[&quot;user_id&quot;, 1], [&quot;user_id&quot;, 2], [&quot;user_id&quot;, 3], [&quot;user_id&quot;, 4], [&quot;user_id&quot;, 5], [&quot;user_id&quot;, 6], [&quot;user_id&quot;, 7], [&quot;user_id&quot;, 8], [&quot;user_id&quot;, 9], [&quot;user_id&quot;, 10]]</span><br><span class="line">↳ app/views/users/index.html.erb:1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以看出 <code>preload</code> 跟 <code>includes</code> 是能達到相同效果的！<br>但要注意的是：<br><strong><code>preload</code> 不能指定條件，無法針對這些關聯數據進行進一步的條件過濾。</strong><br><strong><code>includes</code> 可以指定條件，以檢索符合條件的相關數據。</strong>
+  </p>
+</blockquote>
+</li>
+<li><p><strong><code>eager_load</code></strong> （Eager Loading Associations）<br>  將剛剛在 <code>users_controllers.rb</code> 的方法改寫為 <code>@users = User.eager_load(:posts)</code></p>
+  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/controllers/users_controllers.rb</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UsersController</span> &lt; <span class="title class_ inherited__">ApplicationController</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">index</span></span><br><span class="line">    <span class="variable">@users</span> = <span class="title class_">User</span>.eager_load(<span class="symbol">:posts</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>  查看 log：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SQL (1.3ms)  SELECT &quot;users&quot;.&quot;id&quot; AS t0_r0, &quot;users&quot;.&quot;name&quot; AS t0_r1, &quot;users&quot;.&quot;created_at&quot; AS t0_r2, &quot;users&quot;.&quot;updated_at&quot; AS t0_r3, &quot;posts&quot;.&quot;id&quot; AS t1_r0, &quot;posts&quot;.&quot;title&quot; AS t1_r1, &quot;posts&quot;.&quot;user_id&quot; AS t1_r2, &quot;posts&quot;.&quot;created_at&quot; AS t1_r3, &quot;posts&quot;.&quot;updated_at&quot; AS t1_r4 FROM &quot;users&quot; LEFT OUTER JOIN &quot;posts&quot; ON &quot;posts&quot;.&quot;user_id&quot; = &quot;users&quot;.&quot;id&quot;</span><br><span class="line">↳ app/views/users/index.html.erb:1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>使用 <code>eager_load</code>，Active Record 會使用 LEFT OUTER JOIN 來載入所有指定的關聯。</strong></p>
+<blockquote>
+<p><code>LEFT OUTER JOIN</code> 是 SQL 中的一種 JOIN 類型，用於結合兩個或多個表中的數據，以便在結果中檢索相關數據。具體來說，<code>LEFT OUTER JOIN</code> 返回左側表中的所有行，並返回右側表中與左側表中的行相匹配的行。如果右側表中沒有與左側表匹配的行，則返回 NULL 值。<br>假設你有兩個表：<code>Users</code> 和 <code>Posts</code>，並且希望獲得每個用戶的所有貼文，即使有些用戶還沒有。<br>  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Users.name, Posts.post_number</span><br><span class="line"><span class="keyword">FROM</span> Users</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> Posts <span class="keyword">ON</span> Users.id <span class="operator">=</span> Posts.user_id;</span><br></pre></td></tr></table></figure><br>在這個查詢中，<code>Users</code> 表是左側表，<code>Posts</code> 表是右側表。<br><code>ON Users.id = Posts.user_id</code> 指定了表之間的關聯條件。結果將返回所有用戶的名稱以及他們的貼文，如果某個用戶沒有，則貼文將顯示為 NULL。</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>來比較一下 <code>includes</code> 和 <code>eager_load</code> 差異：<br><strong><code>includes</code></strong>:</p>
+<ul>
+<li><code>includes</code> 使用<strong>兩個 SQL 查詢</strong>，<br>一個用於查詢主 Model <code>User</code>，另一個用於查詢關聯 Model <code>Post</code>。<br>適用於需要在遍歷主 Model 的集合時搜尋關聯數據的情況，這樣他不需要額外的查詢。</li>
+</ul>
+<p><strong><code>eager_load</code></strong>:</p>
+<ul>
+<li><code>eager_load</code> 使用<strong>一個 SQL 查詢</strong>，<br>將主 Model 和關聯 Model 的數據一次性載入，並使用 <code>JOIN</code> 連接他們。<br>適用於需要在遍歷主 Model 的集合之前搜尋關聯數據的情況，<br>這樣他可以通過 <code>JOIN</code> 執行一次性的複雜查詢。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://guides.rubyonrails.org/active_record_querying.html">Active Record Query Interface</a>_<br>➫ <a target="_blank" rel="noopener" href="https://rails.ruby.tw/active_record_querying.html">Active Record 查詢</a><br>➫ <a target="_blank" rel="noopener" href="https://pjchender.dev/ruby-on-rails/ruby-on-rails-active-record-query/">PJCHENder - [Rails] Active Record Query（SQL Query &amp; Model 資料查詢）</a><br>➫ <a target="_blank" rel="noopener" href="https://www.bigbinary.com/blog/preload-vs-eager-load-vs-joins-vs-includes">Preload, Eagerload, Includes and Joins</a><br>➫ <a target="_blank" rel="noopener" href="https://mgleon08.github.io/blog/2016/01/10/ruby-on-rails-include-join-avoid-n-1-query/">Ruby on Rails - 用 Include 和 Join 避免 N+1 Query</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a><a href="/tags/active-record/" class="tag">#active record</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/ruby-block-proc-lambda/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Scope 前情提要 Block、Proc 和 Lambda!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/rails-active-record-query-part1/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Active Record Query (上)!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

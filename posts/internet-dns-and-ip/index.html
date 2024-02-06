@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Internet] - DNS 跟 IP 是什麼！ - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Internet] - DNS 跟 IP 是什麼！ - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/internet-dns-and-ip/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-10-16T05:17:19.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>16,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Internet] - DNS 跟 IP 是什麼！</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/internet/" class="tag">#internet</a><a href="/tags/interview/" class="tag">#interview</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <h2 id="DNS-是什麼？"><a href="#DNS-是什麼？" class="headerlink" title="DNS 是什麼？"></a>DNS 是什麼？</h2><p>DNS (Domain Name System) 將人們可讀取的網域名稱 (<a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a>) 轉換為機器可讀取的 IP 地址 (192.0.1.234)。當開啟 Web 瀏覽器進入網站時，不需要記住這些冗長的數字 （IP 地址）進行輸入，而是輸入像 example.com 這樣的網域名稱就可以連接到正確的位置。</p>
+<blockquote>
+<p>簡單來說就是名字與身分證的概念，<br>每個網域名 (Domain Name) 都會用 DNS 來控制使用者如何找到網站。</p>
+</blockquote>
+<p>當我們想要在瀏覽器輸入網址前往某個網站時，電腦並不知道那個網站是儲存在哪一台主機裡面，<br>如果想要知道網站在哪一台主機中，就會向 DNS 詢問該網站的主機在哪？<br>接著 DNS 會回覆我們該網站所在的 IP 地址，<br>之後電腦才有辦法依照 IP 地址找到存放該網站內容的主機，拜訪後顯示網站於瀏覽器中。</p>
+<h2 id="IP-是什麼？"><a href="#IP-是什麼？" class="headerlink" title="IP 是什麼？"></a>IP 是什麼？</h2><p>IP 是 Internet Protocol 的縮寫，網際網路上的所有電腦，從智慧型手機或筆記型電腦到為大量零售網站提供內容服務的伺服器，都是使用數字找到彼此並互相通訊，而這些數字稱為 IP 地址。</p>
+<h2 id="DNS-的運作流程！"><a href="#DNS-的運作流程！" class="headerlink" title="DNS 的運作流程！"></a>DNS 的運作流程！</h2><p>可以試想一下，今天要將東西寄出，是不是要去尋找相對應的地址以及相關資訊，過程中會透過一層一層的搜尋去查到對應的正確地址，而這樣多層次的搜尋概念就像 DNS 在運作的方式！</p>
+<p>當使用者在瀏覽器輸入 URL，電腦就會需要解析網址 (<a target="_blank" rel="noopener" href="http://www.example.com/">www.example.com</a>) ，以獲取相關的 IP 地址<br>-&gt; <strong>首先，查找本地 DNS 快取，如果找到相應的 IP 地址，則直接解析完成。</strong></p>
+<blockquote>
+<p>本地 DNS 快取是一個臨時的儲存區，通常由操作系統或網絡服務提供商（如 ISP ）維護，<br>用於存儲最近查詢過的域名和相應的 IP 地址。</p>
+</blockquote>
+<p>-&gt; <strong>如果域名的解析訊息不在本地 DNS 快取中，<br>電腦就會向 ISP （Internet Service Provider）的 DNS 伺服器發出查詢請求。</strong></p>
+<p>-&gt; <strong>如果 ISP 的 DNS 伺服器也不知道域名的 IP 地址，將繼續向更高層次的 DNS 伺服器發出查詢請求。首先，將向根域名伺服器查詢，以獲得頂級域名（例如.com、.org、.net等）的 DNS 伺服器的 IP 地址。</strong></p>
+<p>-&gt; <strong>根域名伺服器返回頂級域名（TLD）伺服器的 IP 地址，然後 ISP 的 DNS 伺服器將查詢發給適當的 TLD 伺服器。例如，如果域名是 example.com，那麼查詢將發送給 .com頂級域名伺服器。</strong></p>
+<p>-&gt; <strong>TLD 伺服器返回包含目標域名的權威 DNS 伺服器的 IP 地址。ISP 的 DNS 伺服器繼續查詢，這一次將查詢發給權威 DNS 伺服器，該伺服器最終返回域名的 IP 地址。</strong></p>
+<p>-&gt; <strong>一旦 ISP 的 DNS 伺服器收到域名的 IP 地址，將返回給電腦。設備將使用此 IP 地址建立連接，以便訪問目標網站或伺服器。</strong></p>
+<blockquote>
+<p>過程涉及多個層次的 DNS 伺服器，每個層次都有不同的責任，最終都是將域名解析為相應的IP地址，使電腦能夠與目標伺服器建立通信。</p>
+</blockquote>
+<p><img src="/../assets/images/dns-lookup.webp" alt="DNS Lookup"></p>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://www.cloudflare.com/learning/dns/what-is-dns/">What is DNS?</a><br>➫ <a target="_blank" rel="noopener" href="https://tech-blog.cymetrics.io/posts/crystal/dns-hacking-1/">DNS Hacking 之 基礎知識：DNS 運作與紀錄類型</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/internet/" class="tag">#internet</a><a href="/tags/interview/" class="tag">#interview</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/internet-http-and-https/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Internet] - HTTP / HTTPS！</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/git-basic/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Git] - Time Machine!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

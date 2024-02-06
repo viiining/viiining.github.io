@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby on Rails] - Active Record Query (上)! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby on Rails] - Active Record Query (上)! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/rails-active-record-query-part1/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-10-06T05:17:21.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>6,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby on Rails] - Active Record Query (上)!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a><a href="/tags/active-record/" class="tag">#active record</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p><em>繼續來探究 Active Record，前幾篇談論資料的關聯性，這次我們來點在 Active Record 怎麼抓取資料！</em></p>
+<h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>大家還記得當時提及 Active Record 的好處嗎？<br>如果沒印象，可以回頭看看：<a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10333350">Day 19 - 理解 Ruby on Rails，ORM 與 Active Record 是什麼？</a> </p>
+<p><strong>Active Record 是具體的 ORM 實現，提供一種方式來定義和操作 Model，隱藏了資料庫操作的細節，允許開發人員使用物件導向語法來處理資料。</strong></p>
+<p>一般我們可以使用原始的 SQL 查詢尋找資料庫記錄，但在 Active Record 裡可以用他提供的方法來操作，<br>現在讓我們來看看在 Active Record 是如何搜尋資料的吧！</p>
+<h2 id="如何抓到資料！"><a href="#如何抓到資料！" class="headerlink" title="如何抓到資料！"></a>如何抓到資料！</h2><h3 id="Retrieving-a-Single-Object-找尋單一物件"><a href="#Retrieving-a-Single-Object-找尋單一物件" class="headerlink" title="Retrieving a Single Object 找尋單一物件"></a>Retrieving a Single Object 找尋單一物件</h3><p>Active Record 提供了多種不同的方式來找尋單一物件（資料表中的一筆記錄）。<br>方法：<code>find</code>, <code>find_by</code>, <code>first</code>, <code>last</code>, <code>take</code></p>
+<ol>
+<li><p><strong>find</strong></p>
+<ul>
+<li>Active Record: 使用 <code>find</code> 方法，根據 <strong>主鍵 (id)</strong> 來查找單一記錄。<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user = <span class="title class_">User</span>.find(<span class="number">1</span>)</span><br></pre></td></tr></table></figure></li>
+<li>SQL 語法: 查找主鍵值為 1 的記錄。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>find_by</strong></p>
+<ul>
+<li>Active Record: 使用 <code>find_by</code> 方法，根據指定的條件查找第一個匹配的記錄。<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user = <span class="title class_">User</span>.find_by(<span class="symbol">username:</span> <span class="string">&#x27;viii&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+<li>SQL 語法: 查找用戶名為 ‘viii’ 的第一條記錄。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> username <span class="operator">=</span> <span class="string">&#x27;viii&#x27;</span> LIMIT <span class="number">1</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p><code>find_by!</code> 與 <code>find_by</code> 非常相似，都是用來查找符合條件的記錄。但是，<code>find_by!</code> 在找不到匹配的記錄時會引發 <code>ActiveRecord::RecordNotFound</code> 的錯誤訊息，而 <code>find_by</code> 僅返回 <code>nil</code>。這可以用來強制確保查詢會找到一條記錄，並在未找到時引發錯誤訊息。</p>
+</blockquote>
+</li>
+<li><p><strong>first</strong></p>
+<ul>
+<li>Active Record: 使用 <code>first</code> 方法，檢索資料表中的第一條記錄。<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">first_user = <span class="title class_">User</span>.first</span><br></pre></td></tr></table></figure></li>
+<li>SQL 語法: 檢索資料表中的第一條記錄。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users LIMIT <span class="number">1</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>last</strong></p>
+<ul>
+<li>Active Record: 使用 <code>last</code> 方法，檢索資料表中的最後一條記錄。<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">last_user = <span class="title class_">User</span>.last</span><br></pre></td></tr></table></figure></li>
+<li>SQL 語法: 檢索資料表中的最後一條記錄。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">ORDER</span> <span class="keyword">BY</span> id <span class="keyword">DESC</span> LIMIT <span class="number">1</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>take</strong></p>
+<ul>
+<li>Active Record: 使用 <code>take</code> 方法，取得資料表中的一條記錄。<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user = <span class="title class_">User</span>.take</span><br></pre></td></tr></table></figure></li>
+<li>SQL 語法: 檢索資料表中的一條記錄。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users LIMIT <span class="number">1</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h3 id="Retrieving-Multiple-Objects-in-Batches-批次找尋物件"><a href="#Retrieving-Multiple-Objects-in-Batches-批次找尋物件" class="headerlink" title="Retrieving Multiple Objects in Batches 批次找尋物件"></a>Retrieving Multiple Objects in Batches 批次找尋物件</h3><blockquote>
+<p>當取得多筆資料時，很直覺覺得可以使用 <code>all</code> 接著 <code>.each</code> 方法，但是！這樣可能會導致一次將整個資料表的資料提取出來，並存放在記憶體中，這樣的做法<strong>當資料量很大時，很容易超過記憶體的負荷。</strong><br> <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 將整個資料表的資料全部加載到記憶體中</span></span><br><span class="line"><span class="title class_">User</span>.all.each <span class="keyword">do</span> |<span class="params">user</span>|</span><br><span class="line">  puts user.name</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>為了避免這些問題，Active Record 提供 <code>find_each</code> 或 <code>find_in_batches</code> 方法，可以批次處理記錄，<br>而不是一次性將所有記錄載入記憶體，以便更有效地處理大量數據。這樣可以減輕記憶體負荷並提高效能。<br>方法：<code>find_each</code>, <code>find_in_batches</code></p>
+<ol>
+<li><p><strong>find_each</strong><br> <code>find_each</code> 按批次檢索記錄，並遍歷紀錄。這對於處理大量記錄非常有用，因為每次只加載一批記錄，而不是全部加載到內存中。</p>
+   <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment"># 檢索所有用戶記錄，每次處理 1000 條記錄</span></span><br><span class="line"><span class="title class_">User</span>.find_each(<span class="symbol">batch_size:</span> <span class="number">1000</span>) <span class="keyword">do</span> |<span class="params">user</span>|</span><br><span class="line">  <span class="comment"># 在這裡對每個用戶記錄進行操作</span></span><br><span class="line">  puts user.name</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Options for <code>find_each</code>： <code>:batch_size</code>, <code>:start</code>, <code>:finish</code>, <code>:error_on_ignore</code>, <code>:order</code></p>
+<ul>
+<li><code>:batch_size</code>：指定每個批次中要檢索的記錄數量，用於控制每次處理的記錄數。  </li>
+<li><code>:start</code>：配置序列的第一個 ID，可用於中斷的批次處理，指定從哪個 ID 開始。</li>
+<li><code>:finish</code>：配置序列的最後一個 ID，可用於檢索特定範圍內的記錄。</li>
+<li><code>:error_on_ignore</code>：用於控制當查詢操作遇到問題時應該發生什麼。如果在發現問題時立即中止操作，可以設置為 true；如果操作繼續進行，即使有問題也不中斷，可以保持默認值 false。</li>
+<li><code>:order</code>：指定主鍵 (id) 的順序，可以是升序 (<code>:asc</code>) 或降序 (<code>:desc</code>)，默認為升序。</li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>find_in_batches</strong><br> <code>find_in_batches</code> 方法類似於 <code>find_each</code>，按批次檢索記錄，但不提供遍歷功能。返回的是一個包含每批記錄的集合，可以透過這個集合並處理每批記錄。</p>
+   <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 檢索所有用戶記錄，每次處理 1000 條記錄</span></span><br><span class="line"><span class="title class_">User</span>.find_in_batches(<span class="symbol">batch_size:</span> <span class="number">1000</span>) <span class="keyword">do</span> |<span class="params">batch</span>|</span><br><span class="line">  <span class="comment"># 在這裡處理每批記錄</span></span><br><span class="line">  batch.each <span class="keyword">do</span> |<span class="params">user</span>|</span><br><span class="line">    puts user.name</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Options for <code>find_in_batches</code>： <code>:batch_size</code>, <code>:start</code>, <code>:finish</code>, <code>:error_on_ignore</code></p>
+</blockquote>
+</li>
+</ol>
+<p>   <strong>這兩種方法都有助於減少大量數據查詢時的性能問題，特別是當記錄數量很龐大時，透過分批處理，可以更有效地管理記憶體使用，從而提高應用程式的效能。</strong></p>
+<h3 id="Conditions-條件搜尋"><a href="#Conditions-條件搜尋" class="headerlink" title="Conditions 條件搜尋"></a>Conditions 條件搜尋</h3><p><code>where</code> 方法接收一個條件可以使用 字串、陣列、物件（key : value）作為參數，並返回所有符合條件的查詢對象，是一個 ActiveRecord 查詢集合（Relation）。<br>如果找不到紀錄，會是一個空的 ActiveRecord 查詢結果 <code>[ ]</code>。<br>方法： <code>where</code></p>
+<ol>
+<li><p><strong>Pure String Conditions 純字串條件</strong><br> 用戶可以通過輸入關鍵字來搜索產品的名稱：</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">keyword = params[<span class="symbol">:keyword</span>] <span class="comment"># 使用者輸入的搜索關鍵字</span></span><br><span class="line"><span class="title class_">Product</span>.where(<span class="string">&quot;name LIKE &#x27;%<span class="subst">#&#123;keyword&#125;</span>%&#x27;&quot;</span>) <span class="comment"># 不推薦的寫法，容易有 SQL injection 的風險</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>將使用者輸入的 keyword 直接插入到 SQL 字符中，這樣的做法可能導致 SQL injection!<br><strong>SQL injection 是一個安全漏洞，攻擊者可以通過在 SQL 查詢中插入惡意代碼，從而對數據庫進行未授權的操作。</strong></p>
+</blockquote>
+<h4 id="如何防止-SQL-injection"><a href="#如何防止-SQL-injection" class="headerlink" title="如何防止 SQL injection?"></a>如何防止 SQL injection?</h4><p> 在 Rails 中，防止 SQL injection 的方式可以透過使用 Array Conditions（陣列條件）   </p>
+</li>
+<li><p><strong>Array Conditions 陣列條件</strong></p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Product</span>.where(<span class="string">&quot;name LIKE ?&quot;</span>, params[<span class="symbol">:keyword</span>]) <span class="comment"># 推薦的寫法，使用 Array Conditions</span></span><br></pre></td></tr></table></figure>
+<p> 陣列的第一個元素是一個 SQL 條件字串 <code>&quot;name LIKE ?&quot;</code>，可以包含在 SQL 查詢的 WHERE 子句中。這個字串中可以包含佔位符，通常用問號 <code>?</code> 來表示，Active Record 會將 <code>?</code> 換成 <code>params[:keyword]</code> 做查詢，確保資料被安全地處理，以防止任何 SQL injection。</p>
+</li>
+<li><p><strong>Placeholder Conditions</strong><br> Placeholder conditions 具有類似於使用問號 <code>?</code> 的 params 替換特性，這種風格通常用於傳遞參數值，以防止 SQL 注入攻擊。<br> 除了使用問號之外，還可以在查詢條件字串中指定 keys&#x2F;values 用 <code>Hash</code> 方式！<strong>這種方式的好處是，若條件中有許多參數，這種寫法不僅提高了可讀性，傳遞起來也更方便。</strong></p>
+<p> 用戶可以搜索擁有特定名稱和年齡的用戶，使用 Placeholder conditions 來構建查詢條件：</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">conditions = <span class="string">&quot;name = :user_name AND age &gt; :min_age&quot;</span></span><br><span class="line">values = &#123; <span class="symbol">user_name:</span> <span class="string">&quot;viii&quot;</span>, <span class="symbol">min_age:</span> <span class="number">30</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">User</span>.where(conditions, values)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 寫在一起</span></span><br><span class="line"><span class="title class_">User</span>.where(<span class="string">&quot;name = :user_name AND age &gt; :min_age&quot;</span>, &#123; <span class="symbol">user_name:</span> <span class="string">&quot;viii&quot;</span>, <span class="symbol">min_age:</span> <span class="number">30</span> &#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>儘管條件參數會自動轉義以防止 SQL 注入，但 SQL LIKE 在遇到 SQL Wildcards (SQL 萬用字元)，即 <code>%</code> 和 <code>_</code> 下，不會轉義，這可能會導致意外行為。例如：<br>  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Book</span>.where(<span class="string">&quot;title LIKE ?&quot;</span>, params[<span class="symbol">:title</span>] + <span class="string">&quot;%&quot;</span>)</span><br></pre></td></tr></table></figure><br>  可以通過 <code>sanitize_sql_like</code> 來解決：<br>  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Book</span>.where(<span class="string">&quot;title LIKE ?&quot;</span>, <span class="title class_">Book</span>.sanitize_sql_like(params[<span class="symbol">:title</span>]) + <span class="string">&quot;%&quot;</span>)</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+</li>
+<li><p><strong>Hash Conditions</strong></p>
+<blockquote>
+<p>前情提要:<br>Only equality, range, and subset checking are possible with Hash conditions.<br>只有 Equality (相等性)、Range (範圍)、Subset (子集) 可用這種形式來寫條件。</p>
+</blockquote>
+<ul>
+<li><p>Equality (相等性)</p>
+<ul>
+<li>查找名字是 “viii” 的用戶。  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">User</span>.where(<span class="symbol">name:</span> <span class="string">&quot;viii&quot;</span>)</span><br></pre></td></tr></table></figure>
+  生成的 SQL 查詢：<code>SELECT * FROM users WHERE (users.name = &#39;viii&#39;)</code></li>
+<li>使用字串 <code>&#39;name&#39;</code> 指定為 “viii”。  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">User</span>.where(<span class="string">&#x27;name&#x27;</span> =&gt; <span class="string">&quot;viii&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+<li>使用關聯模型的實例作為值，並使用關聯名作為鍵，以查找符合特定關聯的記錄。<br>  假設 <code>User</code> 有一個 <code>belongs_to</code> 關係，指向 <code>Country</code> 模型，<br>  並且想查找居住在美國的用戶。  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">country = <span class="title class_">Country</span>.find_by(<span class="symbol">name:</span> <span class="string">&quot;USA&quot;</span>)</span><br><span class="line"><span class="title class_">User</span>.where(<span class="symbol">country:</span> country)</span><br></pre></td></tr></table></figure></li>
+<li>tuple-like 序組構造可用於處理具有複合主鍵的表格。<br>假設 <code>User</code> 表具有複合主鍵，由 <code>country_id</code> 和 <code>user_id</code> 兩個列組成，<br>可以查找具有特定組合的用戶。  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">User</span>.where([<span class="symbol">:country_id</span>, <span class="symbol">:user_id</span>] =&gt; [[<span class="number">1</span>, <span class="number">101</span>], [<span class="number">2</span>, <span class="number">202</span>]])</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>Range (範圍)</p>
+<ul>
+<li>查詢在一個特定範圍內的記錄。  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Product</span>.where(<span class="symbol">price:</span> <span class="number">10</span>..<span class="number">50</span>) <span class="comment"># 返回所有價格在 10 到 50 之間的產品記錄。</span></span><br></pre></td></tr></table></figure>
+  生成的 SQL 查詢：<code>SELECT * FROM products WHERE (products.price BETWEEN 10 AND 50)</code></li>
+</ul>
+</li>
+<li><p>Subset (子集)</p>
+<ul>
+<li>可以一次查找多個特定值的記錄<br>  查找名字為 “Alice”、”Bob” 和 “Charlie” 的用戶：  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">User</span>.where(<span class="symbol">name:</span> [<span class="string">&quot;Alice&quot;</span>, <span class="string">&quot;Bob&quot;</span>, <span class="string">&quot;Charlie&quot;</span>])</span><br></pre></td></tr></table></figure>
+  生成的 SQL 查詢：<code>SELECT * FROM users WHERE (users.name IN (&#39;Alice&#39;, &#39;Bob&#39;, &#39;Charlie&#39;))</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>NOT, OR, AND Conditions</strong><br> Active Record 提供了多種方法來構建 SQL 查詢的 <code>NOT</code>、<code>OR</code> 和 <code>AND</code>。</p>
+<ul>
+<li><strong>NOT</strong><ul>
+<li><code>where.not</code>  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">User</span>.where.<span class="keyword">not</span>(<span class="symbol">name:</span> <span class="string">&quot;John&quot;</span>)</span><br></pre></td></tr></table></figure>
+ 生成的 SQL 查詢：<code>SELECT * FROM users WHERE NOT (users.name = &#39;John&#39;)</code></li>
+</ul>
+</li>
+<li><strong>OR</strong><ul>
+<li><code>or</code>  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">User</span>.where(<span class="symbol">name:</span> <span class="string">&quot;Alice&quot;</span>).<span class="keyword">or</span>(<span class="title class_">User</span>.where(<span class="symbol">name:</span> <span class="string">&quot;Bob&quot;</span>))</span><br></pre></td></tr></table></figure>
+ 生成的 SQL 查詢：<code>SELECT * FROM users WHERE (users.name = &#39;Alice&#39; OR users.name = &#39;Bob&#39;)</code></li>
+</ul>
+</li>
+<li><strong>AND</strong><ul>
+<li>使用多個 <code>where</code> 條件，多個條件之間是 AND 關係。 <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">User</span>.where(<span class="symbol">name:</span> <span class="string">&quot;Alice&quot;</span>, <span class="symbol">age:</span> <span class="number">25</span>)</span><br></pre></td></tr></table></figure>
+ 生成的 SQL 查詢：<code>SELECT * FROM users WHERE (users.name = &#39;Alice&#39; AND users.age = 25)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>Ordering</strong></p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">User</span>.order(<span class="symbol">age:</span> <span class="symbol">:asc</span>) <span class="comment"># 升冪排序</span></span><br><span class="line"><span class="title class_">User</span>.order(<span class="symbol">age:</span> <span class="symbol">:desc</span>) <span class="comment"># 降冪排序</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>多次使用 <code>order</code> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">User.order(:name).order(age: :desc)</span><br></pre></td></tr></table></figure>
+ 生成的 SQL 查詢：<code>SELECT * FROM users ORDER BY users.name ASC, users.age DESC</code></li>
+</ul>
+</li>
+<li><p><strong>Selecting Specific Fields</strong><br> 可以指定想要從資料庫中檢索的特定欄位，而不是檢索整個資料表，達到<strong>效能優化</strong>。<br> 方法：<code>select</code>, <code>distinct</code></p>
+<ul>
+<li>假設有一個 <code>User</code> 模型，包含了 <code>name</code>、<code>email</code> 和 <code>age</code> ，但只想查 <code>name</code> 和 <code>email</code>：  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">User</span>.select(<span class="symbol">:name</span>, <span class="symbol">:email</span>)</span><br></pre></td></tr></table></figure>
+ 生成的 SQL 查詢：<code>SELECT name, email FROM users</code></li>
+</ul>
+<blockquote>
+<p>要小心使用 <code>select</code>。因為實體化出來的物件僅有所選欄位。<br>如果試圖存取不存在的欄位，會得到 ActiveModel::MissingAttributeError 異常：<br><code>ActiveModel::MissingAttributeError: missing attribute: &lt;attribute&gt;</code></p>
+</blockquote>
+<ul>
+<li>如果想要僅選擇某個欄位中每個唯一值對應的一條記錄，可以使用 <code>distinct</code>   <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">User</span>.select(<span class="symbol">:name</span>).distinct</span><br></pre></td></tr></table></figure>
+ 生成的 SQL 查詢：<code>SELECT DISTINCT name FROM users</code></li>
+</ul>
+</li>
+<li><p><strong>Limit（限制）Offset（偏移）</strong><br> <code>Limit</code> 和 <code>Offset</code> 是用於在 SQL 查詢中控制結果集大小和選擇的兩個重要參數。</p>
+<ul>
+<li><strong>Limit（限制）</strong>：<code>Limit</code> 用於限制查詢結果集的大小，指定了要返回的記錄數量。</li>
+<li><strong>Offset（偏移）</strong>：<code>Offset</code> 用於指定從查詢結果集的開頭位置開始返回記錄。允許跳過前幾條記錄，以便從指定位置開始檢索記錄。</li>
+</ul>
+<p> 繼續用 <code>User</code> 模型來講解，想查詢所有用戶的名字，但每次僅返回前五個名字，並且跳過前十個名字，這樣你可以從第十一個名字開始繼續查詢，這就可以使用 <code>limit</code> 和 <code>offset</code> 選項來實現這個目的：</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">User</span>.select(<span class="symbol">:name</span>).limit(<span class="number">5</span>).offset(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+<p> 這個查詢將選擇 <code>User</code> 表中的 <code>name</code> 字段，然後使用 <code>limit(5)</code> 來指定返回前五個名字，使用 <code>offset(10)</code> 來指定從第十一個名字開始返回。<br> 生成的 SQL 查詢：<code>SELECT name FROM users LIMIT 5 OFFSET 10</code></p>
+<blockquote>
+<p>這兩個通常在分頁（pagination）中使用，在列表中顯示一部分記錄，然後允許用戶查看更多的記錄。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="Brief-Summary"><a href="#Brief-Summary" class="headerlink" title="Brief Summary"></a>Brief Summary</h3><ul>
+<li>要查找單一記錄，你可以使用 <code>find</code>、<code>find_by</code>、<code>first</code>、<code>last</code>、<code>take</code>。</li>
+<li>要批次處理多條記錄，可使用 <code>find_each</code> 或 <code>find_in_batches</code> 以提高效能。</li>
+<li>使用 <code>where</code> 方法可以建立條件搜尋，避免 SQL 注入攻擊。可以使用純字串、陣列、物件、或哈希來構建條件。 - <code>NOT</code>、<code>OR</code>、<code>AND</code> 條件也可輕鬆應用。</li>
+<li>進一步控制查詢結果可以使用 <code>order</code>、<code>select</code>、<code>distinct</code>、<code>limit</code> 和 <code>offset</code>。</li>
+</ul>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://guides.rubyonrails.org/active_record_querying.html">Active Record Query Interface</a><br>➫ <a target="_blank" rel="noopener" href="https://rails.ruby.tw/active_record_querying.html">Active Record 查詢</a><br>➫ <a target="_blank" rel="noopener" href="https://pjchender.dev/ruby-on-rails/ruby-on-rails-active-record-query/">PJCHENder - [Rails] Active Record Query（SQL Query &amp; Model 資料查詢）</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a><a href="/tags/active-record/" class="tag">#active record</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/rails-active-record-query-part2/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Active Record Query (下)!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/rails-active-record-association-part2/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Active Record Associations (下)!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

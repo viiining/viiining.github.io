@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Development] - SOLID! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Development] - SOLID! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/development-solid/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-09-28T14:12:42.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>September</span>
+            <span>28,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Development] - SOLID!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/web-development/" class="tag">#web development</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p><em>繼上篇的物件導向程式設計概念，近期在面試上有遇到一個很重要的相關觀念，<br>當時不知道為什麼，現在整理出來分享～</em></p>
+<p>：有聽過 SOLID 嗎？<br>：SOLID 是什麼？</p>
+<h2 id="SOLID-是什麼？"><a href="#SOLID-是什麼？" class="headerlink" title="SOLID 是什麼？"></a>SOLID 是什麼？</h2><p>SOLID 是一組五個物件導向程式設計的基本原則，旨在幫助開發者創建可維護、可擴展且易於理解的程式碼。這些原則有助於確保軟體設計具有高內聚性和低耦合性，這對於長期維護和協作開發非常重要。</p>
+<ol>
+<li><p><strong>單一職責原則 (Single Responsibility Principle - SRP)</strong></p>
+<ul>
+<li><strong>一個模組應該只對唯一的一個角色負責。</strong></li>
+<li>通過將不同的職責分開，我們可以輕鬆地修改和擴展每個類別，而不會影響其他程式碼。</li>
+</ul>
+<p> 假設我們有一個名為 <code>Employee</code> 的類別，<br> 表示公司的員工，我們將根據 SRP 創建兩個具有不同職責的類別。</p>
+<ol>
+<li><strong>EmployeeInfo</strong> 類別（負責員工的基本資訊）：</li>
+</ol>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">EmployeeInfo</span></span><br><span class="line">  <span class="built_in">attr_reader</span> <span class="symbol">:name</span>, <span class="symbol">:employee_id</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">name, employee_id</span>)</span><br><span class="line">    <span class="variable">@name</span> = name</span><br><span class="line">    <span class="variable">@employee_id</span> = employee_id</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">display_info</span></span><br><span class="line">    <span class="string">&quot;Name: <span class="subst">#&#123;<span class="variable">@name</span>&#125;</span>, Employee ID: <span class="subst">#&#123;<span class="variable">@employee_id</span>&#125;</span>&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>EmployeeSalary</strong> 類別（負責員工的薪水計算）：</li>
+</ol>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">EmployeeSalary</span></span><br><span class="line">  <span class="built_in">attr_reader</span> <span class="symbol">:employee</span>, <span class="symbol">:salary</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">employee, salary</span>)</span><br><span class="line">    <span class="variable">@employee</span> = employee</span><br><span class="line">    <span class="variable">@salary</span> = salary</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">calculate_bonus</span></span><br><span class="line">    <span class="variable">@salary</span> * <span class="number">0.1</span> <span class="comment"># 假設獎金是薪水的10%</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p> 以上兩個不同的類別，每個類別都具有不同的職責。</p>
+<ul>
+<li><code>EmployeeInfo</code> 負責管理員工的基本資訊（如姓名和員工ID）</li>
+<li><code>EmployeeSalary</code> 負責計算員工的薪水和獎金。<br> 這兩個類別各自專注於其單一職責，符合 SRP 的原則。</li>
+</ul>
+<blockquote>
+<p><code>attr_reader</code> 是 Ruby 中一個用於自動生成讀取實例變數（instance variables）的方法的簡便方式。主要用途是使類別的實例變數能夠被外部程式碼讀取，而不需要額外編寫自訂的 getter 方法。<code>attr_reader</code> 通常用於創建只讀取（read-only）的實例變數，這意味著外部程式碼可以訪問變數的值，但不能修改它。<br><strong>以下是 <code>attr_reader</code> 的基本用法：</strong></p>
+</blockquote>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span></span><br><span class="line">  <span class="built_in">attr_reader</span> <span class="symbol">:my_variable</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">value</span>)</span><br><span class="line">    <span class="variable">@my_variable</span> = value</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在這個示例中，<code>attr_reader :my_variable</code> 被用來定義一個名為 <code>my_variable</code> 的實例變數，並自動生成了一個名為 <code>my_variable</code> 的讀取方法（getter 方法）。這意味著我們可以在外部程式碼中訪問 <code>my_variable</code> 的值，如下所示：</p>
+</blockquote>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">obj = <span class="title class_">MyClass</span>.new(<span class="number">42</span>)</span><br><span class="line">puts obj.my_variable <span class="comment"># 輸出: 42</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>需要注意的是，<code>attr_reader</code> 只創建了讀取方法，不允許外部程式碼修改實例變數的值。如果你需要允許變數被修改，則可以使用 <code>attr_writer</code> 或 <code>attr_accessor</code>，分別用於生成寫入方法（setter 方法）或同時生成讀取和寫入方法。</p>
+</blockquote>
+</li>
+</ol>
+<hr>
+<ol start="2">
+<li><strong>開放-封閉原則 (Open-Closed Principle - OCP)</strong><ul>
+<li>這個原則強調軟體實體（如類別、模組、函數等）應該是開放擴展的，但封閉修改的。</li>
+<li><strong>可以擴展現有的功能，而不必修改現有的程式碼。</strong>通常，這可以通過使用抽象化和多型來實現。<br>可以往前篇回顧<strong>抽象化和多態性範例：<a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10329257">Day 13 - 理解 Ruby - 物件導向程式設計語言</a></strong></li>
+</ul>
+</li>
+</ol>
+<hr>
+<ol start="3">
+<li><p><strong>里氏替換原則 (Liskov Substitution Principle - LSP)</strong></p>
+<ul>
+<li>這個原則強調子類別應該能夠替換其基類別，而不會破壞程式的正確性。換句話說，如果某個程式使用基類別，則應該可以安全地替換為其子類別，而不會導致不正確的行為。</li>
+</ul>
+<p> 假設我們有一個基類別 <code>Bird</code>，代表鳥類，並且有一個 <code>fly</code> 方法用來表示鳥類飛行的行為：</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Bird</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">fly</span></span><br><span class="line">    <span class="string">&quot;This bird can fly.&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p> 然後，我們建立了一個子類別 <code>Penguin</code>，代表企鵝，但企鵝不能飛行，所以我們需要重寫 <code>fly</code> 方法：</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Penguin</span> &lt; <span class="title class_ inherited__">Bird</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">fly</span></span><br><span class="line">    <span class="string">&quot;This penguin can&#x27;t fly.&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p> 現在，我們可以使用里氏替換原則，確保子類別 <code>Penguin</code> 可以替換其基類別 <code>Bird</code>，並且在不影響程式正確性的情況下重寫 <code>fly</code> 方法。</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bird = <span class="title class_">Bird</span>.new</span><br><span class="line">penguin = <span class="title class_">Penguin</span>.new</span><br><span class="line"></span><br><span class="line">puts bird.fly  <span class="comment"># 輸出: &quot;This bird can fly.&quot;</span></span><br><span class="line">puts penguin.fly  <span class="comment"># 輸出: &quot;This penguin can&#x27;t fly.&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p> <strong>雖然 <code>Penguin</code> 重寫了 <code>fly</code> 方法，但它仍然可以替換 <code>Bird</code> 並遵守里氏替換原則。這使得我們能夠根據需要擴展程式碼，同時保持對基類別的一致性使用，而不會破壞程式的正確性。</strong></p>
+</li>
+</ol>
+<hr>
+<ol start="4">
+<li><p><strong>介面隔離原則 (Interface Segregation Principle - ISP)</strong></p>
+<ul>
+<li>這個原則建議將一個大型的、具有多個方法的介面分解成多個小型的、專注於特定用途的介面。這樣可以避免實現不需要的方法，從而減少類別之間的耦合性，並提高代碼的可讀性。</li>
+</ul>
+<p> 假設我們正在建立一個文件系統應用程式，需要處理文件（File）和資料夾（Folder）。我們想確保這些元素都可以執行基本的操作，如開啟（<code>open</code>）、關閉（<code>close</code>）和刪除（<code>delete</code>）。</p>
+<p> 我們可以創建兩個模組，分別是 <code>Openable</code> 和 <code>Deletable</code>：</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> <span class="title class_">Openable</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">open</span></span><br><span class="line">    puts <span class="string">&quot;Opening...&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> <span class="title class_">Deletable</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">delete</span></span><br><span class="line">    puts <span class="string">&quot;Deleting...&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p> 接下來，我們創建文件（File）和資料夾（Folder）類別，並混入相應的模組：</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">File</span></span><br><span class="line">  <span class="keyword">include</span> <span class="title class_">Openable</span></span><br><span class="line">  <span class="keyword">include</span> <span class="title class_">Deletable</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">name</span>)</span><br><span class="line">    <span class="variable">@name</span> = name</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">name</span></span><br><span class="line">    <span class="variable">@name</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Folder</span></span><br><span class="line">  <span class="keyword">include</span> <span class="title class_">Deletable</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">name</span>)</span><br><span class="line">    <span class="variable">@name</span> = name</span><br><span class="line">    <span class="variable">@contents</span> = []</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">add_item</span>(<span class="params">item</span>)</span><br><span class="line">    <span class="variable">@contents</span> &lt;&lt; item</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p> 在以上例子中，<code>File</code> 和 <code>Folder</code> 類別分別混入了 <code>Openable</code> 和 <code>Deletable</code> 模組。這樣，<code>File</code> 可以執行開啟、關閉和刪除操作，而 <code>Folder</code> 只能執行刪除操作。 <strong>確保每個類別僅實現了他們需要的方法，而不包含不必要的方法，從而減少不必要的耦合。</strong> 如果未來需要添加新的操作，可以輕鬆擴展相應的模組，而不會影響其他部分的程式碼。</p>
+</li>
+<li><p><strong>依賴反轉原則 (Dependency Inversion Principle - DIP)</strong></p>
+<ul>
+<li>這個原則強調高層次模組不應該依賴於低層次模組，兩者都應該依賴於抽象。此外，抽象不應該依賴於具體實現，而具體實現應該依賴於抽象。這可以通過使用介面或抽象類別來實現。</li>
+</ul>
+<p> 假設我們有一個介面 <code>Device</code> 代表設備，並且我們希望能夠將不同類型的設備連接到應用程式。<br> 設備可以執行 <code>connect</code> 操作。</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 設備介面</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Device</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">connect</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 具體設備類別</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Keyboard</span> &lt; <span class="title class_ inherited__">Device</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">connect</span></span><br><span class="line">    puts <span class="string">&quot;Keyboard connected.&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Mouse</span> &lt; <span class="title class_ inherited__">Device</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">connect</span></span><br><span class="line">    puts <span class="string">&quot;Mouse connected.&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p> 我們定義了一個 <code>Device</code> 類別，並建立兩個具體的設備類別 <code>Keyboard</code> 和 <code>Mouse</code>，分別覆蓋了 <code>connect</code> 方法以提供實際的連接功能。</p>
+<p> 這樣，當我們需要添加新的設備類別時，只需創建一個新的設備類別，覆蓋 <code>connect</code> 方法，這種方式可以實現 DIP，因為高層模組（使用這些設備的程式碼）依賴於 <code>Device</code> 抽象介面，而不需要關心具體的設備類別。</p>
+</li>
+</ol>
+<hr>
+<p>SOLID 原則有助於創建有彈性、可擴展和易於維護的程式碼。這些原則通常與設計模式和良好的軟體設計實踐一起使用，以實現高品質的軟體。當設計和編寫程式碼時，考慮這些原則可以幫助避免常見的設計問題並提高代碼的質量。<br>但是，即便這樣簡短的講完這些內容，還是必須反覆去複習才會理解！</p>
+<p>今天先分享至此，我們下篇待續～！</p>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://skyyen999.gitbooks.io/-study-design-pattern-in-java/content/oodPrinciple.html">物件導向程式設計基本原則 - SOLID</a><br>➫ <a target="_blank" rel="noopener" href="https://morosedog.gitlab.io/technology-20200225-tech-2/">J.J.’s Blogs</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/web-development/" class="tag">#web development</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/rails-coc-and-dry-introduction/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - CoC &amp; DRY!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/ruby-oop-introduction/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby] - Ruby 的物件導向程式語言基礎概念!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

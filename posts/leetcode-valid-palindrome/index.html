@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [LeetCode] - 016 Valid Palindrome - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [LeetCode] - 016 Valid Palindrome - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/leetcode-valid-palindrome/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-11-19T05:00:00.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/leetcode/">leetcode</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>November</span>
+            <span>19,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [LeetCode] - 016 Valid Palindrome</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/php/" class="tag">#php</a><a href="/tags/javascript/" class="tag">#javascript</a><a href="/tags/ruby/" class="tag">#ruby</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <blockquote>
+<p>keep learning, keep coding!</p>
+</blockquote>
+<h2 id="Problem-Valid-Palindrome"><a href="#Problem-Valid-Palindrome" class="headerlink" title="Problem - Valid Palindrome"></a>Problem - Valid Palindrome</h2><p>A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.</p>
+<p>Given a string s, return true if it is a palindrome, or false otherwise.</p>
+<h3 id="翻譯蒟蒻"><a href="#翻譯蒟蒻" class="headerlink" title="翻譯蒟蒻"></a>翻譯蒟蒻</h3><p><strong>給定一個字串，將所有大寫字母轉換為小寫字母並刪除所有非字母數字符號後，字串正向讀和反向讀是一樣的，就返回 true，否則 false。</strong> (補充：palindrome n. 回文（正向讀和反向讀是一樣的）)</p>
+<ul>
+<li><p>Example 1:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: s = &quot;A man, a plan, a canal: Panama&quot;</span><br><span class="line">Output: true</span><br><span class="line">Explanation: &quot;amanaplanacanalpanama&quot; is a palindrome.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Example 2:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: s = &quot;race a car&quot;</span><br><span class="line">Output: false</span><br><span class="line">Explanation: &quot;raceacar&quot; is not a palindrome.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Example 3:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: s = &quot; &quot;</span><br><span class="line">Output: true</span><br><span class="line">Explanation: s is an empty string &quot;&quot; after removing non-alphanumeric characters.</span><br><span class="line">Since an empty string reads the same forward and backward, it is a palindrome.</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="Solution-JavaScript"><a href="#Solution-JavaScript" class="headerlink" title="Solution - JavaScript"></a>Solution - JavaScript</h2><p>Method 1:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">s</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">boolean</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> isPalindrome = <span class="keyword">function</span>(<span class="params">s</span>) &#123;</span><br><span class="line">  <span class="comment">// 先用 regex 將所有非字母的字元取代並轉為小寫</span></span><br><span class="line">  <span class="keyword">let</span> filteredString = s.<span class="title function_">replace</span>(<span class="regexp">/[^a-zA-Z\d]/g</span>, <span class="string">&quot;&quot;</span>).<span class="title function_">toLowerCase</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> first = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> last = filteredString.<span class="property">length</span> - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (first &lt; last) &#123;</span><br><span class="line">    <span class="keyword">if</span> (filteredString[first] !== filteredString[last]) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    first++;</span><br><span class="line">    last--;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Method 2:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">s</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">boolean</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> isPalindrome = <span class="keyword">function</span>(<span class="params">s</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> filteredString = s.<span class="title function_">replace</span>(<span class="regexp">/[^a-zA-Z\d]/g</span>, <span class="string">&quot;&quot;</span>).<span class="title function_">toLowerCase</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 直接將過濾後的字串反轉</span></span><br><span class="line">  <span class="keyword">let</span> reversedString = filteredString.<span class="title function_">split</span>(<span class="string">&#x27;&#x27;</span>).<span class="title function_">reverse</span>().<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> filteredString === reversedString;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Solution-Ruby"><a href="#Solution-Ruby" class="headerlink" title="Solution - Ruby"></a>Solution - Ruby</h2><figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">is_palindrome</span>(<span class="params">s</span>)</span><br><span class="line">  filtered_string = s.gsub(<span class="regexp">/[^a-zA-Z\d]/</span>, <span class="string">&quot;&quot;</span>).downcase</span><br><span class="line">  reversed_string = filtered_string.reverse</span><br><span class="line"></span><br><span class="line">  filtered_string == reversed_string</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Solution-PHP"><a href="#Solution-PHP" class="headerlink" title="Solution - PHP"></a>Solution - PHP</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPalindrome</span>(<span class="params"><span class="variable">$s</span></span>) </span>&#123;</span><br><span class="line">    <span class="variable">$filteredString</span> = <span class="title function_ invoke__">strtolower</span>(<span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/[^a-zA-Z\d]/&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="variable">$s</span>));</span><br><span class="line"></span><br><span class="line">    <span class="variable">$reversedString</span> = <span class="title function_ invoke__">strrev</span>(<span class="variable">$filteredString</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$filteredString</span> === <span class="variable">$reversedString</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$s</span> = <span class="string">&quot;A man, a plan, a canal: Panama&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">isPalindrome</span>(<span class="variable">$s</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="PHP-方法筆記"><a href="#PHP-方法筆記" class="headerlink" title="PHP 方法筆記"></a>PHP 方法筆記</h4><ul>
+<li><p><code>strtolower</code> 進行小寫轉換。</p>
+</li>
+<li><p><code>preg_replace</code> 進行正則表達式替換。</p>
+<p>函數的基本語法如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">strtolower</span>(<span class="keyword">string</span> <span class="variable">$string</span>): <span class="keyword">string</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 接受一個字串作為參數。</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">preg_replace</span>(pattern, replacement, subject);</span><br><span class="line"></span><br><span class="line"><span class="comment">// `pattern`：是一個正則表達式，用來匹配字串中的模式。</span></span><br><span class="line"><span class="comment">// `replacement`：是用來替換匹配的內容。</span></span><br><span class="line"><span class="comment">// `subject`：是原始字串，也就是要進行替換的字串。</span></span><br></pre></td></tr></table></figure>
+
+<p>在剛剛的解法裡：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$filteredString</span> = <span class="title function_ invoke__">strtolower</span>(<span class="title function_ invoke__">preg_replace</span>(<span class="string">&#x27;/[^a-zA-Z\d]/&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="variable">$s</span>));</span><br></pre></td></tr></table></figure>
+<p>這裡的正則表達式 <code>/[^a-zA-Z\d]/</code> 匹配任何不是字母（包括大小寫）和數字的字。然後，這些匹配的字符被替換為空字符串 <code>&#39;&#39;</code>，即被移除。最終，<code>$filteredString</code> 包含的是原始字串 <code>$s</code> 中的所有字母和數字，並透過 <code>strtolower</code> 轉換為小寫。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><code>strrev</code> 進行將字串反轉（順序顛倒）。</p>
+<p>函數的基本語法如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">strrev</span>(<span class="keyword">string</span> <span class="variable">$string</span>): <span class="keyword">string</span></span><br><span class="line"><span class="comment">// 接受一個字串作為參數，並返回一個新的字串，其中的字符順序是原始字串的相反。</span></span><br></pre></td></tr></table></figure>
+
+<p>在剛剛的解法裡：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$reversedString</span> = <span class="title function_ invoke__">strrev</span>(<span class="variable">$filteredString</span>);</span><br></pre></td></tr></table></figure>
+<p><code>strrev</code> 被用來將經過正則表達式處理後的字串 <code>$filteredString</code> 進行反轉。<br>這樣就可以判斷原始字串是否跟反轉字串相同，一種判斷使否為回文的方法。</p>
+</li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://leetcode.com/problems/valid-palindrome/?envType=study-plan-v2&envId=top-interview-150">LeetCode 傳送門 - Valid Palindrome</a></strong></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/php/" class="tag">#php</a><a href="/tags/javascript/" class="tag">#javascript</a><a href="/tags/ruby/" class="tag">#ruby</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/infosec-xss-attack/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Information Security] - Cross-site scripting (XSS) Attack!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/leetcode-find-the-index-of-the-first-occurrence-in-a-string/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [LeetCode] - 015 Find the Index of the First Occurrence in a String</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

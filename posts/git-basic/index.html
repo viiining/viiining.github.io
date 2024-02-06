@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Git] - Time Machine! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Git] - Time Machine! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/git-basic/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-10-14T02:17:19.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>14,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Git] - Time Machine!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/git/" class="tag">#git</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <h2 id="What-is-Git"><a href="#What-is-Git" class="headerlink" title="What is Git?"></a>What is Git?</h2><blockquote>
+<p>Git 像是時光機，能保存檔案，也能回顧過去的紀錄，是一種記載著連續性歷史紀錄的系統。</p>
+</blockquote>
+<p>有接觸 Git 工具的人可能會說：「 Git 是一種分散式版本控制系統。」</p>
+<p>聽到這會覺得，每個字都看得懂，但是，仍然不知道實質上是做些什麼？</p>
+<p>來看看自己是不是有過數個檔案、數本報告改了又改，檔案命名換了又換，到最後要繳交的時候，根本搞不清楚自己要的最終版本是哪一個？ 又或者，當與別人一起共同編輯資料，如果對方沒說明，不會知道資料哪裡變更了？</p>
+<p>這種時候，Git 真的就是最好的幫手，因為他可以紀錄每個檔案在何時被新增、何時被修改或者被誰異動過，就這樣紀錄著每個檔案！</p>
+<p>首先，Git 免費且開源 (Open Source) ，大家都可以搜尋 Git 網站，下載並使用！</p>
+<p>當知道 Git 會保留歷史紀錄，使我們完全可以在發生狀況的當下，一一檢視哪裡出問題以及該找誰負責，對於想要有效率地檢視檔案內容哪裡有變動的人來說，真的是一個很方便的工具！</p>
+<p>而，Git 之所以稱之為分散式版本控制系統，源自於他不需要伺服器軟體，就可以運作版本控制，不用擔心伺服器壞了或者沒有網路的環境就無法運作。一般而言，大部分 Git 的操作都在本地數據庫 (Local Repository) 裡執行，也就是在自己的電腦上完成操作，所以使用上可以不用過於擔心。</p>
+<hr>
+<h2 id="Environment-Settings-MacOs"><a href="#Environment-Settings-MacOs" class="headerlink" title="Environment Settings (MacOs)"></a>Environment Settings (MacOs)</h2><h4 id="Download-git"><a href="#Download-git" class="headerlink" title="Download git"></a>Download <u><a target="_blank" rel="noopener" href="https://git-scm.com/">git</a></u></h4><h4 id="Step-1-Open-Terminal"><a href="#Step-1-Open-Terminal" class="headerlink" title="Step 1. Open Terminal"></a>Step 1. Open Terminal</h4><ul>
+<li><code>git --version</code> - log out the version</li>
+<li><code>git config</code> - list view current settings</li>
+</ul>
+<h4 id="Step-2-Initial-setting"><a href="#Step-2-Initial-setting" class="headerlink" title="Step 2. Initial setting"></a>Step 2. Initial setting</h4><ul>
+<li><code>git config --global user.name ”your name”</code></li>
+<li><code>git config --global user.email ”your email”</code></li>
+</ul>
+<h4 id="Step-3-git-init"><a href="#Step-3-git-init" class="headerlink" title="Step 3. git init"></a>Step 3. git init</h4><ul>
+<li><code>cd the directory which you want to use git</code> -&gt; <code>git init</code></li>
+</ul>
+<h4 id="Step-4-git-status"><a href="#Step-4-git-status" class="headerlink" title="Step 4. git status"></a>Step 4. git status</h4><ul>
+<li><p><strong>Working Tree</strong><br>The space that you create the file and still edit them.</p>
+</li>
+<li><p><strong>Staging Area</strong><br>After editing, entering the command git add, then the file will be staged.</p>
+</li>
+<li><p><strong>Repository</strong><br>The staged files need to be save into git. Thus, entering the command git commit -m “the description of what you have revised or why you committed”, then the files will be saved.</p>
+</li>
+</ul>
+<h4 id="How-it-works"><a href="#How-it-works" class="headerlink" title="How it works:"></a>How it works:</h4><p><strong>Working Tree</strong> or <strong>Changes not staged for commit</strong><br><em>Untracked files</em> or <em>Modified files</em><br><code>git add</code> &gt;</p>
+<p><strong>Staging Area</strong><br><em>Changes to be committed</em><br><code>git commit</code> &gt;</p>
+<p><strong>Repository</strong><br><em>Committed</em></p>
+<hr>
+<h2 id="Commands"><a href="#Commands" class="headerlink" title="Commands"></a>Commands</h2><h4 id="Working-Tree"><a href="#Working-Tree" class="headerlink" title="Working Tree"></a>Working Tree</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add                                - add untrack files to staging area</span><br><span class="line">git add . (. = here)                   - add all the files here</span><br><span class="line">git add --all or git add -A            - add all the files</span><br></pre></td></tr></table></figure>
+
+<h4 id="Changes-not-staged-for-commit"><a href="#Changes-not-staged-for-commit" class="headerlink" title="Changes not staged for commit"></a>Changes not staged for commit</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git restore                            - discard the changes in working tree</span><br><span class="line">git restore .                          - discard all the changes here</span><br></pre></td></tr></table></figure>
+
+<h4 id="Staging-Area"><a href="#Staging-Area" class="headerlink" title="Staging Area"></a>Staging Area</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;message&quot;                - commit tracked files to local repository</span><br></pre></td></tr></table></figure>
+
+<h4 id="Local-Repository"><a href="#Local-Repository" class="headerlink" title="Local Repository"></a>Local Repository</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone &#x27;URL&#x27;                        - fetch the online sources URL(such as GitHub) to the local repository</span><br><span class="line"></span><br><span class="line">git pull                               - fetch and merge the remote repository to my files</span><br><span class="line">git push                               - push to remote repository</span><br></pre></td></tr></table></figure>
+
+<h4 id="Useful-Commands"><a href="#Useful-Commands" class="headerlink" title="Useful Commands"></a>Useful Commands</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">git blame `file name`                  - log out the file information</span><br><span class="line">git branch                             - see all the branches</span><br><span class="line">git branch `branch name`               - add a new branch</span><br><span class="line">git branch -m &lt;old_name&gt; &lt;new_name&gt;    - rename the branch</span><br><span class="line">git branch -d `branch name`            - delete a branch</span><br><span class="line"></span><br><span class="line">git checkout                           - save the deleted file &amp; switch the branch</span><br><span class="line"></span><br><span class="line">git log                                - log out the records</span><br><span class="line">git log -- oneline                     - log out the simplified records</span><br><span class="line">git log -p `file name`                 - log out the specified file record</span><br><span class="line">l                                      - show the detailed list</span><br><span class="line">ls                                     - show the file name</span><br><span class="line">ls *.html (`*` means all)              - show all the HTML file</span><br><span class="line"></span><br><span class="line">git merge -m “merge message”           - merge branches (merge consults)</span><br><span class="line">git mv                                 - renamed the file in git</span><br><span class="line"></span><br><span class="line">git rebase                             - change the base of branches</span><br><span class="line">git reflog or git log -g               - see all the edited records</span><br><span class="line">git reset HEAD, branch, commit         - gets rid of all the current staged files and gives us control over where HEAD should point to.</span><br><span class="line">git reset HEAD\^                       - return the previous one move</span><br><span class="line">git reset HEAD~`number`                - backward to wanted moves</span><br><span class="line">git reset HEAD\^ --mixed               - (drfault) the hidden file will go to working tree</span><br><span class="line">git reset HEAD\^ --soft                - the hidden file will go to staging area</span><br><span class="line">git reset HEAD\^ --hard                - the hidden file will disappear</span><br><span class="line">git restore                            - save the deleted file (return to the previous move)</span><br><span class="line"></span><br><span class="line">git rm                                 - remove the file from git</span><br><span class="line">rm                                     - remove the directory in git</span><br><span class="line">rm *.html                              - remove all the html files</span><br><span class="line">rm -rf                                 - force to remove the ./git directory in the folder</span><br><span class="line"></span><br><span class="line">git switch                             - switch the HEAD of branch</span><br><span class="line">git switch `commit number` --detach    - switch the HEAD of commit files</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Advanced-進階說明"><a href="#Advanced-進階說明" class="headerlink" title="Advanced 進階說明"></a>Advanced 進階說明</h2><h3 id="釐清-git-commit-操作"><a href="#釐清-git-commit-操作" class="headerlink" title="釐清 git commit 操作"></a>釐清 git commit 操作</h3><p>git commit 並不是將暫存區的檔案清空再放入資料庫。<br>實際上，git commit 是將暫存區的內容保存到本地資料庫中，創建一個新的提交（commit）。</p>
+<p>當使用 git add 命令將修改的檔案加入暫存區後，<br>這些修改的檔案會成為下一個提交（commit）的一部分。</p>
+<p>當執行 git commit 時，<br>Git 會將這些暫存區中的檔案儲存為一個新的提交，<br>並將其保存到本地資料庫中。</p>
+<h3 id="如果已經-git-add-檔案了，但在還沒-git-commit-之前刪除，有辦法復原嗎？"><a href="#如果已經-git-add-檔案了，但在還沒-git-commit-之前刪除，有辦法復原嗎？" class="headerlink" title="如果已經 git add 檔案了，但在還沒 git commit 之前刪除，有辦法復原嗎？"></a>如果已經 git add 檔案了，但在還沒 git commit 之前刪除，有辦法復原嗎？</h3><p><mark><strong>可以的!</strong></mark></p>
+<blockquote>
+<p>git add 指令會將文件的內容加入到 Git 的暫存區（index）中，<br>暫存區是一個存放即將提交的文件和更改的區域。</p>
+</blockquote>
+<p>在執行 git add 後，Git 將文件的內容儲存到暫存區中，<br>但尚未正式提交到 Git 儲存庫的歷史記錄中。<br>因此，即使沒有進行 commit，文件的更改仍然可以在暫存區中找到。</p>
+<p>當使用 git restore 或 git checkout 等命令時，Git 會根據暫存區中的內容來恢復文件。<br>暫存區允許在 commit 之前對文件進行檢查和修改，並可以根據需要將這些更改提交到儲存庫中。</p>
+<p>最後，當執行 git commit 命令時，<br>Git 將暫存區中的內容正式提交到儲存庫中，並創建一個新的 commit 紀錄。<br>而，這些更改就成為了儲存庫的歷史記錄中的一部分，<br>並且可以通過 commit 的 SHA-1 鍵值來追蹤和檢查。</p>
+<h3 id="git-rebase"><a href="#git-rebase" class="headerlink" title="git rebase"></a>git rebase</h3><p><code>git rebase --interactive commit_number</code> -&gt; <code>git rebase -i commit_number</code></p>
+<p><code>EDITOR=&#39;code --wait&#39; git rebase -i commit_number</code><br>這項指令可以在 VSCode 編輯（要注意順序跟在 git graph 相反）<br><em>（如果沒有寫 <code>EDITOR=&#39;code --wait&#39;</code> 就會進入 Vim 的編輯器去編輯）</em></p>
+<p>當執行剛剛的指令後， VSCode 會開啟一個檔案，<br>並在想要更改的 commit 將 pick 改成 reword 存檔並關掉檔案，<br>VSCode 就會跳出另一個視窗讓你修改 commit。</p>
+<p>另外在介紹另一個動詞，squash !<br>squash 是一種合併（merge）多個連續的 commit 記錄成單一的 commit 的操作。<br>想要更改的 commit 將 pick 改成 squash 存檔並關掉檔案，<br>VSCode 就會跳出另一個視窗讓你修改 commit，這時就能將多個 commits 合成一個 commit。</p>
+<pre><code>Remark:
+在執行 EDITOR=&#39;code --wait&#39; 之前，
+透過 Settings 去尋找：
+確保有將 VSCode 開啟 Shell Command: Install &#39;code&#39; command in PATH
+</code></pre>
+<h3 id="git-rebase-vs-git-merge"><a href="#git-rebase-vs-git-merge" class="headerlink" title="git rebase vs git merge"></a>git rebase vs git merge</h3><p>在不同的分支上開發新功能、解決 bug，完成後就需要把功能合併回主要的分支。<br>合併分支的方式主要有兩種：<code>merge</code> 與 <code>rebase</code>。<br><code>merge</code> 的特點是不改變過去 commit 的歷史記錄，而 <code>rebase</code> 會在合併的當下重新改寫過去 commit 的歷史記錄。</p>
+<ul>
+<li><p><strong>git merge</strong>:</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout main</span><br><span class="line">git merge feature</span><br></pre></td></tr></table></figure>
+<ul>
+<li>當 <code>git merge feature</code>，會產生一個新的合併 commit，可以選擇使用 default message: <code>Merge branch &#39;feature&#39;</code> 將兩個分支的歷史記錄整合在一起，可以從上下圖看出 <code>merge</code> 保留原始分支的歷史記錄，因此可以清晰地看到哪些更改是在哪個分支上進行的。</li>
+<li><code>git merge</code> 通常用於將一個分支的更改合併到主分支或其他長期穩定的分支上。</li>
+</ul>
+<p><img src="/../assets/images/before-merge.png" alt="before merging"><br><img src="/../assets/images/after-merge.png" alt="after merging"></p>
+<h4 id="fast-forward-與-no-fast-forward-模式"><a href="#fast-forward-與-no-fast-forward-模式" class="headerlink" title="fast-forward 與 no-fast-forward 模式"></a>fast-forward 與 no-fast-forward 模式</h4><p>fast-forward 合併時，Git 簡單地將 <code>main</code> 的 HEAD 移動到 <code>feature</code> 分支的最新提交，不會產生合併提交。<br>這樣的合併非常乾淨，因為不會產生多餘的合併提交，但它無法保留特性分支的歷史記錄。</p>
+<p>no-fast-forward 合併方式保留了分支的歷史記錄，但會產生一個合併 <code>commit</code>（如上圖），以標識這個合併操作。</p>
+</li>
+<li><p><strong>git rebase</strong>:</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout feature</span><br><span class="line">git rebase main</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>git rebase main</code> 將 <code>feature</code> 分支的更改暫時存取，然後合併在 <code>main</code> 的最新 <code>commit</code> 之上，<blockquote>
+<p>從下圖可發現原本 <code>feature</code> 的 <code>SHA-1</code> 值為 <code>e66f7db1</code>，<br>  當使用 <code>rebase</code> 後，此 <code>SHA-1</code> 值就會變為新的 <code>8332a9fe</code>。 </p>
+</blockquote>
+</li>
+<li>從下圖可看出一個較線性的 <code>commit</code> 歷史記錄，因為是在一個分支上連續進行的更改，而不是合併的多個 <code>commit</code>。</li>
+<li><code>git rebase</code> 通常用於保持分支的歷史記錄簡潔，特別是當你想要將一個分支的更改整合到另一個分支中，而不希望建立多餘的合併提交。</li>
+</ul>
+<p><img src="/../assets/images/before-rebase.png" alt="before rebasing"><br><img src="/../assets/images/after-rebase.png" alt="after rebasing"></p>
+</li>
+</ul>
+<h4 id="merge-conflicts-解衝突！"><a href="#merge-conflicts-解衝突！" class="headerlink" title="merge conflicts! 解衝突！"></a>merge conflicts! 解衝突！</h4><p>當執行 <code>git rebase</code> 時，可能會遇到合併衝突（merge conflicts）。<br>這些衝突發生在 Git 嘗試將一個分支的變更應用到另一個分支的過程中，但無法自動解決變更之間的衝突。<br>在專案上其實很常見，所以要有耐心的且知道大家的 code 在寫什麼才不會弄錯不要的 code 到專案上唷！</p>
+<p>當 Git 嘗試將兩個分支上的相同文件的相同部分合併在一起時，如果他們的內容不一致，就會產生內容衝突。</p>
+   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</span><br><span class="line">This is the new content from the current branch.</span><br><span class="line">=======</span><br><span class="line">This is the old content from the branch being rebased.</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-name</span><br></pre></td></tr></table></figure>
+
+<p>   在這種情況下，你需要手動選擇要保留的內容，然後刪除 <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>、<code>=======</code> 和 <code>&gt;&gt;&gt;&gt;&gt;&gt;</code> 標記。<br>   解決衝突後，你需要執行 <code>git add</code> 以加入已解決的文件。<br>   然後執行 <code>git rebase --continue</code> 以繼續 rebase 。</p>
+<p>除了上述之外，文件刪除&#x2F;重命名衝突、檔案和目錄移動衝突，也是會需要我們手動解衝突的狀況！</p>
+<p>整理一下解決合併衝突的一般步驟：</p>
+<ol>
+<li>手動編輯衝突的文件以解決衝突。</li>
+<li>使用 <code>git add</code> 將已解決的文件標記為已解決。</li>
+<li>使用 <code>git rebase --continue</code> 繼續 rebase 操作，直到沒有其他衝突。</li>
+</ol>
+<h2 id="cat-指令、pipe-符號"><a href="#cat-指令、pipe-符號" class="headerlink" title="cat 指令、pipe (|) 符號"></a>cat 指令、pipe (|) 符號</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat `file_name`             - 可以看到檔案</span><br><span class="line">cat index.html</span><br><span class="line"></span><br><span class="line">git cat-file commitnum -t   - 可以看出是什麼類型</span><br><span class="line">git cat-file commitnum -p   - 可以看出內容物</span><br></pre></td></tr></table></figure>
+<h4 id="pipe"><a href="#pipe" class="headerlink" title="|  pipe"></a>|  pipe</h4><p>用於將一個命令的輸出作為另一個命令的輸入。兩者之間有前後關係！<br>In Unix-based systems, the pipe symbol is extensively used in the command-line interface (CLI) to chain multiple commands together, allowing the output of one command to be processed or used as input for another command.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat index.html | grep n 可以抓出有包含 n 的字</span><br><span class="line">cat index.html | grep n | grep d 可以抓出有包含 n 的字以及包含 d 的字</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat index.html | git hash-object --stdin</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>git hash-object --stdin</code>:<br>git hash-object 是一個 Git 命令，用於計算對象的 SHA-1 雜湊值。<br>–stdin 參數表示要從標準輸入（stdin）讀取資料來計算 SHA-1 雜湊值。</li>
+</ul>
+<h2 id="cherry-pick"><a href="#cherry-pick" class="headerlink" title="cherry-pick"></a>cherry-pick</h2><p>在 Git 使用 cherry-pick 指令的場景通常是想將特定的 commit 變更合併到當前的分支中，<br>而不是將整個分支合併。這可以選擇性地導入某個 commit 的修改，而不需要合併整個分支的歷史。</p>
+<p>cherry-pick 的基本語法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git cherry-pick &lt;commit-hash&gt;</span><br></pre></td></tr></table></figure>
+<p>其中 <code>&lt;commit-hash&gt;</code> 是你擷取的 commit 的 SHA-1 值。<br><em>(我通常直接使用 VSCode 裡的 Extension -&gt; Git Graph 來操作 cherry-pick)</em></p>
+<p>使用 cherry-pick 之後，Git 會將該 commit 的變更應用到當前分支中，並創一個新的 commit。這個新的 commit 和原始 commit 的內容是相同的，但它有不同的 SHA-1 值，<br>因為它是在不同的時間和不同的歷史上提交的。</p>
+<p>需要注意的是，如果你使用 cherry-pick 來選擇並擷取某個 commit，<br>則這個 commit 及其相關的變更會被完整複製到目標分支中。<br>這包括新增的檔案、修改的檔案和刪除的檔案等。<br>因此，在使用 cherry-pick 時，<br>需要確保這個 commit 的變更不會與目標分支中的其他變更產生衝突。</p>
+<hr>
+<p>迅速地介紹完 Git ，希望大家在使用上都能得心應手！</p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/git/" class="tag">#git</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/internet-dns-and-ip/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Internet] - DNS 跟 IP 是什麼！</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/database-transaction-and-acid/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Database] - 資料庫 Transaction 與 ACID！</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

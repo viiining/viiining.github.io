@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [PHP] - TCPDF Library in Laravel！ - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [PHP] - TCPDF Library in Laravel！ - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/php-tcpdf-library-in-laravel/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2024-01-03T04:17:19.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>January</span>
+            <span>3,</span>
+            <span>2024</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [PHP] - TCPDF Library in Laravel！</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/laravel/" class="tag">#laravel</a><a href="/tags/php/" class="tag">#php</a><a href="/tags/tcpdf/" class="tag">#tcpdf</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>總覺得跟 pdf 功能十分有緣分，先前在製作 READMEE 的專案時，有運用到 <strong>jspdf</strong> 這個前端的 pdf 套件，這次在工作上要使用後端的方式來處理，這次要來介紹 <strong>TCPDF</strong>!</p>
+<h2 id="TCPDF-簡介"><a href="#TCPDF-簡介" class="headerlink" title="TCPDF 簡介"></a>TCPDF 簡介</h2><p>TCPDF 是一個用於生成 PDF 文件的免費且開源的 PHP 類別，而且也是唯一基於 PHP 的函式庫並完全支援 UTF-8 Unicode 和從右到左的語言。在 2009 年，TCPDF 是 SourceForge 上超過 200,000 個項目中最活躍的之一（於 2010 年 4 月 3 日排名第 6）。</p>
+<h3 id="特色"><a href="#特色" class="headerlink" title="特色"></a>特色</h3><p>在使用上，TCPDF 能夠在 PHP 應用程式中生成高度自定義和具有豐富內容的 PDF 文件，而無需依賴外部的程式庫，像是：</p>
+<ul>
+<li><p><strong>PDF 文件生成：</strong> TCPDF 可以生成 PDF 文件，用於呈現文檔、報告、表格等內容。</p>
+</li>
+<li><p><strong>頁面格式支援：</strong> 提供對所有標準頁面格式、自定義頁面格式、自定義邊界和度量單位的支援。</p>
+</li>
+<li><p><strong>文字編碼支援：</strong> 完整支援 UTF-8 Unicode 和從右到左的語言。</p>
+</li>
+<li><p><strong>字型支援：</strong> 支援多種字型格式，包括 TrueTypeUnicode、OpenTypeUnicode、TrueType、OpenType、Type 1 和 CID-0 字型，並具有字型子集功能。</p>
+</li>
+<li><p><strong>圖片和圖形處理：</strong> 能夠處理圖片、圖形（如幾何圖形），原生支援 JPEG、PNG 和 SVG 圖片，以及其他圖片格式透過 GD Graphics Library 和 ImageMagick 的支援。</p>
+</li>
+<li><p><strong>條碼生成：</strong> 提供生成各種條碼（1D 和 2D）的功能，包括 CODE 39、CODE 128、QRcode 等。</p>
+</li>
+<li><p><strong>顏色和透明度：</strong> 支援不同的色彩模式，包括灰度、RGB、CMYK、Spot Colors，以及處理透明度。</p>
+</li>
+<li><p><strong>頁面管理：</strong> 包括自動管理頁首和頁尾、自動分頁、換行和文本對齊等功能。</p>
+</li>
+<li><p><strong>安全性：</strong> 提供文件加密高達 256 位和數位簽名認證。</p>
+</li>
+<li><p><strong>其他功能：</strong> 包括註釋、文本渲染模式、多列模式、書籤和內容表、XOBject 模板、PDF&#x2F;A-1b（ISO 19005-1:2005）支援等。</p>
+</li>
+</ul>
+<hr>
+<h2 id="TCPDF-安裝"><a href="#TCPDF-安裝" class="headerlink" title="TCPDF 安裝"></a>TCPDF 安裝</h2><p>在使用之前，要先來安裝 TCPDF 到應用程式裡，這次在 GitHub 找到以 TCPDF 為基底的 <strong>open source: <a target="_blank" rel="noopener" href="https://github.com/elibyy/tcpdf-laravel">elibyy&#x2F;tcpdf-laravel</a></strong> 。</p>
+<blockquote>
+<p>可以透過 <a target="_blank" rel="noopener" href="https://packagist.org/">packagist</a> 找自己想要的 package，先前有找到 <a target="_blank" rel="noopener" href="https://github.com/dompdf/dompdf">dompdf</a> 但是實作起來發現支援中文字體的功能稍嫌不足，找了很多辦法始終沒有效果，因此轉往 TCPDF 來實作！</p>
+</blockquote>
+<h4 id="透過-composer-來安裝-elibyy-x2F-tcpdf-laravel-套件"><a href="#透過-composer-來安裝-elibyy-x2F-tcpdf-laravel-套件" class="headerlink" title="透過 composer 來安裝 elibyy&#x2F;tcpdf-laravel 套件"></a>透過 composer 來安裝 elibyy&#x2F;tcpdf-laravel 套件</h4><p>可以透過兩種方式：</p>
+<ol>
+<li><p>在 terminal 輸入以下指令：<br><code>composer require elibyy/tcpdf-laravel</code></p>
+</li>
+<li><p>在 <code>composer.json</code> 的 require 裡寫下，<code>&quot;elibyy/tcpdf-laravel&quot;: &quot;^9.0&quot;</code> </p>
+<blockquote>
+<p><strong>要記得 JSON 格式要寫對</strong></p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;require&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;elibyy/tcpdf-laravel&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^9.0&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="TCPDF-引入與使用"><a href="#TCPDF-引入與使用" class="headerlink" title="TCPDF 引入與使用"></a>TCPDF 引入與使用</h2><p>安裝完成後，就要來實際寫進 app 裡囉！</p>
+<h4 id="建立-Route"><a href="#建立-Route" class="headerlink" title="建立 Route"></a>建立 Route</h4><p>在 &#x2F;routes 資料夾的 <code>web.php</code> 新增一條路徑。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>\<span class="title">PDFController</span>;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Route</span>::<span class="title function_ invoke__">get</span>(<span class="string">&#x27;pdf&#x27;</span>, [<span class="title class_">PDFController</span>::<span class="variable language_">class</span>,<span class="string">&#x27;index&#x27;</span>]);</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h4 id="建立-Controller"><a href="#建立-Controller" class="headerlink" title="建立 Controller"></a>建立 Controller</h4><p>在 Laravel 裡，要傳遞資料給 blade 來渲染畫面，就要建立 Controller 去傳遞！<br>因此，建立 Controller 來引入 TCPDF 功能並使用：</p>
+<p>在 terminal 輸入以下指令：<br><code>php artisan make:controller PDFController</code></p>
+<p>指令會在 app&#x2F;Http&#x2F;Controllers 資料夾裡出現 <code>PDFController</code>，並在裡頭寫下方法：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Http</span>\<span class="title class_">Controllers</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Elibyy</span>\<span class="title">TCPDF</span>\<span class="title">Facades</span>\<span class="title">TCPDF</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PDFController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$filename</span> = <span class="string">&#x27;sample.pdf&#x27;</span>;</span><br><span class="line">  </span><br><span class="line">        <span class="variable">$data</span> = [</span><br><span class="line">            <span class="string">&#x27;title&#x27;</span> =&gt; <span class="string">&#x27;To Create PDF Files Using TCPDF Library&#x27;</span></span><br><span class="line">        ];</span><br><span class="line">  </span><br><span class="line">        <span class="variable">$html</span> = <span class="title function_ invoke__">view</span>()-&gt;<span class="title function_ invoke__">make</span>(<span class="string">&#x27;pdf&#x27;</span>, <span class="variable">$data</span>)-&gt;<span class="title function_ invoke__">render</span>();</span><br><span class="line">  </span><br><span class="line">        <span class="variable">$pdf</span> = <span class="keyword">new</span> TCPDF;</span><br><span class="line">          </span><br><span class="line">        <span class="variable">$pdf</span>::<span class="title function_ invoke__">SetTitle</span>(<span class="string">&#x27;Generate PDF Using Laravel Library&#x27;</span>);</span><br><span class="line">        <span class="variable">$pdf</span>::<span class="title function_ invoke__">AddPage</span>();</span><br><span class="line">        <span class="variable">$pdf</span>::<span class="title function_ invoke__">writeHTML</span>(<span class="variable">$html</span>, <span class="literal">true</span>, <span class="literal">false</span>, <span class="literal">true</span>, <span class="literal">false</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  </span><br><span class="line">        <span class="variable">$pdf</span>::<span class="title function_ invoke__">Output</span>(<span class="title function_ invoke__">public_path</span>(<span class="variable">$filename</span>), <span class="string">&#x27;F&#x27;</span>);</span><br><span class="line">  </span><br><span class="line">        <span class="keyword">return</span> <span class="title function_ invoke__">response</span>()-&gt;<span class="title function_ invoke__">download</span>(<span class="title function_ invoke__">public_path</span>(<span class="variable">$filename</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>如果有使用 Livewire 作為 Controller 的話，要注意 line 25-27 方法要改為：</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="title function_ invoke__">response</span>()-&gt;<span class="title function_ invoke__">streamDownload</span>(</span><br><span class="line">    fn () =&gt; <span class="variable">$pdf</span>::<span class="title function_ invoke__">Output</span>(<span class="title function_ invoke__">public_path</span>(<span class="variable">$filename</span>), <span class="string">&#x27;F&#x27;</span>),</span><br><span class="line">    <span class="variable">$filename</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="建立-Blade"><a href="#建立-Blade" class="headerlink" title="建立 Blade"></a>建立 Blade</h4><p>接著，在 &#x2F;resources&#x2F;views 資料夾建立一個 <code>pdf.blade.php</code>，用以呈現 pdf 的畫面。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;To Create PDF Files Using TCPDF Library&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1 style=<span class="string">&quot;color:blue;&quot;</span>&gt;&#123;!! <span class="variable">$title</span> !!&#125;&lt;/h1&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>以上設定完成之後，就可以在 terminal 輸入：<code>php artisan serve</code> 開啟 server，<br>當你連到 <code>http://127.0.0.1:8000/pdf</code> 路徑時，就會自動下載一份名為 <code>sample.pdf</code> 的檔案！</strong></p>
+</blockquote>
+<hr>
+<h2 id="TCPDF-常見方法與參數說明"><a href="#TCPDF-常見方法與參數說明" class="headerlink" title="TCPDF 常見方法與參數說明"></a>TCPDF 常見方法與參數說明</h2><h3 id="建立新的-PDF-物件"><a href="#建立新的-PDF-物件" class="headerlink" title="建立新的 PDF 物件"></a>建立新的 PDF 物件</h3><p><code>$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, &#39;UTF-8&#39;, false);</code></p>
+<ol>
+<li><p><strong><code>PDF_PAGE_ORIENTATION</code>：</strong> 用於設置頁面方向的參數。通常，可以使用 <code>P</code>（直向）或 <code>L</code>（橫向），空值則自動判斷，預設為 <code>P</code>（直向）。</p>
+</li>
+<li><p><strong><code>PDF_UNIT</code>：</strong> 用於設置頁面單位。在 PDF 中，頁面的大小和位置可以使用不同的單位來測量，例如，pt、mm（預設）、cm、in 等。</p>
+</li>
+<li><p><strong><code>PDF_PAGE_FORMAT</code>：</strong> 用於設置頁面格式的參數。通常是一個字串，指定了頁面的標準大小，如 A4（預設）、Letter 等。例如，<code>PDF_PAGE_FORMAT = &#39;A4&#39;</code> 將設置頁面格式為 A4 大小。</p>
+</li>
+<li><p><strong><code>true</code>：</strong> 用於啟用或禁用自動頁面設置。當設置為 <code>true</code> 時，TCPDF 將自動調整頁面大小以適應內容。</p>
+</li>
+<li><p><strong><code>&#39;UTF-8&#39;</code>：</strong> 用於設置文本編碼。UTF-8 是一種廣泛使用的字符編碼，支持多種語言。</p>
+</li>
+<li><p><strong><code>false</code>：</strong> 用於指定是否使用純文本模式。如果設置為 <code>true</code>，則 PDF 將以純文本模式創建。</p>
+</li>
+</ol>
+<h3 id="常見方法"><a href="#常見方法" class="headerlink" title="常見方法"></a>常見方法</h3><p>以下透過建立好的 <code>$pdf</code> 來以實例方法調用 TCPDF Library：</p>
+<h4 id="TCPDF-setPrintHeader-val-x3D-true-x2F-TCPDF-setPrintFooter-val-x3D-true"><a href="#TCPDF-setPrintHeader-val-x3D-true-x2F-TCPDF-setPrintFooter-val-x3D-true" class="headerlink" title="TCPDF::setPrintHeader( $val &#x3D; true ) &#x2F; TCPDF::setPrintFooter( $val &#x3D; true )"></a>TCPDF::setPrintHeader( $val &#x3D; true ) &#x2F; TCPDF::setPrintFooter( $val &#x3D; true )</h4><ul>
+<li>設定頁首頁尾<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$pdf</span>-&gt;<span class="title function_ invoke__">setPrintHeader</span>(<span class="literal">false</span>); <span class="comment">//不要頁首</span></span><br><span class="line"><span class="variable">$pdf</span>-&gt;<span class="title function_ invoke__">setPrintFooter</span>(<span class="literal">false</span>); <span class="comment">//不要頁尾</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="TCPDF-SetFont-family-style-x3D-‘’-size-x3D-null-fontfile-x3D-‘’-subset-x3D-‘default’-out-x3D-true"><a href="#TCPDF-SetFont-family-style-x3D-‘’-size-x3D-null-fontfile-x3D-‘’-subset-x3D-‘default’-out-x3D-true" class="headerlink" title="TCPDF::SetFont( $family, $style &#x3D; ‘’, $size &#x3D; null, $fontfile &#x3D; ‘’, $subset &#x3D; ‘default’, $out &#x3D; true )"></a>TCPDF::SetFont( $family, $style &#x3D; ‘’, $size &#x3D; null, $fontfile &#x3D; ‘’, $subset &#x3D; ‘default’, $out &#x3D; true )</h4><ul>
+<li><p>設定字型</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$pdf</span>-&gt;<span class="title function_ invoke__">SetFont</span>( <span class="variable">$family</span>, <span class="variable">$style</span> = <span class="string">&#x27;&#x27;</span>, <span class="variable">$size</span> = <span class="literal">null</span>, <span class="variable">$fontfile</span> = <span class="string">&#x27;&#x27;</span>, <span class="variable">$subset</span> = <span class="string">&#x27;default&#x27;</span>, <span class="variable">$out</span> = <span class="literal">true</span> )</span><br></pre></td></tr></table></figure></li>
+<li><p>參數說明</p>
+<p>  ➢ <strong><code>$family</code>：</strong> 用於指定字型的整體風格，例如 Serif（襯線體）、Sans-serif（無襯線體）等。常見的值包括 ‘times’、’helvetica’、’courier’ 等，也可以是自定義字型的名稱。</p>
+<p>  ➢ <strong><code>$style</code>：</strong> 用於字型的風格，包括 ‘B’（粗體）、’I’（斜體）、’U’（底線）等。預設值為空字串，表示普通風格。多個風格可以組合使用，例如 ‘BIU’ 表示粗體、斜體和底線。</p>
+<p>  ➢ <strong><code>$size</code>：</strong> 用於字型的大小。如果設置為 <code>null</code>，則保持當前字型大小。</p>
+<p>  ➢ <strong><code>$fontfile</code>：</strong> 用於指定字型文件的路徑。如果指定字型文件，則使用該文件作為字型。如果沒有提供，則使用 TCPDF 預設的字型。可以是 TrueType 字型文件 (.ttf) 或其他支援的字型格式。</p>
+<p>  ➢ <strong><code>$subset</code>：</strong> 用於設置是否生成字型子集的參數。字型子集只包含實際使用到的字符，有助於減小生成的 PDF 文件大小。預設值為 ‘default’，表示使用 TCPDF 的預設設置。也可以設置為 ‘full’（生成全部字符的子集）或 ‘simple’（只包含ASCII字符的子集）。</p>
+<p>  ➢ <strong><code>$out</code>：</strong> 用於是否輸出該設定。如果設置為 <code>false</code>，則只是設定當前字型的參數，不會將其應用於生成的 PDF。預設值為 <code>true</code>。</p>
+</li>
+</ul>
+<h4 id="TCPDF-SetAutoPageBreak-auto-margin"><a href="#TCPDF-SetAutoPageBreak-auto-margin" class="headerlink" title="TCPDF::SetAutoPageBreak( $auto, $margin )"></a>TCPDF::SetAutoPageBreak( $auto, $margin )</h4><ul>
+<li><p>設定自動分頁</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$pdf</span>-&gt;<span class="title function_ invoke__">SetAutoPageBreak</span>( <span class="variable">$auto</span>, <span class="variable">$margin</span> );</span><br></pre></td></tr></table></figure></li>
+<li><p>參數說明</p>
+<p>  ➢ <strong><code>$auto</code>：</strong> (boolean) 用於啟用或禁用自動分頁。如果設置為 <code>true</code>，則 TCPDF 將根據內容自動決定何時換頁。如果設置為 <code>false</code>，則需要手動控制分頁。</p>
+<p>  ➢ <strong><code>$margin</code>：</strong> 是一個數值，表示當新頁面開始時，頁面底部應該有多少空白（邊界）。通常，這個值是以點（point）為單位的，點是印刷行業中常用的長度單位之一。</p>
+</li>
+</ul>
+<h4 id="TCPDF-AddPage-orientation-x3D-‘’-format-x3D-‘’-keepmargins-x3D-false-tocpage-x3D-false"><a href="#TCPDF-AddPage-orientation-x3D-‘’-format-x3D-‘’-keepmargins-x3D-false-tocpage-x3D-false" class="headerlink" title="TCPDF::AddPage( $orientation &#x3D; ‘’,  $format &#x3D; ‘’,  $keepmargins &#x3D; false,  $tocpage &#x3D; false )"></a>TCPDF::AddPage( $orientation &#x3D; ‘’,  $format &#x3D; ‘’,  $keepmargins &#x3D; false,  $tocpage &#x3D; false )</h4><ul>
+<li><p>新增分頁</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$pdf</span>-&gt;<span class="title function_ invoke__">AddPage</span>( <span class="variable">$orientation</span> = <span class="string">&#x27;&#x27;</span>,  <span class="variable">$format</span> = <span class="string">&#x27;&#x27;</span>,  <span class="variable">$keepmargins</span> = <span class="literal">false</span>,  <span class="variable">$tocpage</span> = <span class="literal">false</span> )</span><br></pre></td></tr></table></figure></li>
+<li><p>參數說明</p>
+<p>  ➢ <strong><code>$orientation</code>：</strong> 用於頁面的方向，可以是 ‘P’（直向，預設值）或 ‘L’（橫向）。如果不指定，則使用預設值。</p>
+<p>  ➢ <strong><code>$format</code>：</strong> 用於頁面的格式參數，表示頁面的標準大小。常見的值包括 ‘A4’（預設值）、’Letter’、’Legal’ 等。如果不指定，則使用預設值。</p>
+<p>  ➢ <strong><code>$keepmargins</code>：</strong> (boolean) 用於指定是否保留當前頁面的邊距設置。如果設置為 <code>true</code>，則新頁面將繼承當前頁面的邊距。如果設置為 <code>false</code>（預設值），則新頁面的邊距將使用預設值。</p>
+<p>  ➢ <strong><code>$tocpage</code>：</strong> (boolean) 用於指定新頁面是否應該包含在文檔的目錄（Table Of Contents）中。如果設置為 <code>true</code>，則將在目錄中添加對新頁面的引用。如果設置為 <code>false</code>（預設值），則新頁面不會包含在目錄中。</p>
+</li>
+</ul>
+<h4 id="TCPDF-writeHTML-html-ln-x3D-true-fill-x3D-false-reseth-x3D-false-cell-x3D-false-align-x3D-‘’"><a href="#TCPDF-writeHTML-html-ln-x3D-true-fill-x3D-false-reseth-x3D-false-cell-x3D-false-align-x3D-‘’" class="headerlink" title="TCPDF::writeHTML( $html,  $ln &#x3D; true,  $fill &#x3D; false,  $reseth &#x3D; false,  $cell &#x3D; false,  $align &#x3D; ‘’ )"></a>TCPDF::writeHTML( $html,  $ln &#x3D; true,  $fill &#x3D; false,  $reseth &#x3D; false,  $cell &#x3D; false,  $align &#x3D; ‘’ )</h4><ul>
+<li><p>用於將包含 HTML 內容的字符串寫入 PDF 文件</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$pdf</span>-&gt;<span class="title function_ invoke__">writeHTML</span>( <span class="variable">$html</span>,  <span class="variable">$ln</span> = <span class="literal">true</span>,  <span class="variable">$fill</span> = <span class="literal">false</span>,  <span class="variable">$reseth</span> = <span class="literal">false</span>,  <span class="variable">$cell</span> = <span class="literal">false</span>,  <span class="variable">$align</span> = <span class="string">&#x27;&#x27;</span> )</span><br></pre></td></tr></table></figure></li>
+<li><p>參數說明</p>
+<p>  ➢ <strong><code>$html</code>：</strong> 用於將帶有基本標籤的 HTML 代碼傳遞給這個方法，有支援的網頁標籤：a, b, blockquote, br, dd, del, div, dl, dt, em, font, h1, h2, h3, h4, h5, h6, hr, i, img, li, ol, p, pre, small, span, strong, sub, sup, table, tcpdf, td, th, thead, tr, tt, u, ul。</p>
+<blockquote>
+<p><strong>屬性一定要用雙引號</strong></p>
+</blockquote>
+<p>  ➢ <strong><code>$ln</code>：</strong> (boolean) 是否在內容的末尾換行。如果設置為 <code>true</code>（預設值），在內容結束時會換行到下一行；如果設置為 <code>false</code>，則不會換行。</p>
+<p>  ➢ <strong><code>$fill</code>：</strong> (boolean) 是否填充內容區域的背景。如果設置為 <code>true</code>，則內容的區域將被填充；如果設置為 <code>false</code>（預設值），則不會填充。</p>
+<p>  ➢ <strong><code>$reseth</code>：</strong> (boolean) 是否重置當前頁面的高度。如果設置為 <code>true</code>，則在寫入內容之前，將重置頁面的高度。預設值是 <code>false</code>。</p>
+<p>  ➢ <strong><code>$cell</code>：</strong> (boolean) 是否在內容周圍創建一個儲存格（cell）。如果設置為 <code>true</code>，內容將被放置在一個儲存格中；如果設置為 <code>false</code>（預設值），內容將被放置在頁面上，忽略儲存格的邊界。</p>
+<p>  ➢ <strong><code>$align</code>：</strong> 是一個字串，表示內容的對齊方式。可以是 <code>&#39;L&#39;</code>（左對齊）、<code>&#39;C&#39;</code>（居中對齊）、<code>&#39;R&#39;</code>（右對齊）等。預設值是空字符串，表示沒有指定對齊方式。</p>
+</li>
+</ul>
+<h4 id="TCPDF-Output-name-x3D-‘doc-pdf’-dest-x3D-‘I’"><a href="#TCPDF-Output-name-x3D-‘doc-pdf’-dest-x3D-‘I’" class="headerlink" title="TCPDF::Output( $name &#x3D; ‘doc.pdf’,  $dest &#x3D; ‘I’ )"></a>TCPDF::Output( $name &#x3D; ‘doc.pdf’,  $dest &#x3D; ‘I’ )</h4><ul>
+<li><p>用於生成並輸出 PDF 文件</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$pdf</span>-&gt;<span class="title function_ invoke__">Output</span>( <span class="variable">$name</span> = <span class="string">&#x27;doc.pdf&#x27;</span>,  <span class="variable">$dest</span> = <span class="string">&#x27;I&#x27;</span> )</span><br></pre></td></tr></table></figure></li>
+<li><p>參數說明</p>
+<p>  ➢ <strong><code>$name = &#39;doc.pdf&#39;</code>：</strong> 生成的 PDF 文件的名稱。</p>
+<p>  ➢ <strong><code>$dest = &#39;I&#39;</code>：</strong> 指定如何處理生成的文件的參數。預設為 <code>&#39;I&#39;</code>，表示直接在瀏覽器中顯示（inline）。</p>
+<blockquote>
+<p>其他還有：<br>  <code>&#39;D&#39;</code> - 將文件發送到瀏覽器，並使用提供的名稱強制進行文件下載。<br>  <code>&#39;F&#39;</code> - 將文件保存到本地文件系統（local server）。<br>  <code>&#39;S&#39;</code> - 以字串形式返回文件（文件名將被忽略）。<br>  <code>&#39;FI&#39;</code> - 以 streaming* 方式寫入本地文件，不是立即顯示在瀏覽器中。用於在伺服器上保存生成的文件，而不需要立即顯示給用戶。<br>  <code>&#39;FD&#39;</code> - 以 streaming* 方式將文件提供給瀏覽器進行下載，生成的 PDF 文件將被發送到瀏覽器，讓用戶可以選擇下載文件。這對於生成的文件不需要保存在伺服器上，而是由用戶自行下載時很有用。<br>  <code>&#39;E&#39;</code> - 會生成 base64 編碼的字串，適合用作電子郵件的附件。</p>
+</blockquote>
+<p>  <em>補充：</em><br>  *<em>streaming 是一種在處理數據時，不需要將整個數據集一次性讀取或寫入的方法。數據被分割成小的部分，逐個處理，這樣可以節省內存，提高效率，特別適用於處理大型數據集或文件。</em></p>
+</li>
+</ul>
+<hr>
+<h2 id="TCPDF-設定排版方法"><a href="#TCPDF-設定排版方法" class="headerlink" title="TCPDF 設定排版方法"></a>TCPDF 設定排版方法</h2><ul>
+<li><p>TCPDF 有三種方式可以自定義排版與整體結構：<br><strong><code>TCPDF::Cell()</code> - 繪製單行文本區域</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$pdf</span>-&gt;<span class="title function_ invoke__">Cell</span>( <span class="variable">$w</span>,  <span class="variable">$h</span>,  <span class="variable">$txt</span> = <span class="string">&#x27;&#x27;</span>,  <span class="variable">$border</span>,  <span class="variable">$ln</span>,  <span class="variable">$align</span> = <span class="string">&#x27;&#x27;</span>,  <span class="variable">$fill</span> = <span class="literal">false</span>,  <span class="variable">$link</span> = <span class="string">&#x27;&#x27;</span>,  <span class="variable">$stretch</span>,  <span class="variable">$ignore_min_height</span> = <span class="literal">false</span>,  <span class="variable">$calign</span> = <span class="string">&#x27;T&#x27;</span>,  <span class="variable">$valign</span> = <span class="string">&#x27;M&#x27;</span> )</span><br></pre></td></tr></table></figure>
+<p><strong><code>TCPDF::MultiCell()</code> - 繪製多行文本區域</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$pdf</span>-&gt;<span class="title function_ invoke__">MultiCell</span>( <span class="variable">$w</span>,  <span class="variable">$h</span>,  <span class="variable">$txt</span>,  <span class="variable">$border</span>,  <span class="variable">$align</span> = <span class="string">&#x27;J&#x27;</span>,  <span class="variable">$fill</span> = <span class="literal">false</span>,  <span class="variable">$ln</span> = <span class="number">1</span>,  <span class="variable">$x</span> = <span class="string">&#x27;&#x27;</span>,  <span class="variable">$y</span> = <span class="string">&#x27;&#x27;</span>,  <span class="variable">$reseth</span> = <span class="literal">true</span>,  <span class="variable">$stretch</span>,  <span class="variable">$ishtml</span> = <span class="literal">false</span>,  <span class="variable">$autopadding</span> = <span class="literal">true</span>,  <span class="variable">$maxh</span>,  <span class="variable">$valign</span> = <span class="string">&#x27;T&#x27;</span>,  <span class="variable">$fitcell</span> = <span class="literal">false</span> )</span><br></pre></td></tr></table></figure>
+<p><strong><code>TCPDF::writeHTMLCell()</code> - 以 HTML 格式繪製文本區域</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$pdf</span>-&gt;<span class="title function_ invoke__">writeHTMLCell</span>( <span class="variable">$w</span>,  <span class="variable">$h</span>,  <span class="variable">$x</span>,  <span class="variable">$y</span>,  <span class="variable">$html</span> = <span class="string">&#x27;&#x27;</span>,  <span class="variable">$border</span>,  <span class="variable">$ln</span>,  <span class="variable">$fill</span> = <span class="literal">false</span>,  <span class="variable">$reseth</span> = <span class="literal">true</span>,  <span class="variable">$align</span> = <span class="string">&#x27;&#x27;</span>,  <span class="variable">$autopadding</span> = <span class="literal">true</span> )</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>共同的參數說明</p>
+<p>  ➢ <strong><code>$w</code>：</strong> 寬度。</p>
+<p>  ➢ <strong><code>$h</code>：</strong>高度。</p>
+<p>  ➢ <strong><code>$border</code>：</strong> 用於設定文本區域的邊框，可以是 0、1、2、4、8 或其組合。</p>
+<p>  ➢ <strong><code>$ln</code>：</strong> 是一個整數，表示應該在哪裡進行下一個元素的放置。</p>
+<blockquote>
+<p>可選值有：<br>  <code>0</code> - 右來的位置（預設值）<br>  <code>1</code> - 下一行的開頭<br>  <code>2</code> - 在當前行的下一頁的開頭</p>
+</blockquote>
+<p>  ➢ <strong><code>$fill</code>：</strong> (boolean) 表示是否填充文本區域的背景。如果設置為 <code>true</code>，則填充，否則不填充。預設為 <code>false</code>。</p>
+<p>  ➢ <strong><code>$reseth</code>：</strong> (boolean) 表示是否重置當前字型。默認為 <code>true</code>。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong><code>TCPDF::Cell()</code> 專屬參數與 <code>TCPDF::MultiCell()</code> 專屬參數：</strong></p>
+<p>  ➢ <strong><code>$txt</code>：</strong> 在文本區域中顯示的文本。</p>
+<p>  ➢ <strong><code>$align</code>：</strong> 用於設定文本在文本區域中的對齊方式。</p>
+<blockquote>
+<p>可選值有：<br>  <code>&#39;L&#39;</code> - 左對齊<br>  <code>&#39;C&#39;</code> - 居中對齊<br>  <code>&#39;R&#39;</code> - 右對齊<br>  <code>&#39;J&#39;</code> - 兩端對齊（預設）</p>
+</blockquote>
+<p>  ➢ <strong><code>$x</code>：</strong> 文本區域的左上角的 x 軸位置。</p>
+<p>  ➢ <strong><code>$y</code>：</strong> 文本區域的左上角的 y 軸位置。</p>
+</li>
+<li><p><strong><code>TCPDF::MultiCell()</code> 專屬參數：</strong></p>
+<p>  ➢ <strong><code>$stretch</code>：</strong> (boolean) 表示是否自動拉伸文字以填充整個多行文本區域。預設為 <code>false</code>。</p>
+</li>
+<li><p><strong><code>TCPDF::writeHTMLCell()</code> 專屬參數：</strong></p>
+<p>  ➢ <strong><code>$html</code>：</strong> 包含 HTML 內容的字串，也就是要在文本區域中顯示的 HTML。</p>
+<p>  ➢ <strong><code>$autopadding</code>：</strong> (boolean) 表示是否啟用自動填充。如果設置為 <code>true</code>，則根據字型實際高度動態調整 HTML 文本區域的高度。</p>
+</li>
+</ul>
+<hr>
+<p>TCPDF 還有很多可以設定的方式，仔細去看發現整體的方法真的有很多種也有支援的中文字型真的友善許多！可以透過 <a target="_blank" rel="noopener" href="https://hooks.wbcomdesigns.com/reference/classes/tcpdf/#methods">Dev Resources - TCPDF methods</a> 去查找方法，如果看 TCPDF 的原始文件真的會看到心很累哈哈哈，以上就是這次工作上遇到的套件學習整理，給自己一個鼓勵 ୧ʕ•̀ᴥ•́ʔ୨ (耶～)</p>
+<hr>
+<p><strong>參考資料：</strong></p>
+<p>➫ <a target="_blank" rel="noopener" href="https://www.tad0616.net/modules/tad_book3/page.php?tbsn=26&tbdsn=806">Tad 教材網</a><br>➫ <a target="_blank" rel="noopener" href="https://hackmd.io/@nfu-johnny/r1rGzagqY#%E5%B8%B8%E7%94%A8%E8%AA%9E%E6%B3%95">TCPDF筆記</a><br>➫ <a target="_blank" rel="noopener" href="https://hooks.wbcomdesigns.com/reference/classes/tcpdf/#methods">Dev Resources - TCPDF methods</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/laravel/" class="tag">#laravel</a><a href="/tags/php/" class="tag">#php</a><a href="/tags/tcpdf/" class="tag">#tcpdf</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/leetcode-summary-ranges/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [LeetCode] - 025 Summary Ranges</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/leetcode-contains-duplicate-II/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [LeetCode] - 024 Contains Duplicate II</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

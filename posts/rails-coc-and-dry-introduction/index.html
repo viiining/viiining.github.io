@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby on Rails] - CoC &amp; DRY! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby on Rails] - CoC &amp; DRY! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/rails-coc-and-dry-introduction/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-09-29T14:12:42.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>September</span>
+            <span>29,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby on Rails] - CoC &amp; DRY!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a><a href="/tags/ruby/" class="tag">#ruby</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p><em>講到 Ruby 大家一定也聽過 Ruby on Rails 或者 RoR，今天就來點 Ruby on Rails 吧！</em></p>
+<h2 id="Ruby-on-Rails-是什麼？"><a href="#Ruby-on-Rails-是什麼？" class="headerlink" title="Ruby on Rails 是什麼？"></a>Ruby on Rails 是什麼？</h2><p>Ruby on Rails（簡稱RoR）是一個使用 Ruby 程式語言所開發出來的 Web Framework（網站應用程式框架）。作者是名為 David Heinemeier Hansson（DHH）的丹麥人。</p>
+<p>Ruby on Rails 充分利用了 Ruby 的優勢，提供了一種快速、高效且優雅的方式來開發 Web 應用程式。<br>Ruby on Rails 的設計哲學是以 <strong>慣例優於設定 和 DRY（Don’t Repeat Yourself）原則</strong>為基礎，以提高開發速度和代碼的可讀性。</p>
+<p>因此，我們來看看 Ruby on Rails 設計原則吧！</p>
+<h2 id="Rails-設計原則"><a href="#Rails-設計原則" class="headerlink" title="Rails 設計原則"></a>Rails 設計原則</h2><p>在 Rails 裡，有兩個主要的設計原則：</p>
+<h3 id="Convention-over-Configuration-CoC-慣例優於設定"><a href="#Convention-over-Configuration-CoC-慣例優於設定" class="headerlink" title="Convention over Configuration (CoC) 慣例優於設定"></a>Convention over Configuration (CoC) 慣例優於設定</h3><p>Rails 強調慣例優於設定（Convention over Configuration（CoC））。<br><strong>所謂的慣例就是當遇到某種情況的時候我們會用特定的方式來解決問題。</strong><br><strong>這些慣例幫助開發人員在不同項目之間保持一致性，並且使代碼更容易理解和維護。</strong></p>
+<p>Rails 的慣例 (CoC) 被應用在許多地方，以確保代碼的一致性、可讀性和簡潔性。<br>以下是一些應用了 Rails 慣例的地方：</p>
+<ol>
+<li><p><strong>Model 模型命名：</strong><br>Model 模型命名使用<strong>單數形式</strong>，例如 <code>Article</code> 代表一個文章模型。</p>
+</li>
+<li><p><strong>Table 資料表命名：</strong><br>Table 資料表命名使用<strong>複數形式（通常是模型名稱的複數形式）</strong>，例如 <code>articles</code> 資料表對應到 <code>Article</code> 模型。<strong>這種一致性使得 Rails 能夠自動映射模型和資料表。</strong></p>
+</li>
+<li><p><strong>Controller 控制器命名：</strong><br>Controller 控制器命名使用<strong>複數形式，並以”Controller”結尾</strong>，例如 <code>ArticlesController</code> 。<br>這使得 Rails 能夠自動識別控制器並與相應的路由配對。</p>
+</li>
+<li><p><strong>RESTful 路由：</strong><br>Rails 鼓勵使用 RESTful 路由，他定義了一組標準的 URL 結構來執行 CRUD 操作。<br>這些路由命名通常符合慣例，如 <code>index</code>、<code>show</code>、<code>create</code>、<code>update</code> 和 <code>destroy</code> 等。</p>
+<blockquote>
+<h4 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h4><p>REST（Representational State Transfer）是一種軟體架構風格，主要用於設計網路應用程式的 API，有助於不同軟體和程式在網際網路中互相傳遞訊息。它基於資源（Resource）的概念，每個資源都有唯一的識別符號（URI），並且可以透過不同的 HTTP 方法（GET、POST、PUT、DELETE 等）來執行相應的操作。每個網頁都可視為一個資源，使用者可以透過 URL，也就是這些資源的地址，來取得資源並在瀏覽器上使用。</p>
+<blockquote>
+<p>Remark: URI - Uniform Resource Identifier，其中最常見的 URL 是 URI 的一種特殊形式，兩者都是用來唯一識別資源的地址。</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h4 id="RESTful"><a href="#RESTful" class="headerlink" title="RESTful"></a>RESTful</h4><p>RESTful 是符合 REST 設計原則的 API。當我們在設計 API 時，遵循 REST 的原則，特別是適當地使用 HTTP 方法、URI 和回應狀態碼，我們就可以稱這個 API 為 RESTful API。<br>RESTful 風格的網址設計強調從路由結構就能看出要對什麼資料進行什麼操作。在Ruby on Rails中，RESTful路由已經被設計為一種標準，透過Rails的路徑設定，可以快速地建立符合RESTful概念的路由，並使應用程序遵循RESTful架構來處理資源的CRUD操作。这讓開發人員能夠更容易地設計和理解API，並符合REST的最佳實踐。</p>
+<blockquote>
+<p>Remark: 所謂的 API 是應用程式介面 (application programming interface)，網址也是一種應用程式的「介面」，故稱為 API。</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p><strong>View 視圖：</strong><br>Rails 的 view 按照 controller（控制器）和 action（動作）的名稱組織在特定的目錄結構中，<br>例如 <code>views/articles</code> 目錄包含了與 <code>ArticlesController</code> 相關的 view。</p>
+</li>
+<li><p><strong>Active Record：</strong><br>Rails 的資料庫抽象層 Active Record 使用一系列的命名慣例，<br>如 Model 模型名稱對應到資料表名稱、外鍵的命名、時間戳記欄位等，這些慣例都可以自動產生 SQL 查詢。</p>
+</li>
+<li><p><strong>Partial view 部分視圖：</strong><br>Partila view 部分視圖通常以<strong>下底線開頭</strong>，如 <code>_form.html.erb</code>，<strong>用於標識是可重用的 view。</strong></p>
+</li>
+<li><p><strong>路徑和文件結構：</strong><br>路徑和文件結構的組織也遵循慣例，例如放置 controller 控制器、 model 模型、view 視圖、migration 資料庫遷移文件的目錄結構都受到慣例的指導。</p>
+</li>
+</ol>
+<hr>
+<h3 id="Don’t-Repeat-Yourself-DRY-不要做重複的事-原則"><a href="#Don’t-Repeat-Yourself-DRY-不要做重複的事-原則" class="headerlink" title="Don’t Repeat Yourself (DRY) 不要做重複的事 原則"></a>Don’t Repeat Yourself (DRY) 不要做重複的事 原則</h3><p>Rails 遵循 “不要重複自己”（Don’t Repeat Yourself，DRY）原則。代碼應該盡可能地避免繁冗，並且相同的資訊應該只存在一個地方。</p>
+<p>以下是 Rails 中應用 DRY 原則的地方：</p>
+<ol>
+<li><p><strong>Models (模型)：</strong><br>在 Rails 中，Model 模型代表資料庫中的表格，並使用 Active Record 來定義 Model 模型。<br><strong>DRY 原則在 Model 模型中定義一次模型的結構和資料庫表格的映射，<br>而不必在多個地方重複相同的信息。</strong></p>
+</li>
+<li><p><strong>Database Migrations（資料庫遷移）：</strong><br>Rails 使用資料庫遷移來管理資料庫模式的變更。每個遷移檔案只包含一個變更，並按順序應用。</p>
+</li>
+<li><p><strong>Views（視圖）：</strong><br>可以使用 partial view (部分視圖) 和 layouts（佈局）來避免重複的 HTML 代碼。<br><strong>部分視圖允許你定義一次，然後在多個視圖中重複使用特定的片段。</strong></p>
+</li>
+<li><p><strong>Controllers（控制器）：</strong><br>在 Controllers（控制器）中，<strong>可以使用共享的功能和方法來避免重複的代碼。</strong><br><strong>例如，定義一個私有方法，在多個動作中共用這個方法，而不必多次編寫相同的代碼。</strong></p>
+</li>
+<li><p><strong>Routes（路由）：</strong><br>在 Routes（路由）中，可以使用命名路由（named routes）來引用特定的路徑，而不必在每個連接中硬編碼URL。這使得你可以在一個地方定義路由，然後在整個應用程序中重複使用。</p>
+<p>以下是一個實際的例子：</p>
+<p>假設有一個簡單的部落格，其中有一個文章（posts）資源，來定義幾個常見的路由，<br>如文章列表、單篇文章頁面和新增文章頁面。</p>
+<p>首先，在 <code>config/routes.rb</code> 定義路由並指定名稱：</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># config/routes.rb</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Rails</span>.application.routes.draw <span class="keyword">do</span></span><br><span class="line">  <span class="comment"># 文章列表頁面</span></span><br><span class="line">  get <span class="string">&#x27;/posts&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;posts#index&#x27;</span>, <span class="symbol">as:</span> <span class="string">&#x27;posts&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 單篇文章頁面</span></span><br><span class="line">  get <span class="string">&#x27;/posts/:id&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;posts#show&#x27;</span>, <span class="symbol">as:</span> <span class="string">&#x27;post&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 新增文章頁面</span></span><br><span class="line">  get <span class="string">&#x27;/posts/new&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;posts#new&#x27;</span>, <span class="symbol">as:</span> <span class="string">&#x27;new_post&#x27;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p> 我們為每個路徑指定了名稱，如 <code>posts</code>、<code>post</code> 和 <code>new_post</code>。<br> 這些名稱代表了不同的路由，並且可以在整個應用程序中重複使用。</p>
+<p> 當你需要在視圖或控制器中生成 URL 時，只需使用路由的名稱，而不必硬編碼 URL：</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在視圖中使用命名路由</span></span><br><span class="line">&lt;%= link_to <span class="string">&#x27;查看文章列表&#x27;</span>, posts_path %&gt;</span><br><span class="line">&lt;%= link_to <span class="string">&#x27;查看文章&#x27;</span>, post_path(<span class="variable">@post</span>) %&gt;</span><br><span class="line">&lt;%= link_to <span class="string">&#x27;創建新文章&#x27;</span>, new_post_path %&gt;</span><br></pre></td></tr></table></figure>
+<p> 可以看到 <code>posts_path</code>、<code>post_path</code> 和 <code>new_post_path</code> 分別引用了我們在路由中定義的命名路由。這使得代碼更具可讀性，並且在路由發生變化時更容易進行維護。</p>
+</li>
+<li><p><strong>標準庫和Gem：</strong><br>Rails 附帶了一個豐富的標準庫，並且有許多 Gem 可用於擴展應用程序的功能。<br>這些 Gem 通常遵循 DRY 原則，提供了可重用的代碼和功能。</p>
+<p>像是：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/heartcombo/devise">Devise</a>： Devise 用於實現身份驗證和用戶管理功能。他提供了一個完整的用戶註冊、登錄、忘記密碼等功能的解決方案。通過安裝 Devise，你可以在應用程序中輕鬆添加用戶身份驗證，而不必自己編寫大量代碼。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/carrierwaveuploader/carrierwave">CarrierWave</a>： CarrierWave 是一個用於處理文件上傳的 Gem。允許你在應用程序中輕鬆管理用戶上傳的圖像、文件等。使用 CarrierWave，你可以在模型中定義文件上傳字段，然後自動處理文件上傳、存儲和圖像調整大小等操作。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/kaminari/kaminari">Kaminari</a>： Kaminari 是一個用於實現分頁功能的 Gem。允許你在 Rails 應用程序中輕鬆添加分頁功能，並提供了一個簡潔的 API 來處理分頁查詢。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p><strong>參考資料：</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/Ruby_on_Rails">Wiki - Ruby on Rails</a></li>
+<li><a target="_blank" rel="noopener" href="https://railsbook.tw/chapters/01-ecosystem-and-introduction">生態圈及簡介</a></li>
+</ul>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a><a href="/tags/ruby/" class="tag">#ruby</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/rails-what-is-gem/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Gem 是什麼呀!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/development-solid/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Development] - SOLID!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

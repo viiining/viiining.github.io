@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby on Rails] - 常見的查詢方法! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby on Rails] - 常見的查詢方法! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/rails-query-interface/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-07-30T09:35:04.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>July</span>
+            <span>30,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby on Rails] - 常見的查詢方法!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <h2 id="怎麼用-Ruby-語法查詢資料？"><a href="#怎麼用-Ruby-語法查詢資料？" class="headerlink" title="怎麼用 Ruby 語法查詢資料？"></a>怎麼用 Ruby 語法查詢資料？</h2><h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><p>find 方法只能使用 primary key(id) 值來查找，也就是從 id 去找，<br>返回查詢對象或拋出 exception（例外訊息）！<br>exception 意即：如果找不到對應的記錄，則會拋出 ActiveRecord::RecordNotFound 錯誤。</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Find the article with primary key (id) 6.</span></span><br><span class="line">article = <span class="title class_">Article</span>.find(<span class="number">6</span>)</span><br><span class="line"><span class="comment"># =&gt; #&lt;Article id: 6, title: &quot;Hello World&quot;&gt;</span></span><br></pre></td></tr></table></figure>
+<p>轉換成 SQL 語法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> articles <span class="keyword">WHERE</span> (articles.id <span class="operator">=</span> <span class="number">6</span>) LIMIT <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>也可以用陣列方式抓取多個 id：</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Find the articles with primary keys 1 and 6.</span></span><br><span class="line">article = <span class="title class_">Article</span>.find([<span class="number">1</span>, <span class="number">6</span>]) <span class="comment"># Or even Article.find(1, 6)</span></span><br><span class="line"><span class="comment"># =&gt; [#&lt;Article id: 1, title: &quot;Hey&quot;&gt;, #&lt;Article id: 6, title: &quot;Hello World&quot;&gt;]</span></span><br></pre></td></tr></table></figure>
+<p>轉換成 SQL 語法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> articles <span class="keyword">WHERE</span> (articles.id <span class="keyword">IN</span> (<span class="number">1</span>,<span class="number">6</span>))</span><br></pre></td></tr></table></figure>
+
+<pre><code>Remark:
+若不是所有提供的主鍵都有找到匹配的物件，則 find 方法會拋出 ActiveRecord::RecordNotFound。
+</code></pre>
+<p>有 exception（例外訊息）就可以使用 begin … rescue 來捕捉：</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">show</span></span><br><span class="line">    <span class="keyword">begin</span></span><br><span class="line">      article = <span class="title class_">Article</span>.find(params[<span class="symbol">:id</span>])</span><br><span class="line">    <span class="keyword">rescue</span> <span class="title class_">ActiveRecord</span><span class="symbol">:</span><span class="symbol">:RecordNotFound</span></span><br><span class="line">      redirect_to show_path, <span class="symbol">notice:</span> <span class="string">&quot;沒有這個 Record！&quot;</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="find-by"><a href="#find-by" class="headerlink" title="find_by"></a>find_by</h3><p>find_by 方法使用 key: value 的 Hash 當作參數來查找記錄，<br>返回符合條件的第一個查詢對象或 nil。</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">show</span></span><br><span class="line">  user = <span class="title class_">User</span>.find_by(<span class="symbol">name:</span> params[<span class="symbol">:name</span>])</span><br><span class="line">  user.articles <span class="comment"># 顯示與該使用者相關的文章</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>find_by!</strong></p>
+<p>find_by! 方法其實跟 find_by 差異在如果沒有查到符合條件的資料會回傳 exception（例外訊息）也就是 ActiveRecord::RecordNotFound 錯誤！</p>
+<h3 id="where"><a href="#where" class="headerlink" title="where"></a>where</h3><p>where 方法接收一個條件可以使用 字串、陣列、物件（key : value）作為參數，<br>並返回所有符合條件的查詢對象，是一個 ActiveRecord 查詢集合（Relation）。<br>如果找不到紀錄，會是一個空的 ActiveRecord 查詢結果 []。</p>
+<pre><code>Remark:
+純字串的條件下，若字串內帶有變數，會有 SQL injection 的風險，所以通常會改用陣列處理！
+</code></pre>
+  <figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 不推薦的寫法，容易有 SQL injection 的風險</span></span><br><span class="line"><span class="title class_">Model</span>.where(<span class="string">&quot;name = &#x27;%<span class="subst">#&#123;params[<span class="symbol">:name</span>]&#125;</span>%&#x27;&quot;</span>)</span><br><span class="line"><span class="comment"># 推薦的寫法，使用陣列方式處理</span></span><br><span class="line"><span class="title class_">Model</span>.where(<span class="string">&quot;name = ?&quot;</span>, params[<span class="symbol">:name</span>])</span><br></pre></td></tr></table></figure>
+
+<h4 id="SQL-injection"><a href="#SQL-injection" class="headerlink" title="# SQL injection"></a># SQL injection</h4><p>SQL injection 是一種常見的安全漏洞，發生在應用程式沒有適當處理用戶輸入的情況下。<br>當應用程式將用戶輸入直接嵌入 SQL 查詢中，而沒有對輸入進行適當的驗證和處理時，<br>攻擊者可以利用這一點注入惡意的 SQL 代碼，從而在應用程式的資料庫上執行未授權的操作。</p>
+<p>假設一個應用程式接收用戶的輸入並將其直接嵌入 SQL 查詢中：<br>  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 抓取 user 輸入的值</span></span><br><span class="line">user_input = params[<span class="symbol">:name</span>]</span><br><span class="line"><span class="comment"># SQL 語法</span></span><br><span class="line">sql_query = <span class="string">&quot;SELECT * FROM users WHERE name = &#x27;<span class="subst">#&#123;user_input&#125;</span>&#x27;&quot;</span></span><br><span class="line"><span class="comment"># 出來的結果會用 SQL 語法來抓</span></span><br><span class="line">results = <span class="title class_">ActiveRecord</span><span class="symbol">:</span><span class="symbol">:Base</span>.connection.execute(sql_query)</span><br></pre></td></tr></table></figure><br>如果用戶在輸入中插入惡意的 SQL 代碼，攻擊者可能會干擾 SQL 查詢的結構，<br>從而執行未授權的操作，例如刪除資料、查詢敏感資料或修改資料庫內容。</p>
+<h4 id="SQL-Injection-Based-on-1-x3D-1-is-Always-True"><a href="#SQL-Injection-Based-on-1-x3D-1-is-Always-True" class="headerlink" title="# SQL Injection Based on 1&#x3D;1 is Always True"></a># SQL Injection Based on 1&#x3D;1 is Always True</h4><p>1&#x3D;1 is Always True 就是所謂惡意的 SQL 代碼，<br>假如攻擊者在 user_input 輸入： <code>Attacker OR 1=1</code>，<br>這時，攻擊者就可以在毫無驗證的情況下直接通過了，<br>這個 SQL 查詢的條件永遠為真，導致查詢結果返回所有用戶的資料，而不僅僅是符合用戶輸入的資料。</p>
+<h4 id="防止-SQL-injection："><a href="#防止-SQL-injection：" class="headerlink" title="# 防止 SQL injection："></a># 防止 SQL injection：</h4><p><strong>使用參數化查詢或預處理語句，而不是直接將用戶輸入嵌入 SQL 查詢中。</strong><br>使用 Active Record 的方式處理條件，例如使用陣列方式處理：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Model</span>.where(<span class="string">&quot;name = ?&quot;</span>, params[<span class="symbol">:name</span>])</span><br></pre></td></tr></table></figure>
+<p>Rails 會將 ? 換成 params[:name] 做查詢。條件式後的元素，對應到條件裡的每個 ?。</p>
+<h4 id="where-vs-find-by"><a href="#where-vs-find-by" class="headerlink" title="where vs find_by"></a>where vs find_by</h4><figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 where 方法</span></span><br><span class="line">users = <span class="title class_">User</span>.where(<span class="symbol">name:</span> <span class="string">&#x27;John&#x27;</span>)</span><br><span class="line"><span class="comment"># users 不會是 nil，即使沒有找到符合條件的使用者，它會是一個空的 ActiveRecord 查詢結果 []</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 find_by 方法</span></span><br><span class="line">user = <span class="title class_">User</span>.find_by(<span class="symbol">name:</span> <span class="string">&#x27;John&#x27;</span>)</span><br><span class="line"><span class="comment"># 如果找到了名為 &#x27;John&#x27; 的使用者，user 將是該使用者的記錄；如果找不到，user 將是 nil</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
+<li><strong>find</strong> 方法根據主鍵（id）值查詢記錄，並返回查詢對象，如果找不到則拋出例外訊息。</li>
+<li><strong>find_by</strong> 方法以 Hash 參數來查詢記錄，返回第一個符合條件的查詢對象，找不到則返回 nil。</li>
+<li><strong>find_by!</strong> 方法跟 find_by 類似，但如果沒有找到符合條件的記錄，它會拋出例外訊息。</li>
+<li><strong>where</strong> 方法進行更複雜的查詢，它可以接收字串、陣列或物件（key: value）作為條件，並返回所有符合條件的查詢對象，是一個 ActiveRecord 查詢集合（Relation）。<br>使用純字串的條件時，為避免 SQL injection 風險，我們應該改用陣列方式處理。</li>
+</ul>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://rails.ruby.tw/active_record_querying.html">Active Record 查詢</a><br>➫ <a target="_blank" rel="noopener" href="https://molu.in/blog/rails-find-find_by-where/#:~:text=%E5%B7%AE%E5%88%A5%E5%9C%A8%E6%96%BC%20find_by()%20%E5%8F%AA,%E6%A2%9D%E4%BB%B6%E7%9A%84%E3%80%8C%E5%85%A8%E9%83%A8%E8%B3%87%E6%96%99%E3%80%8D%E3%80%82">【Ruby】每天一點 Rails：find()、find_by()、where()</a><br>➫ <a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10244872">ActiveRecord中的find、find_by和where方法的差異在哪？</a><br>➫ <a target="_blank" rel="noopener" href="https://www.w3schools.com/sql/sql_injection.asp">SQL Injection</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/rails-gem-for-transfer-file-to-pdf/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - 呼叫 `.pdf` 轉換術!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/sql-basic/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit SQL!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

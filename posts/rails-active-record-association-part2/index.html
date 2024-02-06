@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby on Rails] - Active Record Associations (下)! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby on Rails] - Active Record Associations (下)! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/rails-active-record-association-part2/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-10-05T05:17:21.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>5,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby on Rails] - Active Record Associations (下)!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a><a href="/tags/active-record/" class="tag">#active record</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p><em>上回我們講到 Active Record Association 的基礎觀念，今天繼續延伸下去！</em></p>
+<h2 id="Polymorphic-Association-多型關聯"><a href="#Polymorphic-Association-多型關聯" class="headerlink" title="Polymorphic Association 多型關聯"></a>Polymorphic Association 多型關聯</h2><p>多型關聯（Polymorphic Association）是一種在資料庫中建立關聯的方法，允許一個模型與多個其他模型建立關聯，並且可以根據需要動態指向這些模型中的一個。主要目的是在不知道或不確定關聯到哪個模型的情況下實現關聯。</p>
+<p>想像你正在建立一個簡單的網站，用戶可以發表評論（Comments），但這些評論可以關聯到多種不同類型的內容，例如文章（Articles）和圖片（Photos）。這時就可以使用多型關聯。</p>
+<ul>
+<li><p>建立一個 <code>Comment</code> 模型，該模型將關聯到多種不同類型的內容。</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Comment</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  belongs_to <span class="symbol">:commentable</span>, <span class="symbol">polymorphic:</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立其他模型，例如 <code>Article</code> 和 <code>Photo</code>，並將它們與 <code>Comment</code> 進行多型關聯。</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Article</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  has_many <span class="symbol">:comments</span>, <span class="symbol">as:</span> <span class="symbol">:commentable</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Photo</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  has_many <span class="symbol">:comments</span>, <span class="symbol">as:</span> <span class="symbol">:commentable</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>我們就可以在 <code>Comment</code> 模型中使用 <code>commentable</code> 來關聯到不同類型的內容。<br>例如，當用戶發表一個評論時：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建立一個評論關聯到一篇文章</span></span><br><span class="line">article = <span class="title class_">Article</span>.find(<span class="number">1</span>)</span><br><span class="line">comment = article.comments.create(<span class="symbol">content:</span> <span class="string">&#x27;這是一個評論&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立一個評論關聯到一張圖片</span></span><br><span class="line">photo = <span class="title class_">Photo</span>.find(<span class="number">2</span>)</span><br><span class="line">comment = photo.comments.create(<span class="symbol">content:</span> <span class="string">&#x27;這是另一個評論&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>可以通過 <code>commentable</code> 關聯動態地關聯到不同類型的內容，同時保持代碼的簡單性和可擴展性。</p>
+<h2 id="Self-joining-Associations-自連接關聯"><a href="#Self-joining-Associations-自連接關聯" class="headerlink" title="Self-joining Associations 自連接關聯"></a>Self-joining Associations 自連接關聯</h2><p>自連接（Self-joining）關聯是一種在資料庫中建立關聯的技術，其中同一個表格（或模型）中的記錄可以與該表格中的其他記錄建立關聯。換句話說，就是在一個模型中創建一個與自己相關聯的關聯，通常用於處理與模型自身相關的數據。</p>
+<p>例如，有一個 “Employee” 的模型，每個員工都有一個直接上級（即另一個員工），並且他們都屬於同一個公司。<br>可以使用自連接來建立員工之間的關聯，同時維護每個員工的直接上級。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Employee 模型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Employee</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  belongs_to <span class="symbol">:manager</span>, <span class="symbol">class_name:</span> <span class="string">&#x27;Employee&#x27;</span>, <span class="symbol">optional:</span> <span class="literal">true</span></span><br><span class="line">  has_many <span class="symbol">:subordinates</span>, <span class="symbol">class_name:</span> <span class="string">&#x27;Employee&#x27;</span>, <span class="symbol">foreign_key:</span> <span class="string">&#x27;manager_id&#x27;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>這個模型有兩個關聯：</p>
+<ol>
+<li><p><code>belongs_to :manager</code>：這個關聯表示每個員工都屬於另一個員工，並且 <code>class_name</code> 參數指定了關聯的模型是自身的 “Employee” 模型。意即，每個員工都有一個直接上級，但不是每個員工都必須有一個直接上級（所以我們使用 <code>optional: true</code>）。</p>
+</li>
+<li><p><code>has_many :subordinates</code>：這個關聯表示每個員工都可以擁有多個下屬，同樣，我們使用 <code>class_name</code> 和 <code>foreign_key</code> 參數指定了關聯的模型和外鍵字段。</p>
+</li>
+</ol>
+<p>使用這些關聯來建立員工之間的關係：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建立員工記錄</span></span><br><span class="line">manager = <span class="title class_">Employee</span>.create(<span class="symbol">name:</span> <span class="string">&#x27;Manager&#x27;</span>)</span><br><span class="line">employee1 = <span class="title class_">Employee</span>.create(<span class="symbol">name:</span> <span class="string">&#x27;Employee 1&#x27;</span>, <span class="symbol">manager:</span> manager)</span><br><span class="line">employee2 = <span class="title class_">Employee</span>.create(<span class="symbol">name:</span> <span class="string">&#x27;Employee 2&#x27;</span>, <span class="symbol">manager:</span> manager)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查詢員工的直接上級和下屬</span></span><br><span class="line">puts employee1.manager.name  <span class="comment"># 輸出 &quot;Manager&quot;</span></span><br><span class="line">puts manager.subordinates.pluck(<span class="symbol">:name</span>)  <span class="comment"># 輸出 [&quot;Employee 1&quot;, &quot;Employee 2&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<p>這樣，你可以使用自連接來建立模型內部的層次結構關係，這在處理組織結構、層次性數據或任何需要記錄與自身建立關聯的情況下非常有用。自連接使用相同的模型在內部建立關聯，同時保持代碼的簡潔性和可讀性。</p>
+<h2 id="補充觀念"><a href="#補充觀念" class="headerlink" title="補充觀念"></a>補充觀念</h2><p>在 Rails Guide - Active Record Association 中，有提及關於在 Rails 應用程式中有效使用 Active Record Association 的注意事項：</p>
+<ol>
+<li><p><strong>控制緩存（Controlling caching）</strong>：</p>
+<p>Active Record 通常會對關聯數據進行緩存，以提高性能。<br>一些查詢結果可能會被緩存在記憶體中，但有時這可能導致意外的行為。<br>可以使用 <code>reload</code> 方法來重新加載關聯數據，以確保獲取的是最新的數據。</p>
+</li>
+<li><p><strong>避免名稱衝突（Avoiding name collisions）</strong>：</p>
+<p>在模型中定義多個關聯時，要注意避免名稱衝突！<br>如果多個關聯使用相同的名稱，可能會導致混淆和錯誤。<br>為每個關聯選擇具有描述性的名稱，並使用 <code>:class_name</code> 選項來指定模型的名稱，以避免混淆。</p>
+</li>
+<li><p><strong>更新模式（Updating the schema）</strong>：</p>
+<p>更改模型之間的關聯時，記得更新 schema！<br>如果新增、刪除或修改關聯，需要遷移（migration）來更新資料庫結構，以反映新的關聯。</p>
+</li>
+<li><p><strong>控制關聯範圍（Controlling association scope）</strong>：</p>
+<p>使用 <code>has_many</code> 或 <code>has_one</code> 關聯時，可以使用 <code>:scope</code> 選項來定義範圍，以限制關聯中的數據。這對於過濾或排序關聯數據非常有用。</p>
+</li>
+<li><p><strong>雙向關聯（Bi-directional associations）</strong>：</p>
+<p>有時可能需要在兩個模型之間建立雙向關聯，也就是說，當一個模型關聯到另一個模型時，也希望反向的關聯也存在。這可以通過在兩個模型中分別定義關聯來實現。確保處理好雙向關聯可以更方便地訪問和操作數據。</p>
+</li>
+</ol>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://guides.rubyonrails.org/association_basics.html#polymorphic-associations">Polymorphic Association</a><br>➫ <a target="_blank" rel="noopener" href="https://pjchender.dev/ruby-on-rails/ruby-on-rails-active-record-association/#generator">PJCHENder - [Rails] Active Record Association (Model)</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a><a href="/tags/active-record/" class="tag">#active record</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/rails-active-record-query-part1/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Active Record Query (上)!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/rails-active-record-association-part1/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Active Record Associations (上)!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

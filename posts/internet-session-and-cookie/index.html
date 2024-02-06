@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Internet] - Session 與 Cookie 是什麼！ - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Internet] - Session 與 Cookie 是什麼！ - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/internet-session-and-cookie/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-10-16T08:17:19.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>16,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Internet] - Session 與 Cookie 是什麼！</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/internet/" class="tag">#internet</a><a href="/tags/interview/" class="tag">#interview</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p>面試大哉問之超常見的 Session 與 Cookie，本篇就來聊聊一些基礎與相關知識！<br>Let’s go!</p>
+<h2 id="為什麼會有-Session-與-Cookie？"><a href="#為什麼會有-Session-與-Cookie？" class="headerlink" title="為什麼會有 Session 與 Cookie？"></a>為什麼會有 Session 與 Cookie？</h2><p>大家是否好奇為什麼會有 Session 與 Cookie？<br>他們之所以會存在是因為 HTTP 是一種無狀態協議（Stateless Protocol），<br>無狀態協議換句話說就是每次從客戶端（Client）對伺服器（Server）發出的請求都是獨立的，<br>伺服器（Server）不會主動保留關於使用者的資訊或狀態。<br>這意味著在多個請求之間，伺服器無法識別特定使用者或追蹤使用者的狀態，<br>簡單說就是這次的請求無法得知上次請求的內容與資訊！</p>
+<blockquote>
+<p>為了解決這個問題，Web 應用程式引入 Session 和 Cookie 機制，<br>以在多個 HTTP 請求之間維護使用者的狀態資訊。</p>
+</blockquote>
+<hr>
+<h2 id="Session-是什麼？"><a href="#Session-是什麼？" class="headerlink" title="Session 是什麼？"></a>Session 是什麼？</h2><h3 id="Session-的生活化概念"><a href="#Session-的生活化概念" class="headerlink" title="Session 的生活化概念"></a>Session 的生活化概念</h3><p>用一個購物流程來看看 Session 的概念吧！</p>
+<ul>
+<li>當你第一次進入購物網站，伺服器（Server）並不知道你是誰或你在做什麼。</li>
+<li>你開始在商店裡挑選商品，並放入購物車中。<br>購物車就會是你目前的<strong>狀態</strong>，包含了你在這次購物過程中的所選物品。</li>
+<li>當你決定購買商品時，你前往結帳，也就是你提交了一個訂單，需要提供付款資訊。<br>在這一步，商店需要知道你的購物車內容和金額。</li>
+<li>你提供了信用卡資訊並付款，同時，購物網站處理你的付款訊息，更新你的帳戶狀態，<br>並將訂單標記為已完成。</li>
+<li>當你離開網站時，伺服器結束了你的 Session，清除了你的狀態訊息，這有助於保護你的隱私。<br>例如購物車內容和登入狀態。下次當你再次訪問這個網站時，你將從頭開始。</li>
+</ul>
+<p>其實，Session 就是在一段時間內保持的狀態，<br>剛剛的購物過程就是在 Session 期間與網站中的互動。</p>
+<p>在購物過程中，Session 用於保持使用者的狀態訊息，例如購物車內容、登入狀態等。<br>使用者在 Session 期間與網站進行多次請求和回應，<br>這些請求和回應在同一 Session 中共享相同的上下文和狀態。</p>
+<blockquote>
+<p>Session 的目的是在一系列相關的操作之間保持用戶的狀態和訊息，<br>以便提供一種連貫的體驗，就像你在購物過程中需要保持你的購物車狀態一樣。</p>
+</blockquote>
+<hr>
+<h2 id="Cookie-是什麼？"><a href="#Cookie-是什麼？" class="headerlink" title="Cookie 是什麼？"></a>Cookie 是什麼？</h2><h3 id="Cookie-生活化概念"><a href="#Cookie-生活化概念" class="headerlink" title="Cookie 生活化概念"></a>Cookie 生活化概念</h3><p>Cookie 用於在使用者的電腦上儲存小段資料，<br>以生活上的例子來看的話，<strong>Cookie 就像你在咖啡店裡點咖啡時得到的取餐明細。</strong></p>
+<ul>
+<li>想像一下，你走進了一家咖啡店，想要點一杯咖啡。當你點咖啡時，店員給你一張取餐明細，上面有你點的咖啡與相關資訊。</li>
+<li>這張取餐明細就像是你的 Cookie，包含了你點的咖啡相關的資訊。</li>
+<li>假如你還想再點一杯咖啡，你只需出示那張取餐明細，店員就知道你之前點了什麼咖啡，然後可以為你準備相同的咖啡。你不需要每次都重新告訴店員你想要什麼。</li>
+<li>但是，這張取餐明細可能有一些限制。例如，只能在這家咖啡館取用，或者他可能有一個有效期，過了有效期就不能再使用。</li>
+</ul>
+<p>取餐明細就像是 Cookie 是一個小的資料片段。<br>在網頁瀏覽中，Cookie 是由伺服器（Server）傳送到你的瀏覽器的小段資料，然後在你的電腦上儲存。</p>
+<p>這些 Cookie 可以包含有關你在網站上的活動的信息，例如登入狀態、購物車內容或使用者首選項。<br>當你再次造訪網站時，瀏覽器將發送這些 Cookie 給伺服器（Server），<br>以便伺服器（Server）可以識別你，並提供與你之前的互動相關的個人化體驗。</p>
+<p>就像在咖啡店中，取餐明細允許你保持與之前點單相關的狀態訊息，<br>Cookie 也允許你在不同的網頁之間保持與先前活動相關的狀態資訊。</p>
+<blockquote>
+<p>Cookie 是由伺服器（Server）傳送給瀏覽器的小段資料。當你造訪一個網站時，<br>伺服器可以在回應中包含一個 Set-Cookie 的 Header，用於在瀏覽器中設定 Cookie。<br>瀏覽器會將這些 Cookie 儲存在使用者的電腦上以便在不同的 HTTP 請求之間保持和傳遞訊息。</p>
+</blockquote>
+<blockquote>
+<p>但 Cookie 是存在 Client 端的資料，在安全性上會有被篡改資料的風險，因此機密的資料不建議存放！而且如果 Cookie 中數據太多會影響傳輸效率。</p>
+</blockquote>
+<h2 id="Brief-Summary"><a href="#Brief-Summary" class="headerlink" title="Brief Summary"></a>Brief Summary</h2><p>Cookie 和 Session 的主要區別在於儲存位置和資料容量。</p>
+<p>Cookie 儲存在使用者的瀏覽器中，通常用於儲存小型數據，例如使用者的識別碼（Session ID）。<br>Cookie 的資料容量有限，並且在使用者的電腦上儲存。他們通常有一個指定的生存期，可以是 Session 層級（瀏覽器關閉後刪除）或持久性（在瀏覽器中儲存一段時間）。</p>
+<p>Session 資料儲存在伺服器（Server）上，通常用於儲存大量的狀態訊息。<br>Session 資料在伺服器記憶體或資料庫中保存，通常安全性較高。而，Session 通常在使用者關閉瀏覽器時結束，或者可以設定逾時時間，也可以在伺服器（Server）手動終止。</p>
+<p>因此，Cookie 主要用於在使用者瀏覽器中儲存少量數據，而 Session 用於在伺服器（Server）上儲存更大量的狀態資訊。</p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/internet/" class="tag">#internet</a><a href="/tags/interview/" class="tag">#interview</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/ruby-method-for-fibonacci/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby] - 費波那契數 Successione di Fibonacci！</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/internet-http-and-https/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Internet] - HTTP / HTTPS！</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

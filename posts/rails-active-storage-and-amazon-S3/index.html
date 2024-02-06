@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby on Rails] - 由 Active Storage 延伸至 Amazon S3 Bucket! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby on Rails] - 由 Active Storage 延伸至 Amazon S3 Bucket! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/rails-active-storage-and-amazon-S3/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-08-20T14:35:04.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>August</span>
+            <span>20,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby on Rails] - 由 Active Storage 延伸至 Amazon S3 Bucket!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <h2 id="before-action-set-knowledge"><a href="#before-action-set-knowledge" class="headerlink" title="before_action :set_knowledge"></a>before_action :set_knowledge</h2><p>最近在專案執行上，碰上需要上傳圖片並且圖片能夠在線上的資料庫做保存，這次藉由 Rails Guide 介紹的 Active Storage 與 Amazon S3 的設置環節來記錄一整個建置的過程！</p>
+<h3 id="About-Active-Storage"><a href="#About-Active-Storage" class="headerlink" title="About Active Storage"></a>About Active Storage</h3><p>Active Storage 是 Ruby on Rails 一個內建庫，專門用於處理各種類型的文件，如圖片、視頻、聲音、文檔的上傳、管理和儲存。</p>
+<p>再次複習 Active Storage 主要功能：</p>
+<ol>
+<li><p><strong>文件上傳和存儲</strong>：簡化文件上傳的過程，並提供多個存儲後端的選擇，包括本地、雲存儲服務（如 Amazon S3、Google Cloud Storage）等。</p>
+</li>
+<li><p><strong>附件關聯</strong>：你可以將文件附件與任何 Active Record 模型進行關聯，ex. 用戶頭像、文章圖片等。</p>
+</li>
+<li><p><strong>文件處理</strong>：Active Storage 允許定義不同版本的文件，ex. 生成縮略圖、處理不同尺寸或格式的文件等。</p>
+</li>
+<li><p><strong>檢視和下載文件</strong>：可以輕鬆通過生成文件 URL，讓用戶查看或下載文件。</p>
+</li>
+<li><p><strong>安全性和驗證</strong>：Active Storage 提供文件類型的驗證，確保上傳的文件符合安全要求。</p>
+</li>
+<li><p><strong>簡化的 API</strong>：通過簡單的 API，可以執行文件上傳、刪除、獲取 URL 等操作。</p>
+</li>
+</ol>
+<h3 id="About-Amazon-S3"><a href="#About-Amazon-S3" class="headerlink" title="About Amazon S3"></a>About Amazon S3</h3><p>Amazon S3（Simple Storage Service）是一種可擴展的物件儲存服務。<br>它被廣泛用於存儲和檢索各種數據，包括圖像、視頻、文檔、數據庫備份等。</p>
+<p>Amazon S3 主要功能：</p>
+<ol>
+<li><p><strong>無限擴展性和耐用性</strong>：Amazon S3 使用分佈式架構，可以自動擴展以滿足不同規模的儲存需求。它提供高度耐用性，將數據複製到多個數據中心，以防止故障和數據丟失。</p>
+</li>
+<li><p><strong>對象儲存</strong>：S3 是一個對象儲存服務，它不僅儲存數據本身，還包括元數據（例如標籤、屬性）和一個唯一的鍵（稱為對象鍵），用於訪問儲存在 S3 中的數據。</p>
+</li>
+<li><p><strong>無需容量計劃</strong>：S3 不需要事先購買或配置特定的儲存容量，你可以根據實際需求進行擴展或縮減，並且只支付實際使用的儲存容量和數據傳輸。</p>
+</li>
+<li><p><strong>安全性</strong>：S3 提供了多層次的安全性，包括數據加密（在傳輸和靜態儲存中）、存取控制和身份驗證，以確保只有授權的用戶可以訪問數據。</p>
+</li>
+<li><p><strong>數據分類和標籤</strong>：你可以使用分類和標籤來組織和管理儲存在 S3 中的數據，以便更有效地管理和檢索數據。</p>
+</li>
+<li><p><strong>高性能</strong>：Amazon S3 提供了高度可靠和低延遲的數據傳輸，可用於快速存儲和檢索大量的數據。</p>
+</li>
+<li><p><strong>生態系統整合</strong>：Amazon S3 與其他 AWS 服務無縫集成，例如 Amazon EC2、Amazon Lambda、Amazon Redshift 等，可以實現更多複雜的應用場景。</p>
+</li>
+<li><p><strong>成本效益</strong>：由於 Amazon S3 的按需定價模型，你只需要支付實際使用的儲存和數據傳輸費用，這有助於降低儲存成本。</p>
+</li>
+</ol>
+<hr>
+<p>接著，將透過建置 AWS S3 的 Bucket，來建立一個對外的儲存庫！</p>
+<p>首先，註冊 AWS 會員<br>接著，要進入 S3 -&gt; Create Bucket<br>The core features of Active Storage require the following permissions: <code>s3:ListBucket</code>, <code>s3:PutObject</code>, <code>s3:GetObject</code>, and <code>s3:DeleteObject</code>. Public access additionally requires <code>s3:PutObjectAcl</code>.</p>
+<ul>
+<li><p>開啟 credentials.yml 存取 Access Key 與 Secret Access Key</p>
+</li>
+<li><p>如果有使用 dotenv 套件，可以將機密的資訊放在 <code>.env</code> 檔案裡</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">EDITOR=&quot;code --wait&quot; rails credentials:edit</span><br><span class="line">File encrypted and saved.</span><br></pre></td></tr></table></figure>
+<p>確認 Gemfile 有以下兩個指令：</p>
+<ul>
+<li>gem “image_processing”, “~&gt; 1.2”</li>
+<li>gem “aws-sdk-s3”, require: false<br>接著，</li>
+<li>bundle<br>如果還沒裝 vips 也可以藉由 (macOS) Homebrew 裝一下：</li>
+<li>brew install vips</li>
+</ul>
+</li>
+<li><p>需要設置 CORS<br>AWS S3 Bucket 的 CORS 設定用於控制瀏覽器如何處理跨來源的 Web 請求，特別是 Ajax 請求和其他前端 Web 請求。<br>通過設置 CORS，我們可以指定允許哪些來源的網站訪問 Bucket 中的資源，以及允許的 HTTP 方法和標頭。<br>這是 Web 安全功能，確保資源只能被授權的網站訪問，同時防止跨站請求偽造（CSRF）等攻擊。<br>在 Rails Guide Active Storage 的教學中，有特別在 AWS S3 設置上提到 CORS 設定，<br>確保對 Bucket 中的內容進行安全而有序的跨來源訪問。<br><strong>link_to:</strong> <a target="_blank" rel="noopener" href="https://edgeguides.rubyonrails.org/active_storage_overview.html#cross-origin-resource-sharing-cors-configuration">Cross-Origin Resource Sharing (CORS) Configuration</a></p>
+</li>
+<li><p>cloudflare<br><a target="_blank" rel="noopener" href="https://medium.com/chouhsiang/cloudflare-30-days/home">30 天入門 Cloudflare</a><br><a target="_blank" rel="noopener" href="https://godleon.github.io/blog/AWS/learn-AWS-IAM-1-user-group-credential/">[AWS IAM] 學習重點節錄</a></p>
+<p>Remarks:<br>  Amazon S3 與 PG 差異：<br>  Amazon S3是一個雲端對象存儲服務，主要用於存儲各種非結構化數據，如文件、媒體文件和備份。它以高可靠性和可擴展性聞名，對象以唯一的鍵進行存儲，可進行高效的數據檢索和存取。相對而言，PostgreSQL是一個關聯式數據庫管理系統，專用於結構化數據的存儲和管理，支援SQL查詢和複雜的數據分析。</p>
+<p>  S3適用於大量非結構化數據的存儲，而PostgreSQL適用於需要結構化數據和SQL功能的應用，如企業應用或數據庫驅動的應用程序。選擇取決於數據性質和用途需求。</p>
+</li>
+</ul>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/javascript-scope-chain-and-closure/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [JavaScript] - Scope Chain &amp; Closure!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/rails-gem-for-transfer-file-to-pdf/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - 呼叫 `.pdf` 轉換術!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

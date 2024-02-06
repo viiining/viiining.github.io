@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Internet] - HTTP / HTTPS！ - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Internet] - HTTP / HTTPS！ - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/internet-http-and-https/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-10-16T07:17:19.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>16,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Internet] - HTTP / HTTPS！</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/internet/" class="tag">#internet</a><a href="/tags/interview/" class="tag">#interview</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p>不知道大家在看網址的時候，有沒有好奇網址的開頭都有 <code>http</code> 或者 <code>https</code>，這兩者到底是什麼？<br>差別又在哪？網路基礎知識難免要理解 HTTP 與 HTTPS 的相關知識，我們來一探究竟吧！</p>
+<h2 id="HTTP-是什麼？"><a href="#HTTP-是什麼？" class="headerlink" title="HTTP 是什麼？"></a>HTTP 是什麼？</h2><p>HTTP 的全名為 HyperText Transfer Protocol，超文本傳輸協定，是全球資訊網的數據通信的基礎。設計 HTTP 最初的目的是為了提供一種<strong>發布和接收 HTML 頁面的方法。</strong> 透過 HTTP 或者 HTTPS 協定請求的資源由統一資源識別碼（Uniform Resource Identifiers，URI）來標識。</p>
+<p>通常，由 HTTP 客戶端（client）發起一個請求，建立一個到伺服器指定埠（預設是 80 埠）的 TCP 連線。HTTP 伺服器（server）則在那個埠監聽客戶端的請求。一旦收到請求，伺服器會向客戶端返回一個狀態，比如 “HTTP&#x2F;1.1 200 OK”，以及返回的內容，如請求的檔案、錯誤訊息、或者其它訊息。</p>
+<h2 id="HTTP-vs-HTTPS"><a href="#HTTP-vs-HTTPS" class="headerlink" title="HTTP vs HTTPS"></a>HTTP vs HTTPS</h2><p>HTTP（Hypertext Transfer Protocol）和 HTTPS（Hypertext Transfer Protocol Secure）是用於在互聯網上傳輸資料的兩種不同協議，他們在安全性和資料傳輸方面存在顯著差異。</p>
+<p>HTTP 是一種標準的網路協議，用於在網頁瀏覽器和網路伺服器之間傳輸資料。因為是明文協議，意味著資料在傳輸過程中不進行加密，因此容易受到中間人攻擊的威脅。如果惡意使用者能夠截取 HTTP 傳輸的資料包，他們可以輕鬆地查看和竊取其中的信息，包括敏感的個人資料和登入憑證。</p>
+<p>相較之下，HTTPS 是 HTTP 的安全版本。HTTPS 使用 SSL（Secure Sockets Layer）或其繼任者 TLS（Transport Layer Security）協定來加密在瀏覽器和伺服器之間傳輸的資料。在 HTTPS 連線中，資料在傳輸過程中被加密，使得中間人攻擊變得非常困難。 HTTPS 通常使用數位憑證來驗證伺服器的身份，確保使用者連接的是正確的伺服器而不是惡意偽裝的網站。這為用戶提供了更高的安全性和隱私保護。</p>
+<blockquote>
+<p>主要的差異在於資料加密和安全性。 HTTP 是不安全的明文協議，而 HTTPS 透過資料加密和身份驗證提供了更高的安全性，因此在涉及敏感資訊傳輸的情況下，如線上銀行、電子郵件和電子商務等，HTTPS 被廣泛採用以確保用戶資料的保護和隱私。</p>
+</blockquote>
+<h3 id="請求方法（動作）"><a href="#請求方法（動作）" class="headerlink" title="請求方法（動作）"></a>請求方法（動作）</h3><p>剛剛提及到 client 會發出請求，那麼有請求這項動作，這個動作就要搭配相對應的動詞！<br>HTTP&#x2F;1.1 協定中共定義了八種方法（動作）來以不同方式操作指定的資源，<br>以下介紹五種常見的請求方法：</p>
+<h3 id="➤-GET"><a href="#➤-GET" class="headerlink" title="➤ GET"></a>➤ GET</h3><ul>
+<li>向指定的資源發出<strong>顯示</strong>請求。使用 GET 方法應該只用在讀取資料，通常用於從伺服器獲取數據而不引起副作用，意即，不會更改伺服器上的資源狀態與數據。</li>
+<li>GET 請求通常將參數附加到 URL 的查詢字串（query string）中。Query string 是 URL 中問號後面的部分，包含鍵值對（key, value），如<code>?key1=value1&amp;key2=value2</code>。這些參數用於請求特定的數據或定制請求，例如，在搜索引擎中，你可以通過查詢字符串來指定搜索關鍵字。</li>
+<li>每個 GET 請求只能由單一個 URL 觸發。如果需要獲取多個資源，則要發送多個 GET 請求，或者使用其他方法來獲取多個資源，比如使用 POST 請求提交一個包含多個資源請求的數據。  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET /example/page?param1=value1&amp;param2=value2 HTTP/1.1</span><br><span class="line">Host: www.example.com</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>GET 方法，用於向伺服器請求數據，通常用於讀取資源而不修改他們，是冪等（無論操作執行多少次結果都是相同的），適合在瀏覽器中獲取網頁內容，查詢參數通常附加在 URL 上的查詢字串（query string）中，且每個請求只能請求一個 URL。</p>
+</blockquote>
+<h3 id="➤-POST"><a href="#➤-POST" class="headerlink" title="➤ POST"></a>➤ POST</h3><ul>
+<li>向指定資源<strong>提交</strong>資料，請求伺服器進行處理（例如提交表單或者上傳檔案），這樣的請求用於建立或更新資源。</li>
+<li>與 GET 請求不同，POST 請求將資料放在 request body 中，而不是作為 URL 參數，這對於敏感資訊（如密碼）很重要，因為資料不會出現在 URL 中，也使得 POST 請求更適合傳輸大量資料，因為 POST 請求沒有嚴格的數據長度限制。</li>
+<li>瀏覽器發出的 POST 請求的 body 主要有兩種格式，一種是 application&#x2F;x-www-form-urlencoded 用來傳輸簡單的資料，大概就是 “key1&#x3D;value1&amp;key2&#x3D;value2” 這樣的格式。另外一種是傳檔案，會採用 multipart&#x2F;form-data 格式是因為 application&#x2F;x-www-form-urlencoded 的編碼方式對於檔案這種二進位的資料非常低效。</li>
+<li>POST 請求不會被瀏覽器緩存，因為通常會對伺服器端資源進行更改。</li>
+</ul>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">POST /example/post-handler HTTP/1.1</span><br><span class="line">Host: www.example.com</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span><br><span class="line">Content-Type: application/x-www-form-urlencoded</span><br><span class="line">Content-Length: 29</span><br><span class="line"></span><br><span class="line">param1=value1&amp;param2=value2</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>POST 方法用於向伺服器發送數據，適合處理表單提交、資料上傳等需要向伺服器傳送資料的情況。</p>
+</blockquote>
+<h4 id="GET-POST-在發送表單上的差異！"><a href="#GET-POST-在發送表單上的差異！" class="headerlink" title="GET POST 在發送表單上的差異！"></a>GET POST 在發送表單上的差異！</h4><p>  GET 和 POST 在發送表單資料時的主要差異在於資料的傳輸方式：GET 將資料附加到 URL 中，而 POST 將資料放在 request body 中，更適合處理敏感資訊和大量資料。</p>
+<h3 id="➤-PUT"><a href="#➤-PUT" class="headerlink" title="➤ PUT"></a>➤ PUT</h3><ul>
+<li>向指定資源位置上傳其最新內容。</li>
+</ul>
+<h3 id="➤-PATCH"><a href="#➤-PATCH" class="headerlink" title="➤ PATCH"></a>➤ PATCH</h3><ul>
+<li>在現有的資料欄位中，增加或部分更新一筆新的資料。</li>
+</ul>
+<h3 id="➤-DELETE"><a href="#➤-DELETE" class="headerlink" title="➤ DELETE"></a>➤ DELETE</h3><ul>
+<li>請求伺服器刪除 Request-URI 所標識的資源。</li>
+</ul>
+<h3 id="讓我們透過一個線上購物來說明這些不同的-HTTP-請求方法："><a href="#讓我們透過一個線上購物來說明這些不同的-HTTP-請求方法：" class="headerlink" title="# 讓我們透過一個線上購物來說明這些不同的 HTTP 請求方法："></a># 讓我們透過一個線上購物來說明這些不同的 HTTP 請求方法：</h3><ul>
+<li><p><strong>GET</strong>：獲取商品資訊 -&gt; <code>GET /products</code> 獲取產品列表。</p>
+<ul>
+<li>當用戶訪問線上商店的網站時，他們使用GET請求從伺服器獲取商品列表，以查看可用商品。GET 請求用於檢索資訊，不會更改伺服器上的資源。</li>
+</ul>
+</li>
+<li><p><strong>POST</strong>：將商品加入購物車 -&gt; <code>POST /cart</code> 將商品添加到購物車。</p>
+<ul>
+<li>用戶選擇了一些商品後，使用 POST 請求將所選商品添加到購物車。這是因為 POST 請求通常用於在伺服器上創建新資源。</li>
+</ul>
+</li>
+<li><p><strong>PUT</strong>：更新購物車中的商品數量 -&gt; <code>PUT /cart/item/123</code> 更新購物車中商品 123 的數量。</p>
+<ul>
+<li>如果用戶在購物車中更改了商品數量，使用 PUT 請求通知伺服器更新購物車中特定商品的數量。</li>
+</ul>
+</li>
+<li><p><strong>PATCH</strong>：更新用戶資訊 -&gt; <code>PATCH /user/456</code> 部分更新用戶資訊。</p>
+<ul>
+<li>假設用戶需要更改他們的送貨地址，使用 PATCH 請求來更新他們的個人資訊，只更改地址部分而不影響其他資訊。</li>
+</ul>
+</li>
+<li><p><strong>DELETE</strong>：從購物車中刪除商品 -&gt; <code>DELETE /cart/item/789</code> 從購物車中刪除商品 789。</p>
+<ul>
+<li>用戶可以使用 DELETE 請求從購物車中刪除商品，以移除不想購買的商品。</li>
+</ul>
+</li>
+</ul>
+<h3 id="POST-vs-PUT-vs-PATCH"><a href="#POST-vs-PUT-vs-PATCH" class="headerlink" title="POST vs PUT vs PATCH"></a>POST vs PUT vs PATCH</h3><p>在理解上 POST／PUT 都可以用來新增，PATCH／PUT 都可以用來修改，但這其中還是存在著一些差異，來看看以下表格：<br><img src="/../assets/images/post-put-patch.png" alt="POST PUT PATCH"></p>
+<blockquote>
+<p>POST 用於建立新資源而不取代原始資源或執行非冪等操作，PUT 用於完全取代指定資源，PATCH 用於部分更新資源。</p>
+</blockquote>
+<h2 id="safe-methods-amp-idempotent-methods-amp-cacheable-methods"><a href="#safe-methods-amp-idempotent-methods-amp-cacheable-methods" class="headerlink" title="safe methods &amp; idempotent methods &amp; cacheable methods"></a>safe methods &amp; idempotent methods &amp; cacheable methods</h2><p>在上方表格中有提及一個 idempotent 就是所謂冪等，<br>在 HTTP 協定中，請求方法（HTTP methods）可以根據屬性進行分類，<br>包括 <code>safe</code>、<code>idempotent</code> 和 <code>cacheable</code>。</p>
+<p>➤ <strong>Safe（安全）</strong>：</p>
+<ul>
+<li><p>安全性方法是指對伺服器上的資源的請求不會導致資源狀態的更改，也就是說，他們是唯讀的。<br>   使用安全方法的請求不應該對伺服器上的資料產生副作用，對於安全方法的請求，不管執行多少次，不會改變伺服器上的資源狀態。</p>
+</li>
+<li><p>常見的安全方法包括HTTP GET 和 HEAD。 GET 用於檢索資源的信息，而 HEAD 用於獲取資源的頭部信息，但不返回資源的主體內容。</p>
+</li>
+</ul>
+<p>➤ <strong>Idempotent（幂等）</strong>：</p>
+<ul>
+<li><p>冪等方法是指執行相同請求一次或多次的結果應該是相同的，不會導致資源狀態的改變。<br>   重複執行相同的冪等請求不會造成不同的結果或產生不同的影響。這在處理網路中的故障時特別有用。</p>
+</li>
+<li><p>常見的冪等方法包括HTTP GET、PUT 和 DELETE。GET 用於取得資源，PUT 用於替代資源，DELETE 用於刪除資源。</p>
+</li>
+</ul>
+<p>➤ <strong>Cacheable（可缓存）</strong>：</p>
+<ul>
+<li><p>可緩存方法是指伺服器的回應可以被緩存，並且可以在未來的請求中使用快取的回應，從而減少頻寬消耗和提高效能。<br>   Response 可以在客戶端或代理伺服器上緩存，以便在將來的相同請求中重複使用。</p>
+</li>
+<li><p>常見的可快取方法包括HTTP GET。 GET 請求的回應通常是可快取的，因為只是用於檢索資源資訊而不修改資源。</p>
+</li>
+</ul>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/internet/" class="tag">#internet</a><a href="/tags/interview/" class="tag">#interview</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/internet-session-and-cookie/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Internet] - Session 與 Cookie 是什麼！</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/internet-dns-and-ip/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Internet] - DNS 跟 IP 是什麼！</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

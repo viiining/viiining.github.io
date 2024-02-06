@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [JavaScript] - Scope Chain &amp; Closure! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [JavaScript] - Scope Chain &amp; Closure! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/javascript-scope-chain-and-closure/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-09-18T12:12:42.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>September</span>
+            <span>18,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [JavaScript] - Scope Chain &amp; Closure!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/javascript/" class="tag">#javascript</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p><em>今天來點 Scope Chain (作用域鏈) 與 Closure (閉包)！</em></p>
+<h2 id="Scope-Chain（作用域鏈）是什麼？"><a href="#Scope-Chain（作用域鏈）是什麼？" class="headerlink" title="Scope Chain（作用域鏈）是什麼？"></a>Scope Chain（作用域鏈）是什麼？</h2><p>當 JavaScript 使用每一個變數時，會先嘗試在目前的作用域中尋找該變數；<br>若找不到該變數，便會一直往外層作用域尋找，直到全域作用域還是沒找到的話就會直接報錯。<br>這一層一層的關係，就是作用域鏈。<br>以下是一段簡單的範例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getNumber</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 在 getNumber 函式作用域中沒有變數 a，於是透過作用域鏈往外層尋找，</span></span><br><span class="line">  <span class="comment">// 在這邊的外層是全域，也就找到了 a 變數</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 100</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">getNumber</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Closure（閉包）是什麼？"><a href="#Closure（閉包）是什麼？" class="headerlink" title="Closure（閉包）是什麼？"></a>Closure（閉包）是什麼？</h2><p>閉包（Closure）是 JavaScript 中的一個重要概念，每當創建一個函式時，都會同時創建一個閉包。<br><strong>閉包（Closure）是一個函式和此函式被宣告時所在的詞法環境組合而成的。</strong></p>
+<blockquote>
+<p>詞法環境（Lexical Environment）是 JavaScript 用於管理變數、函數和作用域。當函數被創建時，同時也會創建一個詞法環境，這個環境記錄了函數內部的變數、函數聲明以及對外部作用域的引用。</p>
+</blockquote>
+<p>來看一個簡單的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">say</span>(<span class="params">greeting</span>) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">name</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(greeting + <span class="string">&#x27; &#x27;</span> + name);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> host = <span class="title function_">say</span>(<span class="string">&#x27;Welcome&#x27;</span>);</span><br><span class="line"><span class="title function_">host</span>(<span class="string">&#x27;Viii&#x27;</span>); <span class="comment">// Welcome Viii</span></span><br></pre></td></tr></table></figure>
+
+<p>大家是否還記得上篇提及的 Execution Context，當 JavaScript 執行以上程式碼時：</p>
+<ol>
+<li><p>開始執行 Global Execution Context，因為 JavaScript 中的 hoisting（提升），function say 已經被建立且儲存在記憶體中，並且可以在作用域中使用。</p>
+</li>
+<li><p>Global Execution Context 繼續執行 <code>var host = say(&#39;Welcome&#39;);</code>。在執行 <code>say(&#39;Welcome&#39;)</code> 時，一個新的 Execution Context 被建立，<code>greeting</code> 也被儲存在 function say 的 Execution Context 中。 透過 say 函式，內部建立一個匿名函式。此時，function say 也就執行完了。雖然 Execution Context 已經不在了，但其中的變數還是儲存在那個記憶體位置！</p>
+</li>
+<li><p>結束前一個任務後，繼續回到 Global Execution Context，接著，碰到了 <code>host(&#39;Viii&#39;)</code> 於是我們建立了一個給匿名函式的 Execution Context，同時裡面帶有參數 name，因為此時在自己的 function 裡面找不到 <code>greeting</code> 這個變數，所以會開始透過 Scope Chain 尋找。因為前面有提及 function say 在記憶體位置仍留有參照，所以在 function say 裡面所建立的函式仍然可以找得到 <code>greeting</code> 這個變數。最後就印出結果 <code>Welcome Viii</code>。</p>
+</li>
+</ol>
+<h4 id="Brief-Summary"><a href="#Brief-Summary" class="headerlink" title="Brief Summary"></a>Brief Summary</h4><p>可以在第三點看出，匿名函示式的 Execution Context 與外面的變數 <code>greeting</code> close 在一起了，這就是閉包 (Closure)。透過這樣的特性，可以確保當在執行 function 的時候，JavaScript 能夠找到其相對應的變數。</p>
+<hr>
+<h4 id="透過閉包讓-function-擁有-private-變數"><a href="#透過閉包讓-function-擁有-private-變數" class="headerlink" title="透過閉包讓 function 擁有 private 變數"></a>透過閉包讓 function 擁有 private 變數</h4><p>理解閉包的概念後，可以透過閉包讓 function 擁有 private 變數，<br>在這個例子中，chocolateCount 變數被保護在 chocolateBox 函式的作用域內，<br>只能通過 eatChocolate 函式來訪問和修改。<br>外部的程式碼無法直接訪問或修改 chocolateCount 變數。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">chocolateBox</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> chocolateCount = <span class="number">10</span>; <span class="comment">// 總共有10顆巧克力，這是函式內要調用的變數</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">eatChocolate</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (chocolateCount &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      chocolateCount--;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`吃了一顆巧克力，還剩下 <span class="subst">$&#123;chocolateCount&#125;</span> 顆。`</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;巧克力已經吃完了！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> eatChocolate;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> eatChocolate = <span class="title function_">chocolateBox</span>();</span><br><span class="line"></span><br><span class="line"><span class="title function_">eatChocolate</span>(); <span class="comment">// 吃了一顆巧克力，還剩下 9 顆。</span></span><br><span class="line"><span class="title function_">eatChocolate</span>(); <span class="comment">// 吃了一顆巧克力，還剩下 8 顆。</span></span><br><span class="line"><span class="title function_">eatChocolate</span>(); <span class="comment">// 吃了一顆巧克力，還剩下 7 顆。</span></span><br><span class="line"><span class="comment">// 依此類推...</span></span><br><span class="line"><span class="title function_">eatChocolate</span>(); <span class="comment">// 吃了一顆巧克力，還剩下 1 顆。</span></span><br><span class="line"><span class="title function_">eatChocolate</span>(); <span class="comment">// 吃了一顆巧克力，還剩下 0 顆。</span></span><br><span class="line"><span class="title function_">eatChocolate</span>(); <span class="comment">// 巧克力已經吃完了！</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="確保了私有變數在不同的執行環境中是獨立的"><a href="#確保了私有變數在不同的執行環境中是獨立的" class="headerlink" title="確保了私有變數在不同的執行環境中是獨立的"></a>確保了私有變數在不同的執行環境中是獨立的</h4><p><strong>閉包的一個重要特性，確保私有變數在不同的執行環境中是獨立的。</strong><br>創建出兩個不同的 box1 和 box2，並且都是使用 chocolateBox 函式創建。<br>即使使用了相同的函式，但每個 box 都有自己獨立的 chocolateCount 變數，<br>因此彼此之間不會互相影響，每個盒子都可以獨立地操作巧克力數量。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">function chocolateBox() &#123;</span><br><span class="line">  let chocolateCount = 10;</span><br><span class="line"></span><br><span class="line">  function eatChocolate() &#123;</span><br><span class="line">    if (chocolateCount &gt; 0) &#123;</span><br><span class="line">      chocolateCount--;</span><br><span class="line">      console.log(`吃了一顆巧克力，還剩下 $&#123;chocolateCount&#125; 顆。`);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      console.log(&quot;巧克力已經吃完了！&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return eatChocolate;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const box1 = chocolateBox();</span><br><span class="line">const box2 = chocolateBox();</span><br><span class="line"></span><br><span class="line">box1(); // 吃了一顆巧克力，還剩下 9 顆。</span><br><span class="line">box2(); // 吃了一顆巧克力，還剩下 9 顆。</span><br><span class="line"></span><br><span class="line">box1(); // 吃了一顆巧克力，還剩下 8 顆。</span><br><span class="line">box2(); // 吃了一顆巧克力，還剩下 8 顆。</span><br><span class="line"></span><br><span class="line">// 每個盒子都有獨立的 chocolateCount 變數，不會互相影響</span><br></pre></td></tr></table></figure>
+
+<h4 id="今天簡單地講述作用域鏈與閉包，下篇會繼續補充閉包的應用以及相關重要小知識！下篇待續！"><a href="#今天簡單地講述作用域鏈與閉包，下篇會繼續補充閉包的應用以及相關重要小知識！下篇待續！" class="headerlink" title="今天簡單地講述作用域鏈與閉包，下篇會繼續補充閉包的應用以及相關重要小知識！下篇待續！"></a>今天簡單地講述作用域鏈與閉包，下篇會繼續補充閉包的應用以及相關重要小知識！下篇待續！</h4><p>（持續理解所有的為什麼！ go! go! go!）ヽ(●&gt;∀&lt;●)ﾉ</p>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://www.explainthis.io/zh-hant/swe/what-is-scope-and-scope-chain">Javascript 的作用域 (Scope) 與作用域鏈 (Scope Chain) 是什麼?</a><br>➫ <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures">MDN - Closures</a><br>➫ <a target="_blank" rel="noopener" href="https://jianline.com/javascript-closure/">[筆記]-JavaScript 閉包(Closure)是什麼?關於閉包的3件事</a><br>➫ <a target="_blank" rel="noopener" href="https://pjchender.blogspot.com/2016/05/javascriptclosures.html">[筆記] 談談JavaScript中closure的概念 – Part 1</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/javascript/" class="tag">#javascript</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/infosec-cors/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Information Security] - CORS!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/rails-active-storage-and-amazon-S3/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - 由 Active Storage 延伸至 Amazon S3 Bucket!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

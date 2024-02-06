@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby on Rails] - 呼叫 `.pdf` 轉換術! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby on Rails] - 呼叫 `.pdf` 轉換術! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/rails-gem-for-transfer-file-to-pdf/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-08-10T02:05:28.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>August</span>
+            <span>10,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby on Rails] - 呼叫 `.pdf` 轉換術!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a><a href="/tags/wicked-pdf/" class="tag">#wicked_pdf</a><a href="/tags/jspdf/" class="tag">#jspdf</a><a href="/tags/html2canvas/" class="tag">#html2canvas</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <h2 id="before-action-why-I-need-pdf"><a href="#before-action-why-I-need-pdf" class="headerlink" title="before_action :why I need .pdf?"></a>before_action :why I need .pdf?</h2><p>現階段接了一項新任務，為專案做出 pdf 檔案<br>專案在如火如荼地進行著，實作將 html 轉成 pdf 格式！<br>原本運用的是 wicked_pdf， 後來又使用了 jspdf + html2canvas 來製作這項功能，<br>就想著順道來記錄一下，每一階段在運行的狀況！</p>
+<h3 id="Step-by-step-to-generate-pdf-version-1"><a href="#Step-by-step-to-generate-pdf-version-1" class="headerlink" title="# Step by step to generate .pdf - version 1"></a># Step by step to generate .pdf - version 1</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/mileszs/wicked_pdf#advanced-usage-with-all-available-options">wicked_pdf</a></li>
+</ul>
+<h4 id="安裝-wicked-pdf-與-wkhtmltopdf-binary"><a href="#安裝-wicked-pdf-與-wkhtmltopdf-binary" class="headerlink" title="安裝 wicked_pdf 與 wkhtmltopdf-binary"></a>安裝 <code>wicked_pdf</code> 與 <code>wkhtmltopdf-binary</code></h4><p>依照 wicked_pdf README.md 說明，<br>需要先將 <code>wicked_pdf</code> 與 <code>wkhtmltopdf-binary</code> 載入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gem &#x27;wicked_pdf&#x27;</span><br><span class="line">gem &#x27;wkhtmltopdf-binary&#x27;</span><br></pre></td></tr></table></figure>
+<p><strong>實際上 wicked_pdf 是使用 wkhtmltopdf 這個 command line tools 來把html轉成pdf！</strong></p>
+<h3 id="為-controller-建立轉檔方法"><a href="#為-controller-建立轉檔方法" class="headerlink" title="為 controller 建立轉檔方法"></a>為 controller 建立轉檔方法</h3><p>以自己想要哪一個頁面轉為 pdf 來做方法設定，這裡是以 ResumesController 的 show 來做：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class ResumesController &lt; ApplicationController</span><br><span class="line">  def show</span><br><span class="line">    respond_to do |format|</span><br><span class="line">      format.html</span><br><span class="line">      format.pdf do</span><br><span class="line">        render pdf: &quot;file_name&quot;, template: &quot;resumes/show&quot;, formats: [:html]</span><br><span class="line">      end</span><br><span class="line">    end</span><br><span class="line">  end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p><strong>要注意的是，如果是用 Rails 7 的話，必須將 format.pdf 的寫法轉換成：</strong></p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">format.pdf <span class="keyword">do</span></span><br><span class="line">  render <span class="symbol">pdf:</span> <span class="string">&quot;file_name&quot;</span>, <span class="symbol">template:</span> <span class="string">&quot;profiles/show&quot;</span>, <span class="symbol">formats:</span> [<span class="symbol">:html</span>]</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><em>如果是照著 README.md 的方法寫會一直噴出 Template is missing 錯誤！</em></p>
+<p>在 show.html.erb 設定連結到 .pdf 頁面上：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%= link_to &#x27;PDF this profile&#x27;, resume_path(@resume, format: :pdf) %&gt;</span><br></pre></td></tr></table></figure>
+<p>除此之外，讓 pdf 可以讀取樣式，因為 wicked_pdf 是以 wkhtmltopdf-binary 二進制在 Rails 應用程序之外運行，所以在 layout 上必須設定以下 wicked_pdf 相關連結：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!doctype <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&#x27;utf-8&#x27;</span> /&gt;</span></span><br><span class="line">    &lt;%= wicked_pdf_stylesheet_link_tag &quot;pdf&quot; -%&gt;</span><br><span class="line">    &lt;%= wicked_pdf_javascript_include_tag &quot;number_pages&quot; %&gt;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span>=<span class="string">&#x27;number_pages&#x27;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;header&quot;</span>&gt;</span></span><br><span class="line">      &lt;%= wicked_pdf_image_tag &#x27;mysite.jpg&#x27; %&gt;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;content&quot;</span>&gt;</span></span><br><span class="line">      &lt;%= yield %&gt;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>以上是 wicked_pdf 需要注意的主要重點，<br>剩下的可以在 GitHub 的 README.md 上做更仔細的設定！<br>接著要來介紹最終決定的套件！<strong>jspdf</strong></p>
+<h3 id="Step-by-step-to-generate-pdf-version-2"><a href="#Step-by-step-to-generate-pdf-version-2" class="headerlink" title="# Step by step to generate .pdf - version 2"></a># Step by step to generate .pdf - version 2</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/parallax/jsPDF">jspdf</a></li>
+</ul>
+<p>因為專案上是以 Rails 7 進行，在引入 javascript 套件時，我使用 importmap 的方式引入！<br>當你在使用 jspdf 時，本身套件就涵蓋 html2canvas，可以依照 README 文件去做設定！</p>
+<p>我主要分享在運用這個套件所遇到的問題！</p>
+<h3 id="Sovling-Problems"><a href="#Sovling-Problems" class="headerlink" title="Sovling Problems"></a>Sovling Problems</h3><ul>
+<li>實作將履歷在網頁上運用截圖的方式，但在使用 html2canvas 時，<br>一直出現 <code>Uncaught (in promise) DOMException: Failed to execute &#39;toDataURL&#39; on &#39;HTMLCanvasElement&#39;: Tainted canvases may not be exported.</code> 錯誤，因為我在專案上傳圖片時，是儲存在 AWS S3 bucket 裡，在訪問 AWS S3 上的圖片上會有 CORS 的設置問題，已確定我在 AWS S3 上的 CORS 設置，並且還依照一下連結的方式設置，還是有同樣的錯誤，當時決定冷靜一天…</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://saturncloud.io/blog/handling-cors-with-html2canvas-and-aws-s3-images-a-comprehensive-guide/">Handling CORS with html2Canvas and AWS S3 Images: A Comprehensive Guide</a></p>
+<p>終於，在隔天！我找到了最終解法：將圖片轉換為 Base64 編碼！！！<br>（困擾我整整兩天的 pdf 終於有結果了！）</p>
+<p>在 Rails 中，我透過 Helper 來優化 view 上面的程式碼，其中最重要的部分是將圖片轉為 Base64，一開始的圖片路徑都是寫絕對路徑的方式導向 AWS S3 儲存庫，就是因為這點有 CORS 的問題，因此，當下先從 stackoverflow 去尋找與我有著相同錯誤的討論，當時一直卡在設置 CORS 的規格上，後續發現那裡不是主要的問題，而是我應該要改成相對路徑或者 Base64 的編碼，這樣在取用上才不會有問題。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> <span class="title class_">ResumesHelper</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">display_avatar_base64</span>(<span class="params">profile</span>)</span><br><span class="line">    <span class="keyword">if</span> profile.avatar.attached? <span class="comment">#如果有頭貼</span></span><br><span class="line">      image = profile.avatar.variant(<span class="symbol">:thumb</span>).processed <span class="comment">#透過 `.processed` 獲得這張頭貼</span></span><br><span class="line">      base64_data = <span class="title class_">Base64</span>.strict_encode64(image.download) <span class="comment">#將下載的頭像數據編碼轉為 Base64 格式</span></span><br><span class="line">      image_tag(<span class="string">&quot;data:image/jpeg;base64,<span class="subst">#&#123;base64_data&#125;</span>&quot;</span>, <span class="symbol">class:</span> <span class="string">&quot;mx-auto&quot;</span>) <span class="comment">#將 image_tag 創建一個帶有 Base64 編碼數據的圖像</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      image_tag(<span class="string">&quot;defaultuser.png&quot;</span>, <span class="symbol">class:</span> <span class="string">&quot;rounded-full w-32 h-32 mx-auto&quot;</span>)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://medium.com/@pk60905/rails-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8wicked-pdf%E7%94%9F%E6%88%90pdf-29f92fcabef6">[Rails]如何使用 wicked pdf 生成 pdf</a><br>➫ <a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1165844">jspdf+html2canvas</a><br>➫ <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/HTTP/CORS">跨來源資源共用（CORS）</a><br>➫ <a target="_blank" rel="noopener" href="https://www.explainthis.io/zh-hant/swe/what-is-cors">CORS 是什麼? 為什麼要有 CORS?</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a><a href="/tags/wicked-pdf/" class="tag">#wicked_pdf</a><a href="/tags/jspdf/" class="tag">#jspdf</a><a href="/tags/html2canvas/" class="tag">#html2canvas</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/rails-active-storage-and-amazon-S3/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - 由 Active Storage 延伸至 Amazon S3 Bucket!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/rails-query-interface/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - 常見的查詢方法!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

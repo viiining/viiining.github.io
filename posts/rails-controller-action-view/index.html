@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby on Rails] - Controller, Action, View! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby on Rails] - Controller, Action, View! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/rails-controller-action-view/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-10-02T04:17:21.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>2,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby on Rails] - Controller, Action, View!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <h2 id="建立-Controller-與定義-Action"><a href="#建立-Controller-與定義-Action" class="headerlink" title="建立 Controller 與定義 Action"></a>建立 Controller 與定義 Action</h2><p>在先前介紹路徑時，以「文章列表」的路徑為例子：</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get <span class="string">&#x27;/articles&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;articles#index&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>可以發現，在建立路徑的同時，to: 後方就是 controller 與 action！</p>
+<p><strong>Controller 的命名會根據 Route 是使用複數的 resources 還是單數 resource 方法而定。</strong><br>這種命名幫助我們更好地組織與管理 controller 與 action，程式碼也更易於理解和維護。<br>同時也符合 Rails 的慣例優於設定（Convention over Configuration）的原則。</p>
+<p>在這裡我們使用的是 resources，所以我們可以建立一個 ArticlesController!</p>
+<h3 id="rails-g-controller-Articles"><a href="#rails-g-controller-Articles" class="headerlink" title="rails g controller Articles"></a>rails g controller Articles</h3><p>透過 <strong>rails generate controller Articles</strong> or <strong>rails g controller Articles</strong> 指令，<br>生成叫做 Articles 的 controller！</p>
+<pre><code>Remark:
+controller 建立， rails generate controller 自定義名字 -&gt; rails g controller 自定義名字
+controller 移除， rails destroy controller 自定義名字 -&gt; rails d controller 自定義名字
+</code></pre>
+<p>剛剛的指令可以幫我們生成一些所需要的檔案，而 Action 就會被定義在 controller</p>
+<h3 id="透過-controller-rb-定義-action"><a href="#透過-controller-rb-定義-action" class="headerlink" title="透過 controller.rb 定義 action"></a>透過 controller.rb 定義 action</h3><p><strong>app&#x2F;controllers&#x2F;articles_controller.rb</strong></p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ArticlesController</span> &lt; <span class="title class_ inherited__">ApplicationController</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Rails 在讀取以下 action 之前，可以先調用 private 方法，透過 only 限定哪些 action 需要。</span></span><br><span class="line">  <span class="comment"># except: [...] 是另外一種寫法，可以根據要限定的 action 多寡來決定要用哪個。</span></span><br><span class="line">  before_action <span class="symbol">:set_article</span>, <span class="symbol">only:</span> [<span class="symbol">:show</span>, <span class="symbol">:edit</span>, <span class="symbol">:update</span>, <span class="symbol">:destroy</span>]</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Read</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">index</span></span><br><span class="line">    <span class="comment"># 設定一個實體變數，將所有新增的文章呈現在 index 裡</span></span><br><span class="line">    <span class="comment"># 預設是升冪排序 (id: :asc)</span></span><br><span class="line">    <span class="variable">@articles</span> = <span class="title class_">Article</span>.order(<span class="symbol">id:</span> <span class="symbol">:desc</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">show</span></span><br><span class="line">    <span class="comment"># <span class="doctag">@article</span> = Article.find(params[:id])</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Create</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">new</span></span><br><span class="line">    <span class="comment"># 在 controller 生成 &quot;@實體變數&quot; ， view 呈現！</span></span><br><span class="line">    <span class="variable">@article</span> = <span class="title class_">Article</span>.new</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">create</span> <span class="comment"># 不需獨立建 view 可以直接借別人的畫面使用</span></span><br><span class="line">    <span class="comment"># 在這裡用實體變數 <span class="doctag">@article</span> view 就可以一起連動所有有這個變數的檔案，呈現畫面！</span></span><br><span class="line">    <span class="variable">@article</span> = <span class="title class_">Article</span>.new(article_params)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Save in 資料庫</span></span><br><span class="line">    <span class="keyword">if</span> <span class="variable">@article</span>.save</span><br><span class="line">      redirect_to <span class="string">&quot;/articles&quot;</span>, <span class="symbol">notice:</span> <span class="string">&quot;文章新增成功&quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      <span class="comment"># 拿 new.html.erb，將驗證過後，失敗的話，留下原始有填寫的欄位留下來</span></span><br><span class="line">      render <span class="symbol">:new</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Update</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">edit</span></span><br><span class="line">    <span class="comment"># <span class="doctag">@article</span> = Article.find(params[:id]) # 直接調用剛剛 show 所寫找出想對應文章</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">update</span> <span class="comment"># 不需獨立建 view 可以直接借別人的畫面使用</span></span><br><span class="line">    <span class="comment"># <span class="doctag">@article</span> = Article.find(params[:id])</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="variable">@article</span>.update(article_params)</span><br><span class="line">      <span class="comment"># redirect_to &quot;/articles&quot;, notice: &quot;文章新增成功&quot;</span></span><br><span class="line">      redirect_to articles_path, <span class="symbol">notice:</span> <span class="string">&quot;文章更新成功&quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      render <span class="symbol">:edit</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Delete</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">destroy</span></span><br><span class="line">    <span class="comment"># <span class="doctag">@article</span> = Article.find(params[:id])</span></span><br><span class="line">    <span class="variable">@article</span>.destroy</span><br><span class="line">    redirect_to articles_path, <span class="symbol">notice:</span> <span class="string">&quot;文章刪除成功&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span></span><br><span class="line">  <span class="comment"># Strong Parameter</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">article_params</span></span><br><span class="line">    params.<span class="keyword">require</span>(<span class="symbol">:article</span>).permit(<span class="symbol">:title</span>, <span class="symbol">:content</span>, <span class="symbol">:sub_title</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">set_article</span></span><br><span class="line">    <span class="variable">@article</span> = <span class="title class_">Article</span>.find(params[<span class="symbol">:id</span>])</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>註解拿掉：</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ArticlesController</span> &lt; <span class="title class_ inherited__">ApplicationController</span></span><br><span class="line"></span><br><span class="line">  before_action <span class="symbol">:set_article</span>, <span class="symbol">only:</span> [<span class="symbol">:show</span>, <span class="symbol">:edit</span>, <span class="symbol">:update</span>, <span class="symbol">:destroy</span>]</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Read</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">index</span></span><br><span class="line">    <span class="variable">@articles</span> = <span class="title class_">Article</span>.includes(<span class="symbol">:user</span>).order(<span class="symbol">id:</span> <span class="symbol">:desc</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">show</span></span><br><span class="line">    <span class="variable">@comment</span> = <span class="title class_">Comment</span>.new</span><br><span class="line">    <span class="variable">@comments</span> = <span class="variable">@article</span>.comments.order(<span class="symbol">id:</span> <span class="symbol">:desc</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Create</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">new</span></span><br><span class="line">    <span class="variable">@article</span> = <span class="title class_">Article</span>.new</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">create</span></span><br><span class="line">    <span class="variable">@article</span> = current_user.articles.new(article_params)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="variable">@article</span>.save</span><br><span class="line">      redirect_to <span class="string">&quot;/articles&quot;</span>, <span class="symbol">notice:</span> <span class="string">&quot;文章新增成功&quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      render <span class="symbol">:new</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">edit</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">update</span></span><br><span class="line">    <span class="keyword">if</span> <span class="variable">@article</span>.update(article_params)</span><br><span class="line">      redirect_to articles_path, <span class="symbol">notice:</span> <span class="string">&quot;文章更新成功&quot;</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      render <span class="symbol">:edit</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">destroy</span></span><br><span class="line">      <span class="variable">@article</span>.destroy</span><br><span class="line">      redirect_to articles_path, <span class="symbol">notice:</span> <span class="string">&quot;文章刪除成功&quot;</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">article_params</span></span><br><span class="line">    params.<span class="keyword">require</span>(<span class="symbol">:article</span>).permit(<span class="symbol">:title</span>, <span class="symbol">:content</span>, <span class="symbol">:sub_title</span>, <span class="symbol">:password</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">set_article</span></span><br><span class="line">    <span class="variable">@article</span> = <span class="title class_">Article</span>.find(params[<span class="symbol">:id</span>])</span><br><span class="line">  <span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="建立-View"><a href="#建立-View" class="headerlink" title="建立 View"></a>建立 View</h2><p>當 Route, Controller 與 Action 都建立好後，就需要建立 View 呈現畫面！<br>需要手動新增檔案：<strong>action 名稱.html.erb</strong>，建立 <strong>view</strong><br>（以 index 為例） <strong>index.html.erb</strong></p>
+<p><strong>app&#x2F;views&#x2F;articles&#x2F;index.html.erb</strong></p>
+<figure class="highlight erb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Articles 文章列表<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span><span class="comment">&lt;%# &lt;button&gt;&lt;a href=&quot;/articles/new&quot; style=&quot;text-decoration: none&quot; &gt;Add a new article!&lt;/a&gt;&lt;/button&gt; %&gt;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">button</span>&gt;</span>&lt;%=</span><span class="language-ruby"> link_to <span class="string">&quot;Add a new article!&quot;</span>, new_article_path </span><span class="language-xml">%&gt;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  &lt;%</span><span class="language-ruby"> <span class="variable">@articles</span>.each <span class="keyword">do</span> |<span class="params">article</span>| </span><span class="language-xml">%&gt;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">&quot;article_list&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      </span><span class="comment">&lt;%#= link_to article.title, article_path(article.id) %&gt;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">      </span><span class="comment">&lt;%#= link_to article.title, article_path(article) %&gt;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">      </span><span class="comment">&lt;%#= article.user&amp;.email %&gt;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">      &lt;%=</span><span class="language-ruby"> link_to article.title, article </span><span class="language-xml">%&gt;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>&lt;%=</span><span class="language-ruby"> link_to <span class="string">&#x27;Updated&#x27;</span>, edit_article_path(article.id) </span><span class="language-xml">%&gt;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>&lt;%=</span><span class="language-ruby"> link_to <span class="string">&#x27;Deleted&#x27;</span>, article_path(article.id),</span></span><br><span class="line"><span class="language-ruby">    <span class="symbol">data:</span> &#123; <span class="symbol">turbo_method:</span> <span class="string">&#x27;delete&#x27;</span>, <span class="symbol">turbo_confirm:</span> <span class="string">&#x27;Are you sure?&#x27;</span> &#125;</span><span class="language-xml">%&gt;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    </span><span class="comment">&lt;%# turbo_confirm 可以連結 JS 的 confirm 功能  %&gt;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">  &lt;%</span><span class="language-ruby"> <span class="keyword">end</span> </span><span class="language-xml">%&gt;</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p>我建立了 POST 路徑，為了新增一篇文章用的，<br>也確定 Controller, Action &amp; View 都有對應到，<br>但是顯示這個錯誤訊息<br><code>ActionController::InvalidAuthenticityToken in ArticlesController#create</code><br>發生什麼事了？！</p>
+</blockquote>
+<p>這裡要額外說明一個知識，就是 <strong>CSRF</strong>！</p>
+<h3 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h3><h4 id="What-is-CSRF"><a href="#What-is-CSRF" class="headerlink" title="What is CSRF?"></a>What is CSRF?</h4><p>CSRF 是指跨站的請求偽造，這種攻擊方法會讓使用者去瀏覽一個曾經認證過的網站並執行惡意的操作，因為已經驗證過該使用者，所以網站就會認為操作來自該使用者，因而接受。<br><strong>CSRF 之所以成立，是因為使用者的身份已經先被驗證過。</strong><br>白話一點就像是別人拿你的會員卡去買東西，但剛好因為店家認卡不認人，所以當看到有人拿著你的卡，就相信是你本人，並接受他人使用你的會員卡進行消費。</p>
+<p>在 Rails 中，POST 行為具有保護機制。<br>如果在設定好的 action 中重新整理頁面，並且在沒有建立 view 的情況下，<br>你會注意到與之前不同的錯誤訊息：<br><code>ActionController::InvalidAuthenticityToken in ArticlesController#create</code><br>這時候，你需要設定 CSRF token 保護機制，以便在提交表單後能夠通過！</p>
+<p>Rails 的 form_with 方法，會自動為每個表單和非 GET 請求生成唯一的 CSRF Token，<br>並在提交請求時驗證該 Token，以防止 CSRF 攻擊。</p>
+<pre><code>Remark:
+有種情況下不需要設定 CSRF token：
+當你需要跟第三方金流做連線時，需要把這個保護機制關閉，這樣才能互相聯繫。 
+非同步交易時，當完成之後，會透過 Notify-URL 去通知對方。
+</code></pre>
+<h4 id="實作-Go-Go"><a href="#實作-Go-Go" class="headerlink" title="實作 Go! Go!"></a>實作 Go! Go!</h4><p><strong>app&#x2F;views&#x2F;articles&#x2F;new.html.erb</strong><br>特別以 <strong>new.html.erb</strong> 來說明 form_with 可以生成所需要的表單並包含 CSRF token，<br>保護你的應用免受 CSRF 攻擊。</p>
+<p>這裡先看一次不藉由 form_with 時，自己加上 CSRF Token 的 input tag：</p>
+<figure class="highlight erb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Add a new article!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;/articles&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span> <span class="attr">data-turbo</span>=<span class="string">&quot;false&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;title&quot;</span> &gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Content<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">&quot;content&quot;</span> <span class="attr">id</span>=<span class="string">&quot;&quot;</span> <span class="attr">cols</span>=<span class="string">&quot;30&quot;</span> <span class="attr">rows</span>=<span class="string">&quot;10&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;Enter your story...&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  </span><span class="comment">&lt;%# CSRF token 讓送出之後可以通過 POST 的保護機制 %&gt;</span><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">&quot;authenticity_token&quot;</span> <span class="attr">value</span>=<span class="string">&quot;&lt;%=</span></span></span><span class="language-ruby"> form_authenticity_token </span><span class="language-xml"><span class="tag"><span class="string">%&gt;&quot;</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">button</span>&gt;</span>Submit!<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>接著是實際做一次使用 form_with ：</p>
+<figure class="highlight erb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Add a new article!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">&lt;%=</span><span class="language-ruby"> form_with(<span class="symbol">model:</span> article, <span class="symbol">data:</span> &#123; <span class="symbol">turbo:</span> <span class="literal">false</span> &#125;) <span class="keyword">do</span> |<span class="params">f</span>| </span><span class="language-xml">%&gt;</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  &lt;%=</span><span class="language-ruby"> f.text_field <span class="symbol">:title</span> </span><span class="language-xml">%&gt;</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Subtitle<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  &lt;%=</span><span class="language-ruby"> f.text_field <span class="symbol">:sub_title</span> </span><span class="language-xml">%&gt;</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>password<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  &lt;%=</span><span class="language-ruby"> f.password_field <span class="symbol">:password</span> </span><span class="language-xml">%&gt;</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Content<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  &lt;%=</span><span class="language-ruby"> f.text_area <span class="symbol">:content</span> </span><span class="language-xml">%&gt;</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">&lt;%=</span><span class="language-ruby"> f.button <span class="symbol">:submit</span>, <span class="symbol">class:</span> <span class="string">&#x27;submit-btn&#x27;</span> </span><span class="language-xml">%&gt;</span></span><br><span class="line"><span class="language-xml">&lt;%</span><span class="language-ruby"> <span class="keyword">end</span> </span><span class="language-xml">%&gt;</span></span><br></pre></td></tr></table></figure>
+<p>當使用 form_with 時，可以去檢視網頁的原始碼，<br>就會發現我們不用自己加上 CSRF Token，HTML 也會生成以下這段：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;authenticity_token&quot;</span> <span class="attr">value</span>=<span class="string">&quot;BTeOTjllGc-FxHfBtsCidE_i1BAotM0RvZHVnr1LmA16OgTE04My-zwySMSVBav6tlOt62iEDUyDCgNANEVCkA&quot;</span> <span class="attr">autocomplete</span>=<span class="string">&quot;off&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>完整的 HTML 原始碼，CSRF Token 於 line 4：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">&quot;main-title&quot;</span>&gt;</span>Add a new article!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">data-turbo</span>=<span class="string">&quot;false&quot;</span> <span class="attr">action</span>=<span class="string">&quot;/articles&quot;</span> <span class="attr">accept-charset</span>=<span class="string">&quot;UTF-8&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;authenticity_token&quot;</span> <span class="attr">value</span>=<span class="string">&quot;BTeOTjllGc-FxHfBtsCidE_i1BAotM0RvZHVnr1LmA16OgTE04My-zwySMSVBav6tlOt62iEDUyDCgNANEVCkA&quot;</span> <span class="attr">autocomplete</span>=<span class="string">&quot;off&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;article[title]&quot;</span> <span class="attr">id</span>=<span class="string">&quot;article_title&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Subtitle<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;article[sub_title]&quot;</span> <span class="attr">id</span>=<span class="string">&quot;article_sub_title&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>password<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;article[password]&quot;</span> <span class="attr">id</span>=<span class="string">&quot;article_password&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Content<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">name</span>=<span class="string">&quot;article[content]&quot;</span> <span class="attr">id</span>=<span class="string">&quot;article_content&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">name</span>=<span class="string">&quot;article[submit]&quot;</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">id</span>=<span class="string">&quot;article_submit&quot;</span> <span class="attr">class</span>=<span class="string">&quot;submit-btn&quot;</span>&gt;</span>Create Article<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>自己在實作 CRUD 方式是從 Route -&gt; Controller -&gt; Action -&gt; View 一個一個打造起來，<br>這篇主要敘述 Controller, Action &amp; View，這三者之間的關聯與遇到 CSRF 錯誤訊息的狀況！</p>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://railsbook.tw/chapters/12-controllers">為你自己學 Ruby on Rails - Controller</a><br>➫ <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0">wikipedia - 跨站請求偽造</a><br>➫ <a target="_blank" rel="noopener" href="https://www.explainthis.io/zh-hant/interview-guides/browser/what-is-csrf">ExplainThis</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/rails-active-record/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Active Record!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/rails-routes/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Route!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

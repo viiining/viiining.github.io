@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby] - 費波那契數 Successione di Fibonacci！ - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby] - 費波那契數 Successione di Fibonacci！ - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/ruby-method-for-fibonacci/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-10-17T13:17:19.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>17,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby] - 費波那契數 Successione di Fibonacci！</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/interview/" class="tag">#interview</a><a href="/tags/ruby/" class="tag">#ruby</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p>面試上很常見的費氏數列，來看看如何用 Ruby 的方法來定義吧！</p>
+<h2 id="費波那契數-Successione-di-Fibonacci"><a href="#費波那契數-Successione-di-Fibonacci" class="headerlink" title="費波那契數 Successione di Fibonacci"></a>費波那契數 Successione di Fibonacci</h2><h3 id="在數學上，費波那契數是以遞迴的方法來定義："><a href="#在數學上，費波那契數是以遞迴的方法來定義：" class="headerlink" title="在數學上，費波那契數是以遞迴的方法來定義："></a>在數學上，費波那契數是以遞迴的方法來定義：</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">F0 = 0; </span><br><span class="line">F1 = 1; </span><br><span class="line">Fn = F(n-1) + F(n-2) (n &gt;= 2)</span><br></pre></td></tr></table></figure>
+<p>0, 1, 1, 2, 3, 5, 8, 13…<br><strong>用文字來說，就是費氏數列由0和1開始，之後的費波那契數就是由之前的兩數相加而得出。</strong></p>
+<p><img src="/../assets/images/fib.jpeg" alt="fib"></p>
+<blockquote>
+<p>遞迴 (Recursive) 是自己呼叫自己的函式，目的是要使用相同的方法，解決重複性的問題。</p>
+</blockquote>
+<h4 id="Remark"><a href="#Remark" class="headerlink" title="Remark"></a>Remark</h4><p>遞迴通常用於解決問題的特點是可以被分解為相同結構的子問題，每個子問題都可以使用相同的方法解決。這樣的方法常常以簡單的基本情況為終止條件（例如：設定最小單位），以確保遞迴不會無限運行，也就是說，要用遞迴函式必須確定最小單位是什麼！否則，會發生 stackoverflow 堆疊滿出來的情形!!!</p>
+<ul>
+<li><p>Method 1</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">fib</span>(<span class="params">n</span>)</span><br><span class="line">  n &gt; <span class="number">1</span> ? fib(n-<span class="number">1</span>) + fib(n-<span class="number">2</span>) : n</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">puts fib(<span class="number">1</span>)</span><br><span class="line">puts fib(<span class="number">6</span>)</span><br><span class="line">puts fib(<span class="number">36</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[Running]</span><br><span class="line">1</span><br><span class="line">8</span><br><span class="line">14930352</span><br><span class="line"></span><br><span class="line">[Done] exited with code=0 in 1.072 seconds</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Method 1 使用遞迴方法來計算斐波那契數列。<br>計算方式是通過不斷地對 n-1 和 n-2 調用自身來計算第 n 項的斐波那契數。<br>這個方法在處理小的 n 值時效率還可以，但對於較大的 n 值，效率會降低，<br>因為在計算中多次重複運行相同的子問題，導致指數級的計算時間增長。<br>這就是為什麼 Method 1 在處理 n&#x3D;36 時運行時間較長。 </p>
+</blockquote>
+</li>
+<li><p>Method 2</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">fib</span>(<span class="params">n</span>)</span><br><span class="line">  fib_array = [<span class="number">0</span>, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> n &lt; <span class="number">2</span></span><br><span class="line">    <span class="keyword">return</span> fib_array[n]</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  (<span class="number">2</span>..n).each <span class="keyword">do</span> |<span class="params">i</span>|</span><br><span class="line">    fib_array[i] = fib_array[i - <span class="number">1</span>] + fib_array[i - <span class="number">2</span>]</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> fib_array[n]</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">puts fib(<span class="number">1</span>)</span><br><span class="line">puts fib(<span class="number">6</span>)</span><br><span class="line">puts fib(<span class="number">36</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[Running]</span><br><span class="line">1</span><br><span class="line">8</span><br><span class="line">14930352</span><br><span class="line"></span><br><span class="line">[Done] exited with code=0 in 0.059 seconds</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>Method 2 使用動態方法，在計算過程中避免重複計算，<br>運用陣列 <code>fib_array</code> 來存已經計算過的斐波那契數值。<br>Method 2 僅計算一次每個斐波那契數，然後重複使用這些值，因此性能較高。此方法的計算時間是線性，因此不會像 Method 1 那樣出現指數級的計算時間增長。</p>
+</blockquote>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/interview/" class="tag">#interview</a><a href="/tags/ruby/" class="tag">#ruby</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/ruby-class-and-module/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby] - Class &amp; Module！</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/internet-session-and-cookie/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Internet] - Session 與 Cookie 是什麼！</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

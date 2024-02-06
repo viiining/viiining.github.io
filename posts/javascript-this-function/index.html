@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [JavaScript] - what is this! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [JavaScript] - what is this! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/javascript-this-function/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-09-23T12:12:42.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>September</span>
+            <span>23,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [JavaScript] - what is this!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/javascript/" class="tag">#javascript</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p><em>今天我想來點 <code>this</code> !</em></p>
+<p>當時在學習 <code>this</code> 概念時，覺得有點複雜，但他又是 JavaScript 中滿重要的概念之一，<br>而且之前在看 JavaScript 相關面試題目 - <a target="_blank" rel="noopener" href="https://github.com/lydiahallie/javascript-questions">javascript-questions</a> 也發現 <code>this</code> 是 JavaScript 面試經典題，最近剛好在整理筆記時，想透過本篇文章再次整理一次，讓自己能輕易掌握概念。</p>
+<h2 id="this-是什麼？"><a href="#this-是什麼？" class="headerlink" title="this 是什麼？"></a><code>this</code> 是什麼？</h2><h3 id="在-JavaScript-中，this-的值是動態的，this-跟怎麼被呼叫有關，與放在哪無關！"><a href="#在-JavaScript-中，this-的值是動態的，this-跟怎麼被呼叫有關，與放在哪無關！" class="headerlink" title="在 JavaScript 中，this 的值是動態的，this 跟怎麼被呼叫有關，與放在哪無關！"></a>在 JavaScript 中，<code>this</code> 的值是動態的，<code>this</code> 跟怎麼被呼叫有關，與放在哪無關！</h3><p>來透過以下幾種情境與例子來看看 What is <code>this</code> ?</p>
+<ul>
+<li><p><strong>情境一：無明確的呼叫者時，<code>this</code> 指向全局物件 window &#x2F; global</strong><br>  在瀏覽器中，當你在全域作用域（也就是没有在任何函式内部）使用 <code>this</code> 時，<br>  他通常會指向全域物件 <code>window</code>。</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>); <span class="comment">// 在瀏覽器中運行，通常輸出全域物件 window</span></span><br></pre></td></tr></table></figure>
+
+<p>  在全域作用域中使用 <code>console.log(this)</code>，會輸出全域物件 <code>window</code>。<br>  因為在瀏覽器環境中，全域作用域下的程式碼就是在全域物件 <code>window</code> 下執行的。</p>
+<p>  <strong>在全域作用域中，如果沒有明確的呼叫者，<code>this</code> 會默認指向全域物件～！</strong></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>情境二：誰呼叫，誰就是 this</strong><br> 指在 JavaScript 中，<code>this</code> 的值取決於函式被誰呼叫。<br> 宣告一個常數 <code>person</code>，其中包含函式 <code>sayHello</code>，<br> 當這個函式被呼叫時，<code>this</code> 將指向呼叫他的對象，也就是 <code>person</code>。</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;Viii&quot;</span>,</span><br><span class="line">  <span class="attr">sayHello</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`Hello，<span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>！`</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">person.<span class="title function_">sayHello</span>(); <span class="comment">// Hello, Viii！</span></span><br></pre></td></tr></table></figure>
+<p>  <strong>誰呼叫 <code>sayHello</code>，<code>this</code> 就指向谁，這裡就會輸出 Hello, Viii！</strong></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>情境三：當使用 <code>new</code> 關鍵字時，<code>this</code> 指向新建立的物件 <code>&#123;&#125;</code></strong></p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定義一個名為 Person 的建構函式</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span>(<span class="params">name, age</span>) &#123;</span><br><span class="line">  <span class="comment">// 在建構函式中使用 this 來設定物件的屬性</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">name</span> = name;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 new 關鍵字來創建一個新的 Person 物件</span></span><br><span class="line"><span class="keyword">const</span> person1 = <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&#x27;Viii&#x27;</span>, <span class="number">18</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 現在 person1 是一個新的物件，this 指向 person1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person1.<span class="property">name</span>); <span class="comment">// 輸出 &quot;Viii&quot;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person1.<span class="property">age</span>);  <span class="comment">// 輸出 18</span></span><br></pre></td></tr></table></figure>
+
+<p>  我們定義了一個名為 <code>Person</code> 的建構函式，然後使用 <code>new</code> 關鍵字來創建一個新的 <code>Person</code> 物件 <code>person1</code>。當我們在建構函式中使用 <code>this</code> 設定 <code>name</code> 和 <code>age</code> 屬性時，<code>this</code> 正確地指向了新建立的 <code>person1</code> 物件。因此，<code>person1.name</code> 等於 Viii，<code>person1.age</code> 等於 18。</p>
+<p>  <strong>使用 <code>new</code> 關鍵字時，<code>this</code> 指向新建立的物件 <code>&#123;&#125;</code>，這裡 <code>this</code> 指向 <code>person1</code></strong></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>情境四：Arrow Function (箭頭函式) 没有自己的 <code>this</code>，會指向全域物件 window &#x2F; global</strong></p>
+<p>  Arrow Function (箭頭函式) 在 JavaScript 中沒有自己的 <code>this</code> 綁定，而是捕獲了其所在上下文的<code>this</code> 值。也就是箭頭函式內部的 <code>this</code> 值與包含他的函數或作用域的 <code>this</code> 值是相同的，而不是在常規函數中，<code>this</code> 的值可以根據呼叫方式而變化。</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在全局上下文中定義一個物件</span></span><br><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">  <span class="attr">firstName</span>: <span class="string">&quot;Viii&quot;</span>,</span><br><span class="line">  <span class="attr">lastName</span>: <span class="string">&quot;Chang&quot;</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 使用箭頭函數定義一個方法</span></span><br><span class="line">  <span class="attr">getFullName</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.firstName&#125;</span> <span class="subst">$&#123;<span class="variable language_">this</span>.lastName&#125;</span>`</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person.<span class="title function_">getFullName</span>()); <span class="comment">// 輸出 &quot;undefined undefined&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>  在上面的例子中，<code>getFullName</code> 方法是一個箭頭函數，但他嘗試訪問 <code>this.firstName</code> 和<code>this.lastName</code>，由於箭頭函數沒有自己的 <code>this</code> 綁定，他會捕獲包含他的上下文，這裡是全域上下文。因此，<strong>他嘗試訪問全域上下文中的 <code>firstName</code> 和 <code>lastName</code>，這些值在全域上下文中未定義，所以返回了 “undefined undefined”。</strong></p>
+<p>  相比之下，如果我們使用常規函數定義 <code>getFullName</code>，它將能夠正確訪問 <code>person</code> 物件的屬性：</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">  <span class="attr">firstName</span>: <span class="string">&quot;Viii&quot;</span>,</span><br><span class="line">  <span class="attr">lastName</span>: <span class="string">&quot;Chang&quot;</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 使用常規函數定義一個方法</span></span><br><span class="line">  <span class="attr">getFullName</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.firstName&#125;</span> <span class="subst">$&#123;<span class="variable language_">this</span>.lastName&#125;</span>`</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(person.<span class="title function_">getFullName</span>()); <span class="comment">// 輸出 &quot;Viii Chang&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>  在這個例子中，<code>getFullName</code> 方法是一個常規函數，它可以正確地訪問<code>person</code>物件的屬性，因為它有自己的<code>this</code>綁定，並且該綁定指向<code>person</code>物件。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>情境五：使用 <code>.call()</code> <code>.apply()</code> <code>.bind()</code></strong></p>
+<p>  以下分別說明這三種情境，明確指定函式內的 <code>this</code> 值：</p>
+<p>  <strong>情境五之一：使用 <code>.call()</code></strong></p>
+<p>  <code>call()</code> 方法允許在呼叫函式時明確指定函式內的 <code>this</code> 值，並且可以將參數傳遞給函式。<br>  第一個參數是要指定的 <code>this</code> 值，後續參數是傳遞給函式的引數。</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">greet</span>(<span class="params">message</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;message&#125;</span>, <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>!`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;Viii&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">greet.<span class="title function_">call</span>(person, <span class="string">&quot;你好&quot;</span>); <span class="comment">// 輸出 &quot;你好, Viii!&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><code>call()</code> 方法的第一個參數 <code>person</code> 取代了 <code>greet</code> 函式內的 <code>this</code>，所以在函式內部 <code>this.name</code> 指向了 <code>person</code> 物件的 <code>name</code> 屬性。</strong></p>
+<hr>
+<p>  <strong>情境五之二：使用 <code>.apply()</code></strong></p>
+<p>  <code>apply()</code> 方法與 <code>call()</code> 方法類似，明確指定函式內的 <code>this</code> 值，並且傳遞參數給函式。<br>  <strong>不同之處在於，參數是以陣列形式傳遞的。</strong></p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">greet</span>(<span class="params">message</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;message&#125;</span>, <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>!`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;Bob&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">greet.<span class="title function_">apply</span>(person, [<span class="string">&quot;嗨&quot;</span>]); <span class="comment">// 輸出 &quot;嗨, Bob!&quot;</span></span><br></pre></td></tr></table></figure>
+<p>  <strong><code>apply()</code> 方法的第一個參數 <code>person</code> 取代了 <code>greet</code> 函式內的 <code>this</code>，並且參數以陣列形式傳遞給函式。</strong></p>
+<hr>
+<p> <strong>情境五之三：使用 <code>.bind()</code></strong></p>
+<p>  <code>bind()</code> 方法<strong>不會立即呼叫函式，而是回傳一個新的函式</strong>，該函式內的 <code>this</code> 值已經綁定到指定的值。這個新的函式可以稍後呼叫，它將始終具有綁定的 <code>this</code> 值。</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">greet</span>(<span class="params">message</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;message&#125;</span>, <span class="subst">$&#123;<span class="variable language_">this</span>.name&#125;</span>!`</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> person = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;Charlie&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> greetPerson = greet.<span class="title function_">bind</span>(person);</span><br><span class="line"></span><br><span class="line"><span class="title function_">greetPerson</span>(<span class="string">&quot;嘿&quot;</span>); <span class="comment">// 輸出 &quot;嘿, Charlie!&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>  <strong><code>bind()</code> 方法將 <code>greet</code> 函式內的 <code>this</code> 綁定到 <code>person</code> 物件，並回傳一個新的函式 <code>greetPerson</code>。當呼叫 <code>greetPerson</code> 時，仍然具有與 <code>person</code> 物件相關聯的 <code>this</code> 值。</strong></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p><strong>情境六：是否有用 strict mode （嚴格模式）</strong></p>
+<p>  自從 ECMAScript 5（ES5）中引入了 strict mode （嚴格模式），嚴格模式已經成為 JavaScript 中的一個重要特性，旨在提高代碼的安全性，發現並防止一些常見的錯誤。嚴格模式對於 <code>this</code> 的行為也產生了一些影響，特別是在以下情況：</p>
+<ol>
+<li><p><strong>全域範圍中的<code>this</code>：</strong> 在非 “嚴格模式” 下，全域範圍中的 <code>this</code> 通常指向全域物件（在瀏覽器中是<code>window</code>）。但在 “嚴格模式” 下，全域範圍中的 <code>this</code> 將是 <code>undefined</code>，而不是全域物件。這有助於防止意外地修改全域物件上的屬性。</p>
+</li>
+<li><p><strong>建構函式中的<code>this</code>：</strong> 在非 “嚴格模式” 下，如果在沒有使用 <code>new</code> 關鍵字的情況下調用建構函式，<code>this</code> 會自動綁定到全域物件。但在 “嚴格模式” 下，如果未明確指定建構函式的執行上下文，<code>this</code> 會保持為<code>undefined</code>，而不會自動綁定到全域物件。</p>
+</li>
+</ol>
+<p>  用簡單的例子說明 “使用嚴格模式” 對 <code>this</code> 的影響：</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&quot;use strict&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sayHello</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>); <span class="comment">// 在嚴格模式下，this 是 undefined</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">sayHello</span>(); <span class="comment">// 在嚴格模式下，不會將 this 綁定到全域物件</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<p>最後，想透過一個簡單的小題目，來複習一下今天的內容！</p>
+<h4 id="Q-How-to-make-User0-do-not-return-“undefined-undefined”"><a href="#Q-How-to-make-User0-do-not-return-“undefined-undefined”" class="headerlink" title="Q: How to make User0 do not return “undefined undefined”?"></a>Q: How to make User0 do not return “undefined undefined”?</h4><pre><code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">User0</span> = &#123;</span><br><span class="line">  <span class="attr">firstName</span>: <span class="string">&quot;who&quot;</span>,</span><br><span class="line">  <span class="attr">lastName</span>: <span class="string">&quot;whowho&quot;</span>,</span><br><span class="line">  <span class="attr">getName</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> hello = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.firstName&#125;</span> <span class="subst">$&#123;<span class="variable language_">this</span>.lastName&#125;</span>`</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">hello</span>();</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">User0</span>.<span class="title function_">getName</span>());</span><br></pre></td></tr></table></figure>
+</code></pre>
+<hr>
+<ul>
+<li><p>Solution 1: 使用 <code>.call()</code> 方法明確地將 <code>this</code> 綁定到 User0 物件，並呼叫 <code>hello</code> 函式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">User0</span> = &#123;</span><br><span class="line">  <span class="attr">firstName</span>: <span class="string">&quot;Viii&quot;</span>,</span><br><span class="line">  <span class="attr">lastName</span>: <span class="string">&quot;Chang&quot;</span>,</span><br><span class="line">  <span class="attr">getName</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> hello = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.firstName&#125;</span> <span class="subst">$&#123;<span class="variable language_">this</span>.lastName&#125;</span>`</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> hello.<span class="title function_">call</span>(<span class="variable language_">this</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">User0</span>.<span class="title function_">getName</span>());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Solution 2: 使用 <code>.apply()</code> 方法明確地將 <code>this</code> 綁定到 User0 物件，並呼叫 <code>hello</code> 函式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">User0</span> = &#123;</span><br><span class="line">  <span class="attr">firstName</span>: <span class="string">&quot;Viii&quot;</span>,</span><br><span class="line">  <span class="attr">lastName</span>: <span class="string">&quot;Chang&quot;</span>,</span><br><span class="line">  <span class="attr">getName</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> hello = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.firstName&#125;</span> <span class="subst">$&#123;<span class="variable language_">this</span>.lastName&#125;</span>`</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> hello.<span class="title function_">apply</span>(<span class="variable language_">this</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">User0</span>.<span class="title function_">getName</span>());</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>Solution 3: 使用 <code>.bind()</code> 方法將 <code>this</code> 綁定到 User0 物件，然後立即呼叫 <code>hello</code> 函式（IIFE - 立即調用的函式表達式）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">User0</span> = &#123;</span><br><span class="line">  <span class="attr">firstName</span>: <span class="string">&quot;Viii&quot;</span>,</span><br><span class="line">  <span class="attr">lastName</span>: <span class="string">&quot;Chang&quot;</span>,</span><br><span class="line">  <span class="attr">getName</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> hello = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.firstName&#125;</span> <span class="subst">$&#123;<span class="variable language_">this</span>.lastName&#125;</span>`</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> hello.<span class="title function_">bind</span>(<span class="variable language_">this</span>)();</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">User0</span>.<span class="title function_">getName</span>());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Solution 4: 將 <code>hello</code> 函式改為箭頭函式，箭頭函式不會建立自己的 this 綁定，而是捕獲外部上下文的 <code>this</code>，因此可以正確地訪問 User0 物件的屬性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">User0</span> = &#123;</span><br><span class="line">  <span class="attr">firstName</span>: <span class="string">&quot;Viii&quot;</span>,</span><br><span class="line">  <span class="attr">lastName</span>: <span class="string">&quot;Chang&quot;</span>,</span><br><span class="line">  <span class="attr">getName</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">hello</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;<span class="variable language_">this</span>.firstName&#125;</span> <span class="subst">$&#123;<span class="variable language_">this</span>.lastName&#125;</span>`</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">hello</span>();</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">User0</span>.<span class="title function_">getName</span>());</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<p>呼～ <code>this</code> 真的是不簡單，以上是今天分享的內容，希望大家都能理解～！<br>我們下篇見！</p>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/this">MDN - this</a><br>➫ <a target="_blank" rel="noopener" href="https://www.explainthis.io/zh-hant/swe/what-is-this">解釋 JavaScript 中 this 的值?</a><br>➫ <a target="_blank" rel="noopener" href="https://lichi-chen.medium.com/%E8%A9%A6%E8%91%97%E7%90%86%E8%A7%A3-this-in-javascript-3f5f0b36f290">JavaScript “this” 解釋與說明</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/javascript/" class="tag">#javascript</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/javascript-how-to-create-object/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [JavaScript] - How to create Object in JavaScript!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/javascript-event-loop/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [JavaScript] - Event Loop!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

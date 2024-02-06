@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [JavaScript] - Closure! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [JavaScript] - Closure! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/javascript-closure/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-09-19T12:12:42.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>September</span>
+            <span>19,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [JavaScript] - Closure!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/javascript/" class="tag">#javascript</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p><em>上篇簡單講述了閉包的特性之後，今天來點不同的舉例來加深印象！</em></p>
+<p>先來看看以下程式碼：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createFunctionArray</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> functionArray = []; <span class="comment">// 創建一個函式陣列，用於存放多個函式</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    <span class="comment">// 在迴圈中，我們創建一個匿名函式，該函式將輸出目前的索引值</span></span><br><span class="line">    functionArray.<span class="title function_">push</span>(</span><br><span class="line">      <span class="keyword">function</span> <span class="title function_">printIndex</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">      &#125;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> functionArray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> functions = <span class="title function_">createFunctionArray</span>(); <span class="comment">// 創建一個包含多個函式的陣列</span></span><br><span class="line"></span><br><span class="line">functions[<span class="number">0</span>](); <span class="comment">// 呼叫陣列中的第一個函式，將輸出 5</span></span><br><span class="line">functions[<span class="number">1</span>](); <span class="comment">// 呼叫陣列中的第二個函式，將輸出 5</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="是不是會很好奇，為什麼輸出都是-5？"><a href="#是不是會很好奇，為什麼輸出都是-5？" class="headerlink" title="是不是會很好奇，為什麼輸出都是 5？"></a>是不是會很好奇，為什麼輸出都是 <code>5</code>？</h4><p>回想一下閉包的特性，雖然上面的程式碼似乎應該依次輸出 <code>0</code>、<code>1</code>，<br>但實際上它們都輸出 <code>5</code> 的原因是因為在迴圈中創建的匿名函式捕獲了變數 <code>i</code> 的引用，而不是其值。</p>
+<p>在 <code>createFunctionArray</code> 函式中，我們創建了一個函式陣列 <code>functionArray</code>，<br>並使用一個迴圈來添加匿名函式到這個陣列中。這些匿名函式都捕獲了外部作用域的變數 <code>i</code>。</p>
+<p>當迴圈完成並退出後，<code>i</code> 的值等於 <code>5</code>，因為這是使迴圈停止的條件。<br>由於這些匿名函式仍然引用相同的 <code>i</code>，當呼叫這些函式時，都將使用當前的 <code>i</code> 值，即 <code>5</code>。<br>這就是為什麼無論呼叫 <code>functions[0]()</code> 還是 <code>functions[1]()</code>，都輸出 <code>5</code> 的原因。</p>
+<hr>
+<h4 id="那麼要如何讓上面的輸出結果是-0、1呢？"><a href="#那麼要如何讓上面的輸出結果是-0、1呢？" class="headerlink" title="那麼要如何讓上面的輸出結果是 0、1呢？"></a>那麼要如何讓上面的輸出結果是 <code>0</code>、<code>1</code>呢？</h4><p>我們可以<strong>在每次迴圈迭代時創建一個新的作用域，這樣每個匿名函式都會捕獲不同的 <code>i</code> 值。</strong></p>
+<ul>
+<li>方式一：<strong>使用 <code>let</code> 來產生區塊作用域</strong><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createFunctionArray</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> functionArray = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123; <span class="comment">// 使用 let 創建區塊作用域</span></span><br><span class="line">    functionArray.<span class="title function_">push</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> functionArray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> functions = <span class="title function_">createFunctionArray</span>();</span><br><span class="line"></span><br><span class="line">functions[<span class="number">0</span>](); <span class="comment">// 輸出 0</span></span><br><span class="line">functions[<span class="number">1</span>](); <span class="comment">// 輸出 1</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>使用 <code>let</code> 創建的 <code>i</code> 變數在每次迴圈迭代時都有自己的區塊作用域，<br>因此每個匿名函式都能正確地捕獲到其自己的 <code>i</code> 值。</p>
+<ul>
+<li>方式二：<strong>IIFE (Immediately Invoked Function Expression)（立即呼叫函式表示法）</strong></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createFunctionArray</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> functionArray = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">    (<span class="keyword">function</span> (<span class="params">index</span>) &#123; <span class="comment">// 使用IIFE創建新的作用域</span></span><br><span class="line">      functionArray.<span class="title function_">push</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(index);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;)(i); <span class="comment">// 將i作為參數傳遞給IIFE</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> functionArray;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> functions = <span class="title function_">createFunctionArray</span>();</span><br><span class="line"></span><br><span class="line">functions[<span class="number">0</span>](); <span class="comment">// 輸出 0</span></span><br><span class="line">functions[<span class="number">1</span>](); <span class="comment">// 輸出 1</span></span><br></pre></td></tr></table></figure>
+
+<p>這樣做之後，每個匿名函式都捕獲了它自己的 <code>index</code> 值，使得輸出正確。</p>
+<blockquote>
+<p>IIFE 通常用於</p>
+<ul>
+<li><strong>創建私有作用域</strong>： IIFE 創建了一個獨立的作用域，其中的變數在函式執行後會被銷毀。<br>這有助於防止變數污染全域作用域。</li>
+<li><strong>模組化程式碼</strong>： IIFE 可用於創建模組化的程式碼區塊，其中可以定義私有變數和函式，<br>並通過返回公共接口來封裝它們，以供外部使用。</li>
+</ul>
+</blockquote>
+<hr>
+<h4 id="閉包實際應用"><a href="#閉包實際應用" class="headerlink" title="閉包實際應用"></a>閉包實際應用</h4><ol>
+<li><p><strong>封裝私有變數和函式：</strong><br>閉包可以用來創建具有私有變數的函式，以增加安全性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createCounter</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">increment</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      count++;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">getCount</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> counter = <span class="title function_">createCounter</span>();</span><br><span class="line">counter.<span class="title function_">increment</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(counter.<span class="title function_">getCount</span>()); <span class="comment">// 輸出 1</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>事件處理程序：</strong><br>閉包可用於處理事件。當使用者點擊按鈕時，可以使用閉包來記錄點擊次數。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> button = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;likeButton&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> clickCount = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">button.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  clickCount++;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`點擊次數：<span class="subst">$&#123;clickCount&#125;</span>`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>setTimeout 和 setInterval：</strong><br>使用閉包可以創建具有狀態的定時任務。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createTimer</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> seconds = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    seconds++;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`過去秒數：<span class="subst">$&#123;seconds&#125;</span>`</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> timer = <span class="title function_">createTimer</span>();</span><br><span class="line"><span class="built_in">setInterval</span>(timer, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>模組模式：</strong><br>閉包可用於創建模組，將相關的函式和數據封裝在一起，以提供更好的代碼組織。<br>假設我們正在建立一個計數器模組：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">CounterModule</span> = (<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 私有變數</span></span><br><span class="line">  <span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 增加</span></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">increment</span>(<span class="params"></span>) &#123;</span><br><span class="line">    count++;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 減少</span></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">decrement</span>(<span class="params"></span>) &#123;</span><br><span class="line">    count--;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 獲取當前值</span></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">getCount</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 公開的部分</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">increment</span>: increment,</span><br><span class="line">    <span class="attr">decrement</span>: decrement,</span><br><span class="line">    <span class="attr">getCount</span>: getCount</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用計數器模組</span></span><br><span class="line"><span class="title class_">CounterModule</span>.<span class="title function_">increment</span>();</span><br><span class="line"><span class="title class_">CounterModule</span>.<span class="title function_">increment</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">CounterModule</span>.<span class="title function_">getCount</span>()); <span class="comment">// 輸出 2</span></span><br><span class="line"><span class="title class_">CounterModule</span>.<span class="title function_">decrement</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">CounterModule</span>.<span class="title function_">getCount</span>()); <span class="comment">// 輸出 1</span></span><br></pre></td></tr></table></figure>
+
+<p> 在這個例子中，<code>CounterModule</code> 是一個使用閉包實現的模組，<br> 包含了私有變數 <code>count</code> 和三個公開方法：<code>increment</code>、<code>decrement</code> 和 <code>getCount</code>。<br> 這樣，我們可以使用模組來管理計數器的狀態，同時保護了 <code>count</code> 變數，<br> 使其無法被外部直接訪問或修改，提供了更好的代碼組織和隔離。</p>
+</li>
+<li><p><strong>快取：</strong><br>閉包可用於創建簡單的快取，以避免重複計算。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createCache</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> cache = &#123;&#125;;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params">key</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (key <span class="keyword">in</span> cache) &#123;</span><br><span class="line">      <span class="keyword">return</span> cache[key];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> result = <span class="comment">/* 計算結果 */</span>;</span><br><span class="line">      cache[key] = result;</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> getValue = <span class="title function_">createCache</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">getValue</span>(<span class="string">&#x27;data&#x27;</span>)); <span class="comment">// 計算並快取結果</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">getValue</span>(<span class="string">&#x27;data&#x27;</span>)); <span class="comment">// 直接使用快取的結果</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>深入了解不同的例子與閉包實際應用之後，相信大家有對閉包留下深刻的印象！<br>今天就先分享到這，我們下篇見！</p>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures">MDN - Closures</a><br>➫ <a target="_blank" rel="noopener" href="https://jianline.com/javascript-closure/">[筆記]-JavaScript 閉包(Closure)是什麼?關於閉包的3件事</a><br>➫ <a target="_blank" rel="noopener" href="https://pjchender.blogspot.com/2016/05/javascriptclosure.html">[筆記] 談談JavaScript中closure的概念 – Part 2</a><br>➫ <a target="_blank" rel="noopener" href="https://pjchender.dev/javascript/js-closure/">[JS] 深入淺出 JavaScript 閉包（closure）</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/javascript/" class="tag">#javascript</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/javascript-first-class-function-and-callback-function/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [JavaScript] - First-Class Function &amp; Callback Function!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/infosec-cors/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Information Security] - CORS!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

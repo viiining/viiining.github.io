@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [JavaScript] - const, let, var! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [JavaScript] - const, let, var! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/javascript-const-let-var/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-07-01T12:12:42.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>July</span>
+            <span>1,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [JavaScript] - const, let, var!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/javascript/" class="tag">#javascript</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <blockquote>
+<p>在 JavaScript 裡，最常見的 const, let, var，這三者到底有什麼不同？</p>
+</blockquote>
+<h2 id="Basics"><a href="#Basics" class="headerlink" title="Basics"></a>Basics</h2><ul>
+<li><strong>const 常數</strong><br>在宣告常數上，要注意<strong>不能重複宣告也不能重新賦值</strong>，但是在<strong>宣告陣列或是物件時，可修改其內部屬性</strong>。<br>在第三點可以發現 const d &#x3D; [“a”, “b”, “c”] 可以藉由取 <strong>index</strong> 的方式，更換陣列裡的元素。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. constant declaration</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="number">2</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. const cannot be re-assigned!</span></span><br><span class="line"><span class="comment">//example 1</span></span><br><span class="line"><span class="keyword">const</span> b = <span class="number">2</span>;</span><br><span class="line">b = <span class="number">3</span>; <span class="comment">// Uncaught TypeError: Assignment to constant variable.</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b);</span><br><span class="line"></span><br><span class="line"><span class="comment">//example 2</span></span><br><span class="line"><span class="keyword">const</span> c = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>];</span><br><span class="line">c = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>]; <span class="comment">// Uncaught TypeError: Assignment to constant variable.</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(c);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. const can changed by index</span></span><br><span class="line"><span class="keyword">const</span> d = [<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>];</span><br><span class="line">d[<span class="number">0</span>] = <span class="number">333</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(d); <span class="comment">// [333, &#x27;b&#x27;, &#x27;c&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>let 宣告在當前區塊的變數</strong></p>
+</li>
+<li><p><strong>var 宣告一個變數</strong></p>
+<blockquote>
+<p>let 與 var 都是可以用來宣告變數的，差異在:</p>
+<ol>
+<li>var 可以重複宣告，let 則不行</li>
+<li>作用域 (scope) 不同<br>let 作用於 block scope ; var 作用於 function scope。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b = <span class="number">1</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b); <span class="comment">// Uncaught SyntaxError: Identifier &#x27;b&#x27; has already been declared</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> c = <span class="number">1</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(c); <span class="comment">// Uncaught SyntaxError: Identifier &#x27;c&#x27; has already been declared</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> d = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> d = <span class="number">1</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(d); <span class="comment">// Uncaught SyntaxError: Identifier &#x27;d&#x27; has already been declared</span></span><br></pre></td></tr></table></figure></blockquote>
+</li>
+</ul>
+<h4 id="變數應當宣告後再使用，避免使用無宣告變數"><a href="#變數應當宣告後再使用，避免使用無宣告變數" class="headerlink" title="變數應當宣告後再使用，避免使用無宣告變數"></a>變數應當宣告後再使用，避免使用無宣告變數</h4><p>有宣告與沒宣告變數差別在是否可以 delete (一個刪除物件的運算)<br><em>delete operator: removes a property from an object.</em></p>
+<p>下方例子說明，無宣告的變數會被當作物件屬性新增，容易在 coding 上誤刪造成 bug，因此回歸到標題所述，<br><strong>變數應當宣告後再使用，避免使用無宣告變數</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> user = <span class="string">&quot;小明&quot;</span>;</span><br><span class="line"><span class="keyword">delete</span> user; <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">user = <span class="string">&quot;小明&quot;</span>;</span><br><span class="line"><span class="keyword">delete</span> user; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="應當常使用-const-let-而非-var"><a href="#應當常使用-const-let-而非-var" class="headerlink" title="應當常使用 const, let 而非 var"></a>應當常使用 const, let 而非 var</h4><p>const 的規則相較 let, var 嚴謹許多，因此在宣告上比較不會有重複的狀況。<br>透過上面的說明，可以知道 let 與 var 很相似，但是！<br>var 沒做好管理，容易發生變數相互覆蓋，最嚴重的情形便是<strong>全域汙染</strong>，因此在使用上要小心。</p>
+<p><em>使用上的方法，可以參考 Google 的說明：<a target="_blank" rel="noopener" href="https://google.github.io/styleguide/jsguide.html#features-declare-types-as-needed">Google JavaScript Style Guide</a></em></p>
+<h4 id="Brief-Summary"><a href="#Brief-Summary" class="headerlink" title="Brief Summary"></a><mark>Brief Summary</mark></h4><table>
+<thead>
+<tr>
+<th align="center">-</th>
+<th align="center">var</th>
+<th align="center">let &#x2F; const</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>Variable Hoisting</strong></td>
+<td align="center">yes</td>
+<td align="center">yes <mark>TDZ</mark></td>
+</tr>
+<tr>
+<td align="center"><strong>Scope</strong></td>
+<td align="center">function scope</td>
+<td align="center">block scope</td>
+</tr>
+<tr>
+<td align="center"><strong>Repeated declaration</strong></td>
+<td align="center">yes</td>
+<td align="center">no</td>
+</tr>
+<tr>
+<td align="center"><strong>Influence to Global attributes</strong></td>
+<td align="center">yes</td>
+<td align="center">no</td>
+</tr>
+</tbody></table>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Glossary/Scope">MDN</a><br>➫ <a target="_blank" rel="noopener" href="https://jianline.com/javascript-scope-and-scope-chain/">ㄚ建的技能樹</a><br>➫ <a target="_blank" rel="noopener" href="https://www.explainthis.io/zh-hant/interview-guides/javascript/what-is-scope-and-scope-chain">ExplainThis</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/javascript/" class="tag">#javascript</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/ruby-brief-introduction/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby] - Intro!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/github-pages/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [GitHub] - GitHub Pages!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

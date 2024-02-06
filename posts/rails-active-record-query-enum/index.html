@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby on Rails] - Active Record Query - Enum! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby on Rails] - Active Record Query - Enum! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/rails-active-record-query-enum/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-10-10T04:17:21.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>10,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby on Rails] - Active Record Query - Enum!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a><a href="/tags/active-record/" class="tag">#active record</a><a href="/tags/enum/" class="tag">#enum</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p><em>在 Active Record 裡，有一個滿常見的功能，<strong>Enum</strong>，這功能該如何使用，今天就來點 Enum 吧！</em></p>
+<h2 id="Enum-是什麼？"><a href="#Enum-是什麼？" class="headerlink" title="Enum 是什麼？"></a>Enum 是什麼？</h2><p>Enum（Enumeration的縮寫）稱為列舉，是一種程式設計中常見的資料型別，<br>用於定義一組具有固定名稱的整數常數。<br><strong>這些名稱通常用作代表特定狀態、選項、或類別的符號，使我們在程式上更易於閱讀、理解和維護。</strong></p>
+<p>讓我們來看看 Rails 裡該如何使用 Enum 吧！</p>
+<h2 id="Enum-in-Ruby-on-Rails"><a href="#Enum-in-Ruby-on-Rails" class="headerlink" title="Enum in Ruby on Rails"></a>Enum in Ruby on Rails</h2><p>在 Rails 中，Enum（列舉）是一個用於定義 Model 屬性的機制。<br>可以使用 Enum 來將整數映射到易於理解的名稱（自定義名稱），以增強代碼的可讀性。</p>
+<p>首先，我們已經建立好 <code>Order</code> Model，<br>現在我想針對一張訂單可能會有的狀態新增一個欄位到 <code>orders</code> 資料表上。<br>一張訂單可能有這四種狀態：<code>pending</code>、<code>shipped</code>、<code>delivered</code> 和 <code>canceled</code>，</p>
+<p>可以在建立狀態欄位上使用整數的資料型態來設置：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails g migration AddStatusToOrder status:integer</span><br></pre></td></tr></table></figure>
+<p>點進去剛剛新增的 migration 檔案：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AddStatusToOrder</span> &lt; <span class="title class_ inherited__">ActiveRecord::Migration</span>[<span class="number">7.0</span>]</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">change</span></span><br><span class="line">    add_column <span class="symbol">:orders</span>, <span class="symbol">:status</span>, <span class="symbol">:integer</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>如果想設定預設值為 <code>0</code>，可以加上 <code>default: 0</code></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AddStatusToOrder</span> &lt; <span class="title class_ inherited__">ActiveRecord::Migration</span>[<span class="number">7.0</span>]</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">change</span></span><br><span class="line">    add_column <span class="symbol">:orders</span>, <span class="symbol">:status</span>, <span class="symbol">:integer</span>, <span class="symbol">default:</span> <span class="number">0</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h2 id="如何在-Model-定義-Enum"><a href="#如何在-Model-定義-Enum" class="headerlink" title="如何在 Model 定義 Enum?"></a>如何在 Model 定義 Enum?</h2><p>接著，我們到 <code>Order</code> Model，使用 Enum 來定義狀態： </p>
+<h4 id="在定義上可以使用多種方式，來看看有哪些寫法吧！"><a href="#在定義上可以使用多種方式，來看看有哪些寫法吧！" class="headerlink" title="在定義上可以使用多種方式，來看看有哪些寫法吧！"></a>在定義上可以使用多種方式，來看看有哪些寫法吧！</h4><ul>
+<li><p>Array</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/models/order.rb</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Order</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  enum <span class="symbol">:status</span>, [<span class="symbol">:pending</span>, <span class="symbol">:shipped</span>, <span class="symbol">:delivered</span>, <span class="symbol">:canceled</span>]</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure></li>
+<li><p><code>%i()</code> format</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/models/order.rb</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Order</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  enum <span class="symbol">:status</span>, %i(pending shipped delivered canceled)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>當我們使用陣列的方式去定義時，<code>pending</code>、<code>shipped</code>、<code>delivered</code> 和 <code>canceled</code>，<br>將會被映射到 <code>0</code>、<code>1</code>、<code>2</code> 和 <code>3</code>（陣列的第一個元素 index 為 0，以此類推）。</p>
+</li>
+<li><p>Hash<br>除了使用 Array，我們還可以使用 Hash 去設定，並為每個值自定義整數或名稱去對應：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/models/order.rb</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Order</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  enum <span class="symbol">:status</span>, &#123;</span><br><span class="line">    <span class="symbol">pending:</span> <span class="number">0</span>,</span><br><span class="line">    <span class="symbol">shipped:</span> <span class="number">1</span>,</span><br><span class="line">    <span class="symbol">delivered:</span> <span class="number">2</span>,</span><br><span class="line">    <span class="symbol">canceled:</span> <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/models/order.rb</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Order</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  enum <span class="symbol">:status</span>, &#123;</span><br><span class="line">    <span class="symbol">pending:</span> <span class="string">&#x27;待處理&#x27;</span>,</span><br><span class="line">    <span class="symbol">shipped:</span> <span class="string">&#x27;已發貨&#x27;</span>,</span><br><span class="line">    <span class="symbol">delivered:</span> <span class="string">&#x27;已送達&#x27;</span>,</span><br><span class="line">    <span class="symbol">canceled:</span> <span class="string">&#x27;已取消&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在使用上，比較建議用 Hash 的方式去定義，<br>因為當使用 Array 定義 Enum 時，資料庫會存取相應的 index 值，當之後要更改現有 Enum 的順序上會導致問題，因為資料庫裡的值可能與新的順序不符。<br>因此，當使用 Hash 定義，因為是自定義值，不是依賴於 index 值。當要更改 Enum 的順序時，只需更新 Enum 的 Hash 自定義值，而不會影響現有資料的整合性。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Enum-在-Rails-如使用？"><a href="#Enum-在-Rails-如使用？" class="headerlink" title="Enum 在 Rails 如使用？"></a>Enum 在 Rails 如使用？</h2><p>在 Model 定義好 Enum 之後，我們要如何使用呢？</p>
+<h3 id="Order-Model-擁有新的方法了！"><a href="#Order-Model-擁有新的方法了！" class="headerlink" title="Order Model 擁有新的方法了！"></a>Order Model 擁有新的方法了！</h3><h4 id="透過複數型來抓取整個定義好的狀態-使用-statuses-方法"><a href="#透過複數型來抓取整個定義好的狀態-使用-statuses-方法" class="headerlink" title="透過複數型來抓取整個定義好的狀態 - 使用 statuses 方法"></a>透過複數型來抓取整個定義好的狀態 - 使用 <code>statuses</code> 方法</h4><p>透過剛剛的 Hash 定義，我們便可以用 <code>Order.statuses</code> 得到一個 Hash 如下：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/models/order.rb</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Order</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  enum <span class="symbol">:status</span>, &#123;</span><br><span class="line">    <span class="symbol">pending:</span> <span class="number">0</span>,</span><br><span class="line">    <span class="symbol">shipped:</span> <span class="number">1</span>,</span><br><span class="line">    <span class="symbol">delivered:</span> <span class="number">2</span>,</span><br><span class="line">    <span class="symbol">canceled:</span> <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight irb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Order</span>.statuses</span><br><span class="line">=&gt; &#123;<span class="string">&quot;pending&quot;</span>=&gt;<span class="number">0</span>, <span class="string">&quot;shipped&quot;</span>=&gt;<span class="number">1</span>, <span class="string">&quot;delivered&quot;</span>=&gt;<span class="number">2</span>, <span class="string">&quot;canceled&quot;</span>=&gt;<span class="number">3</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Order</span>.statuses[<span class="symbol">:pending</span>] <span class="keyword">or</span> <span class="title class_">Order</span>.statuses[<span class="string">&quot;pending&quot;</span>]</span><br><span class="line">=&gt; <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查詢具有相應狀態的訂單記錄-使用-pending-shipped-delivered-canceled-方法"><a href="#查詢具有相應狀態的訂單記錄-使用-pending-shipped-delivered-canceled-方法" class="headerlink" title="查詢具有相應狀態的訂單記錄 - 使用 pending, shipped, delivered, canceled 方法"></a>查詢具有相應狀態的訂單記錄 - 使用 <code>pending</code>, <code>shipped</code>, <code>delivered</code>, <code>canceled</code> 方法</h4><p>透過 <code>Order.pending</code>, <code>Order.shipped</code>, <code>Order.delivered</code>, <code>Order.canceled</code>，<br>這些方法用於查詢具有相應狀態的訂單記錄。<br><code>Order.pending</code> 將返回所有狀態為 “pending” 的訂單。</p>
+<figure class="highlight irb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Order</span>.pending</span><br><span class="line">  <span class="title class_">Order</span> <span class="title class_">Load</span> (<span class="number">0</span>.3ms)  <span class="variable constant_">SELECT</span> <span class="string">&quot;orders&quot;</span>.* <span class="variable constant_">FROM</span> <span class="string">&quot;orders&quot;</span> <span class="variable constant_">WHERE</span> <span class="string">&quot;orders&quot;</span>.<span class="string">&quot;status&quot;</span> = ?  [[<span class="string">&quot;status&quot;</span>, <span class="number">0</span>]]</span><br><span class="line"> =&gt; </span><br><span class="line">[#&lt;Order:0x0000000110836420</span><br><span class="line">  id: 3,</span><br><span class="line">  order_name: &quot;20231010001&quot;,</span><br><span class="line">  created_at: Tue, 10 Oct 2023 06:17:08.953478000 UTC +00:00,</span><br><span class="line">  updated_at: Tue, 10 Oct 2023 06:17:08.953478000 UTC +00:00,</span><br><span class="line">  status: &quot;pending&quot;&gt;,</span><br><span class="line"> #&lt;Order:0x00000001108362e0</span><br><span class="line">  id: 4,</span><br><span class="line">  order_name: &quot;20231010002&quot;,</span><br><span class="line">  created_at: Tue, 10 Oct 2023 06:17:17.280539000 UTC +00:00,</span><br><span class="line">  updated_at: Tue, 10 Oct 2023 06:17:17.280539000 UTC +00:00,</span><br><span class="line">  status: &quot;pending&quot;&gt;,</span><br><span class="line"> #&lt;Order:0x00000001108361a0</span><br><span class="line">  id: 5,</span><br><span class="line">  order_name: &quot;20231010001&quot;,</span><br><span class="line">  created_at: Tue, 10 Oct 2023 07:12:39.204159000 UTC +00:00,</span><br><span class="line">  updated_at: Tue, 10 Oct 2023 07:12:39.204159000 UTC +00:00,</span><br><span class="line">  status: &quot;pending&quot;&gt;] </span><br></pre></td></tr></table></figure>
+
+<h4 id="透過建立一張新的-order-使用-status-方法"><a href="#透過建立一張新的-order-使用-status-方法" class="headerlink" title="透過建立一張新的 order - 使用 status 方法"></a>透過建立一張新的 order - 使用 <code>status</code> 方法</h4><p><code>status</code> 方法是一個可以用在知道一個實體變數的狀態方法：<br>建立一張新的 order001 之後，可以用 <code>order001.status</code>，<br>剛剛因為有設定 <code>default: 0</code>，所以結果會是 “pending”。</p>
+<figure class="highlight irb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">order001 = <span class="title class_">Order</span>.create(<span class="symbol">order_name:</span> <span class="string">&quot;20231010001&quot;</span>)</span><br><span class="line">order001.status</span><br><span class="line">=&gt; <span class="string">&quot;pending&quot;</span> </span><br></pre></td></tr></table></figure>
+
+<h4 id="確認-order-狀態-使用-pending-shipped-delivered-canceled-方法"><a href="#確認-order-狀態-使用-pending-shipped-delivered-canceled-方法" class="headerlink" title="確認 order 狀態 - 使用 pending?, shipped?, delivered?, canceled? 方法"></a>確認 order 狀態 - 使用 <code>pending?</code>, <code>shipped?</code>, <code>delivered?</code>, <code>canceled?</code> 方法</h4><p>透過自定義的名稱加上 <code>?</code>，可以檢查是否為某種狀態：</p>
+<figure class="highlight irb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">order001 = <span class="title class_">Order</span>.create(<span class="symbol">order_name:</span> <span class="string">&quot;20231010001&quot;</span>)</span><br><span class="line">order001.pending?</span><br><span class="line">=&gt; true </span><br><span class="line">order001.shipped?</span><br><span class="line">=&gt; false </span><br><span class="line">order001.delivered?</span><br><span class="line">=&gt; false </span><br><span class="line">order001.canceled?</span><br><span class="line">=&gt; false </span><br></pre></td></tr></table></figure>
+
+<h4 id="更新-order-狀態-使用-pending-shipped-delivered-canceled-方法"><a href="#更新-order-狀態-使用-pending-shipped-delivered-canceled-方法" class="headerlink" title="更新 order 狀態 - 使用 pending!, shipped!, delivered!, canceled! 方法"></a>更新 order 狀態 - 使用 <code>pending!</code>, <code>shipped!</code>, <code>delivered!</code>, <code>canceled!</code> 方法</h4><p>透過自定義的名稱加上 <code>!</code>，可以更新狀態：</p>
+<figure class="highlight irb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">order001 = <span class="title class_">Order</span>.create(<span class="symbol">order_name:</span> <span class="string">&quot;20231010001&quot;</span>)</span><br><span class="line">order001.shipped!</span><br><span class="line">  <span class="variable constant_">TRANSACTION</span> (<span class="number">0</span>.1ms)  <span class="keyword">begin</span> transaction</span><br><span class="line">  <span class="title class_">Order</span> <span class="title class_">Update</span> (<span class="number">1</span>.4ms)  <span class="variable constant_">UPDATE</span> <span class="string">&quot;orders&quot;</span> <span class="variable constant_">SET</span> <span class="string">&quot;updated_at&quot;</span> = <span class="string">?,</span> <span class="string">&quot;status&quot;</span> = ? <span class="variable constant_">WHERE</span> <span class="string">&quot;orders&quot;</span>.<span class="string">&quot;id&quot;</span> = ?  [[<span class="string">&quot;updated_at&quot;</span>, <span class="string">&quot;2023-10-10 07:36:12.025293&quot;</span>], [<span class="string">&quot;status&quot;</span>, <span class="number">1</span>], [<span class="string">&quot;id&quot;</span>, <span class="number">3</span>]]</span><br><span class="line">  <span class="variable constant_">TRANSACTION</span> (<span class="number">1</span>.2ms)  commit transaction</span><br><span class="line"> =&gt; true</span><br></pre></td></tr></table></figure>
+<figure class="highlight irb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">order001.shipped?</span><br><span class="line">=&gt; true</span><br><span class="line">order001.pending?</span><br><span class="line">=&gt; false </span><br></pre></td></tr></table></figure>
+<p>另外，我們也可以使用：<code>order001.update(status: :shipped)</code></p>
+<figure class="highlight irb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">order001.update(<span class="symbol">status:</span> <span class="symbol">:shipped</span>)</span><br><span class="line">  <span class="variable constant_">TRANSACTION</span> (<span class="number">0</span>.1ms)  <span class="keyword">begin</span> transaction</span><br><span class="line">  <span class="title class_">Order</span> <span class="title class_">Update</span> (<span class="number">0</span>.8ms)  <span class="variable constant_">UPDATE</span> <span class="string">&quot;orders&quot;</span> <span class="variable constant_">SET</span> <span class="string">&quot;updated_at&quot;</span> = <span class="string">?,</span> <span class="string">&quot;status&quot;</span> = ? <span class="variable constant_">WHERE</span> <span class="string">&quot;orders&quot;</span>.<span class="string">&quot;id&quot;</span> = ?  [[<span class="string">&quot;updated_at&quot;</span>, <span class="string">&quot;2023-10-10 07:38:30.268312&quot;</span>], [<span class="string">&quot;status&quot;</span>, <span class="number">1</span>], [<span class="string">&quot;id&quot;</span>, <span class="number">3</span>]]</span><br><span class="line">  <span class="variable constant_">TRANSACTION</span> (<span class="number">1</span>.7ms)  commit transaction</span><br><span class="line"> =&gt; true</span><br></pre></td></tr></table></figure>
+<figure class="highlight irb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">order001.shipped?</span><br><span class="line">=&gt; true</span><br><span class="line">order001.pending?</span><br><span class="line">=&gt; false </span><br></pre></td></tr></table></figure>
+<p>但是相較 <code>!</code>，這寫法比較冗長，我比較想要快速一點點，通常我都會用第一種方式去更新！</p>
+<h3 id="prefix-suffix"><a href="#prefix-suffix" class="headerlink" title="prefix, suffix"></a>prefix, suffix</h3><p>在 Enum 還可以使用 <code>prefix</code> 和 <code>suffix</code> 選項來控制生成的方法的前綴和後綴，以避免命名衝突。</p>
+<ul>
+<li><p><strong>prefix（前綴）</strong>：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Order</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  enum <span class="symbol">status:</span> &#123; <span class="symbol">pending:</span> <span class="number">0</span>, <span class="symbol">shipped:</span> <span class="number">1</span>, <span class="symbol">delivered:</span> <span class="number">2</span>, <span class="symbol">canceled:</span> <span class="number">3</span> &#125;, <span class="symbol">prefix:</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>生成的方法將具有前綴 <code>status_</code>： <code>status_pending</code>、<code>status_shipped</code>、<code>status_delivered</code>、<code>status_canceled</code>。</p>
+</li>
+<li><p><strong>suffix（後綴）</strong>：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Order</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  enum <span class="symbol">status:</span> &#123; <span class="symbol">pending:</span> <span class="number">0</span>, <span class="symbol">shipped:</span> <span class="number">1</span>, <span class="symbol">delivered:</span> <span class="number">2</span>, <span class="symbol">canceled:</span> <span class="number">3</span> &#125;, <span class="symbol">suffix:</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>生成的方法將具有後綴 <code>_status</code>： <code>pending_status</code>、<code>shipped_status</code>、<code>delivered_status</code>、<code>canceled_status</code>。</p>
+</li>
+</ul>
+<p>今天就到這啦！我們下篇見～</p>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://guides.rubyonrails.org/active_record_querying.html#enums">Active Record Query Interface #Enums</a><br>➫ <a target="_blank" rel="noopener" href="https://blog.saeloun.com/2022/01/05/how-to-use-enums-in-rails/">How to Use Enums in Rails</a><br>➫ <a target="_blank" rel="noopener" href="https://www.honeybadger.io/blog/how-to-use-enum-attributes-in-ruby-on-rails/">How to use enum attributes in Ruby on Rails</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a><a href="/tags/active-record/" class="tag">#active record</a><a href="/tags/enum/" class="tag">#enum</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/database-basic/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Database] - 資料庫是什麼？</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/rails-active-record-query-scope/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Active Record Query - scope!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

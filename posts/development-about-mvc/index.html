@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Development] - MVC! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Development] - MVC! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/development-about-mvc/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-09-30T14:12:42.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>September</span>
+            <span>30,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Development] - MVC!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/web-development/" class="tag">#web development</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p><em>上篇我們提到 Ruby on Rails 的設計原則，今天來點 MVC，看看 Rails 在這樣的模式下是如何運作的！</em></p>
+<h2 id="什麼是-MVC-架構？"><a href="#什麼是-MVC-架構？" class="headerlink" title="什麼是 MVC 架構？"></a>什麼是 MVC 架構？</h2><p>MVC（Model View Controller）是一種軟體架構模式，用於組織和分離應用程式的不同部分，以實現更好的代碼結構和可維護性，這樣的設計概念是以 <strong>關注點分離（Separation of Concerns）</strong> 為基礎，將應用程式分拆成不同功能層 (layer) 或程式碼模組 (module)，讓每個區塊有各自的關注點，彼此分工合作。</p>
+<p>Model, View, Controller 便是歸屬於不同的部門，每個部門各自負責不同的關注點，而，Ruby on Rails（RoR）就是一個運用 MVC 架構的 Web Framework（網站應用程式框架）。</p>
+<ol>
+<li><p><strong>Model：</strong> Model（模型）負責處理應用程式的數據邏輯和數據存儲，<strong>簡單來說就是跟資料庫溝通</strong>，負責從資料庫取出必要的資料，Model 是應用程式的核心數據結構，並處理數據的檢索、存儲和處理。</p>
+</li>
+<li><p><strong>View：</strong> View (視圖) 負責<strong>管理畫面的呈現</strong>。將數據呈現給用戶，以便用戶可以看到和操作數據。</p>
+</li>
+<li><p><strong>Controller：</strong> Controller（控制器）是 Model（模型）和 View (視圖) 之間的中間人，<strong>負責接收用戶的輸入，處理用戶的請求，然後將相關數據傳遞給 Model（模型）進行處理，然後將處理結果返回給 View (視圖) 以供呈現。</strong></p>
+<p> 在 Controller 上會設置不同的 **action (動作)**，有點像遙控器上的按鈕，只要觸發了不同的 action，Controller 就會啟動後續的行為。</p>
+</li>
+</ol>
+<hr>
+<p>用一張簡易的示意圖來說明整個運作原理：</p>
+<p>   <img src="https://ithelp.ithome.com.tw/upload/images/20230930/20161764YQPprUetsK.png" alt="https://ithelp.ithome.com.tw/upload/images/20230930/20161764YQPprUetsK.png"></p>
+<ul>
+<li>用戶通過瀏覽器發送請求（用戶執行某些操作），例如：點擊連結、提交表單或輸入URL。</li>
+<li>當 Route (路徑) 接收到這個請求，然後根據請求的 URL 路徑確定應該調用哪個 Controller（控制器）的哪個 action（動作）來處理這個請求。</li>
+<li>Route (路徑) 根據選擇的 Controller（控制器）與 action (動作) 會開始執行。action (動作) 是一個方法，包含處理用戶請求的邏輯。action (動作) 可以訪問請求中的參數、處理數據、執行業務邏輯，然後準備回應。</li>
+<li>在 Controller（控制器）的 action（動作）中，通常會與 Model（模型）互動，這是用來處理數據存取和業務邏輯的部分。Controller（控制器）可能會使用 Model (模型) 來檢索、更新或建立數據。</li>
+<li>一旦控制器完成了操作，會以 View（視圖）來呈現結果。View（視圖）負責將數據格式化為最終的 HTML 或其他內容，然後返回給用戶。</li>
+<li>最後控制器將處理的結果作為 HTTP 回應返回給瀏覽器，用戶將在瀏覽器中看到結果。</li>
+</ul>
+<h2 id="Ruby-on-Rails-中的-MVC"><a href="#Ruby-on-Rails-中的-MVC" class="headerlink" title="Ruby on Rails 中的 MVC"></a>Ruby on Rails 中的 MVC</h2><p>Ruby on Rails 中的 MVC 結構，我們透過定義一個 show 的方法，來看看 MVC 架構的一小部分：</p>
+<ol>
+<li><strong>Model（模型）：</strong><br>建立一個 <code>Book</code> Model（模型），驗證必須要存在的書名以及驗證頁數和價格的有效性。</li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/models/book.rb</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Book</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  validates <span class="symbol">:bookname</span>, <span class="symbol">presence:</span> <span class="literal">true</span></span><br><span class="line">  validates <span class="symbol">:page</span>, <span class="symbol">presence:</span> <span class="literal">true</span>, <span class="symbol">numericality:</span> &#123; <span class="symbol">greater_than:</span> <span class="number">0</span> &#125;</span><br><span class="line">  validates <span class="symbol">:price</span>, <span class="symbol">presence:</span> <span class="literal">true</span>, <span class="symbol">numericality:</span> &#123; <span class="symbol">greater_than:</span> <span class="number">0</span> &#125;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>View（視圖）：</strong> 建立 View（視圖），以 HTML 形式呈現書籍的詳細資訊頁面，其中包含書名、描述、頁數和價格，這些是根據模型中的數據動態生成的。</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- app/views/books/show.html.erb --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">article</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&lt;%= @book.bookname %&gt;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Description<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    &lt;%= @book.description %&gt;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Page<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    &lt;%= @book.page %&gt;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Price<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    &lt;%= @book.price %&gt;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>Controller（控制器）：</strong> 建立一個 <code>BooksController</code> 來處理用戶的請求，當用戶訪問書籍相關資訊頁面時，Controller（控制器）的 show 方法被調用。從 URL 中獲取書籍的 <code>:id</code>，然後使用 <code>Book</code> Model（模型）來查找相應的書籍。最後，將找到的書籍數據傳遞給 View（視圖），以呈現給用戶。</li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># app/controllers/books_controller.rb</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BooksController</span> &lt; <span class="title class_ inherited__">ApplicationController</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">show</span></span><br><span class="line">    <span class="variable">@book</span> = <span class="title class_">Book</span>.find(params[<span class="symbol">:id</span>])</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>這樣的分離設計使程式碼更具可讀性、可維護性和可擴展性；讓我們可以專注於不同方面的開發，同時確保應用程序的不同部分能夠協同工作。</strong></p>
+<hr>
+<h2 id="MVC-架構的好處"><a href="#MVC-架構的好處" class="headerlink" title="MVC 架構的好處"></a>MVC 架構的好處</h2><ul>
+<li><strong>可重複使用：</strong> Model (模型)、View (視圖) 和 Controllr (控制器) 是獨立的組件，可以在不同部分的應用程序中重複使用。</li>
+<li><strong>易於維護：</strong> 因為每個組件的職責都清晰定義，所以當需要進行修改或維護時，只需關注相關組件，而不影響其他部分。</li>
+<li><strong>易於擴展：</strong> 當需要添加新功能或改進現有功能時，可以較容易地擴展相關組件，而無需大規模修改代碼。</li>
+<li><strong>測試性：</strong> 每個 MVC 組件都可以單獨進行單元測試，確保它們的功能正常運作。這有助於測試覆蓋率的提高，確保代碼的各個部分都得到測試，同時減少錯誤的發生。</li>
+<li><strong>提高團隊合作：</strong> 不同的團隊或開發者可以同時工作在不同的 MVC 組件上，並且不會相互干擾。提高了開發效率，MVC的清晰結構使不同的團隊成員能夠更容易地協同合作。設計師可以專注於視圖，開發者可以專注於模型和控制器。</li>
+</ul>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://medium.com/pierceshih/%E7%AD%86%E8%A8%98-%E4%BD%95%E8%AC%82-mvc-%E8%BB%9F%E9%AB%94%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F-af1ff10901e6">「筆記」- 何謂 MVC 軟體設計模式 Pierce Shih 皮爾斯的自學旅程</a><br>➫ <a target="_blank" rel="noopener" href="https://railsbook.tw/chapters/10-mvc">Model、View、Controller 三分天下</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/web-development/" class="tag">#web development</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/rails-routes/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Route!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/rails-what-is-gem/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Gem 是什麼呀!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

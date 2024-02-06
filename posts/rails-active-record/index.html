@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby on Rails] - Active Record! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby on Rails] - Active Record! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/rails-active-record/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-10-03T04:17:21.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>3,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby on Rails] - Active Record!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a><a href="/tags/active-record/" class="tag">#active record</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p><em>今天來點 Active Record!</em></p>
+<p><strong>在講述 Active Record 之前，我們先來建立一個基礎概念：ORM Object–relational mapping</strong></p>
+<h2 id="Object–relational-mapping-ORM-物件關聯映射"><a href="#Object–relational-mapping-ORM-物件關聯映射" class="headerlink" title="Object–relational mapping (ORM) 物件關聯映射"></a>Object–relational mapping (ORM) 物件關聯映射</h2><p>物件關聯映射（ORM）是一種軟體設計模式，將資料庫中的數據映射到物件導向程式語言中的物件，使開發人員能夠使用物件導向的方式處理數據，而不必直接處理SQL查詢。<br>用一個圖書館管理系統的例子來說明不使用 ORM 和使用 ORM 之間的差異。</p>
+<h3 id="不使用-ORM-的圖書館管理系統："><a href="#不使用-ORM-的圖書館管理系統：" class="headerlink" title="不使用 ORM 的圖書館管理系統："></a>不使用 ORM 的圖書館管理系統：</h3><p>在不使用 ORM 的情況下，需要手動建立 Table，並編寫 SQL 查詢將資料存到資料庫中或從資料庫中檢索資料。</p>
+<ul>
+<li><p>建立 Table</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> books (</span><br><span class="line">  id <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">  title <span class="type">VARCHAR</span>(<span class="number">255</span>),</span><br><span class="line">  author <span class="type">VARCHAR</span>(<span class="number">255</span>),</span><br><span class="line">  publication_year <span class="type">INT</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>編寫原生 SQL 查詢來插入書的資料</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> books (title, author, publication_year) <span class="keyword">VALUES</span> (<span class="string">&#x27;To Kill a Mockingbird&#x27;</span>, <span class="string">&#x27;Harper Lee&#x27;</span>, <span class="number">1960</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>編寫原生 SQL 查詢來檢索書的資料</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> books <span class="keyword">WHERE</span> author <span class="operator">=</span> <span class="string">&#x27;Harper Lee&#x27;</span>;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>在這種情況下，需要自己處理資料庫結構的細節和 SQL 查詢的編寫。</p>
+<h3 id="使用-ORM-的圖書館管理系統："><a href="#使用-ORM-的圖書館管理系統：" class="headerlink" title="使用 ORM 的圖書館管理系統："></a>使用 ORM 的圖書館管理系統：</h3><p>使用ORM，可以更輕鬆地處理資料，並將其映射到物件。</p>
+<ul>
+<li><p>Active Record 定義一個書模型（Model）</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Book</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>創建一本新書並保存到資料庫</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">book = <span class="title class_">Book</span>.new(<span class="symbol">title:</span> <span class="string">&#x27;To Kill a Mockingbird&#x27;</span>, <span class="symbol">author:</span> <span class="string">&#x27;Harper Lee&#x27;</span>, <span class="symbol">publication_year:</span> <span class="number">1960</span>)</span><br><span class="line">book.save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查詢書的資料：</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">books_by_harper_lee = <span class="title class_">Book</span>.where(<span class="symbol">author:</span> <span class="string">&#x27;Harper Lee&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>使用 ORM，可以將資料庫表格映射到模型 (Model)，並使用 Model 方法來執行資料庫操作，而不必編寫原生 SQL 查詢或擔心資料庫結構的詳細資訊，使得代碼更容易閱讀、維護和擴展。</p>
+<hr>
+<p>在理解完 ORM 之後，接著來看看 Active Record 吧！</p>
+<h2 id="Active-Record"><a href="#Active-Record" class="headerlink" title="Active Record"></a>Active Record</h2><p>Active Record 是一個具體的 ORM 實現。他提供了一種方式來定義和操作 Model，隱藏了資料庫操作的細節，允許開發人員使用物件導向語法來處理資料。Active Record 還提供了方法來執行數據庫查詢、新增、更新和刪除記錄，並建立了 Model 和資料表之間的映射關係，而 Model 在 Rails 中處理與資料庫的互動、商業邏輯、驗證。</p>
+<p>接續 Active Record 的概念，讓我們來了解如何建立一個新的 Model（模型）並與資料庫關聯。</p>
+<ul>
+<li><p>建立 <code>Article</code> Model：</p>
+<blockquote>
+<p>命名慣例：Model 的命名是單數<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails generate model Article title:string content:text</span><br></pre></td></tr></table></figure><br>也可以簡寫成：<br>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails g model Article title content:text</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>這個命令會生成一個新的 Model 文件 <code>article.rb</code>，並創建一個對應的 Migration，用於創建資料表，在這裡會有個叫 <strong>articles 的資料表（table）</strong>，該資料表包含 <strong>title 和 content 兩個欄位，分別是 string 和 text 型別</strong>。<br>Migration 檔名會包含時間戳記和表名的相關資訊，且包含 <code>create_table</code> 方法，用於定義資料表的結構。</p>
+</li>
+<li><p><strong>確認 Model 定義</strong>：</p>
+<p><strong>app&#x2F;models&#x2F;article.rb</strong></p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Article</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  validates <span class="symbol">:title</span>, <span class="symbol">presence:</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>定義 <code>Article</code> 的 Model，並在其中添加了一個驗證規則，要求 <code>title</code> 欄位必須存在。</p>
+<blockquote>
+<p>Active Record 驗證是 Ruby on Rails 中的重要功能，允許在保存記錄到資料庫之前對數據進行驗證，以確保數據的完整性和一致性。</p>
+</blockquote>
+</li>
+<li><p><strong>執行 Migration</strong>：</p>
+<p> 使用以下命令執行 Migration，以建立 <code>articles</code> 資料表：</p>
+<blockquote>
+<p>確認資料表欄位都符合自己的需求時，要執行 <strong>rails db:migrate</strong> 才會真正在資料庫中建立相應的資料表！<br>  <em>沒執行就會看到錯誤訊息：<code>ActiveRecord::PendingMigrationError</code>！</em></p>
+</blockquote>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rails db:migrate</span><br></pre></td></tr></table></figure>
+
+<p> 根據 Model 定義在資料庫中創建一個對應的資料表，該資料表包括 <code>title</code> 和 <code>content</code> 兩個欄位，<br> 且檔名會包含時間戳記和表名的相關資訊，且包含 <code>create_table</code> 方法，用於定義資料表的結構。</p>
+<p><strong>db&#x2F;migrate&#x2F;20231003042828_create_articles.rb</strong></p>
+  <figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CreateArticles</span> &lt; <span class="title class_ inherited__">ActiveRecord::Migration</span>[<span class="number">7.0</span>]</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">change</span></span><br><span class="line">    create_table <span class="symbol">:articles</span> <span class="keyword">do</span> |<span class="params">t</span>|</span><br><span class="line">      t.string <span class="symbol">:title</span></span><br><span class="line">      t.text <span class="symbol">:content</span></span><br><span class="line"></span><br><span class="line">      t.timestamps</span><br><span class="line">      <span class="comment"># t.datetime :created_at</span></span><br><span class="line">      <span class="comment"># t.datetime :updated_at # 可以思考這個欄位有無需要更新時間功能</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>使用 Model 的方法</strong>：</p>
+<p> 如此，我們可以在 Rails 中使用 <code>Article</code> Model 來處理文章相關的操作，例如新增、查詢、更新和刪除文章。</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新增一篇文章</span></span><br><span class="line">article = <span class="title class_">Article</span>.new(<span class="symbol">title:</span> <span class="string">&#x27;Sample Title&#x27;</span>, <span class="symbol">content:</span> <span class="string">&#x27;Sample Content&#x27;</span>)</span><br><span class="line">article.save</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查詢文章</span></span><br><span class="line">articles = <span class="title class_">Article</span>.where(<span class="symbol">title:</span> <span class="string">&#x27;Sample Title&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新文章</span></span><br><span class="line">article = <span class="title class_">Article</span>.find_by(<span class="symbol">title:</span> <span class="string">&#x27;Sample Title&#x27;</span>)</span><br><span class="line">article.update(<span class="symbol">content:</span> <span class="string">&#x27;Updated Content&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 刪除文章</span></span><br><span class="line">article = <span class="title class_">Article</span>.find_by(<span class="symbol">title:</span> <span class="string">&#x27;Sample Title&#x27;</span>)</span><br><span class="line">article.destroy</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="CRUD-新增、讀取、更新與刪除"><a href="#CRUD-新增、讀取、更新與刪除" class="headerlink" title="CRUD 新增、讀取、更新與刪除"></a>CRUD 新增、讀取、更新與刪除</h3><p>當使用 Active Record 在 Ruby on Rails 中進行 CRUD（新增、讀取、更新和刪除）操作時，通常使用以下方法：</p>
+<ol>
+<li><p><strong>新增（Create）</strong></p>
+<ul>
+<li>使用 <code>create</code> 方法來新增並保存記錄。</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">article = <span class="title class_">Article</span>.create(<span class="symbol">title:</span> <span class="string">&#x27;New Article&#x27;</span>, <span class="symbol">content:</span> <span class="string">&#x27;This is the content of the article&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>使用 <code>create!</code> 方法也用於新增記錄並保存到資料庫，不過行為不同。如果新增成功，會返回新記錄的實例，但如果出現任何問題，會引發異常（通常是 ActiveRecord::RecordInvalid），並中止操作。</p>
+</li>
+<li><p>使用 <code>new</code> 方法新增一個實例，然後調用 <code>save</code> 方法來保存記錄。</p>
+</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">article = <span class="title class_">Article</span>.new(<span class="symbol">title:</span> <span class="string">&#x27;New Article&#x27;</span>, <span class="symbol">content:</span> <span class="string">&#x27;This is the content of the article&#x27;</span>)</span><br><span class="line">article.save</span><br></pre></td></tr></table></figure>
+<p><code>new</code> 跟 <code>create</code> 的差別：<code>new</code> 方法只是先把物件做出來，尚未存入資料表，因此要手動透過 <code>save</code> 儲存；而 <code>create</code> 方法則是直接把存入資料表。</p>
+</li>
+<li><p><strong>讀取（Read）</strong></p>
+<ul>
+<li>使用 <code>find</code> 方法按主鍵（ID）查找記錄。</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">article = <span class="title class_">Article</span>.find(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>where</code> 方法按特定條件查找多個記錄。</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">articles = <span class="title class_">Article</span>.where(<span class="symbol">category:</span> <span class="string">&#x27;Technology&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>all</code> 方法獲取所有記錄。</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">all_articles = <span class="title class_">Article</span>.all</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>更新（Update）</strong></p>
+<ul>
+<li>使用 <code>update</code> 方法來更新記錄。</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">article = <span class="title class_">Article</span>.find(<span class="number">1</span>)</span><br><span class="line">article.update(<span class="symbol">title:</span> <span class="string">&#x27;Updated Article Title&#x27;</span>, <span class="symbol">content:</span> <span class="string">&#x27;Updated content&#x27;</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>刪除（Delete）</strong></p>
+<ul>
+<li>使用 <code>destroy</code> 方法刪除單個記錄。</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">article = <span class="title class_">Article</span>.find(<span class="number">1</span>)</span><br><span class="line">article.destroy</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>delete</code> 方法刪除單個記錄，但不執行回呼或驗證。</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">article = <span class="title class_">Article</span>.find(<span class="number">1</span>)</span><br><span class="line">article.delete</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>destroy_all</code> 方法刪除多個記錄。</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">articles = <span class="title class_">Article</span>.where(<span class="symbol">category:</span> <span class="string">&#x27;Obsolete&#x27;</span>)</span><br><span class="line">articles.destroy_all</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>delete_all</code> 方法刪除多個記錄，但不執行回呼或驗證。</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">articles = <span class="title class_">Article</span>.where(<span class="symbol">category:</span> <span class="string">&#x27;Obsolete&#x27;</span>)</span><br><span class="line">articles.delete_all</span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h3 id="Callbacks-回呼"><a href="#Callbacks-回呼" class="headerlink" title="Callbacks 回呼"></a>Callbacks 回呼</h3><p>Active Record 回呼（Callbacks）可以在 Model 的生命週期中定義一些方法，這些方法會在特定事件發生時自動執行。這些事件包括記錄的新增、更新、刪除等。<br>Active Record 回呼在這些事件之前、之後或在其他特定情況下執行自定義的程式碼，像是：數據驗證、處理圖片上傳、設定默認值、發送通知等。</p>
+<p>以下是一些常見的 Active Record 回呼事件：</p>
+<ol>
+<li><p><strong>before_save 和 after_save</strong>：</p>
+<ul>
+<li><code>before_save</code> 回呼在記錄保存到資料庫之前執行，通常用於數據驗證、設定默認值等操作。</li>
+<li><code>after_save</code> 回呼在記錄成功保存到資料庫之後執行，通常用於記錄日誌、發送通知等操作。</li>
+</ul>
+</li>
+<li><p><strong>before_create 和 after_create</strong>：</p>
+<ul>
+<li><code>before_create</code> 回呼在創建新記錄之前執行。</li>
+<li><code>after_create</code> 回呼在成功創建新記錄之後執行。</li>
+</ul>
+</li>
+<li><p><strong>before_update 和 after_update</strong>：</p>
+<ul>
+<li><code>before_update</code> 回呼在更新記錄之前執行。</li>
+<li><code>after_update</code> 回呼在成功更新記錄之後執行。</li>
+</ul>
+</li>
+<li><p><strong>before_destroy 和 after_destroy</strong>：</p>
+<ul>
+<li><code>before_destroy</code> 回呼在刪除記錄之前執行。</li>
+<li><code>after_destroy</code> 回呼在成功刪除記錄之後執行。</li>
+</ul>
+</li>
+</ol>
+<p>回呼也可以自定義邏輯，例如，你可以使用 <code>before_save</code> 回呼來檢查數據的有效性，或者使用 <code>after_create</code> 回呼來發送一封歡迎郵件給新註冊的用戶。<br>以下來看另外一個舉例，在 <code>User</code> 模型中定義了一個 <code>before_save</code> 回呼，在保存記錄之前檢查 <code>api_key</code> 是否為空，如果為空，則生成一個新的 API 金鑰。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  before_save <span class="symbol">:generate_api_key</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">generate_api_key</span></span><br><span class="line">    <span class="variable language_">self</span>.api_key = <span class="title class_">SecureRandom</span>.hex(<span class="number">16</span>) <span class="keyword">if</span> api_key.blank?</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Migration-遷移"><a href="#Migration-遷移" class="headerlink" title="Migration 遷移"></a>Migration 遷移</h3><p>Migration 遷移是一個<strong>描述資料庫的架構長什麼樣子</strong>的檔案。<br>每個遷移透過逐步添加、修改或刪除資料表、欄位和記錄等，Active Record 能夠根據遷移的時間順序更新資料庫結構，使資料庫能夠在任何時間點前進到最新版本。<br>同時，Active Record 也會維護一個 <code>db/schema.rb</code> 檔案，以保持其與最新的資料庫結構同步。</p>
+<p>在執行 <code>rails db:migrate</code> 後，資料表便隨之產生，<br>可以想到資料表會有 title 與 content 兩個欄位，但實際打開資料表會發現，<br>多了 id、created_at 跟 updated_at 這三個欄位。<br>其實在 Migration 檔案中的 t.timestamps，會產生 created_at 跟 updated_at 的時間欄位，分別會在資料「新增」及「更新」的時候，把當下的時間寫入，所以在 Rails 專案中處理資料的時候，大多不太需要煩惱時間的問題。</p>
+<p>id 欄位是 Rails 自動幫每個資料表加的流水編號欄位，<br>這個欄位稱為資料表的主鍵（Primary Key）。<br>如果你不想要這個主鍵，可以在 Migration 加上 id: false 參數：</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CreateArticles</span> &lt; <span class="title class_ inherited__">ActiveRecord::Migration</span>[<span class="number">7.0</span>]</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">change</span></span><br><span class="line">    create_table <span class="symbol">:articles</span>, <span class="symbol">id:</span> <span class="literal">false</span> <span class="keyword">do</span> |<span class="params">t</span>| <span class="comment"># id: false</span></span><br><span class="line">      t.string <span class="symbol">:title</span></span><br><span class="line">      t.text <span class="symbol">:content</span></span><br><span class="line"></span><br><span class="line">      t.timestamps</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="如果想在-Model-再多新增欄位呢？"><a href="#如果想在-Model-再多新增欄位呢？" class="headerlink" title="如果想在 Model 再多新增欄位呢？"></a>如果想在 Model 再多新增欄位呢？</h3><p>想要在既有的 Model 內，再新增欄位的話，<br>透過 <strong>rails g migration add_subtitle_to_article</strong> 新增一個 migration 之後，<br>藉由新生成的 migration，加上 <strong>add_column</strong> 方法，<br>就可以對之前有建立的 Model (Article) 新增欄位！</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AddSubtitleToArticle</span> &lt; <span class="title class_ inherited__">ActiveRecord::Migration</span>[<span class="number">7.0</span>]</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">change</span></span><br><span class="line">    add_column <span class="symbol">:articles</span>, <span class="symbol">:sub_title</span>, <span class="symbol">:string</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>接著再次 <strong>rails db:migrate</strong> 後，就可以發現資料庫裡面新增了 sub_title 欄位了！</p>
+<hr>
+<h3 id="Brief-Summary"><a href="#Brief-Summary" class="headerlink" title="Brief Summary"></a>Brief Summary</h3><p>Active Record 是 Rails 中的 ORM 實現，讓開發人員能夠以物件導向的方式處理資料，而不必直接處理 SQL 查詢。通過定義模型（Model），我們可以執行 CRUD 操作（新增、讀取、更新、刪除），同時使用回呼（Callbacks）來自動執行特定事件。Migration 則允許我們管理資料庫結構的變化，保持資料庫和程式碼的同步。</p>
+<p>詳細的內容可以參考<a target="_blank" rel="noopener" href="https://rails.ruby.tw/active_record_basics.html">Active Record 基礎</a>看更深入的細節！</p>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://railsbook.tw/chapters/16-model-basic">為你自己學 Ruby on Rails - Model</a><br>➫ <a target="_blank" rel="noopener" href="https://pjchender.dev/ruby-on-rails/ruby-on-rails-active-record-basic/">[Rails] Active Record Basic（Model 基本的 CRUD 操作)</a><br>➫ <a target="_blank" rel="noopener" href="https://rails.ruby.tw/active_record_basics.html">Active Record 基礎</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a><a href="/tags/active-record/" class="tag">#active record</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/rails-active-record-association-part1/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Active Record Associations (上)!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/rails-controller-action-view/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Controller, Action, View!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

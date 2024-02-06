@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby on Rails] - Active Record Associations (上)! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby on Rails] - Active Record Associations (上)! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/rails-active-record-association-part1/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-10-04T04:17:21.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>4,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby on Rails] - Active Record Associations (上)!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a><a href="/tags/active-record/" class="tag">#active record</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <h2 id="before-action-前言"><a href="#before-action-前言" class="headerlink" title="before_action :前言"></a>before_action :前言</h2><h3 id="為什麼需要關聯性？"><a href="#為什麼需要關聯性？" class="headerlink" title="為什麼需要關聯性？"></a>為什麼需要關聯性？</h3><p>在 Rails 中，Active Record 關聯是指不同 Model 之間的連結與關係。</p>
+<p>我們在一個專案裡，一定不只有一個 Model，會同時存在許多 Model，<br>在 Rails 裡，我們可以透過關聯將這些 Model 連結在一起，大致上歸納出以下優點：</p>
+<blockquote>
+<p>Model 需要關聯性是為了更好地組織和管理資料，以及實現資料間的關聯和連結。</p>
+</blockquote>
+<ul>
+<li><p>資料的結構化：通常一個應用程式涉及多個資料，彼此之間可能存在著很複雜的關係。<br><strong>可以將這些資料的關係結構化，使得資料庫中的資料更容易理解和管理。</strong></p>
+</li>
+<li><p>整合資料：資料往往存在著相互關聯的情況。例如：一個使用者有多個訂單。<br><strong>可以將這些相關聯的資料整合在一起，使得查詢和操作資料更加方便。</strong></p>
+</li>
+<li><p>簡化資料存取：<strong>在查詢資料時不需要手動撰寫複雜的 SQL 語句，而是使用 Rails 提供的簡單方法即可。這樣可以節省開發時間，並減少出錯的可能性。</strong></p>
+</li>
+<li><p>維護性和擴展性：當應用程式需要新增新的資料實體或調整資料結構時，<strong>使用 Model 的關聯性可以輕鬆地進行修改而不影響其他部分的程式碼。</strong></p>
+</li>
+</ul>
+<h3 id="關聯種類"><a href="#關聯種類" class="headerlink" title="關聯種類"></a>關聯種類</h3><p>這種關聯性可以在資料庫層面建立表格之間的連結，使得資料之間可以相互關聯和互動，<br>進而簡化資料的查詢和操作。</p>
+<p>Rails 支援以下六種關聯：</p>
+<ul>
+<li>belongs_to</li>
+<li>has_one</li>
+<li>has_many</li>
+<li>has_many :through</li>
+<li>has_one :through</li>
+<li>has_and_belongs_to_many</li>
+</ul>
+<p>透過關聯而產生的方法，你可以在 Model 類別中指定關聯的類別和條件，Rails 將根據這些定義在資料庫層面建立對應的關聯。</p>
+<hr>
+<h4 id="一對一關聯"><a href="#一對一關聯" class="headerlink" title="一對一關聯"></a>一對一關聯</h4><ul>
+<li><p><strong>belongs_to</strong><br>生成 Profile Model 的指令：<br><code>rails generate model Profile bio:text user:belongs_to</code> (or)<br><code>rails generate model Profile bio:text user:references</code><br>–&gt; <strong>這樣就會在 Profile 資料表中生成 <code>user_id</code> 這個 foreign key</strong></p>
+<ul>
+<li>例如，個人檔案只屬於一位使用者。</li>
+</ul>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Profile 模型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Profile</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  belongs_to <span class="symbol">:user</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>has_one</strong><br>生成 User Model 的指令：<br><code>rails generate model User name:string</code></p>
+<ul>
+<li>例如，一個使用者只有一個個人檔案。</li>
+</ul>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># User 模型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  has_one <span class="symbol">:profile</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p> 當有 <code>has_one :profile</code> 時，這個關聯會生成以下方法：<br> <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">profile -&gt; user.profile <span class="comment"># 找出用戶的個人檔案</span></span><br><span class="line">profile= -&gt; user.profile = profile <span class="comment"># 將一個現有的個人檔案分配給用戶，以更改用戶的個人檔案。</span></span><br><span class="line">build_profile -&gt; user.build_profile(<span class="symbol">bio:</span> <span class="string">&#x27;About me&#x27;</span>) <span class="comment"># 建立一個新個人檔案，但該個人檔案不會立即保存到資料庫中。</span></span><br><span class="line">create_profile -&gt; user.create_profile(<span class="symbol">bio:</span> <span class="string">&#x27;About me&#x27;</span>) <span class="comment"># 建立一個新個人檔案，同時個人檔案會保存到資料庫中。</span></span><br><span class="line">create_profile! -&gt; user.create_profile!(<span class="symbol">bio:</span> <span class="string">&#x27;About me&#x27;</span>) <span class="comment"># 當保存個人檔案時，如果存在驗證失敗或其他錯誤，將引發異常（exception），而非返回 false。</span></span><br><span class="line">reload_profile -&gt; user.reload_profile <span class="comment"># 如果你修改了個人檔案，但希望獲取最新的數據，可以使用 reload_profile 方法。</span></span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p><strong>has_one :through</strong>（透過一對一關聯）：<br>生成 User Model 的指令：<br><code>rails generate model User name:string</code><br>生成 Profile Model 的指令：<br><code>rails generate model Profile bio:text</code><br>生成 Account Model 的指令：<br><code>rails generate model Account user:references</code><br>–&gt; <strong>這樣就會在 Account 資料表中生成 <code>user_id</code> 這個 foreign key</strong></p>
+<ul>
+<li>例如，一個使用者可以透過一個帳戶來存取其餘的資訊。</li>
+</ul>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># User 模型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  has_one <span class="symbol">:account</span></span><br><span class="line">  has_one <span class="symbol">:profile</span>, <span class="symbol">through:</span> <span class="symbol">:account</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Account 模型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Account</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  belongs_to <span class="symbol">:user</span></span><br><span class="line">  has_one <span class="symbol">:profile</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Profile 模型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Profile</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  belongs_to <span class="symbol">:account</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="可以使用以下方法來建立與尋找關聯資料："><a href="#可以使用以下方法來建立與尋找關聯資料：" class="headerlink" title="可以使用以下方法來建立與尋找關聯資料："></a>可以使用以下方法來建立與尋找關聯資料：</h3> <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建立使用者</span></span><br><span class="line">user = <span class="title class_">User</span>.create(<span class="symbol">name:</span> <span class="string">&#x27;Viii&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立帳戶，並與使用者建立關聯</span></span><br><span class="line">account = user.create_account</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立個人檔案，並與帳戶建立關聯</span></span><br><span class="line">profile = account.build_profile(<span class="symbol">bio:</span> <span class="string">&#x27;About me&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存關聯記錄到資料庫</span></span><br><span class="line">user.save</span><br></pre></td></tr></table></figure>
+<h4 id="查找："><a href="#查找：" class="headerlink" title="查找："></a>查找：</h4> <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查找使用者的帳戶</span></span><br><span class="line">account = user.account</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找使用者的個人檔案（透過帳戶關聯）</span></span><br><span class="line">profile = user.profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找帳戶所屬的使用者</span></span><br><span class="line">account_user = account.user</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找帳戶關聯的個人檔案</span></span><br><span class="line">account_profile = account.profile</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h4 id="一對多關聯"><a href="#一對多關聯" class="headerlink" title="一對多關聯"></a>一對多關聯</h4><ul>
+<li><p><strong>has_many</strong></p>
+<ul>
+<li>例如，一個使用者有多篇文章。</li>
+</ul>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># User 模型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  has_many <span class="symbol">:articles</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Article 模型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Article</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  belongs_to <span class="symbol">:user</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>當有 <code>has_many :articles</code> 時，這個關聯會自帶以下方法：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">articles -&gt; user.articles <span class="comment"># 獲取該用戶的所有文章</span></span><br><span class="line">articles&lt;&lt;(object, ...) -&gt; user.articles &lt;&lt; article1 <span class="comment"># 來將一篇文章添加到用戶的文章集合中</span></span><br><span class="line">articles.delete(object, ...) -&gt; user.articles.delete(article1) <span class="comment"># 來刪除用戶的某篇文章</span></span><br><span class="line">articles.destroy(object, ...) -&gt; user.articles.destroy(article1) <span class="comment"># 來刪除用戶的某篇文章，同時也會刪除該文章的資料庫記錄</span></span><br><span class="line">articles=(objects) -&gt; user.articles = [article1, article2] <span class="comment"># 來設定用戶的所有文章</span></span><br><span class="line">article_ids -&gt; user.article_ids <span class="comment"># 來獲取用戶的所有文章的 ID</span></span><br><span class="line">article_ids=(ids) -&gt; user.article_ids = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] <span class="comment"># 來設定用戶的所有文章的 ID</span></span><br><span class="line">articles.clear -&gt; articles.clear <span class="comment"># 用於從關聯集合中刪除所有 Article 物件，但不會銷毀這些對象。</span></span><br><span class="line">articles.empty? -&gt; articles.empty? <span class="comment"># 用於檢查關聯集合是否為空，如果集合中不包含任何 Article 物件，則返回 true。</span></span><br><span class="line">articles.size -&gt; articles.size <span class="comment"># 用於獲取關聯集合中的 Article 物件數量。</span></span><br><span class="line">articles.find(...) -&gt; articles.find <span class="comment"># 用於查找關聯集合中滿足指定條件的 Article，使用 id 來查找文章。</span></span><br><span class="line">articles.where(...) -&gt; articles.where <span class="comment"># 用於使用條件查找關聯集合中的 Article，並返回一個 ActiveRecord 查詢。</span></span><br><span class="line">articles.exists?(...) -&gt; articles.exists? <span class="comment"># 用於檢查關聯集合中是否存在滿足指定條件的 Article，如果存在則返回 true，否則返回 false。</span></span><br><span class="line">articles.build(attributes = &#123;&#125;, ...) -&gt; articles.build <span class="comment"># 用於建立一個新的 Article，但不會將其保存到資料庫中。可以選擇性地提供屬性（attributes）作為參數，以自定義新建對象的屬性。</span></span><br><span class="line">articles.create(attributes = &#123;&#125;) -&gt; articles.create <span class="comment"># 用於建立一個新的 Article 並將其保存到資料庫中。可以選擇性地提供屬性（attributes）作為參數，以自定義新建對象的屬性。</span></span><br><span class="line">articles.create!(attributes = &#123;&#125;) -&gt; articles.create! 方法與 articles.create 方法相似，但當保存文章時，如果存在驗</span><br><span class="line">articles.reload -&gt; articles.reload <span class="comment"># 用於重新向數據庫發出查詢，以確保關聯集合的數據是最新的。</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h4 id="多對多關聯"><a href="#多對多關聯" class="headerlink" title="多對多關聯"></a>多對多關聯</h4><p>在 Rails 中，有兩種方式可以實現多對多關聯：<br><strong>has_many :through</strong> 和 <strong>has_and_belongs_to_many</strong>。</p>
+<h4 id="has-many-through"><a href="#has-many-through" class="headerlink" title="has_many :through"></a>has_many :through</h4><p><code>has_many :through</code> 通常在以下情況下使用：</p>
+<ol>
+<li><strong>需要跟蹤關聯的其他資料</strong>：當你需要在多對多關聯中存儲其他資料時，例如時間戳、評分、評論等，<code>has_many :through</code> 是更好的選擇。</li>
+<li><strong>複雜查詢需求</strong>：如果你需要執行複雜的查詢，例如過濾、排序或計數，<code>has_many :through</code> 允許你使用 Active Record 查詢方法對中間模型進行操作，進而實現更高級的查詢。</li>
+<li><strong>未來擴展性</strong>：當你希望你的數據模型具有未來擴展性，以便在以後添加更多的關聯或屬性時，<code>has_many :through</code> 更靈活。</li>
+</ol>
+<p>使用 <code>has_many :through</code>：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># User 模型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  has_many <span class="symbol">:user_roles</span></span><br><span class="line">  has_many <span class="symbol">:roles</span>, <span class="symbol">through:</span> <span class="symbol">:user_roles</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Role 模型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Role</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  has_many <span class="symbol">:user_roles</span></span><br><span class="line">  has_many <span class="symbol">:users</span>, <span class="symbol">through:</span> <span class="symbol">:user_roles</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># UserRole 模型作為中間模型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UserRole</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  belongs_to <span class="symbol">:user</span></span><br><span class="line">  belongs_to <span class="symbol">:role</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="has-and-belongs-to-many"><a href="#has-and-belongs-to-many" class="headerlink" title="has_and_belongs_to_many"></a><code>has_and_belongs_to_many</code></h4><p><code>has_and_belongs_to_many</code> 關聯是一種簡單的多對多關聯，<br>不使用中間模型，<strong>只需一個連接表（join table）來維護關聯</strong>，通常在以下情況下使用：</p>
+<ol>
+<li><strong>簡單多對多關聯</strong>：當多對多關聯相對簡單，不需要額外的資料（例如，評論或時間戳）時，<code>has_and_belongs_to_many</code> 可以更容易地設置和使用。</li>
+<li><strong>不需要進行複雜的查詢</strong>：如果你只需要基本的查詢（例如，獲取所有關聯記錄），並且不需要進行複雜的過濾或排序，那麼 <code>has_and_belongs_to_many</code> 可能是更簡單的選擇。</li>
+</ol>
+<p>使用 <code>has_and_belongs_to_many</code>：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># User 模型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  has_and_belongs_to_many <span class="symbol">:roles</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Role 模型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Role</span> &lt; <span class="title class_ inherited__">ApplicationRecord</span></span><br><span class="line">  has_and_belongs_to_many <span class="symbol">:users</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>簡單來說，如果需要將關聯模型視為獨立的實體來操作，<br>那麼應該設置一個 <code>has_many :through</code> 關聯。<br>如果不需要對關聯模型進行任何操作，<br>也許設置一個 <code>has_and_belongs_to_many</code> 關聯會更簡單（需要記住在資料庫中創建連接表 join table）。<br>如果你需要在關聯模型上進行驗證、回調或使用額外的屬性，應該使用 <code>has_many :through</code>。</p>
+</blockquote>
+<hr>
+<p>我們今天先到這！下篇繼續提及 Active Record Associations 的相關概念！</p>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://railsbook.tw/chapters/18-model-relationship">為你自己學 Ruby on Rails - Model</a><br>➫ <a target="_blank" rel="noopener" href="https://rails.ruby.tw/association_basics.html">Active Record Associations</a><br>➫ <a target="_blank" rel="noopener" href="https://pjchender.dev/ruby-on-rails/ruby-on-rails-active-record-association/#generator">PJCHENder - [Rails] Active Record Association (Model)</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a><a href="/tags/active-record/" class="tag">#active record</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/rails-active-record-association-part2/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Active Record Associations (下)!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/rails-active-record/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Active Record!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

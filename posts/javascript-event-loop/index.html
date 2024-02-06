@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [JavaScript] - Event Loop! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [JavaScript] - Event Loop! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/javascript-event-loop/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-09-22T05:12:42.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>September</span>
+            <span>22,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [JavaScript] - Event Loop!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/javascript/" class="tag">#javascript</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p><em>今天，我想來點 Event Loop （事件循環）!</em></p>
+<h2 id="為什麼會有-Event-Loop-事件循環-？"><a href="#為什麼會有-Event-Loop-事件循環-？" class="headerlink" title="為什麼會有 Event Loop (事件循環)？"></a>為什麼會有 Event Loop (事件循環)？</h2><p><em>在正式說明之前，先來理解一下，為何會有 Event Loop (事件循環) 吧！</em></p>
+<p>JavaScript 是一種<strong>單執行緒（single-threaded）的程式語言</strong>，也就是在任何給定的時間只能執行一個任務。<br>換句話說，當 JavaScript 執行一段代碼時，其他的代碼或任務必須等待。<br>這個單執行緒在某些情況下可能會成為限制，尤其是當有耗時的操作需要處理時，例如網絡請求。</p>
+<p>如果 JavaScript 在執行這些耗時操作的同時，主執行緒阻塞的話，將導致應用程序變得沒反應，甚至可能出現凍結的情況，這會給使用者帶來不好的體驗。</p>
+<p>為了解決這個問題，JavaScript 引入了 Event Loop (事件循環) 機制。<br>事件循環使得 JavaScript 能夠處理非同步操作，而不會阻塞主執行緒。</p>
+<p>當一個耗時的操作（例如網絡請求）被觸發時，<br>JavaScript 將它交給外部的系統（如瀏覽器或 Node.js）處理，同時繼續執行其他代碼。<br>當操作完成並準備好時，一個回調函數將被放入事件佇列（Message Queue）中。<br>事件循環定期檢查佇列，並將回調函數執行，這樣就實現了非同步操作的處理，而不會阻塞主執行緒。</p>
+<p>這種機制使得 JavaScript 能夠同時處理多個任務，保持應用程序的反應性，從而提供更好的使用者體驗。</p>
+<hr>
+<h3 id="Event-Loop-事件循環-的組成"><a href="#Event-Loop-事件循環-的組成" class="headerlink" title="Event Loop (事件循環) 的組成"></a>Event Loop (事件循環) 的組成</h3><p>Event Loop (事件循環) 有以下重要觀念：</p>
+<ol>
+<li><p><strong>Heap (堆)：</strong> Heap (堆) 用於存儲複雜的數據。堆的特點是其大小比較靈活，可以根據需要動態分配和釋放內存。通常用於存儲動態生成的數據，例如用戶輸入或在運行時創建的對象。</p>
+</li>
+<li><p><strong>Stack (棧)：</strong> Stack (棧) 特點是 <code>後進先出（Last-In, First-Out，LIFO）</code> 的原則。當一個函數被調用時，其局部變數和函數調用信息被壓入棧的頂部。當函數執行完成後，這些信息被彈出，直到棧被清空。棧主要用於跟蹤函數調用和局部變數。</p>
+</li>
+<li><p><strong>Queue (隊列)：</strong> Queue (隊列) 特點是 <code>先進先出（First-In, First-Out，FIFO）</code> 的原則。在 JavaScript 的執行環境中，等待處理的任務通常會被放在隊列中，例如事件處理程序、非同步操作的回調函數等。最早進入隊列的任務會首先被處理。</p>
+<p> <img src="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop/the_javascript_runtime_environment_example.svg" alt="MDN - Event Loop"></p>
+</li>
+</ol>
+<p><strong>Event Loop (事件循環) 的工作方式：</strong></p>
+<ol>
+<li><p><strong>檢查 Call Stack（執行棧）</strong>：<br>事件循環首先檢查執行棧是否為空。<br>執行棧是一個紀錄當前執行上下文的結構，如果它為空，表示目前沒有待處理的同步代碼。</p>
+</li>
+<li><p><strong>檢查 Task Queue（任務隊列）</strong>：<br>如果執行棧為空，事件循環接下來會檢查任務隊列。<br>任務隊列是用於存儲待處理的非同步操作的佇列，通常包括定時器、事件處理程序回調等。</p>
+</li>
+<li><p><strong>將下一個任務的回調函數推入執行棧</strong>：<br>如果執行棧和任務隊列都不為空，事件循環將從隊列中取出下一個任務的回調函數，並將它推入執行棧中開始執行。<br>這表示開始處理一個非同步操作。</p>
+</li>
+<li><p><strong>執行回調函數</strong>：<br>執行棧中的回調函數開始執行，處理相應的任務或事件。<br>這可以是網絡請求的回調、定時器的回調、按鈕點擊事件的回調等等。</p>
+</li>
+<li><p><strong>檢查執行棧和任務隊列</strong>：<br>回調函數執行完成，事件循環會再次檢查執行棧和任務隊列。<br>如果執行棧為空，且隊列中還有待處理的任務，則重複上述步驟，<br>將下一個任務的回調函數推入執行棧，繼續處理其他非同步操作。</p>
+</li>
+<li><p><strong>重複運行</strong>：<br>事件循環將以上步驟不斷重複，確保 JavaScript 能夠同時處理多個任務和事件，從而保持程式的反應性。</p>
+</li>
+</ol>
+<h3 id="Brief-Summary"><a href="#Brief-Summary" class="headerlink" title="Brief Summary"></a>Brief Summary</h3><p><strong>所以 Event Loop (事件循環) 是什麼？</strong></p>
+<ul>
+<li><strong>Event Loop (事件循環) 是 JavaScript 中的一個重要機制，<br>用於處理非同步操作和事件驅動的代碼，同時保持程式的反應性。</strong></li>
+<li><strong>通過不斷檢查 Call Stack（執行棧）和 Task Queue（任務隊列），<br>使 JavaScript 能夠有效處理非同步操作，而不會阻塞主執行緒，從而提供更好的使用者體驗。</strong></li>
+<li><strong>事件循環是實現 JavaScript 中非同步操作的核心，<br>確保代碼可以同時處理多個任務，使應用程序保持反應靈敏。</strong></li>
+</ul>
+<p>最後讓我們用生活上的例子來加深印象：</p>
+<p>假設你在煮湯，同時要做兩件事 – ① 等待鍋中的湯煮沸，② 同時切番茄。<br>通常你應該不會一直盯著鍋等湯煮沸，而是會這麼做：</p>
+<ol>
+<li>將湯放在爐上。</li>
+<li>開始切番茄。</li>
+<li>檢查鍋中的湯是否煮沸。</li>
+<li>如果湯煮沸了，就繼續做下一步，否則繼續切番茄。</li>
+<li>重複步驟3和4，直到湯煮沸。</li>
+</ol>
+<p>在這個情境下，你在等湯煮沸的同時，還能夠繼續切番茄，不需要一直等待。<br>這就好比 JavaScript 中的事件循環。</p>
+<blockquote>
+<p>在 JavaScript 中，當你執行程式碼時，有時候會遇到需要等待的事情，<br>例如：下載網頁資料或等待用戶點擊按鈕。<br>為了不讓整個程式停下來等待這些事情完成，JavaScript 使用事件循環：</p>
+<ol>
+<li>你告訴 JavaScript 執行某個任務，然後繼續執行下一個任務（就像切番茄一樣）。</li>
+<li>JavaScript 會檢查這個任務是否完成（就像檢查湯是否煮沸一樣）。</li>
+<li>如果任務完成了，JavaScript 會執行相應的程式碼，然後繼續下一個任務。</li>
+<li>這個過程不斷重複，直到所有任務都完成。</li>
+</ol>
+</blockquote>
+<p><strong>事件循環允許 JavaScript 執行非同步操作，而不會阻塞其他代碼的執行。<br>這就是為什麼在執行非同步操作期間，我們仍然能夠執行其他代碼的原因。</strong></p>
+<p>以上透過為什麼去簡單講述關於 Event Loop （事件循環）概念！希望大家都能理解～～！</p>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://www.explainthis.io/zh-hant/swe/what-is-event-loop">ExplainThis</a><br>➫ <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop">MDN</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/javascript/" class="tag">#javascript</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/javascript-this-function/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [JavaScript] - what is this!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/javascript-promise-and-async-await/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [JavaScript] - Promise &amp; async/await!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

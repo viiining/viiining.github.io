@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Database] - 資料庫是什麼？ - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Database] - 資料庫是什麼？ - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/database-basic/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-10-11T04:17:21.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>11,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Database] - 資料庫是什麼？</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/database/" class="tag">#database</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p><em>在之前透過 Active Record Query 去探索在 Rails 裡是如何對資料庫找資料的，想想發現對於資料庫的基本觀念似乎還沒有講述，今天來點資料庫吧！</em></p>
+<h2 id="資料庫是什麼？"><a href="#資料庫是什麼？" class="headerlink" title="資料庫是什麼？"></a>資料庫是什麼？</h2><p>簡單來說，資料庫是用於有效地存儲、檢索和管理所有資料！<br>平時在詳列出自己的購物清單明細，其實這樣列點式出來就很像一個小型的資料庫，<br>一張紙上列出一筆筆購物項目，可以新增修改刪除。<br>而在電腦上的資料庫就是儲存在電腦系統上的資料資訊集合，例如書店的庫存資訊。</p>
+<p><strong>在資料庫中，資訊被組織成表格，每個表格包含一組列和行，每列表示一種類型的資料，每行包含一條特定的數據記錄。</strong></p>
+<p>隨著資料越來越龐大，想要讓資料保持井然有序、易於存取且安全無虞變得更為困難。<br>為了解決這些問題，就有了現在常聽到的資料庫管理系統 (DBMS)。而資料庫管理系統又是什麼？</p>
+<h2 id="資料庫系統是什麼？"><a href="#資料庫系統是什麼？" class="headerlink" title="資料庫系統是什麼？"></a>資料庫系統是什麼？</h2><p>想要有效率地使用與管理資料，能方便、有效使用資料庫的軟體，<br>就是資料庫管理系統 (Database Management System，簡稱 DBMS)。<br>資料庫管理系統能幫我們與資料庫做溝通，<br>其中包括<strong>關聯型資料庫管理系統（RDBMS）</strong>以及<strong>非關聯型資料庫 (NoSQL)</strong> 。</p>
+<blockquote>
+<p>為什麼非關聯型資料庫稱為 NoSQL?<br>在關聯型資料庫管理系統 (RDBMS) 裡，通常使用結構化查詢語言，也就是 SQL 語法來管理和檢索資料；而非關聯型資料庫 (NoSQL) 通常不使用 SQL，而是使用不同的方法來存儲和檢索資料！</p>
+</blockquote>
+<ul>
+<li><p>關聯型資料庫管理系統（RDBMS）</p>
+<ul>
+<li><strong>MySQL：</strong><br>一個開源的關聯型資料庫管理系統，相容於各個不同的程式語言、作業系統、資源眾多，廣泛用於 Web 應用程式。</li>
+<li><strong>PostgreSQL：</strong><br>另一個開源關聯型資料庫，具有高度可擴展性和擴展功能，商業應用導向，擁有比 MySQL 更嚴格的測試驗證和設計機制。</li>
+<li><strong>Oracle Database：</strong><br>由 Oracle Corporation 甲骨文公司開發的商業級 RDBMS，廣泛用於企業級應用程式，常見於較有歷史的組織，例如銀行、公部門。</li>
+<li><strong>Microsoft SQL Server：</strong><br>由 Microsoft 開發的 RDBMS，適用於 Windows 環境並支持企業級資料管理。</li>
+</ul>
+</li>
+<li><p>非關聯型資料庫 (NoSQL)</p>
+<ul>
+<li><strong>MongoDB (Document DB)：</strong><br>一個以文件儲存方式的 NoSQL 資料庫，用於處理半結構化資料，特別適合大資料應用。</li>
+<li><strong>Cassandra (Column DB)：</strong><br>一個高度可擴展的分佈式 NoSQL 資料庫，用於處理大規模資料和時間序列資料。</li>
+<li><strong>Redis (Key-Value)：</strong><br>一個用於快速資料存儲和緩存的 NoSQL 資料庫，通常用於緩存和即時應用。</li>
+<li><strong>Amazon DynamoDB  (Key-Value)：</strong><br>由亞馬遜 AWS 提供的分佈式 NoSQL 資料庫，專為高可用性和擴展性而設計。</li>
+<li><strong>Neo4j  (Graph DB)：</strong><br>一個圖形資料庫，專為處理具有複雜關係的資料而設計，常用於社交網絡和推薦系統。</li>
+</ul>
+<blockquote>
+<p>資料庫也可以分成 <code>伺服器型資料庫</code> 和 <code>檔案型資料庫</code>：<br>伺服器型資料庫 - 幾乎所有 RDBMS 都是伺服器型資料庫，資料庫需要先將資料庫安裝於電腦主機上才能使用。<br>檔案型資料庫 - 一個檔案本身就是一個資料庫，像是 SQLite 適合用在資料量較少，且不會有多人同時存取的情況。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="如何設計資料庫"><a href="#如何設計資料庫" class="headerlink" title="如何設計資料庫?"></a>如何設計資料庫?</h2><p>在建立資料庫時，需要先針對需求以及規格去思考要建立哪些資料表以及資料表中所包含的資料型態，<br>甚至還有資料與資料之間的關聯，今天就來淺談這幾點吧！Let’s go!</p>
+<h3 id="設計資料表"><a href="#設計資料表" class="headerlink" title="設計資料表"></a>設計資料表</h3><ul>
+<li>根據需求，開始設計資料表。每個資料表應該對應到一個特定的實體，例如顧客、訂單、商品等。</li>
+<li>決定每個資料表中需要包含哪些欄位，以及每個欄位的資料型態，例如整數、文字、日期等。</li>
+<li>考慮是否需要主鍵來唯一識別每個記錄，以及是否需要外鍵來建立資料表之間的關聯，可能包括一對一、一對多、多對多等關聯類型。</li>
+</ul>
+<h4 id="主鍵-PK-vs-外鍵-FK"><a href="#主鍵-PK-vs-外鍵-FK" class="headerlink" title="主鍵 PK vs 外鍵 FK"></a>主鍵 PK vs 外鍵 FK</h4><ul>
+<li><p>主鍵（Primary Key，PK）</p>
+<ul>
+<li>主鍵是資料表中的一個欄位，它的值用來唯一識別該資料表中的每一筆記錄。</li>
+<li>每個資料表只能有一個主鍵。</li>
+<li>主鍵的值必須是唯一的，不能重複，且不能為 NULL。</li>
+<li>主鍵通常用來建立資料表之間的關聯，或者用來加速查詢和更新操作。</li>
+</ul>
+</li>
+<li><p>外鍵（Foreign Key，FK）</p>
+<ul>
+<li>外鍵是資料表中的一個欄位，它的值來自另一個資料表的主鍵，建立兩個資料表之間的關聯。</li>
+<li>外鍵的值在資料表中可能重複，也可以為 NULL。</li>
+<li>外鍵通常用來建立不同資料表之間的關聯，<br>例如建立一對多（One-to-Many）或多對多（Many-to-Many）的關係。</li>
+<li>外鍵用來確保資料的完整性和一致性，保證關聯的資料在不同資料表中是有效的。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>主鍵用來唯一識別一個資料表中的每一筆資料，而外鍵用來建立資料表之間的關聯，確保資料的一致性。主鍵和外鍵在資料庫設計和資料表之間的連接中扮演著重要角色。</p>
+</blockquote>
+<h4 id="資料型態"><a href="#資料型態" class="headerlink" title="資料型態"></a>資料型態</h4><p>在建立資料表之前，我們要先來看看有哪些資料型態：</p>
+<ol>
+<li><p><strong>整數 (INTEGER)</strong>:</p>
+<ul>
+<li>整數資料型態用於存儲不帶小數點的數值，用於存儲年齡、計數等。</li>
+</ul>
+</li>
+<li><p><strong>小數 (DECIMAL&#x2F;NUMERIC, FLOAT, DOUBLE)</strong>:</p>
+<ul>
+<li>這些資料型態用於存儲帶有小數點的數值，用於存儲價格、百分比等。</li>
+</ul>
+</li>
+<li><p><strong>字符 (CHAR, VARCHAR, TEXT)</strong>:</p>
+<ul>
+<li>用於存儲文字，像是名稱、地址、評論等。</li>
+<li><code>CHAR</code> 是固定長度的字符，而 <code>VARCHAR</code> 是可變長度的字符。</li>
+<li>CHAR vs VARCHAR 可以參閱：<a href="https://viiisit.com/20230723-SQL/#char-vs-varchar">Viiisit SQL!</a></li>
+</ul>
+</li>
+<li><p><strong>日期和時間 (DATE, TIME, DATETIME, TIMESTAMP)</strong>:</p>
+<ul>
+<li>這些資料型態用於存儲日期和時間。</li>
+</ul>
+</li>
+<li><p><strong>布林 (BOOLEAN)</strong>:</p>
+<ul>
+<li>用於存儲真或假值，用於表示狀態、開關等。</li>
+</ul>
+</li>
+<li><p><strong>枚舉 (ENUM)</strong>:</p>
+<ul>
+<li>這種資料型態允許在一組預定義的值中選擇一個，用於表示選項，例如產品類型（例如 “小型”、”中型”、”大型”）。</li>
+</ul>
+</li>
+<li><p><strong>二進制 (BINARY, BLOB)</strong>:</p>
+<ul>
+<li>用於存儲二進制數據，例如圖像、音頻、文件，用於存儲用戶上傳的圖像或文件。</li>
+</ul>
+</li>
+</ol>
+<h3 id="建立資料表："><a href="#建立資料表：" class="headerlink" title="建立資料表："></a>建立資料表：</h3><ul>
+<li>建立顧客（Customer）資料表，<br>  包括顧客ID、顧客名稱、名字、姓氏、電子郵件和註冊日期等欄位：</li>
+</ul>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Customers (</span><br><span class="line">    CustomerID <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    Customername <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    FirstName <span class="type">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">    LastName <span class="type">VARCHAR</span>(<span class="number">50</span>),</span><br><span class="line">    Email <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">UNIQUE</span>,</span><br><span class="line">    RegistrationDate <span class="type">DATE</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>建立訂單（Order）資料表，<br>  包括訂單ID、顧客ID、訂單日期、總金額等欄位，<br>  使用外鍵來建立與 “Customers” 資料表之間的關聯：</li>
+</ul>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Orders (</span><br><span class="line">    OrderID <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    CustomerID <span class="type">INT</span>,</span><br><span class="line">    OrderDate <span class="type">DATE</span>,</span><br><span class="line">    TotalAmount <span class="type">DECIMAL</span>(<span class="number">10</span>, <span class="number">2</span>),</span><br><span class="line">    <span class="keyword">FOREIGN</span> KEY (CustomerID) <span class="keyword">REFERENCES</span> Customers(CustomerID)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>商品（Product）資料表，<br>  包括商品ID、商品名稱、價格、類別等欄位：</li>
+</ul>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Products (</span><br><span class="line">    ProductID <span class="type">INT</span> <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    ProductName <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    Price <span class="type">DECIMAL</span>(<span class="number">10</span>, <span class="number">2</span>),</span><br><span class="line">    Category <span class="type">VARCHAR</span>(<span class="number">50</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="SQL-的基礎語法"><a href="#SQL-的基礎語法" class="headerlink" title="SQL 的基礎語法"></a>SQL 的基礎語法</h2><p>上面我們看到了在建立資料表時，使用的 SQL 語法，<br>接著淺談一下，在 SQL 裡的基礎語法有哪些吧！</p>
+<h3 id="練習-SQL-語法！"><a href="#練習-SQL-語法！" class="headerlink" title="練習 SQL 語法！"></a>練習 SQL 語法！</h3><pre><code>Remark:
+每段最後同時寫上呼應的 Rails 語法，底下的 Hero 是 Model 喔！
+</code></pre>
+<ul>
+<li><p>SELECT 查詢資料</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="comment">-- 挑出所有欄位</span></span><br><span class="line"><span class="keyword">FROM</span> heroes;</span><br><span class="line"><span class="comment">-- Rails: Hero.all</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> hero_level <span class="operator">=</span> <span class="string">&#x27;S&#x27;</span>;</span><br><span class="line"><span class="comment">-- Rails: Hero.where(hero_level: &#x27;S&#x27;)</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Method 1</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> (hero_level, gender) <span class="operator">=</span>  (<span class="string">&#x27;S&#x27;</span>, <span class="string">&#x27;F&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Method 2</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> hero_level <span class="operator">=</span> <span class="string">&#x27;S&#x27;</span>;</span><br><span class="line"><span class="keyword">AND</span> gender <span class="operator">=</span> <span class="string">&#x27;F&#x27;</span>;</span><br><span class="line"><span class="comment">-- Rails: Hero.where(hero_level: &#x27;S&#x27;, gender: &#x27;F&#x27;)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>只要名字與等級欄位：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, hero_level</span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> hero_level <span class="operator">=</span> <span class="string">&#x27;S&#x27;</span>;</span><br><span class="line"><span class="comment">-- Rails: Hero.select(:name, :hero_level).where(hero_level: &#x27;S&#x27;)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>判斷 age 是 NULL：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> age <span class="keyword">is</span> <span class="keyword">NULL</span>;</span><br><span class="line"><span class="comment">-- Rails: Hero.where(age: nil)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>練習搜尋的語法 LIKE<br>找有背心開頭兩個字的詞：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> name <span class="keyword">LIKE</span> <span class="string">&#x27;背心%&#x27;</span> ;</span><br><span class="line"><span class="comment">-- Rails: Hero.where(&quot;name LIKE &#x27;%背心%&#x27;&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>尋找特定範圍：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Method 1</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> age <span class="keyword">BETWEEN</span> <span class="number">10</span> <span class="keyword">AND</span> <span class="number">25</span>; <span class="comment">-- 有包含 10 and 25</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- Method 2</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> age <span class="operator">&gt;</span> <span class="number">10</span> <span class="keyword">AND</span> age <span class="operator">&lt;</span> <span class="number">25</span>;</span><br><span class="line"><span class="comment">-- Rails: Hero.where(age: 10...25)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>尋找 hero_level 是 S 級跟 A 級的：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Method 1</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> hero_level <span class="keyword">IN</span> (<span class="string">&#x27;S&#x27;</span>, <span class="string">&#x27;A&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Method 2</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> hero_level <span class="operator">=</span> <span class="string">&#x27;S&#x27;</span> <span class="keyword">OR</span> hero_level <span class="operator">=</span> <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line"><span class="comment">-- Rails: Hero.where(hero_level: [&#x27;S&#x27;, &#x27;A&#x27;])</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>尋找 hero_level 不是 S 級的：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Method 1</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> hero_level <span class="operator">!=</span> <span class="string">&#x27;S&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Method 2 用大於小於組合！ SQL 專屬！</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> hero_level <span class="operator">&lt;&gt;</span> <span class="string">&#x27;S&#x27;</span>;</span><br><span class="line"><span class="comment">-- Rails: Hero.where.not(hero_level: &#x27;S&#x27;)</span></span><br><span class="line"><span class="comment">-- Rails: Hero.where(&quot;hero_level != &#x27;S&#x27;&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>尋找 hero_level 不是 S 級，也不是 A 級的：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> hero_level <span class="keyword">NOT</span> <span class="keyword">IN</span> (<span class="string">&#x27;S&#x27;</span>, <span class="string">&#x27;A&#x27;</span>);</span><br><span class="line"><span class="comment">-- Rails: Hero.where.not(hero_level: [&#x27;S&#x27;, &#x27;A&#x27;])</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>尋找是 A 級的男性，列出姓名與年齡：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> name, age</span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> gender <span class="operator">=</span> <span class="string">&#x27;M&#x27;</span> <span class="keyword">AND</span> hero_level <span class="operator">=</span> <span class="string">&#x27;A&#x27;</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>UPDATE 更新資料</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> heroes</span><br><span class="line"><span class="keyword">SET</span> age <span class="operator">=</span> <span class="number">10</span></span><br><span class="line"><span class="keyword">WHERE</span> id <span class="operator">=</span> <span class="number">25</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>讓所有的 heroes 年齡都加一：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> heroes</span><br><span class="line"><span class="keyword">SET</span> age <span class="operator">=</span> age <span class="operator">+</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>請把 id &#x3D; 35 的英雄等級由原本的 C 級 388 位調整成 B 級的 101 位：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> heroes</span><br><span class="line"><span class="keyword">SET</span> hero_level <span class="operator">=</span> <span class="string">&#x27;B&#x27;</span> ,  hero_rank <span class="operator">=</span> <span class="number">101</span></span><br><span class="line"><span class="keyword">WHERE</span> ID <span class="operator">=</span> <span class="number">35</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DELETE 刪除資料</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span></span><br><span class="line"><span class="keyword">WHERE</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>進階查詢 - 計算總數</p>
+<ul>
+<li>計算所有 S 級的總數：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>)</span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> hero_level <span class="operator">=</span> <span class="string">&#x27;S&#x27;</span>;</span><br><span class="line"><span class="comment">-- Rails: Hero.where(hero_level: &#x27;S&#x27;).count</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>計算 A 級年齡的總和：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(age)</span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> hero_level <span class="operator">=</span> <span class="string">&#x27;A&#x27;</span> <span class="keyword">AND</span> age <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>;</span><br><span class="line"><span class="comment">-- Rails: Hero.where(hero_level: &#x27;A&#x27;).sum</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>計算 A 級年齡的平均：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">AVG</span>(age)</span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> hero_level <span class="operator">=</span> <span class="string">&#x27;A&#x27;</span> <span class="keyword">AND</span> age <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>;</span><br><span class="line"><span class="comment">-- Rails: Hero.where(hero_level: &#x27;A&#x27;).where.not(age: nil).average(:age)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分組</p>
+<ul>
+<li>以每個等級做分組且算出每組的平均年齡：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> hero_level, <span class="built_in">AVG</span>(age)</span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> hero_level;</span><br><span class="line"><span class="comment">-- Rails: Hero.group(:hero_level).average(:age)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DISTINCT</p>
+<p>在 SQL 中，DISTINCT 用於去除查詢結果中重複的行，使得查詢結果只包含唯一值。</p>
+<p>挑出不同的級數：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> danger_level</span><br><span class="line"><span class="keyword">FROM</span> monsters;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>排序</p>
+<ul>
+<li>對 S 級做排序：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 升冪排序</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> hero_level <span class="operator">=</span> <span class="string">&#x27;S&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> hero_rank <span class="keyword">ASC</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 降冪排序</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> hero_level <span class="operator">=</span> <span class="string">&#x27;S&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> hero_rank <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> hero_level <span class="operator">=</span> <span class="string">&#x27;S&#x27;</span></span><br><span class="line"><span class="keyword">AND</span> age <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="comment">-- 可以排除掉沒有的值</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> age;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> heroes</span><br><span class="line"><span class="keyword">WHERE</span> hero_level <span class="operator">=</span> <span class="string">&#x27;S&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> hero_rank</span><br><span class="line">LIMIT <span class="number">5</span>; <span class="comment">-- 限定數量</span></span><br></pre></td></tr></table></figure>
+
+<pre><code>Remark:
+蝦皮的捲軸分頁視窗：
+如果 page = params[:page] || 1
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> items</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> id</span><br><span class="line">LIMIT <span class="number">6</span></span><br><span class="line"><span class="keyword">OFFSET</span> (page <span class="operator">-</span> <span class="number">1</span>) <span class="operator">*</span> <span class="number">6</span>;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>INNER JOIN 兩者交集<br>LEFT JOIN 左邊為主對照右邊；RIGHT JOIN 右邊為主對照左邊</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> t1</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> t2</span><br><span class="line"><span class="keyword">on</span> t1.username <span class="operator">=</span> t2.name; <span class="comment">-- 比對 t1 跟 t2 的相同名稱</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>反派是被誰打倒的？</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> monsters.name, heroes.name</span><br><span class="line"><span class="keyword">FROM</span> monsters</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> heroes</span><br><span class="line"><span class="keyword">on</span> monsters.kill_by <span class="operator">=</span> heroes.id</span><br><span class="line"><span class="keyword">WHERE</span> kill_by <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>;</span><br></pre></td></tr></table></figure>
+
+<p>簡化：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> m.name, h.name</span><br><span class="line"><span class="keyword">FROM</span> monsters <span class="keyword">as</span> m</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> heroes <span class="keyword">as</span> h</span><br><span class="line"><span class="keyword">on</span> m.kill_by <span class="operator">=</span> h.id</span><br><span class="line"><span class="keyword">WHERE</span> m.kill_by <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span>;</span><br></pre></td></tr></table></figure>
+
+<p>透過 battle_histories 將資訊由 id 轉為 name：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> h.name,  m.name</span><br><span class="line"><span class="keyword">FROM</span> battle_histories <span class="keyword">as</span> bh</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> heroes <span class="keyword">as</span> h</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> monsters <span class="keyword">as</span> m</span><br><span class="line"><span class="keyword">on</span> bh.hero_id <span class="operator">=</span> h.id <span class="keyword">AND</span> bh.monster_id <span class="operator">=</span> m.id;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="ERD-Entity-Relationship-Diagram-實體關係圖"><a href="#ERD-Entity-Relationship-Diagram-實體關係圖" class="headerlink" title="ERD - Entity Relationship Diagram 實體關係圖"></a>ERD - Entity Relationship Diagram 實體關係圖</h2><p>一種用來描述資料庫中資料實體和它們之間關係的視覺化工具。</p>
+<ul>
+<li>運用 <strong>子查詢</strong>，尋找被埼玉與傑諾斯幹掉的怪獸：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> monsters</span><br><span class="line"><span class="keyword">WHERE</span> kill_by <span class="operator">=</span> (</span><br><span class="line">	<span class="keyword">SELECT</span> id</span><br><span class="line">	<span class="keyword">FROM</span> heroes</span><br><span class="line">	<span class="keyword">WHERE</span> name <span class="operator">=</span> <span class="string">&#x27;埼玉&#x27;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span></span><br><span class="line"><span class="keyword">FROM</span> monsters</span><br><span class="line"><span class="keyword">WHERE</span> kill_by <span class="keyword">IN</span> (</span><br><span class="line">	<span class="keyword">SELECT</span> id</span><br><span class="line">	<span class="keyword">FROM</span> heroes</span><br><span class="line">	<span class="keyword">WHERE</span> name <span class="keyword">IN</span> (<span class="string">&#x27;埼玉&#x27;</span>, <span class="string">&#x27;傑諾斯&#x27;</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h2 id="思考一下：資料庫與-excel-的差別"><a href="#思考一下：資料庫與-excel-的差別" class="headerlink" title="思考一下：資料庫與 excel 的差別"></a>思考一下：資料庫與 excel 的差別</h2><p>資料庫和 Excel 是兩種不同的資料管理工具，在設計和使用上有很多差異：</p>
+<ul>
+<li>資料結構：<ul>
+<li>資料庫使用表格（Table）來組織和儲存資料，包含多個欄位（Column）和資料列（Row）。</li>
+<li>Excel 是一個電子試算表軟體，使用單一工作表來儲存資料，每個工作表包含多個儲存格。</li>
+</ul>
+</li>
+<li>多用戶支援：<ul>
+<li>資料庫可以支援多個使用者同時存取和修改資料，通過設置權限保護資料的一致性和安全性。</li>
+<li>Excel 常常是單用戶的工具，一般情況下不支援多個使用者同時編輯。</li>
+</ul>
+</li>
+<li>資料容量：<ul>
+<li>資料庫可以處理大量的資料，並且支援擴展來應對日益增長的資料量。</li>
+<li>Excel 對於大型資料集的處理可能受限，因為它主要是設計為處理小型資料集。</li>
+</ul>
+</li>
+<li>查詢和分析：<ul>
+<li>資料庫提供更強大的查詢語言（如 SQL），能夠進行複雜的查詢和分析操作。</li>
+<li>Excel 也提供一些基本的查詢和過濾功能，但相對於資料庫來說功能有限。</li>
+</ul>
+</li>
+<li>適用範圍：<ul>
+<li>資料庫主要用於大型企業或應用程式，用於儲存和管理大量結構化資料。</li>
+<li>Excel 常用於個人或小型組織，用於較小的資料集的儲存和分析。</li>
+</ul>
+</li>
+</ul>
+<h3 id="Brief-Summary"><a href="#Brief-Summary" class="headerlink" title="Brief Summary"></a>Brief Summary</h3><p>資料庫適用於大型結構化資料的管理和處理，並且支援多用戶存取和複雜的查詢需求。<br>Excel 則適合用於較小的資料集，用於個人或小型組織的資料管理和分析。</p>
+<p>今天就到這，我們下篇見！</p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/database/" class="tag">#database</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/database-normalization-and-denormalization/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Database] - 資料庫正規化與反正規化！</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/rails-active-record-query-enum/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Active Record Query - Enum!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

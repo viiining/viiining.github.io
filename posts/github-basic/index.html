@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [GitHub] - `git push` error fixed! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [GitHub] - `git push` error fixed! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/github-basic/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-06-28T09:40:48.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>June</span>
+            <span>28,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [GitHub] - `git push` error fixed!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/git/" class="tag">#git</a><a href="/tags/github/" class="tag">#github</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <h1 id="Git-與-GitHub-是不同的！"><a href="#Git-與-GitHub-是不同的！" class="headerlink" title="Git 與 GitHub 是不同的！"></a>Git 與 GitHub 是不同的！</h1><p><strong>Git 為一項工具</strong>，下載至自己的裝置上操作檔案間的版本控制、記載連續性的歷史紀錄；</p>
+<p><strong>GitHub 則是一個網站、平台</strong>，提供一個遠端儲存庫 (Remote Repository)，<br>讓本地儲存庫（Local Repository）上傳至 GitHub。在 GitHub 我們能分享自己的原始碼、能參考別人做的原始碼，並且也能進行線上合作、討論專案。</p>
+<hr>
+<h2 id="要如何將自己的-repository-上傳到-GitHub-上呢？"><a href="#要如何將自己的-repository-上傳到-GitHub-上呢？" class="headerlink" title="要如何將自己的 repository 上傳到 GitHub 上呢？"></a>要如何將自己的 repository 上傳到 GitHub 上呢？</h2><p>首先到 GitHub 網站上註冊帳號 ，並前往 repository 建立新的儲存庫。<br>而上傳的方式有很多種，可以用圖形介面工具 — GUI (Graphical User Interface) 上傳，像是 VScode 或者 SourceTree，都有畫面呈現每個 commit, branch，相較直接使用 Terminal 簡單許多！<br>但，<strong>GUI 的指令操作與 Terminal 是一樣的，所以我們還是必須要先了解每個指令的意義</strong>，才能更有效使用。</p>
+<hr>
+<blockquote>
+<p><strong>不要害怕指令，更不要害怕錯，錯誤訊息就在眼前！</strong></p>
+</blockquote>
+<p>把之前在 Viiisit Terminal 那篇所講過的話，再次拿出來講一次，因為不熟悉而發生多次的錯誤訊息真的是見怪不怪，幾乎每次都在祈禱一次性通過，有時候就是會事與願違：）</p>
+<p>分享一下剛開始我使用 <code>git push</code> 將本地儲存庫上傳至遠端時發生的錯誤，當時真的試了又試，排錯在排錯，要成為優秀的工程師，這樣不停地分析錯誤並試圖解決是必要的。</p>
+<p>（默默在心中立志只許成功不許失敗！）</p>
+<hr>
+<h2 id="Error-Fixed-Process"><a href="#Error-Fixed-Process" class="headerlink" title="Error Fixed Process"></a>Error Fixed Process</h2><p><code>git push</code> 可以把本機端儲存庫的相關檔案，上傳到遠端，但首次嘗試總是不會跟自己預期的那樣順利…</p>
+<p>當時我在自己的 GitHub 上建立新的 Repository，依循引導畫面在 Terminal 上給指令進行，因為我是要將本地端已有的儲存庫上傳，所以我使用 <em>push an existing repository from the command line</em></p>
+<p>早在之前我很多餘的手動刪除在 GitHub 的一個 Repository ，當時也是遵照給的指令操作，造成我後面要重新 <code>git push</code> 時，就發生 <em>fatal: remote origin already exisits</em> （遠程分支 origin 已存在，重複建立而報錯）。</p>
+<p>因此，要先移除那個分支（把 origin 這個貼紙撕掉）</p>
+<p>使用 <mark> <code>git remote rm origin</code></mark></p>
+<p>就可以排除上述問題，接著再依照 GitHub 給的指令去執行就可以囉！</p>
+<p>在真正 <code>git push</code> 之前，GitHub 會要求填上 username 跟 password。<br>username 填入當初申請時的使用者名稱即可，<br>但！<strong>password 要去拿取一個名為 personal access token 的編碼</strong></p>
+<p>如果用自己的登入密碼，肯定會看到這樣的訊息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">remote: Support for password authentication was removed on August 13, 2021.</span><br><span class="line">remote: Please see https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls for information on currently recommended modes of authentication.</span><br><span class="line">fatal: Authentication failed for &#x27;https://github.com/viiining/PracticeJS.git/&#x27;</span><br></pre></td></tr></table></figure>
+
+<h2 id="So…-How-to-create-personal-access-token"><a href="#So…-How-to-create-personal-access-token" class="headerlink" title="So… How to create personal access token?"></a>So… How to create personal access token?</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">點擊右上角的頭貼 -&gt; 點進 settings -&gt; 左側選單最後有個 Developer settings -&gt;</span><br><span class="line"></span><br><span class="line">Personal access tokens -&gt; Tokens (classic) &gt; Generate new token (classic) -&gt;</span><br><span class="line"></span><br><span class="line">Get your personal token and paste to terminal for requesting password.</span><br></pre></td></tr></table></figure>
+
+<p>因為一些授權的關係，GitHub 不再使用個人的登入密碼作為 <code>git push</code> 時使用，如果沒有自己試過，根本不知道還有這樣的環節！</p>
+<p>把遇到的錯誤整理完，下次再遇到時，就能毫不猶豫地排除這些錯誤！</p>
+<p>之後陸陸續續會整理出更多排錯的文章，畢竟真的是很常遇到突發狀況，<br>既然遇到就要一一破關，只許成功不許失敗！（抱拳）</p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/git/" class="tag">#git</a><a href="/tags/github/" class="tag">#github</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/github-pages/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [GitHub] - GitHub Pages!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/terminal-useful-commands/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Terminal] - Usual Commands and Shortcut!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Ruby on Rails] - Route! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Ruby on Rails] - Route! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/rails-routes/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-10-01T14:05:28.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>October</span>
+            <span>1,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Ruby on Rails] - Route!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p><em>今天來點 Routes</em></p>
+<p>   <img src="https://ithelp.ithome.com.tw/upload/images/20230930/20161764YQPprUetsK.png" alt="https://ithelp.ithome.com.tw/upload/images/20230930/20161764YQPprUetsK.png"></p>
+<p>在 <a href="https://viiisit.com/20230929-ruby-on-rails-intro-of-coc-and-dry/">Viiisit Ruby on Rails - CoC &amp; DRY!</a><br>有提到 REST 與 RESTful 概念，我們再複習一次：</p>
+<h3 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h3><p>REST (Representational State Transfer) 是一種軟體架構風格，<br> <mark>主要用於設計網路應用程式的 API(幫助世界各地不同軟體、程式在網際網路中能夠互相傳遞訊息)</mark><br>它基於資源（Resource）的概念，每個資源都有唯一的識別符號（URI），<br>並且可以透過不同的 HTTP 方法（GET、POST、PUT、DELETE 等）來執行相應的操作。</p>
+<blockquote>
+<p>每個網頁都可視為一個資源提供使用者使用，而我們就可以透過 URL，也就是這些資源的地址，<br>來取得這些資源並在瀏覽器上使用。<br>Remark:<br>    URI - Uniform Resource Identifier，<br>    其中最常看見的 URL 是 URI 的一種特殊形式，兩者都是用來唯一識別資源的地址。</p>
+</blockquote>
+<h3 id="RESTful"><a href="#RESTful" class="headerlink" title="RESTful"></a>RESTful</h3><p><em>透過 Rails 的路徑設定，可以快速地建立符合 RESTful 概念的路由，並使應用程序遵循 RESTful 架構來處理資源的 CRUD 操作。</em></p>
+<p>RESTful 是符合 REST 設計原則的 API。當我們在設計 API 時，遵循 REST 的原則，特別是適當地使用 HTTP 方法、URI 和回應狀態碼，我們就可以稱這個 API 為 RESTful API。</p>
+<blockquote>
+<p>Remark:<br>    所謂的 API 是應用程式介面 (application programming interface)，<br>    網址也是一種應用程式的「介面」，故稱為 API。<br>    <strong>RESTful 風格的網址設計強調從路由結構就能看出要對什麼資料、進行什麼操作。</strong></p>
+</blockquote>
+<p>Ruby on Rails 在設計上已經將 RESTful 的路由設定架構出來了。透過 Rails 的路徑設定，可以快速地建立符合 RESTful 概念的路由，並使應用程序遵循 RESTful 架構來處理資源的 CRUD 操作。</p>
+<h3 id="CRUD"><a href="#CRUD" class="headerlink" title="CRUD"></a>CRUD</h3><p><strong>CRUD 是 Create, Read, Update, Delete</strong> 四個字母的縮寫，中文是「增刪查改」；<br>這是一連串常見的動作行為，通常是為了針對某個特定資源所作出的舉動，如：建立資料、讀取資料等。<br>這四個行為最常見的用途是在<strong>使用 SQL 資料庫</strong>與<strong>網站的 API 埠口</strong>的時候。</p>
+<h4 id="相對應的-SQL-語法、HTTP-請求、REST-表現層狀態轉換"><a href="#相對應的-SQL-語法、HTTP-請求、REST-表現層狀態轉換" class="headerlink" title="相對應的 SQL 語法、HTTP 請求、REST 表現層狀態轉換"></a>相對應的 SQL 語法、HTTP 請求、REST 表現層狀態轉換</h4><table>
+<thead>
+<tr>
+<th align="center">-</th>
+<th align="center">SQL</th>
+<th align="center">HTTP</th>
+<th align="center">REST 表現層狀態轉換</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Create 建立</td>
+<td align="center">INSERT</td>
+<td align="center">PUT &#x2F; POST</td>
+<td align="center">POST</td>
+</tr>
+<tr>
+<td align="center">Read 讀取</td>
+<td align="center">SELECT</td>
+<td align="center">GET</td>
+<td align="center">GET</td>
+</tr>
+<tr>
+<td align="center">Update 更新</td>
+<td align="center">UPDATE</td>
+<td align="center">PUT &#x2F; POST &#x2F; PATCH</td>
+<td align="center">PUT</td>
+</tr>
+<tr>
+<td align="center">Delete 刪除</td>
+<td align="center">DELETE</td>
+<td align="center">DELETE</td>
+<td align="center">DELETE</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>get, post, patch, delete 是先前在 CRUD 提過的路徑對 HTTP 的請求方法，<br>這些 HTTP 方法與 CRUD 操作關係如下：</p>
+<ul>
+<li>GET 對應 Read 操作，用於獲取資料。</li>
+<li>POST 對應 Create 操作，用於創建新的資料。</li>
+<li>PATCH 對應 Update 操作，用於部分更新資料。</li>
+<li>DELETE 對應 Delete 操作，用於刪除資料。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="建立-Route"><a href="#建立-Route" class="headerlink" title="建立 Route"></a>建立 Route</h2><p>首先，要把路徑建立起來，才能通過這些路徑來對應各個頁面。<br>因為 Route 是整個網站連結各個頁面的相關路徑，當使用者連上網站時，Rails 會解析使用者所輸入的網址及參數，去找到該負責處理 Controller 與 Action。</p>
+<h4 id="實作-GO-GO"><a href="#實作-GO-GO" class="headerlink" title="實作 GO! GO!"></a>實作 GO! GO!</h4><p>在 routes.rb 這個檔案裡，把所需要的路徑先建立起來！</p>
+<p><strong>config&#x2F;routes.rb</strong></p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Rails</span>.application.routes.draw <span class="keyword">do</span></span><br><span class="line">  <span class="comment"># ⓶ 建立 homepage (Method 1) -&gt; 文章列表直接當首頁使用</span></span><br><span class="line">  get <span class="string">&#x27;/&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;articles#index&#x27;</span></span><br><span class="line">  <span class="comment"># ⓶ 建立 homepage (Method 2) 可以直接以 root &#x27;controller#action&#x27;</span></span><br><span class="line">  root <span class="string">&#x27;articles#index&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># ⓵ 建立 articles indexpage -&gt; 文章列表</span></span><br><span class="line">  get <span class="string">&#x27;/articles&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;articles#index&#x27;</span></span><br><span class="line">  <span class="comment"># ⓷ 建立 articles newpage -&gt; 新增文章（呈現填寫的表單）</span></span><br><span class="line">  get <span class="string">&#x27;/articles/new&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;articles#new&#x27;</span></span><br><span class="line">  <span class="comment"># ⓸ 新增文章（按下新增按鈕會提交的行為）</span></span><br><span class="line">  post <span class="string">&#x27;/articles&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;articles#create&#x27;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># show, edit, update, delete 都是透過尋找 id 來找對應的文章！</span></span><br><span class="line">  <span class="comment"># 這必須被放在 articles newpage 之後，因為這是屬於比對型的路徑，</span></span><br><span class="line">  <span class="comment"># 如果放在 articles newpage 之前， &#x27;/articles/new&#x27; /new 會被當作 /:id。 </span></span><br><span class="line">  <span class="comment"># 要注意！`:id` 並非符號，是一個 params 可以拿來當作 key 的寫法</span></span><br><span class="line">  <span class="comment"># ⓹ 建立 articles showpage -&gt; 呈現每一篇文章的相關資訊，透過自定義路徑建立對應的 view</span></span><br><span class="line">  get <span class="string">&#x27;/articles/:id&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;articles#show&#x27;</span>, <span class="symbol">as:</span> <span class="string">&quot;article&quot;</span> <span class="comment"># as: &quot;自定義名字&quot;；可以生成 &quot;自定義名字&quot;_path</span></span><br><span class="line">  <span class="comment"># ⓺ 建立 articles editpage</span></span><br><span class="line">  get <span class="string">&#x27;/articles/:id/edit&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;articles#edit&#x27;</span>, <span class="symbol">as:</span> <span class="string">&quot;edit_article&quot;</span></span><br><span class="line">  <span class="comment"># ⓻ 更新文章（按下更新按鈕會提交的行為）</span></span><br><span class="line">  patch <span class="string">&#x27;/articles/:id&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;articles#update&#x27;</span></span><br><span class="line">  <span class="comment"># ⓼ 刪除文章（按下刪除按鈕會提交的行為）</span></span><br><span class="line">  delete <span class="string">&#x27;/articles/:id&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;articles#destroy&#x27;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>註解拿掉，並將首頁路徑以 <code>root &#39;articles#index&#39;</code> 作為代表：</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Rails</span>.application.routes.draw <span class="keyword">do</span></span><br><span class="line">  root <span class="string">&#x27;articles#index&#x27;</span></span><br><span class="line"></span><br><span class="line">  get <span class="string">&#x27;/articles&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;articles#index&#x27;</span></span><br><span class="line">  get <span class="string">&#x27;/articles/new&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;articles#new&#x27;</span></span><br><span class="line">  post <span class="string">&#x27;/articles&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;articles#create&#x27;</span></span><br><span class="line"></span><br><span class="line">  get <span class="string">&#x27;/articles/:id&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;articles#show&#x27;</span>, <span class="symbol">as:</span> <span class="string">&quot;article&quot;</span></span><br><span class="line">  get <span class="string">&#x27;/articles/:id/edit&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;articles#edit&#x27;</span>, <span class="symbol">as:</span> <span class="string">&quot;edit_article&quot;</span></span><br><span class="line">  patch <span class="string">&#x27;/articles/:id&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;articles#update&#x27;</span></span><br><span class="line">  delete <span class="string">&#x27;/articles/:id&#x27;</span>, <span class="symbol">to:</span> <span class="string">&#x27;articles#destroy&#x27;</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>Remark:<br>   可以將常用的 route 放在前面，不常用的放在後面，因為 route 在讀取時，越前面的會越先讀取！</p>
+</blockquote>
+<h3 id="快速捷徑！-gt-resources"><a href="#快速捷徑！-gt-resources" class="headerlink" title="快速捷徑！ -&gt; resources"></a>快速捷徑！ -&gt; <code>resources</code></h3><p>上方的路徑可以透過 <code>resources :自定義名字</code> 讓 Rails 框架自動生成！</p>
+<p><strong>config&#x2F;routes.rb</strong></p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Rails</span>.application.routes.draw <span class="keyword">do</span></span><br><span class="line">  root <span class="string">&#x27;articles#index&#x27;</span></span><br><span class="line">  resources <span class="symbol">:articles</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><blockquote>
+<p>resource’s’ - <code>s</code> 的有無差異在生成的路徑中是否包含 <code>:id</code> 參數！<br>透過有 <code>:id</code> 可以針對特定的資料進行操作。</p>
+</blockquote>
+<ul>
+<li>resources :articles -&gt; 會生成有 <code>:id</code> 的路徑</li>
+<li>resource :articles -&gt; 會生成無 <code>:id</code> 的路徑，也不會生成 index 路徑</li>
+</ul>
+<h3 id="巢狀式的路徑"><a href="#巢狀式的路徑" class="headerlink" title="巢狀式的路徑"></a>巢狀式的路徑</h3><p>resources 方法裡面可以再繼續包 resources，例如一個 article 可能會有很多 comments：</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resources <span class="symbol">:articles</span> <span class="keyword">do</span></span><br><span class="line">  resources <span class="symbol">:comments</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>透過上述方式可以生成主從關係的路徑，<br>但在這之中有些路徑其實不需要透過 articles 來找到 comments，<br>可以直接透過他自己的 :id 找到，因此，可以將路徑限制一些條件：</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">resources <span class="symbol">:articles</span> <span class="keyword">do</span></span><br><span class="line">  <span class="comment"># resources :comments, only: [:index, :new, :create]</span></span><br><span class="line">  <span class="comment"># :index, :new 是跟 article 的 :index, :new 相同頁面，這裡就不需要寫！</span></span><br><span class="line">  resources <span class="symbol">:comments</span>, <span class="symbol">only:</span> [<span class="symbol">:create</span>]</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 這些不需要跟 articles 有主從的路徑關係，只需要單就 comment :id 去搜尋即可！</span></span><br><span class="line"><span class="comment"># resources :comments, only: [:show, :edit, :update, :destroy]</span></span><br><span class="line"><span class="comment"># :show, :edit, :update 這裡不需要寫（主要也是看開發需求），comment 不需要單獨 show 出來！</span></span><br><span class="line">resources <span class="symbol">:comments</span>, <span class="symbol">only:</span> [<span class="symbol">:destroy</span>]</span><br></pre></td></tr></table></figure>
+
+<p>註解拿掉：</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">resources <span class="symbol">:articles</span> <span class="keyword">do</span></span><br><span class="line">  resources <span class="symbol">:comments</span>, <span class="symbol">only:</span> [<span class="symbol">:create</span>]</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">resources <span class="symbol">:comments</span>, <span class="symbol">only:</span> [<span class="symbol">:destroy</span>]</span><br></pre></td></tr></table></figure>
+
+<p>而，這樣的寫法還可以透過 Rails 提供的 <strong>Shallow Nesting</strong> 方法來簡化：</p>
+<h3 id="Shallow-Nesting"><a href="#Shallow-Nesting" class="headerlink" title="Shallow Nesting"></a>Shallow Nesting</h3><p>Shallow Nesting 是在設計 Rails 路徑時的一種方式，<br>目的是將深度嵌套的路徑結構簡化，使路徑設定更加直觀和易於管理。</p>
+<p>在下方如果不寫 <code>only: [:create, :destroy]</code>，預設情況下所有的 CRUD<br>（create、read、update、destroy）都會被定義在 comments routes 範圍內。<br><em>在這裡，我只想要有新增評論跟刪除評論的功能。</em></p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">resources <span class="symbol">:articles</span> <span class="keyword">do</span></span><br><span class="line">  resources <span class="symbol">:comments</span>, <span class="symbol">shallow:</span> <span class="literal">true</span>, <span class="symbol">only:</span> [<span class="symbol">:create</span>, <span class="symbol">:destroy</span>]</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="collection-vs-member"><a href="#collection-vs-member" class="headerlink" title="collection vs member"></a>collection vs member</h3><p>藉由 resources 可以快速生成 8 個基本路徑，<strong>但是，我還想要更多不同的路徑該怎麼辦？</strong><br>可以使用 collection 或 member 選項來定義額外的自訂路徑！<br>這些自訂路徑可以對應到控制器中定義的自訂動作（action），能處理更多不同的用途。</p>
+<h4 id="這兩種路徑的主要差異在於生成的-URL-有無-id。"><a href="#這兩種路徑的主要差異在於生成的-URL-有無-id。" class="headerlink" title="這兩種路徑的主要差異在於生成的 URL 有無 :id。"></a>這兩種路徑的主要差異在於生成的 URL 有無 :id。</h4><h4 id="collection"><a href="#collection" class="headerlink" title="collection"></a>collection</h4><p>使用 collection 選項可以定義針對集合進行操作的路徑，<br>也就是不針對單一資源，而是針對多個資源進行操作。</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">resource <span class="symbol">:users</span>, <span class="symbol">except:</span> [<span class="symbol">:show</span>, <span class="symbol">:destroy</span>] <span class="keyword">do</span></span><br><span class="line">  collection <span class="keyword">do</span></span><br><span class="line">    get <span class="symbol">:login</span> <span class="comment"># GET /users/login：顯示登入表單的頁面</span></span><br><span class="line">    post <span class="symbol">:afterlogin</span> <span class="comment"># POST /users/afterlogin：處理登入表單的提交</span></span><br><span class="line">    delete <span class="symbol">:logout</span> <span class="comment"># DELETE /users/logout：執行登出操作</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="member"><a href="#member" class="headerlink" title="member"></a>member</h4><p>使用 member 選項可以定義針對單一資源進行操作的路徑，路徑內會包含資源的（ID）。</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">resources <span class="symbol">:articles</span>, <span class="symbol">only:</span> [] <span class="keyword">do</span></span><br><span class="line">  member <span class="keyword">do</span> </span><br><span class="line">    patch <span class="symbol">:like</span> <span class="comment"># PATCH /articles/:id/like</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><em>這段使用 resources 方法來生成對文章資源的路徑，但是通過 only: [] 選項，只生成一個空的資源路徑，即不生成標準的 CRUD 路徑。在 member 區塊中使用 patch 方法，指定了一個名為 like 的自定義動作，並將這個動作與單一文章資源（即 &#x2F;articles&#x2F;:id）相關聯。這樣就生成了一個特定的路徑，用於對單一文章進行點讚（like）操作。</em></p>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/%E5%A2%9E%E5%88%AA%E6%9F%A5%E6%94%B9">增刪查改</a><br>➫ <a target="_blank" rel="noopener" href="https://railsbook.tw/chapters/11-routes">為你自己學 Ruby on Rails - Routes</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/ruby-on-rails/" class="tag">#ruby on rails</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/rails-controller-action-view/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [Ruby on Rails] - Controller, Action, View!</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/development-about-mvc/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Development] - MVC!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

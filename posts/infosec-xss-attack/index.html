@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Information Security] - Cross-site scripting (XSS) Attack! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Information Security] - Cross-site scripting (XSS) Attack! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/infosec-xss-attack/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-11-21T07:13:30.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>November</span>
+            <span>21,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Information Security] - Cross-site scripting (XSS) Attack!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/infosec/" class="tag">#infosec</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <h2 id="What-is-Cross-site-scripting-XSS"><a href="#What-is-Cross-site-scripting-XSS" class="headerlink" title="What is Cross-site scripting (XSS) ?"></a>What is Cross-site scripting (XSS) ?</h2><p>跨站腳本攻擊（Cross-Site Scripting，簡稱XSS）是一種網站應用程序中常見的安全漏洞，<br>允許攻擊者將惡意代碼注入到網頁上，並在用戶瀏覽頁面時執行這些程式碼。<br>XSS 攻擊的目標是盜取用戶的敏感資訊、繞過訪問控制或者破壞網站的正常運作。</p>
+<p>有三種主要的 XSS 攻擊類型：</p>
+<ol>
+<li><p><strong>儲存型（Stored XSS）：</strong> 攻擊者將惡意代碼存儲在網站上，當其他用戶訪問包含這些惡意代碼的頁面時，就會觸發攻擊。</p>
+</li>
+<li><p><strong>反射型（Reflected XSS）：</strong> 攻擊者通常通過傳遞特殊的 URL 參數，將惡意代碼注入到頁面上，頁面在用戶訪問時即時執行該代碼。</p>
+</li>
+<li><p><strong>DOM-based XSS：</strong> 攻擊者利用 DOM（Document Object Model）的漏洞，在客戶端修改網頁的 DOM 結構，進而執行惡意代碼。</p>
+</li>
+</ol>
+<p>假設有一個簡單的搜尋功能，URL 看起來像這樣：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://example.com/search?q=&lt;user_input&gt;</span><br></pre></td></tr></table></figure>
+
+<p>使用者可以在 <code>&lt;user_input&gt;</code> 的位置輸入搜尋內容。<br>如果這個輸入沒有得到正確的過濾或處理，攻擊者可以輸入以下內容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://example.com/search?q=&lt;script&gt;alert(&#x27;XSS&#x27;)&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>當其他用戶訪問這個 URL 時，頁面可能會執行包含在 <code>&lt;script&gt;</code> 標籤中的 JavaScript 程式碼，<br>這裡舉例一個簡單的 alert，但攻擊者也可以進一步執行更危險的操作，如竊取用戶 cookie、模擬用戶操作等。</p>
+<p>防範XSS攻擊的方法包括：</p>
+<ul>
+<li><p><strong>輸入驗證：</strong> 對用戶輸入進行嚴格的驗證，過濾或拒絕包含惡意代碼的輸入。</p>
+</li>
+<li><p><strong>輸出過濾：</strong> 在輸出數據到瀏覽器之前，對數據進行適當的過濾和轉義，以確保任何潛在的HTML標籤都被視為純文本。</p>
+</li>
+<li><p><strong>使用HTTP Only Cookie：</strong> 將 cookie 標記為 HTTP Only，這樣他們就無法通過 JavaScript 訪問，減少被竊取的風險。</p>
+</li>
+</ul>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://tech-blog.cymetrics.io/posts/jo/zerobased-cross-site-scripting/">零基礎資安系列（二）-認識 XSS（Cross-Site Scripting）</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/infosec/" class="tag">#infosec</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/leetcode-is-subsequence/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [LeetCode] - 017 Is Subsequence</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/leetcode-valid-palindrome/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [LeetCode] - 016 Valid Palindrome</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>

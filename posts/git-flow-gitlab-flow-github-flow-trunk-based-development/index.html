@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/git-flow-gitlab-flow-github-flow-trunk-based-development/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2023-11-11T11:40:48.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>November</span>
+            <span>11,</span>
+            <span>2023</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Git] - Git Flow, GitHub Flow, GitLab Flow, Trunk-based development!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/git/" class="tag">#git</a><a href="/tags/github/" class="tag">#github</a><a href="/tags/gitlab/" class="tag">#gitlab</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <p>Git 是在軟體開發上常用的版本控制工具，要如何有效對分支進行管理以及使用 Git 進行協作和開發呢？<br>以下分享四種常見的 Flow 分別為 Git Flow, GitHub Flow, GitLab Flow, Trunk-based development，在往後的團隊合作上可以好好的利用！</p>
+<ol>
+<li><p><strong>Git Flow:</strong><br>  Git Flow 明確定義特定分支的責任，例如將 main&#x2F;master 分支用於 production，使用 develop 分支進行主開發，feature 分支用於開發新功能，release 分支作為通往production 之前把關的閘門，以及 hotfix 分支用於解決緊急問題。</p>
+<p> 優點：</p>
+<ul>
+<li>適用於大型團隊，並在多個團隊之間協調工作。</li>
+<li>有效處理多個產品版本。</li>
+<li>對每個分支有清晰的責任。</li>
+<li>通過標籤輕鬆尋找生產版本。</li>
+</ul>
+<p> 缺點：</p>
+<ul>
+<li>由於分支眾多，可能導致合併衝突，使得複雜度增加。</li>
+<li>由於多步驟流程，開發和發布的頻率可能較慢。</li>
+<li>需要團隊共識並致力於堅持該策略。</li>
+</ul>
+<p> <img src="/../assets/images/git-flow.png" alt="Git Flow"></p>
+</li>
+<li><p><strong>GitHub Flow:</strong><br>  GitHub Flow 沒有 release 分支，通過開發分支（通常是 main 或 master），直接部署到生產環境。<br>  使用長期存在的功能分支來實現功能和錯誤修復，在 open-source projects 中很常見。</p>
+<p> 優點：</p>
+<ul>
+<li>更快的反饋週期和更短的生產週期。</li>
+<li>適用於較小團隊的非同步工作。</li>
+<li>與 Git Flow 相比，更敏捷且更容易理解。</li>
+</ul>
+<p> 缺點：</p>
+<ul>
+<li>合併功能分支也就是這新的分支已經準備好投入 production，可能在沒有正確測試和堅固的 CI&#x2F;CD 流程的情況下引入錯誤。</li>
+<li>長期存在的分支可能使流程變得複雜。</li>
+<li>由於合併衝突增多，對於較大的團隊來說難以擴展。</li>
+<li>同時支持多個發布版本可能會變得困難。</li>
+</ul>
+<p> <img src="/../assets/images/github-flow.png" alt="GitHub Flow"></p>
+</li>
+<li><p><strong>GitLab Flow:</strong><br>  GitLab Flow 在 Git Flow 和 GitHub Flow 之間取得平衡。<br>  採用了 GitHub Flow 的分支策略，依然有 feature branch 與 master branch，但在 master 之外，增加專門用來配合交付與部署的 branch，例如 pre-production branch、production branch 或 特定版號 -stable。</p>
+<blockquote>
+<p>上游優先 Upstream First<br> GitLab Flow 主要原則為上游優先（upsteam first）只存在一個主分支 master，此分支是所有分支的上游。所以分支合併的順序很重要，要一次和並且確保通過測試才可以往下游合併，除非是緊急情況，才允許跳過上游直接在下游操作合併。</p>
+</blockquote>
+<p> 優點：</p>
+<ul>
+<li>CI&#x2F;CD</li>
+<li>能夠有效處理多個發布版本或階段。</li>
+<li>比 Git Flow 更簡單。</li>
+<li>以精簡的方式專注於質量。</li>
+</ul>
+<p> 缺點：</p>
+<ul>
+<li>當維護多個版本時，複雜性會增加。</li>
+<li>與 GitHub Flow 相比更為複雜。</li>
+</ul>
+<p> <img src="/../assets/images/gitlab-flow.webp" alt="GitLab Flow"></p>
+</li>
+<li><p>Trunk-based development<br>  Trunk-based development（TBD）是一種軟體開發的策略，強調在一個主要分支（通常是稱為 trunk 或 main 的分支）上進行大部分的開發工作，而不是使用較長壽命的特性分支。這種方法的目標是促使團隊更快速地進行迭代和持續交付，並減少分支引入的複雜性。</p>
+<p> a. <strong>持續整合：</strong> Trunk 鼓勵持續整合，開發者經常將變更合併到主分支。這種方法確保了代碼的定期整合，有助於在開發過程的早期識別和解決集成問題，減少了大型和複雜的合併風險，使團隊更早地發現問題。</p>
+<p> b. <strong>團隊協作：</strong> 通過在共享的主分支上工作，開發者可以更有效地協作。多個團隊成員可以同時在各種功能上工作，而無需使用長時間的特性分支。</p>
+<p> c. <strong>敏捷和迭代開發：</strong> Trunk 使團隊能夠向生產環境交付更小、增量的變更。這種迭代的方法有助於從用戶和利益相關者那裡更快地獲得反饋，使根據他們的反饋進行調整和變更變得更容易。</p>
+<p> d. <strong>減少代碼複雜性：</strong> 長期存在的特性分支可能導致代碼的顯著分歧和複雜性。相比之下，Trunk-based development 通過最小化分支分開的時間，使代碼庫更容易維護。</p>
+<p> e. <strong>更快的上市時間：</strong> Trunk 縮短了開發和部署之間的時間，使新功能更快地交付給最終用戶，支持持續交付和 DevOps 實踐，幫助組織實現更短的發布周期，迅速回應市場需求。</p>
+<p> f. <strong>提高代碼質量和穩定性：</strong> 定期將代碼變更整合到主分支中促進了問題的早期識別和解決。這種做法還激勵開發者創建更簡單、自包含的代碼變更進行測試和驗證。</p>
+<p> 優點：</p>
+<ul>
+<li>快速迭代和交付。</li>
+<li>減少分支合併的複雜性。</li>
+<li>更容易檢測和修復問題。</li>
+<li>鼓勵小型增量的變更。</li>
+</ul>
+<p> 缺點：</p>
+<ul>
+<li>不適用於所有項目，特別是對於需要長期特性分支的大型項目。</li>
+<li>可能需要更強大的自動化測試基礎。</li>
+</ul>
+<p> <img src="/../assets/images/trunk-based-development.avif" alt="Trunk Based Development"></p>
+</li>
+</ol>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://blog.jetbrains.com/space/2023/04/18/space-git-flow/">Introducing the Space Git Flow</a><br>➫ <a target="_blank" rel="noopener" href="https://medium.com/@sreekanth.thummala/choosing-the-right-git-branching-strategy-a-comparative-analysis-f5e635443423">Choosing the Right Git Branching Strategy: A Comparative Analysis</a><br>➫ <a target="_blank" rel="noopener" href="https://gitlab-book.tw/ithelp/gitlab-workflow/workflow/">初探 GitLab Workflow &amp; GitLab Flow</a><br>➫ <a target="_blank" rel="noopener" href="https://blog.logrocket.com/product-management/a-guide-to-trunk-based-development/#trunkbaseddevelopmentkeyprinciplesandpractices">A guide to trunk-based development</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/git/" class="tag">#git</a><a href="/tags/github/" class="tag">#github</a><a href="/tags/gitlab/" class="tag">#gitlab</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        
+        <a href="/posts/leetcode-jump-game/" class="next">
+            <div>
+                <div class="text">
+                    <p class="label">Next</p>
+                    <h3 class="title">Viiisit [LeetCode] - 009 Jump Game</h3>
+                </div>
+            </div>
+        </a>
+        
+        
+        <a href="/posts/leetcode-best-time-to-buy-and-sell-stock-II/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [LeetCode] - 008 Best Time to Buy and Sell Stock II</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>
