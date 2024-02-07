@@ -199,6 +199,15 @@
 這會將 mailpit 安裝在 <code>/usr/local/bin/mailpit</code>。</li>
 </ul>
 <p>以 <code>mailpit</code> 指令連線！<br><img src="/../assets/images/mailpit.png" alt="mailpit"><br>透過 <a target="_blank" rel="noopener" href="http://localhost:8025/">http://localhost:8025/</a> 看到以下畫面就是成功啦！୧ʕ•̀ᴥ•́ʔ୨<br><img src="/../assets/images/mailpit-ui.png" alt="mailpit-ui"></p>
+<h4 id="補充"><a href="#補充" class="headerlink" title="補充"></a>補充</h4><h5 id="如果是-Mac-使用-mailpit"><a href="#如果是-Mac-使用-mailpit" class="headerlink" title="如果是 Mac 使用 mailpit?"></a>如果是 Mac 使用 mailpit?</h5><blockquote>
+<p>前提是 Mac 要先安裝 <a target="_blank" rel="noopener" href="https://brew.sh/">Homebrew</a></p>
+</blockquote>
+<ul>
+<li>安裝可以透過 Homebrew 指令：<code>brew install mailpit</code></li>
+<li>開啟連線就是：<code>brew services start mailpit</code></li>
+<li>關閉連線就是：<code>brew services stop mailpit</code></li>
+<li>要從 Mac 卸載就是：<code>brew uninstall mailpit</code></li>
+</ul>
 <hr>
 <h4 id="在使用-MailHog-遇到的問題"><a href="#在使用-MailHog-遇到的問題" class="headerlink" title="在使用 MailHog 遇到的問題"></a>在使用 MailHog 遇到的問題</h4><h6 id="如果-port-已經被使用了，該怎麼辦？"><a href="#如果-port-已經被使用了，該怎麼辦？" class="headerlink" title="如果 port 已經被使用了，該怎麼辦？"></a>如果 port 已經被使用了，該怎麼辦？</h6><ul>
 <li><p>在預設的 port (:8025) 已經被使用的情況下，就會在下 <code>MailHog</code> 指令時出現以下錯誤訊息：</p>
