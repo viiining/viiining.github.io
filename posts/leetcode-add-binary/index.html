@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [LeetCode] - 039 Add Binary - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [LeetCode] - 039 Add Binary - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/leetcode-add-binary/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2024-02-07T04:00:00.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/leetcode/">leetcode</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>February</span>
+            <span>7,</span>
+            <span>2024</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [LeetCode] - 039 Add Binary</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/php/" class="tag">#php</a><a href="/tags/javascript/" class="tag">#javascript</a><a href="/tags/ruby/" class="tag">#ruby</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <blockquote>
+<p>keep learning, keep coding!</p>
+</blockquote>
+<h2 id="Problem-Add-Binary"><a href="#Problem-Add-Binary" class="headerlink" title="Problem - Add Binary"></a>Problem - Add Binary</h2><p>Given two binary strings a and b, return their sum as a binary string.</p>
+<h3 id="翻譯蒟蒻"><a href="#翻譯蒟蒻" class="headerlink" title="翻譯蒟蒻"></a>翻譯蒟蒻</h3><p><strong>給定兩個二進位的數，要返回兩者的總和</strong></p>
+<hr>
+<ul>
+<li><p>Example 1:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: a = &quot;11&quot;, b = &quot;1&quot;</span><br><span class="line">Output: &quot;100&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Example 2:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: a = &quot;1010&quot;, b = &quot;1011&quot;</span><br><span class="line">Output: &quot;10101&quot;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="Solution-JavaScript"><a href="#Solution-JavaScript" class="headerlink" title="Solution - JavaScript"></a>Solution - JavaScript</h2><blockquote>
+<p>藉由從最後一位數開始處理，並用 temp 作為存儲進位值</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">a</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">b</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">string</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> addBinary = <span class="keyword">function</span>(<span class="params">a, b</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> result = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="keyword">let</span> i = a.<span class="property">length</span> - <span class="number">1</span>, j = b.<span class="property">length</span> - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">let</span> temp = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (i &gt;= <span class="number">0</span> || j &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> sum = temp;</span><br><span class="line">    <span class="keyword">if</span> (i &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">      sum += <span class="built_in">parseInt</span>(a[i--]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (j &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">      sum += <span class="built_in">parseInt</span>(b[j--]);</span><br><span class="line">    &#125;</span><br><span class="line">    result = (sum % <span class="number">2</span>) + result;</span><br><span class="line">    temp = <span class="title class_">Math</span>.<span class="title function_">floor</span>(sum / <span class="number">2</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (temp) &#123;</span><br><span class="line">    result = temp + result;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>parseInt()</code> 函數可以將字符串轉換為整數，<br>但！ <code>parseInt()</code> 在解析二進制字符串時有一個限制：只能解析 32 位的二進制數字。<br>如果二進制字串表示的數字大於 11111111111111111111111111111111（32 個 1），<code>parseInt()</code> 就無法正確解析，所以以下方式不會過。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">a</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">b</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">string</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> addBinary = <span class="keyword">function</span>(<span class="params">a, b</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> sum = <span class="built_in">parseInt</span>(a, <span class="number">2</span>) + <span class="built_in">parseInt</span>(b, <span class="number">2</span>);</span><br><span class="line">  <span class="keyword">return</span> sum.<span class="title function_">toString</span>(<span class="number">2</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Solution-Ruby"><a href="#Solution-Ruby" class="headerlink" title="Solution - Ruby"></a>Solution - Ruby</h2><p>Method 1:</p>
+<blockquote>
+<p>使用 <code>reverse</code> 為了從最右邊開始進行加法運算。</p>
+</blockquote>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add_binary</span>(<span class="params">a, b</span>)</span><br><span class="line">  a = a.split(<span class="string">&quot;&quot;</span>).reverse</span><br><span class="line">  b = b.split(<span class="string">&quot;&quot;</span>).reverse</span><br><span class="line">  result = []</span><br><span class="line">  temp = <span class="number">0</span></span><br><span class="line">  i = <span class="number">0</span></span><br><span class="line">  <span class="keyword">while</span> i &lt; a.length |<span class="params"></span>| i &lt; b.length</span><br><span class="line">    sum = temp</span><br><span class="line">    sum += a[i].to_i <span class="keyword">if</span> i &lt; a.length</span><br><span class="line">    sum += b[i].to_i <span class="keyword">if</span> i &lt; b.length</span><br><span class="line">    result &lt;&lt; sum % <span class="number">2</span></span><br><span class="line">    temp = sum / <span class="number">2</span></span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  result &lt;&lt; temp <span class="keyword">if</span> temp &gt; <span class="number">0</span></span><br><span class="line">  result.reverse.join(<span class="string">&quot;&quot;</span>) </span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>Method 2:</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add_binary</span>(<span class="params">a, b</span>)</span><br><span class="line">  sum = a.to_i(<span class="number">2</span>) + b.to_i(<span class="number">2</span>)</span><br><span class="line">  sum.to_s(<span class="number">2</span>)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>與上面的 JavaScript <code>parseInt()</code> 相比之下，Ruby 的 <code>to_i</code> 方法可以解析任意長度的二進制字串。這也是為什麼在 Ruby 中可以直接使用 <code>to_i</code> 和 <code>to_s</code> 方法來進行二進制加法，而在 JavaScript 中則需要使用更複雜的方法。</p>
+</blockquote>
+<h2 id="Solution-PHP"><a href="#Solution-PHP" class="headerlink" title="Solution - PHP"></a>Solution - PHP</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addBinary</span>(<span class="params"><span class="variable">$a</span>, <span class="variable">$b</span></span>) </span>&#123;</span><br><span class="line">  <span class="variable">$result</span> = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="variable">$temp</span> = <span class="number">0</span>;</span><br><span class="line">  <span class="variable">$i</span> = <span class="title function_ invoke__">strlen</span>(<span class="variable">$a</span>) - <span class="number">1</span>;</span><br><span class="line">  <span class="variable">$j</span> = <span class="title function_ invoke__">strlen</span>(<span class="variable">$b</span>) - <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (<span class="variable">$i</span> &gt;= <span class="number">0</span> || <span class="variable">$j</span> &gt;= <span class="number">0</span> || <span class="variable">$temp</span> == <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="variable">$temp</span> += <span class="variable">$i</span> &gt;= <span class="number">0</span> ? <span class="variable">$a</span>[<span class="variable">$i</span>--] : <span class="number">0</span>;</span><br><span class="line">    <span class="variable">$temp</span> += <span class="variable">$j</span> &gt;= <span class="number">0</span> ? <span class="variable">$b</span>[<span class="variable">$j</span>--] : <span class="number">0</span>;</span><br><span class="line">    <span class="variable">$result</span> = (<span class="variable">$temp</span> % <span class="number">2</span>) . <span class="variable">$result</span>;</span><br><span class="line">    <span class="variable">$temp</span> = (<span class="keyword">int</span>)(<span class="variable">$temp</span> / <span class="number">2</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>以下方式會造成 Runtime Error，原因在於處理非常大的數字時會失效。</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addBinary</span>(<span class="params"><span class="variable">$a</span>, <span class="variable">$b</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">decbin</span>(<span class="title function_ invoke__">bindec</span>(<span class="variable">$a</span>) + <span class="title function_ invoke__">bindec</span>(<span class="variable">$b</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="PHP-方法筆記"><a href="#PHP-方法筆記" class="headerlink" title="PHP 方法筆記"></a>PHP 方法筆記</h4><ul>
+<li><p><code>bindec</code> 函數用於將二進制字符串轉換為對應的十進制數字。</p>
+<p>函數的基本語法如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> <span class="title function_ invoke__">bindec</span> ( <span class="keyword">string</span> <span class="variable">$binary_string</span> )</span><br><span class="line"></span><br><span class="line"><span class="comment">// `$binary_string`: 要轉換的二進制字符串。</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$binaryString</span> = <span class="string">&#x27;1101&#x27;</span>;</span><br><span class="line"><span class="variable">$decimalNumber</span> = <span class="title function_ invoke__">bindec</span>(<span class="variable">$binaryString</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$decimalNumber</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Output: 13</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>decbin</code> 函數用於將十進制數字轉換為對應的二進制字符串。</p>
+<p>函數的基本語法如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">string</span> <span class="title function_ invoke__">decbin</span> ( <span class="keyword">int</span> <span class="variable">$number</span> )</span><br><span class="line"></span><br><span class="line"><span class="comment">// `$number`: 要轉換的十進制數字。</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$decimalNumber</span> = <span class="number">10</span>;</span><br><span class="line"><span class="variable">$binaryString</span> = <span class="title function_ invoke__">decbin</span>(<span class="variable">$decimalNumber</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$binaryString</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Output: 1010</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://leetcode.com/problems/add-binary/description/?envType=study-plan-v2&envId=top-interview-150">LeetCode 傳送門 - Add Binary</a></strong></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/php/" class="tag">#php</a><a href="/tags/javascript/" class="tag">#javascript</a><a href="/tags/ruby/" class="tag">#ruby</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        <a class="next"></a>
+        
+        <a href="/posts/development-tools-mailhog-and-mailpit/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Development] - MailHog vs mailpit！</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>
