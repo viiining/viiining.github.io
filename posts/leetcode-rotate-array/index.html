@@ -177,10 +177,10 @@
 <blockquote>
 <p>建立新的 newArr，使用展開運算符 <code>...</code> 將原始數組 nums 中的所有元素複製到 newArr 中。使得在修改原本陣列之前保留原本的元素順序。<br><code>nums[newIndex] = newArr[i];</code> 使用計算得到的新索引，將 newArr 中對應的元素賦值給原本 nums 中的新索引位置。</p>
 </blockquote>
-<h2 id="Solution-Ruby"><a href="#Solution-Ruby" class="headerlink" title="Solution - Ruby"></a>Solution - Ruby</h2><p>Method 1: </p>
+<h2 id="Solution-Ruby"><a href="#Solution-Ruby" class="headerlink" title="Solution - Ruby"></a>Solution - Ruby</h2><p>Solution 1: </p>
 <figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">rotate</span>(<span class="params">nums, k</span>)</span><br><span class="line">  <span class="comment"># 建立新的 Array -&gt; new_arr，内容與 nums 相同</span></span><br><span class="line">  new_arr = nums.dup </span><br><span class="line"></span><br><span class="line">  nums.length.times <span class="keyword">do</span> |<span class="params">i</span>|</span><br><span class="line">    new_index = (i + k) % nums.length</span><br><span class="line">    nums[new_index] = new_arr[i]</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 
-<p>Method 2: </p>
+<p>Solution 2: </p>
 <figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">rotate</span>(<span class="params">nums, k</span>)</span><br><span class="line">  nums.rotate!(-k)</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>整個方法的作用是將陣列 nums 向左旋轉 k 步。在 Ruby 中，rotate! 方法會修改原始 Array，而不是傳回一個新的陣列。</p>
