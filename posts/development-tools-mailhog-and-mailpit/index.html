@@ -178,28 +178,30 @@
 <ul>
 <li>setup the <code>.env</code> file<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MAIL_MAILER=smtp</span><br><span class="line">MAIL_HOST=mailhog</span><br><span class="line">MAIL_PORT=1025</span><br><span class="line">MAIL_USERNAME=null</span><br><span class="line">MAIL_PASSWORD=null</span><br><span class="line">MAIL_ENCRYPTION=null</span><br><span class="line">MAIL_FROM_ADDRESS=from@example.com</span><br><span class="line">MAIL_FROM_NAME=&quot;$&#123;APP_NAME&#125;&quot;</span><br></pre></td></tr></table></figure></li>
 <li>setup the <code>Homestead.yaml</code> file<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ports:</span><br><span class="line">	- send: 33060 # MySQL/MariaDB</span><br><span class="line">	to: 3306</span><br><span class="line">	- send: 8025 # Mailhog</span><br><span class="line">	to: 8025</span><br></pre></td></tr></table></figure>
-都設定好之後，<code>cd ~/Homestead</code>，<br>接著透過 <code>vagrant ssh</code>，進入到 Homestead 虛擬機中，</li>
+都設定好之後，<code>cd ~/Homestead</code>，<br>接著透過 <code>vagrant ssh</code>，進入到 Homestead 虛擬機中，<br>以 <code>MailHog</code> 指令連線！<br><img src="/../assets/images/mailhog.png" alt="MailHog"><br>透過 <a target="_blank" rel="noopener" href="http://localhost:8025/">http://localhost:8025/</a> 看到以下畫面就是成功啦！୧ʕ•̀ᴥ•́ʔ୨<br><img src="/../assets/images/mailhog-ui.png" alt="mailhog-ui"></li>
 </ul>
-<h4 id="安裝-MailHog-在虛擬機中"><a href="#安裝-MailHog-在虛擬機中" class="headerlink" title="安裝 MailHog 在虛擬機中"></a>安裝 MailHog 在虛擬機中</h4><p>進入到虛擬機之後，依照 MailHog 的文件說明，用以下指令安裝 MailHog：</p>
+<h5 id="安裝-MailHog"><a href="#安裝-MailHog" class="headerlink" title="安裝 MailHog"></a>安裝 MailHog</h5><p>依照 MailHog 的文件說明，用以下指令安裝 MailHog：<br>（可以依照自己的系統與環境做安裝）</p>
 <ul>
-<li>Debian &#x2F; Ubuntu Go &lt; v1.18<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get -y install golang-go</span><br><span class="line">go get github.com/mailhog/MailHog</span><br></pre></td></tr></table></figure></li>
+<li><p>MacOS</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew update &amp;&amp; brew install mailhog</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Debian &#x2F; Ubuntu Go &lt; v1.18</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get -y install golang-go</span><br><span class="line">go get github.com/mailhog/MailHog</span><br></pre></td></tr></table></figure></li>
 </ul>
-<p>以 <code>MailHog</code> 指令連線！<br><img src="/../assets/images/mailhog.png" alt="MailHog"><br>透過 <a target="_blank" rel="noopener" href="http://localhost:8025/">http://localhost:8025/</a> 看到以下畫面就是成功啦！୧ʕ•̀ᴥ•́ʔ୨<br><img src="/../assets/images/mailhog-ui.png" alt="mailhog-ui"></p>
 <h3 id="mailpit"><a href="#mailpit" class="headerlink" title="mailpit"></a>mailpit</h3><blockquote>
 <p>假設已經安裝了 <code>Laravel Homestead</code></p>
 </blockquote>
 <ul>
 <li>setup the <code>.env</code> file<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MAIL_MAILER=smtp</span><br><span class="line">MAIL_HOST=app_url_without_http #這裡記得要改！</span><br><span class="line">MAIL_PORT=1025</span><br><span class="line">MAIL_USERNAME=null</span><br><span class="line">MAIL_PASSWORD=null</span><br><span class="line">MAIL_ENCRYPTION=null</span><br><span class="line">MAIL_FROM_ADDRESS=from@example.com</span><br><span class="line">MAIL_FROM_NAME=&quot;$&#123;APP_NAME&#125;&quot;</span><br></pre></td></tr></table></figure></li>
 <li>setup the <code>Homestead.yaml</code> file<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ports:</span><br><span class="line">	- send: 33060 # MySQL/MariaDB</span><br><span class="line">	to: 3306</span><br><span class="line">	- send: 8025 # mailpit</span><br><span class="line">	to: 8025</span><br></pre></td></tr></table></figure>
-都設定好之後，<code>cd ~/Homestead</code>，<br>接著透過 <code>vagrant ssh</code>，進入到 Homestead 虛擬機中，</li>
+都設定好之後，<code>cd ~/Homestead</code>，<br>接著透過 <code>vagrant ssh</code>，進入到 Homestead 虛擬機中，<br>以 <code>mailpit</code> 指令連線！<br><img src="/../assets/images/mailpit.png" alt="mailpit"><br>透過 <a target="_blank" rel="noopener" href="http://localhost:8025/">http://localhost:8025/</a> 看到以下畫面就是成功啦！୧ʕ•̀ᴥ•́ʔ୨<br><img src="/../assets/images/mailpit-ui.png" alt="mailpit-ui"></li>
 </ul>
-<h4 id="安裝-mailpit-在虛擬機中"><a href="#安裝-mailpit-在虛擬機中" class="headerlink" title="安裝 mailpit 在虛擬機中"></a>安裝 mailpit 在虛擬機中</h4><p>進入到虛擬機之後，依照 mailpit 的文件說明，用以下指令安裝 mailpit：</p>
+<h4 id="安裝-mailpit"><a href="#安裝-mailpit" class="headerlink" title="安裝 mailpit"></a>安裝 mailpit</h4><p>依照 mailpit 的文件說明，用以下指令安裝 mailpit：</p>
 <ul>
 <li>Linux &amp; Mac users can install it directly to &#x2F;usr&#x2F;local&#x2F;bin&#x2F;mailpit with:<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo bash &lt; &lt;(curl -sL https://raw.githubusercontent.com/axllent/mailpit/develop/install.sh)</span><br></pre></td></tr></table></figure>
 這會將 mailpit 安裝在 <code>/usr/local/bin/mailpit</code>。</li>
 </ul>
-<p>以 <code>mailpit</code> 指令連線！<br><img src="/../assets/images/mailpit.png" alt="mailpit"><br>透過 <a target="_blank" rel="noopener" href="http://localhost:8025/">http://localhost:8025/</a> 看到以下畫面就是成功啦！୧ʕ•̀ᴥ•́ʔ୨<br><img src="/../assets/images/mailpit-ui.png" alt="mailpit-ui"></p>
-<h4 id="補充"><a href="#補充" class="headerlink" title="補充"></a>補充</h4><h5 id="如果是-Mac-使用-mailpit"><a href="#如果是-Mac-使用-mailpit" class="headerlink" title="如果是 Mac 使用 mailpit?"></a>如果是 Mac 使用 mailpit?</h5><blockquote>
+<h5 id="如果是-Mac-使用-mailpit"><a href="#如果是-Mac-使用-mailpit" class="headerlink" title="如果是 Mac 使用 mailpit?"></a>如果是 Mac 使用 mailpit?</h5><blockquote>
 <p>前提是 Mac 要先安裝 <a target="_blank" rel="noopener" href="https://brew.sh/">Homebrew</a></p>
 </blockquote>
 <ul>
