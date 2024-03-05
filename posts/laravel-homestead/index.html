@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Laravel] - Laravel Homestead 環境建置! - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Laravel] - Laravel Homestead 環境建置! - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/laravel-homestead/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2024-03-05T04:00:00.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>March</span>
+            <span>5,</span>
+            <span>2024</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Laravel] - Laravel Homestead 環境建置!</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/laravel/" class="tag">#laravel</a><a href="/tags/homestead/" class="tag">#homestead</a><a href="/tags/parallels/" class="tag">#parallels</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <h2 id="預備知識！"><a href="#預備知識！" class="headerlink" title="預備知識！"></a>預備知識！</h2><p>在開始介紹 Laravel Homestead 之前，需要先了解以下內容：</p>
+<ul>
+<li>Vagrant：Vagrant 是 open source，讓開發者在虛擬機器上管理和配置虛擬機器，而 Laravel Homestead 是建立在 Vagrant 官方預載的 Vagrant box，為開發者提供完善的開發環境。</li>
+<li>Virtual Machine (VM) 虛擬機器：Homestead 是一個虛擬機器，藉由 Vagrant 管理，可以在虛擬環境中進行開發，而不會影響本機系統。</li>
+<li>Homestead.yaml 設定檔：透過 Homestead.yaml 設定檔，可以調整 Homestead 的設定，例如：新增 Nginx 網站或設定 Cron 排程器。</li>
+</ul>
+<h2 id="Laravel-Homestead-是什麼"><a href="#Laravel-Homestead-是什麼" class="headerlink" title="Laravel Homestead 是什麼?"></a>Laravel Homestead 是什麼?</h2><blockquote>
+<p>Laravel Homestead 以下以 Homestead 作為說明，是一個官方預載的 Vagrant box，提供開發者一個完善的開發環境，無需在本機安裝 PHP、網頁伺服器或其他伺服器軟體，避免影響本機系統；使用 Homestead 可透過 Vagrant 管理虛擬機器，並透過 Homestead.yaml 設定檔來調整設定。</p>
+</blockquote>
+<p>在安裝 Homestaed 之前，需要在本機上先安裝：</p>
+<ul>
+<li>Vagrant</li>
+<li>選擇一種 providers<br>- <a target="_blank" rel="noopener" href="https://www.virtualbox.org/wiki/Download_Old_Builds_6_1">VirtualBox 6.1.x</a><br>- <a target="_blank" rel="noopener" href="https://www.parallels.com/products/desktop/">Parallels</a><blockquote>
+<p>如果使用 <code>Parallels</code> 則要額外安裝 <a target="_blank" rel="noopener" href="https://github.com/Parallels/vagrant-parallels"><strong>Parallels Vagrant plug-in</strong></a>。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="安裝的事先準備"><a href="#安裝的事先準備" class="headerlink" title="安裝的事先準備"></a>安裝的事先準備</h2><p>本身使用 MacBook Air M2 (Apple Silicon M2 晶片) 以下是我個人的安裝方式：</p>
+<blockquote>
+<ul>
+<li><strong>Install Vagrant</strong><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew tap hashicorp/tap</span><br><span class="line">brew install hashicorp/tap/hashicorp-vagrant</span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>Install Parallels</strong><br>*官方文件有說明：If you are using Apple Silicon the Parallels provider is required.<br><strong>Parallels Desktop 19 for Mac 要使用 Pro or Business Edition 才能啟動！</strong><br>點進 <a target="_blank" rel="noopener" href="https://www.parallels.com/products/desktop/">Parallels</a> 官網找到下載之後按下，<br>接著會跳出要你安裝 Window 的畫面，可以不用安裝，直接到左上角有一個<br><code>Parallels Desktop -&gt; About Parallels Desktop -&gt; Account &amp; License...</code><br><img src="/../assets/images/step_for_parallels.png" alt="step for parallels"><br>點進去之後要輸入你的 Parallels License Key 然後點 Activate，這樣才算有使用成功，因為用免費版的話會無法啟用！</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><strong>Install Vagrant Parallels</strong><br><strong>使用 Parallels 要再多安裝這個！</strong><br>打開終端機輸入 <code>vagrant plugin install vagrant-parallels</code></li>
+</ul>
+</blockquote>
+<p>如果都成功，我們就已經完成了 Homestead 安裝的事先準備了！<br>進入正題，來安裝 Homestead 吧！</p>
+<h2 id="安裝-Homestead"><a href="#安裝-Homestead" class="headerlink" title="安裝 Homestead"></a>安裝 Homestead</h2><p>跟著官方文件一起操作，安裝 Homestead 可透過複製 repository，<br>以下指令會在本機的 home 裡建立一個 Homestead 的資料夾：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/laravel/homestead.git ~/Homestead</span><br></pre></td></tr></table></figure>
+
+<p>接著，到 Homestead 資料夾並且 checkout 到 release branch （這分支會包含最新且穩定的 Homestead 版本）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd ~/Homestead</span><br><span class="line">git checkout release</span><br></pre></td></tr></table></figure>
+
+<p>接著，根據自己本身的環境執行以下指令，這指令是生成 Homestead.yaml 設定檔：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># macOS / Linux...</span><br><span class="line">bash init.sh</span><br><span class="line"></span><br><span class="line"># Windows...</span><br><span class="line">init.bat</span><br></pre></td></tr></table></figure>
+
+<p>有了 Homestead.yaml 設定檔，就可以用指令 <code>open Homestead.yaml</code>，<br>將 provider 修改為你先前安裝的 provider，我是使用 <code>parallels</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">provider:</span> <span class="string">parallels</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置-Vagrant-box"><a href="#配置-Vagrant-box" class="headerlink" title="配置 Vagrant box"></a>配置 Vagrant box</h2><p>根據 <a target="_blank" rel="noopener" href="https://parallels.github.io/vagrant-parallels/docs/usage.html">vagrant + parallels usage</a> 文件，<br>藉由 <code>vagrant init</code> 指令來生成 <code>Vagrantfile</code>，並且指定 <code>box</code> 為 <strong>bento&#x2F;ubuntu-20.04-arm64</strong>，並以 <code>vagrant up</code> 啟動：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vagrant init bento/ubuntu-20.04-arm64</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vagrant up <span class="comment">#先不用 `vagrant up`，因為在這之前我們要先編輯 Homestead.yaml 設定檔！</span></span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="http://localhost:4000/posts/laravel-homestead/#%E7%B7%A8%E8%BC%AF-Homestead-yaml-%E8%A8%AD%E5%AE%9A%E6%AA%94">編輯 Homestead.yaml 設定檔</a></p>
+<h4 id="補充"><a href="#補充" class="headerlink" title="# 補充"></a># 補充</h4><p>也可以到 <a target="_blank" rel="noopener" href="https://app.vagrantup.com/boxes/search"><strong>Vagrant Cloud</strong></a> 尋找較為多人使用或者有持續維護的 box！</p>
+<blockquote>
+<p>因此我用以下指令來使用我要的並啟動 box：<br>  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vagrant init laravel/homestead</span></span><br></pre></td></tr></table></figure><br>  *透過 <code>vagrant box list</code> 可以檢視所有的 box 有哪些，<br>  *如果要加入新的 box 可以透過 <code>vagrant box add</code>。</p>
+</blockquote>
+<hr>
+<h2 id="編輯-Homestead-yaml-設定檔"><a href="#編輯-Homestead-yaml-設定檔" class="headerlink" title="編輯 Homestead.yaml 設定檔"></a>編輯 Homestead.yaml 設定檔</h2><p>在配置 Homestead box 後，接著就是要來編輯 Homestead.yaml 設定檔，需設定：</p>
+<ul>
+<li><p>Shared Folders<br>以下就是設定本機與虛擬機的共享資料夾，在本機和 Homestead 虛擬環境之間保持同步。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">folders:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">map:</span> <span class="string">~/code/project1</span></span><br><span class="line">      <span class="attr">to:</span> <span class="string">/home/vagrant/project1</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">map:</span> <span class="string">~/code/project2</span></span><br><span class="line">      <span class="attr">to:</span> <span class="string">/home/vagrant/project2</span></span><br></pre></td></tr></table></figure></li>
+<li><p>Nginx Sites<br>如果不熟悉 Nginx，Homestead.yaml 中的 sites 屬性可以簡單地將 domain 映射到 Homestead 環境中的 folder。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sites:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">map:</span> <span class="string">homestead.test</span></span><br><span class="line">    <span class="attr">to:</span> <span class="string">/home/vagrant/project1/public</span></span><br></pre></td></tr></table></figure>
+<p>要記得到本機的 <code>sudo vim /etc/hosts</code> 將網域對應，</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192.168.56.56  homestead.test</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通常在專案上， site 也要在專案中的 <code>.env</code> 檔案做設定 </p>
+</blockquote>
+</li>
+<li><p>Services<br>Homestead 默認啟動多個服務，也可以自定義啟用或禁用哪些服務。<br>例如，來啟用 PostgreSQL 並禁用 MySQL：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">enabled:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;postgresql&quot;</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">disabled:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;mysql&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="啟動-Vagrant-box"><a href="#啟動-Vagrant-box" class="headerlink" title="啟動 Vagrant box"></a>啟動 Vagrant box</h2><p>編輯了 Homestead.yaml 設定檔，接著在 Homestead 目錄中運行 <code>vagrant up</code> 命令。</p>
+<p>通常在 <code>vagrant up</code> 之後，會有提示說明接著下  <strong><code>vagrant up --provision</code></strong> ，這指令可以使 Vagrant 在啟動虛擬機時，執行所有定義在 Vagrantfile 中配置共享文件夾和 Nginx 站點，以確保虛擬機的環境是最新的。</p>
+<p>根據剛剛示範的 site，就可以從 <code>http://homestead.test</code> 開啟網頁了！</p>
+<p>*如果要銷毀虛擬機，可以使用 <code>vagrant destroy</code>。</p>
+<hr>
+<h2 id="設定時區"><a href="#設定時區" class="headerlink" title="設定時區"></a>設定時區</h2><p>在安裝好 Homestead 之後，透過 <code>vagrant ssh</code> 進入 VM（虛擬機），可以看見如下畫面：<br><img src="/../assets/images/original_timezone.png" alt="original timezone"></p>
+<p>在 Parallels 的 Control Center，有一個設定的 icon，點進去到 <code>Options</code> -&gt; <code>More Options</code> -&gt; <code>Time</code>，即便有選擇 <code>Sync for Mac</code> （也就是跟著 Mac 的設定），還是顯示不對的時區。</p>
+<p>因此，為了調整 timezone 設定，先 <code>vagrant ssh</code> 進入 VM（虛擬機），接著，用 <code>sudo dpkg-reconfigure tzdata</code> 去調整所在時區：</p>
+<ul>
+<li>選擇區域<br><img src="/../assets/images/tzdata01.png" alt="tzdata01"></li>
+<li>選擇城市<br><img src="/../assets/images/tzdata02.png" alt="tzdata02"></li>
+<li>設定成功的輸出結果<br><img src="/../assets/images/set_timezone.png" alt="set timezone"></li>
+</ul>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://parallels.github.io/vagrant-parallels/docs/">vagrant-parallels</a><br>➫ <a target="_blank" rel="noopener" href="https://github.com/Parallels/vagrant-parallels">vagrant-parallels-providers</a><br>➫ <a target="_blank" rel="noopener" href="https://vagrantpi.github.io/2018/02/11/vagrant/">Vagrant 學習筆記</a><br>➫ <a target="_blank" rel="noopener" href="https://laracasts.com/discuss/channels/general-discussion/homestead-wrong-time">Homestead - wrong time answered from danielcoimbra</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/laravel/" class="tag">#laravel</a><a href="/tags/homestead/" class="tag">#homestead</a><a href="/tags/parallels/" class="tag">#parallels</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        <a class="next"></a>
+        
+        <a href="/posts/leetcode-running-sum-of-1d-array/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [LeetCode] - 1480. Running Sum of 1d Array</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>
