@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [LeetCode] - 791. Custom Sort String - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [LeetCode] - 791. Custom Sort String - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/leetcode-custom-sort-string/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2024-03-11T04:00:00.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/leetcode/">leetcode</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>March</span>
+            <span>11,</span>
+            <span>2024</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [LeetCode] - 791. Custom Sort String</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/php/" class="tag">#php</a><a href="/tags/javascript/" class="tag">#javascript</a><a href="/tags/ruby/" class="tag">#ruby</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <blockquote>
+<p>keep learning, keep coding!</p>
+</blockquote>
+<h2 id="Problem-Custom-Sort-String"><a href="#Problem-Custom-Sort-String" class="headerlink" title="Problem - Custom Sort String"></a>Problem - Custom Sort String</h2><p>You are given two strings order and s. All the characters of order are unique and were sorted in some custom order previously.</p>
+<p>Permute the characters of s so that they match the order that order was sorted. More specifically, if a character x occurs before a character y in order, then x should occur before y in the permuted string.</p>
+<p>Return any permutation of s that satisfies this property.</p>
+<h3 id="翻譯蒟蒻"><a href="#翻譯蒟蒻" class="headerlink" title="翻譯蒟蒻"></a>翻譯蒟蒻</h3><p><strong>給定兩個字串，<code>order</code> 為先前以某種自訂順序排序過的唯一字元集合。題目要求重新排列字串 <code>s</code> 中的字元，使其符合 <code>order</code> 的排序方式。換句話說，如果一個字元 x 在 <code>order</code> 中出現在字元 y 之前，則在重新排列後的字串中，x 應該在 y 之前出現。未出現在 <code>order</code> 中的字元可以以任意順序出現，只要已出現在 <code>order</code> 中的字元保持其原始順序即可。</strong></p>
+<hr>
+<ul>
+<li><p>Example 1:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input:  order = &quot;cba&quot;, s = &quot;abcd&quot; </span><br><span class="line"></span><br><span class="line">Output:  &quot;cbad&quot; </span><br><span class="line"></span><br><span class="line">Explanation: &quot;a&quot;, &quot;b&quot;, &quot;c&quot; appear in order, so the order of &quot;a&quot;, &quot;b&quot;, &quot;c&quot; should be &quot;c&quot;, &quot;b&quot;, and &quot;a&quot;.</span><br><span class="line"></span><br><span class="line">Since &quot;d&quot; does not appear in order, it can be at any position in the returned string. &quot;dcba&quot;, &quot;cdba&quot;, &quot;cbda&quot; are also valid outputs.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Example 2:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Input:  order = &quot;bcafg&quot;, s = &quot;abcd&quot; </span><br><span class="line"></span><br><span class="line">Output:  &quot;bcad&quot; </span><br><span class="line"></span><br><span class="line">Explanation: The characters &quot;b&quot;, &quot;c&quot;, and &quot;a&quot; from order dictate the order for the characters in s. The character &quot;d&quot; in s does not appear in order, so its position is flexible.</span><br><span class="line"></span><br><span class="line">Following the order of appearance in order, &quot;b&quot;, &quot;c&quot;, and &quot;a&quot; from s should be arranged as &quot;b&quot;, &quot;c&quot;, &quot;a&quot;. &quot;d&quot; can be placed at any position since it&#x27;s not in order. The output &quot;bcad&quot; correctly follows this rule. Other arrangements like &quot;bacd&quot; or &quot;bcda&quot; would also be valid, as long as &quot;b&quot;, &quot;c&quot;, &quot;a&quot; maintain their order.</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="Solution-JavaScript"><a href="#Solution-JavaScript" class="headerlink" title="Solution - JavaScript"></a>Solution - JavaScript</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">order</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">s</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">string</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> customSortString = <span class="keyword">function</span>(<span class="params">order, s</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> map = <span class="keyword">new</span> <span class="title class_">Map</span>()</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; order.<span class="property">length</span>; i++) &#123;</span><br><span class="line">        map.<span class="title function_">set</span>(order[i], i)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> splitS = s.<span class="title function_">split</span>(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    splitS.<span class="title function_">sort</span>(<span class="function">(<span class="params">a, b</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">let</span> aIndex = map.<span class="title function_">get</span>(a) !== <span class="literal">undefined</span> ? map.<span class="title function_">get</span>(a) : -<span class="number">1</span>;</span><br><span class="line">      <span class="keyword">let</span> bIndex = map.<span class="title function_">get</span>(b) !== <span class="literal">undefined</span> ? map.<span class="title function_">get</span>(b) : -<span class="number">1</span>;</span><br><span class="line">      <span class="keyword">return</span> aIndex - bIndex;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> splitS.<span class="title function_">join</span>(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Solution-Ruby"><a href="#Solution-Ruby" class="headerlink" title="Solution - Ruby"></a>Solution - Ruby</h2><p>Solution 1:</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">custom_sort_string</span>(<span class="params">order, s</span>)</span><br><span class="line">  map = &#123;&#125;</span><br><span class="line">  order.each_char.with_index <span class="keyword">do</span> |<span class="params">c, i</span>|</span><br><span class="line">      map[c] = i</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  split_s = s.split(<span class="string">&quot;&quot;</span>)</span><br><span class="line">  split_s.sort! <span class="keyword">do</span> |<span class="params">a, b</span>|</span><br><span class="line">    (map[a] |<span class="params"></span>| -<span class="number">1</span>) &lt;=&gt; (map[b] |<span class="params"></span>| -<span class="number">1</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  split_s.join</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<p>Solution 2:</p>
+<figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">custom_sort_string</span>(<span class="params">order, s</span>)</span><br><span class="line">  order_index = &#123;&#125;</span><br><span class="line">  order.each_char.with_index <span class="keyword">do</span> |<span class="params">c, i</span>|</span><br><span class="line">      order_index[c] = i</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">    </span><br><span class="line">  s.chars.sort_by &#123; |<span class="params">char</span>| order_index[char] |<span class="params"></span>| order.size &#125;.join</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>這裡使用了 sort_by 方法，以 <code>order_index[char] || order.size</code> 取得 order 中的索引位置，如果不在 order 中，則返回 <code>order.size</code>，這樣可以使不在 order 中的字被排到最後面。</p>
+</blockquote>
+<h2 id="Solution-PHP"><a href="#Solution-PHP" class="headerlink" title="Solution - PHP"></a>Solution - PHP</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">customSortString</span>(<span class="params"><span class="variable">$order</span>, <span class="variable">$s</span></span>) </span>&#123;</span><br><span class="line">  <span class="variable">$map</span> = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="title function_ invoke__">strlen</span>(<span class="variable">$order</span>); <span class="variable">$i</span>++)&#123;</span><br><span class="line">      <span class="variable">$map</span>[<span class="variable">$order</span>[<span class="variable">$i</span>]] = <span class="variable">$i</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable">$s</span> = <span class="title function_ invoke__">str_split</span>(<span class="variable">$s</span>);</span><br><span class="line">  <span class="title function_ invoke__">usort</span>(<span class="variable">$s</span>, function(<span class="variable">$a</span>, <span class="variable">$b</span>) <span class="keyword">use</span> ($<span class="title">map</span>) &#123;</span><br><span class="line">      $<span class="title">aIndex</span> = $<span class="title">map</span>[$<span class="title">a</span>] !== <span class="title">null</span> ? $<span class="title">map</span>[$<span class="title">a</span>] : <span class="title">strlen</span>($<span class="title">order</span>);</span><br><span class="line">      <span class="variable">$bIndex</span> = <span class="variable">$map</span>[<span class="variable">$b</span>] !== <span class="literal">null</span> ? <span class="variable">$map</span>[<span class="variable">$b</span>] : <span class="title function_ invoke__">strlen</span>(<span class="variable">$order</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="variable">$aIndex</span> - <span class="variable">$bIndex</span>;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_ invoke__">implode</span>(<span class="string">&#x27;&#x27;</span>, <span class="variable">$s</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="PHP-方法筆記"><a href="#PHP-方法筆記" class="headerlink" title="PHP 方法筆記"></a>PHP 方法筆記</h4><ul>
+<li><p><code>usort</code> 函數用於 array 進行自定義排序的內置函數。。</p>
+<p>函數的基本語法如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_ invoke__">usort</span>(<span class="keyword">array</span> &amp;<span class="variable">$array</span>, <span class="keyword">callable</span> <span class="variable">$callback</span>): <span class="keyword">bool</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// array 是要排序的陣列，通過引用（&amp;）傳遞，也就是排序後的結果會直接影響到原始的陣列。</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 按照字串長度升序排序 --&gt;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compareLength</span>(<span class="params"><span class="variable">$a</span>, <span class="variable">$b</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">strlen</span>(<span class="variable">$a</span>) - <span class="title function_ invoke__">strlen</span>(<span class="variable">$b</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$array</span> = [<span class="string">&quot;apple&quot;</span>, <span class="string">&quot;banana&quot;</span>, <span class="string">&quot;orange&quot;</span>, <span class="string">&quot;grape&quot;</span>];</span><br><span class="line"></span><br><span class="line">&lt;!-- 使用 <span class="title function_ invoke__">usort</span>() 函數進行排序 --&gt;</span><br><span class="line"><span class="title function_ invoke__">usort</span>(<span class="variable">$array</span>, <span class="string">&quot;compareLength&quot;</span>);</span><br><span class="line"></span><br><span class="line">&lt;!-- 輸出排序後的結果 --&gt;</span><br><span class="line"><span class="title function_ invoke__">print_r</span>(<span class="variable">$array</span>);</span><br><span class="line">&lt;!-- <span class="title function_ invoke__">Array</span></span><br><span class="line">(</span><br><span class="line">    [<span class="number">0</span>] =&gt; apple</span><br><span class="line">    [<span class="number">1</span>] =&gt; grape</span><br><span class="line">    [<span class="number">2</span>] =&gt; banana</span><br><span class="line">    [<span class="number">3</span>] =&gt; orange</span><br><span class="line">) --&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong><a target="_blank" rel="noopener" href="https://leetcode.com/problems/custom-sort-string/description/">LeetCode 傳送門 - Custom Sort String</a></strong></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/php/" class="tag">#php</a><a href="/tags/javascript/" class="tag">#javascript</a><a href="/tags/ruby/" class="tag">#ruby</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        <a class="next"></a>
+        
+        <a href="/posts/laravel-homestead/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Laravel] - Laravel Homestead 環境建置!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>
