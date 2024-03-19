@@ -377,13 +377,7 @@
 <hr>
 <h2 id="Active-Record-回調-與-Eloquent-事件"><a href="#Active-Record-回調-與-Eloquent-事件" class="headerlink" title="Active Record 回調 與 Eloquent 事件"></a>Active Record 回調 與 Eloquent 事件</h2><p>執行 Eloquent 事件（Laravel）和 Active Record 回調（Rails）都是在操作資料庫時執行額外邏輯的機制。<br>這兩種機制都允許在模型生命週期中的特定事件觸發時執行自定義的程式碼。</p>
 <p><img src="/../assets/images/rails_and_laravel_table.png" alt="rails and laravel table"></p>
-<h3 id="差異"><a href="#差異" class="headerlink" title="差異"></a>差異</h3><ol>
-<li><p><strong>觸發時間</strong>：</p>
-<ul>
-<li>Laravel 的 Eloquent 事件在模型被建立、更新或刪除之前和之後各有一個事件。</li>
-<li>Rails 的 Active Record 回調在記錄的不同階段觸發，例如驗證、保存、建立、更新和刪除。</li>
-</ul>
-</li>
+<h3 id="差異"><a href="#差異" class="headerlink" title="差異"></a>差異</h3><ul>
 <li><p><strong>細分程度</strong>：</p>
 <ul>
 <li>Rails 提供了更細緻的回調級別，例如驗證前後、保存前後、建立前後、更新前後、刪除前後，這使得可以在更多細節層面上處理邏輯。</li>
@@ -392,11 +386,11 @@
 </li>
 <li><p><strong>用法差異</strong>：</p>
 <ul>
-<li>Rails 的回調通常是直接在模型類中定義方法，例如 <code>before_validation</code>、<code>after_save</code> 等。</li>
-<li>Laravel 的 Eloquent 事件需要通過註冊監聽器來執行額外的邏輯，例如發送郵件。</li>
+<li>Rails 的 Active Record 回調是在模型類中定義的方法，這些方法會在模型的特定生命周期事件發生時自動被調用。<br> 例如，在創建模型、更新模型或刪除模型時，可以定義相應的回調方法。</li>
+<li>Laravel 的 Eloquent 事件需要通過註冊監聽器（Listener）來執行額外的邏輯，例如發送郵件。</li>
 </ul>
 </li>
-</ol>
+</ul>
 <p>透過註冊回調方法，您可以在記錄的不同階段執行自定義的邏輯，從而擴展和定制模型的行為。</p>
 <blockquote>
 <p>無論是在 Laravel 中的 Eloquent 事件還是在 Rails 中的 Active Record 回調，都提供了在模型生命週期中執行額外程式碼的方法。這些機制可以在資料庫操作的不同階段執行自定義邏輯，從而實現更高級別的業務邏輯或應用程式行為。</p>
