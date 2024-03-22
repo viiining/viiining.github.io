@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Laravel] - niklasravnsborg/laravel-pdf with mPDF 套用客製化的字型 - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Laravel] - niklasravnsborg/laravel-pdf with mPDF 套用客製化的字型 - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/laravel-mpdf-custom-fonts/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2024-03-21T04:00:00.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>March</span>
+            <span>21,</span>
+            <span>2024</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Laravel] - niklasravnsborg/laravel-pdf with mPDF 套用客製化的字型</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/laravel/" class="tag">#laravel</a><a href="/tags/php/" class="tag">#php</a><a href="/tags/mpdf/" class="tag">#mpdf</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <h2 id="前情提要"><a href="#前情提要" class="headerlink" title="前情提要"></a>前情提要</h2><p>這次在工作上遇到中文字體無法解碼問題，<br>實際上的情況是：使用電腦可以讀取中文字體，但是在手機上卻不行的問題。</p>
+<p>當時先思考到的是手機由於缺乏特定字型的支援，所以無法解讀，<br>因此，解決的辦法就是換掉字體。</p>
+<p>不過，因為是承接別人寫的 code，在換之前，想先找出實際上被載入的字體是哪一個，<br>因此花了不少時間在看 mpdf 文件、別人的解法與建議。</p>
+<blockquote>
+<p>稍微 memo 一下當時的脈絡：<br>由於缺乏特定字型的支援 -&gt; 必須換字體 -&gt; 移除實際上無法解析的字體 -&gt;<br>透過 Stack Overflow, Perplexity, mpdf docs 等等綜合意見找出最適合這次的解法</p>
+</blockquote>
+<hr>
+<h3 id="關於-niklasravnsborg-x2F-laravel-pdf"><a href="#關於-niklasravnsborg-x2F-laravel-pdf" class="headerlink" title="關於 niklasravnsborg&#x2F;laravel-pdf"></a>關於 <a target="_blank" rel="noopener" href="https://github.com/niklasravnsborg/laravel-pdf">niklasravnsborg&#x2F;laravel-pdf</a></h3><blockquote>
+<p>niklasravnsborg&#x2F;laravel-pdf 這個 open source 的底層是使用 mPDF，<br>是一個用於從 HTML 生成 PDF 文件的 PHP library。</p>
+</blockquote>
+<p>mPDF 支持 Unicode、UTF-8 和 CJK（Chinese, Japanese, Korean），<br>可以在 Laravel 中使用 niklasravnsborg&#x2F;laravel-pdf 輕鬆生成 PDF。<br>但，niklasravnsborg&#x2F;laravel-pdf 已於 2023年8月22日 被標記為不再維護。</p>
+<p>因為已經沒有在維護，加上我先以不更換套件的前提下，<br>試著找出可以使手機用戶也能讀取中文字的解法。</p>
+<p>當時在查找時，透過這篇講述漢字 Unicode 範圍 (<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Han_unification">Han unification</a>)<br><a target="_blank" rel="noopener" href="https://blog.miniasp.com/post/2019/01/02/Common-Regex-patterns-for-Unicode-characters">整理 Unicode 經常會使用到的內碼區域並透過 Regex 自動比對文字</a></p>
+<p>就想到，可以到 mPDF 去找有沒有以 Unicode 對應的字！</p>
+<p>因此，對應到 mPDF 本身有一段講到通用的 fonts 有哪些：<br><a target="_blank" rel="noopener" href="https://mpdf.github.io/reference/codepages-glyphs/unicode-coverage-of-free-fonts.html">Unicode coverage of Free Fonts</a><br>就找到 <strong>CJK UNIFIED IDEOGRAPHS (U+4E00-U+9FFF)</strong> 相對應的字體了！</p>
+<hr>
+<h2 id="客製化字體"><a href="#客製化字體" class="headerlink" title="客製化字體"></a>客製化字體</h2><h3 id="所以要如何新增想要的字體？"><a href="#所以要如何新增想要的字體？" class="headerlink" title="所以要如何新增想要的字體？"></a>所以要如何新增想要的字體？</h3><p>在專案本身的 config 資料夾裡有一個叫做 pdf.php 的檔案，<br>這檔案就是當要生成 pdf 時，所需要的設定檔。</p>
+<p>在查看這套件是如何抓取 pdf.php 的參數時，發現還有 <code>font_path</code>, <code>font_data</code> 可以額外設定！</p>
+<ul>
+<li><p><code>font_path</code>: 要給定絕對路徑，讓套件能抓取裡面的字體檔案</p>
+</li>
+<li><p><code>font_data</code>: 會根據提供的字體作為讀取</p>
+<p>備註：依照以下的設定，我把下載好的 <strong>NotoSansTC-Regular.ttf</strong> 與 <strong>NotoSansTC-Bold.ttf</strong>，<br>事先放入 <strong>resource&#x2F;fonts</strong> 裡。（fonts 是我自己新增的資料夾）</p>
+</li>
+</ul>
+<blockquote>
+<h4 id="仔細看會發現有一個-useOTL-參數"><a href="#仔細看會發現有一個-useOTL-參數" class="headerlink" title="仔細看會發現有一個 useOTL 參數"></a>仔細看會發現有一個 <code>useOTL</code> 參數</h4><p>：那是什麼？？</p>
+<ul>
+<li>在 mPDF 中，<code>useOTL</code> 代表 OpenType Layout 功能，<br>用於進行高級的排版控制，如連字、音標和其他特定字型設置。<br>將 <code>useOTL</code> 設置為 <strong>255</strong> or <strong>0xFF</strong> 可以啟用特定字型的 OpenType 佈局功能，<br>實現更複雜的呈現和樣式設定。</li>
+</ul>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> [</span><br><span class="line">    <span class="comment">// 新增以下兩種參數：</span></span><br><span class="line">    <span class="string">&#x27;font_path&#x27;</span>             =&gt; <span class="title function_ invoke__">resource_path</span>(<span class="string">&#x27;fonts/&#x27;</span>),</span><br><span class="line">    <span class="string">&#x27;font_data&#x27;</span>             =&gt; [</span><br><span class="line">        <span class="string">&#x27;notosanstc&#x27;</span> =&gt; [</span><br><span class="line">            <span class="string">&#x27;R&#x27;</span> =&gt; <span class="string">&#x27;NotoSansTC-Regular.ttf&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;B&#x27;</span> =&gt; <span class="string">&#x27;NotoSansTC-Bold.ttf&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;useOTL&#x27;</span> =&gt; <span class="number">255</span>,</span><br><span class="line">        ],</span><br><span class="line">    ]</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<h6 id="最後，整理要設定的餐數："><a href="#最後，整理要設定的餐數：" class="headerlink" title="最後，整理要設定的餐數："></a>最後，整理要設定的餐數：</h6><ul>
+<li>下載自己要的字體，我選用 <a target="_blank" rel="noopener" href="https://fonts.google.com/noto/specimen/Noto+Sans+TC">Google - Noto Sans TC fonts</a></li>
+<li><code>font_path</code> 有事先在 resource 資料夾裡新增 <strong>fonts</strong> 資料夾，並把下載好的（.ttf）檔案放到裡面</li>
+<li><code>font_data</code> 把下載好的（.ttf）檔案名稱寫進去</li>
+<li><code>useOTL</code> 設定為 255 or 0xFF</li>
+</ul>
+<hr>
+<h3 id="小記"><a href="#小記" class="headerlink" title="小記"></a>小記</h3><p>最終以 custom fonts 解決，<br>其實也可以直接使用 CJK UNIFIED IDEOGRAPHS 也就是 Unicode 對應的 U+4E00 - U+9FFF。 </p>
+<blockquote>
+<p>mPDF 文件上提供的字體有：<br><code>bitstreamcyberbit</code>, <code>hannoma</code>, <code>sun-exta</code>，用這三種不需額外加字體。</p>
+</blockquote>
+<p>不過，有鑑於整體網站使用的字體（考量到 UX），<br>最後還是選用 <a target="_blank" rel="noopener" href="https://fonts.google.com/noto/specimen/Noto+Sans+TC">Google - Noto Sans TC fonts</a> 來作為要更換的字體。</p>
+<p><em>P.S.</em><br>之前也有使用 <code>TCPDF</code> 作為生成 pdf 的套件，<br>有興趣可以參考：<a href="https://viiisit.com/posts/php-tcpdf-library-in-laravel/">Viiisit [PHP] - TCPDF Library in Laravel！</a></p>
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://mpdf.github.io/">mpdf</a><br>➫ <a target="_blank" rel="noopener" href="https://blog.csdn.net/winson20102010/article/details/120749620">Laravel PDF 导出</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/laravel/" class="tag">#laravel</a><a href="/tags/php/" class="tag">#php</a><a href="/tags/mpdf/" class="tag">#mpdf</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        <a class="next"></a>
+        
+        <a href="/posts/rails-and-laravel/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [Ruby on Rails, Laravel] - 起步走!</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>
