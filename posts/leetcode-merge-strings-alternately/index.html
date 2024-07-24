@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [LeetCode] - 1768. Merge Strings Alternately - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [LeetCode] - 1768. Merge Strings Alternately - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/leetcode-merge-strings-alternately/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2024-07-24T04:00:00.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/leetcode/">leetcode</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>July</span>
+            <span>24,</span>
+            <span>2024</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [LeetCode] - 1768. Merge Strings Alternately</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/php/" class="tag">#php</a><a href="/tags/javascript/" class="tag">#javascript</a><a href="/tags/ruby/" class="tag">#ruby</a><a href="/tags/python/" class="tag">#python</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <blockquote>
+<p>keep learning, keep coding!</p>
+</blockquote>
+<h2 id="Problem-Merge-Strings-Alternately"><a href="#Problem-Merge-Strings-Alternately" class="headerlink" title="Problem - Merge Strings Alternately"></a>Problem - Merge Strings Alternately</h2><p>You are given two strings <code>word1</code> and <code>word2</code>. Merge the strings by adding letters in alternating order, starting with <code>word1</code>. If a string is longer than the other, append the additional letters onto the end of the merged string.</p>
+<p>Return the merged string.</p>
+<h3 id="翻譯蒟蒻"><a href="#翻譯蒟蒻" class="headerlink" title="翻譯蒟蒻"></a>翻譯蒟蒻</h3><p><strong>將<code>word1</code> 與 <code>word2</code> 字串的字母以交錯順序合併，從 <code>word1</code> 開始。如果其中一個字串比另一個字串長，則將多餘的字母直接附加到合併後的字串末尾。</strong></p>
+<hr>
+<ul>
+<li><p>Example 1:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: word1 = &quot;abc&quot;, word2 = &quot;pqr&quot;</span><br><span class="line">Output: &quot;apbqcr&quot;</span><br><span class="line">Explanation: The merged string will be merged as so:</span><br><span class="line">word1:  a   b   c</span><br><span class="line">word2:    p   q   r</span><br><span class="line">merged: a p b q c r</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Example 2:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: word1 = &quot;ab&quot;, word2 = &quot;pqrs&quot;</span><br><span class="line">Output: &quot;apbqrs&quot;</span><br><span class="line">Explanation: Notice that as word2 is longer, &quot;rs&quot; is appended to the end.</span><br><span class="line">word1:  a   b </span><br><span class="line">word2:    p   q   r   s</span><br><span class="line">merged: a p b q   r   s</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Example 3:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: word1 = &quot;abcd&quot;, word2 = &quot;pq&quot;</span><br><span class="line">Output: &quot;apbqcd&quot;</span><br><span class="line">Explanation: Notice that as word1 is longer, &quot;cd&quot; is appended to the end.</span><br><span class="line">word1:  a   b   c   d</span><br><span class="line">word2:    p   q </span><br><span class="line">merged: a p b q c   d</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h2 id="Solution-JavaScript"><a href="#Solution-JavaScript" class="headerlink" title="Solution - JavaScript"></a>Solution - JavaScript</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">word1</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">word2</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">string</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">word1</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; <span class="variable">word2</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">string</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> mergeAlternately = <span class="keyword">function</span>(<span class="params">word1, word2</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> result = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; word1.<span class="property">length</span> &amp;&amp; j &lt; word2.<span class="property">length</span>) &#123;</span><br><span class="line">        result += word1[i] + word2[j];</span><br><span class="line">        i++;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; word1.<span class="property">length</span>) &#123;</span><br><span class="line">        result += word1[i];</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (j &lt; word2.<span class="property">length</span>) &#123;</span><br><span class="line">        result += word2[j];</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Solution-Ruby"><a href="#Solution-Ruby" class="headerlink" title="Solution - Ruby"></a>Solution - Ruby</h2><figure class="highlight rb"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">merge_alternately</span>(<span class="params">word1, word2</span>)</span><br><span class="line">  i, j = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">  ans = <span class="string">&quot;&quot;</span></span><br><span class="line">  <span class="keyword">while</span> i &lt; word1.length |<span class="params"></span>| j &lt; word2.length</span><br><span class="line">    ans += word1[i] <span class="keyword">if</span> i &lt; word1.length</span><br><span class="line">    ans += word2[j] <span class="keyword">if</span> j &lt; word2.length</span><br><span class="line">    i += <span class="number">1</span></span><br><span class="line">    j += <span class="number">1</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  ans</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Solution-PHP"><a href="#Solution-PHP" class="headerlink" title="Solution - PHP"></a>Solution - PHP</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">mergeAlternately</span>(<span class="params"><span class="variable">$word1</span>, <span class="variable">$word2</span></span>) </span>&#123;</span><br><span class="line">  <span class="variable">$i</span> = <span class="number">0</span>;</span><br><span class="line">  <span class="variable">$j</span> = <span class="number">0</span>;</span><br><span class="line">  <span class="variable">$result</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="keyword">while</span> (<span class="variable">$i</span> &lt; <span class="title function_ invoke__">strlen</span>(<span class="variable">$word1</span>) &amp;&amp; <span class="variable">$j</span> &lt; <span class="title function_ invoke__">strlen</span>(<span class="variable">$word2</span>)) &#123;</span><br><span class="line">    <span class="variable">$result</span> .= <span class="variable">$word1</span>[<span class="variable">$i</span>];</span><br><span class="line">    <span class="variable">$result</span> .= <span class="variable">$word2</span>[<span class="variable">$j</span>];</span><br><span class="line">    <span class="variable">$i</span>++;</span><br><span class="line">    <span class="variable">$j</span>++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span> (<span class="variable">$i</span> &lt; <span class="title function_ invoke__">strlen</span>(<span class="variable">$word1</span>)) &#123;</span><br><span class="line">    <span class="variable">$result</span> .= <span class="variable">$word1</span>[<span class="variable">$i</span>];</span><br><span class="line">    <span class="variable">$i</span>++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span> (<span class="variable">$j</span> &lt; <span class="title function_ invoke__">strlen</span>(<span class="variable">$word2</span>)) &#123;</span><br><span class="line">    <span class="variable">$result</span> .= <span class="variable">$word2</span>[<span class="variable">$j</span>];</span><br><span class="line">    <span class="variable">$j</span>++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable">$result</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Solution-Python3"><a href="#Solution-Python3" class="headerlink" title="Solution - Python3"></a>Solution - Python3</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">mergeAlternately</span>(<span class="params">self, word1: <span class="built_in">str</span>, word2: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">    result = <span class="string">&quot;&quot;</span></span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    j = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> i &lt; <span class="built_in">len</span>(word1) <span class="keyword">and</span> j &lt; <span class="built_in">len</span>(word2):</span><br><span class="line">        result += word1[i] + word2[j]</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">        j += <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> i &lt; <span class="built_in">len</span>(word1):</span><br><span class="line">        result += word1[i:]</span><br><span class="line">    <span class="keyword">if</span> j &lt; <span class="built_in">len</span>(word2):</span><br><span class="line">        result += word2[j:]</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure>
+
+<p><strong><a target="_blank" rel="noopener" href="https://leetcode.com/problems/merge-strings-alternately/">LeetCode 傳送門 - Merge Strings Alternately</a></strong></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/php/" class="tag">#php</a><a href="/tags/javascript/" class="tag">#javascript</a><a href="/tags/ruby/" class="tag">#ruby</a><a href="/tags/python/" class="tag">#python</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        <a class="next"></a>
+        
+        <a href="/posts/leetcode-delete-leaves-with-a-given-value/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [LeetCode] - 1325. Delete Leaves With a Given Value</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>
