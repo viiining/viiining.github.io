@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head prefix="og: https://ogp.me/ns#">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  
+  <title>Viiisit [Laravel] - MongoDB with Laravel - Viiisit!</title>
+  
+    <link rel="shortcut icon" href="/theme-img/viiilogo.png">
+  
+  
+    <link rel='manifest' href='/manifest.json'>
+  
+
+  
+  
+  
+  <meta property="og:title" content="Viiisit [Laravel] - MongoDB with Laravel - Viiisit!" />
+  
+  <meta property="og:type" content="article" />
+  
+  <meta property="og:url" content="https://viiisit.com/posts/laravel-mongodb/index.html" />
+  
+  <meta property="og:image" content="/favicon.png" />
+  
+  <meta property="og:article:published_time" content="2024-08-10T04:00:00.000Z" />
+  
+  <meta property="og:article:author" content="Zinni Chang" />
+  
+  
+
+  
+<link rel="stylesheet" href="/css/var.css">
+
+  
+<link rel="stylesheet" href="/css/main.css">
+
+  
+<link rel="stylesheet" href="/css/typography.css">
+
+  
+<link rel="stylesheet" href="/css/code-highlighting.css">
+
+  
+<link rel="stylesheet" href="/css/components.css">
+
+  
+<link rel="stylesheet" href="/css/nav.css">
+
+  
+<link rel="stylesheet" href="/css/paginator.css">
+
+  
+<link rel="stylesheet" href="/css/footer.css">
+
+  
+<link rel="stylesheet" href="/css/post-list.css">
+
+  
+  
+<link rel="stylesheet" href="/css/rainbow-banner.css">
+
+  
+  
+  
+<link rel="stylesheet" href="/css/toc.css">
+
+  
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/post.css">
+
+  
+  
+  
+  
+  
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+    <body
+        data-color-scheme="auto"
+        data-uppercase-categories="true"
+        
+        data-rainbow-banner="true"
+        data-rainbow-banner-shown="auto"
+        data-rainbow-banner-month="6"
+        data-rainbow-banner-colors="#e50000,#ff8d00,#ffee00,#008121,#004cff,#760188"
+        
+        data-config-root="/"
+        
+        data-toc="true"
+        data-toc-max-depth="2"
+        
+        
+    >
+        <nav id="theme-nav">
+    <div class="inner">
+        <a class="title" href="/">Viiisit!</a>
+        <div class="nav-arrow"></div>
+        <div class="nav-items">
+            <a class="nav-item nav-item-home" href="/">Home</a>
+            
+            
+            <a class="nav-item" href="/archives">Archives</a>
+            
+            
+            
+            <a class="nav-item" target="_blank" rel="noopener" href="https://github.com/viiining">Projects</a>
+            
+            
+            
+            <a class="nav-item" href="/about">About me</a>
+            
+            
+            
+            <a class="nav-item nav-item-github nav-item-icon" href="https://github.com/viiining" target="_blank" aria-label="GitHub">&nbsp;</a>
+            
+            
+            
+            <a class="nav-item nav-item-discord nav-item-icon" href="https://discordapp.com/users/1113786568956715118" target="_blank" aria-label="Discord">&nbsp;</a>
+            
+            
+        </div>
+    </div>
+</nav>
+        
+<article class="post">
+    <div class="meta">
+        
+        <div class="categories text-uppercase">
+        
+            <a href="/categories/keep-learning/">keep learning</a>
+        
+        </div>
+        
+
+        
+        <div class="date" id="date">
+            <span>August</span>
+            <span>10,</span>
+            <span>2024</span>
+        </div>
+        
+
+        <h1 class="title">Viiisit [Laravel] - MongoDB with Laravel</h1>
+    </div>
+
+    <div class="about">
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/laravel/" class="tag">#laravel</a><a href="/tags/mongodb/" class="tag">#mongodb</a>
+        </p>
+        
+    </div>
+
+    <div class="content">
+        <h2 id="What-is-MongoDB"><a href="#What-is-MongoDB" class="headerlink" title="What is MongoDB?"></a>What is MongoDB?</h2><p>MongoDB 是目前流行的 NoSQL 資料庫，是一個文檔導向（doc）的資料庫，不使用傳統的表格與行的模式，而是使用 JSON-like 的文檔（在 MongoDB 中稱為 BSON）來存儲資料。這使得數據結構可以非常靈活，能夠存儲更復雜的數據類型並輕鬆進行嵌套。MongoDB 廣泛用於需要處理大量數據並且數據頻繁變動的應用場景中。</p>
+<hr>
+<h2 id="要如何在-Laravel-專案中使用-MongoDB"><a href="#要如何在-Laravel-專案中使用-MongoDB" class="headerlink" title="要如何在 Laravel 專案中使用 MongoDB?"></a>要如何在 Laravel 專案中使用 MongoDB?</h2><h3 id="安裝-mongodb-x2F-laravel-mongodb"><a href="#安裝-mongodb-x2F-laravel-mongodb" class="headerlink" title="安裝 mongodb&#x2F;laravel-mongodb"></a>安裝 <a target="_blank" rel="noopener" href="https://github.com/mongodb/laravel-mongodb">mongodb&#x2F;laravel-mongodb</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer require mongodb/laravel-mongodb</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>註：<code>mongodb/laravel-mongodb</code> 之前叫做 <code>jenssegers/mongodb</code>，因為所有權轉移給 MongoDB, Inc. 而更名為 <code>mongodb/laravel-mongodb</code>。</p>
+</blockquote>
+<h5 id="在-config-database-php-設定-MongoDB-的連線"><a href="#在-config-database-php-設定-MongoDB-的連線" class="headerlink" title="在 config\database.php 設定 MongoDB 的連線"></a>在 <code>config\database.php</code> 設定 MongoDB 的連線</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;default&#x27;</span> =&gt; <span class="title function_ invoke__">env</span>(<span class="string">&#x27;DB_CONNECTION&#x27;</span>, <span class="string">&#x27;mongodb&#x27;</span>),</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;mongodb&#x27;</span> =&gt; [</span><br><span class="line">    <span class="string">&#x27;driver&#x27;</span> =&gt; <span class="string">&#x27;mongodb&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;host&#x27;</span> =&gt; <span class="title function_ invoke__">env</span>(<span class="string">&#x27;DB_HOST&#x27;</span>, <span class="string">&#x27;127.0.0.1&#x27;</span>),</span><br><span class="line">    <span class="string">&#x27;port&#x27;</span> =&gt; <span class="title function_ invoke__">env</span>(<span class="string">&#x27;DB_PORT&#x27;</span>, <span class="number">27017</span>),</span><br><span class="line">    <span class="string">&#x27;database&#x27;</span> =&gt; <span class="title function_ invoke__">env</span>(<span class="string">&#x27;DB_DATABASE&#x27;</span>, <span class="string">&#x27;&#x27;</span>),</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
+
+<h5 id="在-app-php-設定-providers"><a href="#在-app-php-設定-providers" class="headerlink" title="在 app.php 設定 providers"></a>在 <code>app.php</code> 設定 providers</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;providers&#x27;</span> =&gt; [</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Laravel Framework Service Providers...</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">MongoDB<span class="title class_">\Laravel\MongoDBServiceProvider</span>::<span class="variable language_">class</span>,</span><br><span class="line"></span><br><span class="line">],</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Laravel-MongoDB-CRUD-example"><a href="#Laravel-MongoDB-CRUD-example" class="headerlink" title="Laravel MongoDB CRUD example"></a>Laravel MongoDB CRUD example</h2><h3 id="以建立-Location-Model-作為範例"><a href="#以建立-Location-Model-作為範例" class="headerlink" title="以建立 Location Model 作為範例"></a>以建立 Location Model 作為範例</h3><h5 id="建立一個-Location-Model-並指定連接到-MongoDB："><a href="#建立一個-Location-Model-並指定連接到-MongoDB：" class="headerlink" title="建立一個 Location Model 並指定連接到 MongoDB："></a>建立一個 Location Model 並指定連接到 MongoDB：</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan make:model Location -mc</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>這指令會生成 <code>App/Models/Location.php</code> 與 <code>App/Http/Controllers/LocationController.php</code><br>預設上 artisan 指令會用 <code>Illuminate\Database\Eloquent\Model</code>。</p>
+</blockquote>
+<blockquote>
+<p>但要使用 MongoDB 我們需要用 <code>MongoDB Eloquent model</code>，<br>也就是要將上面的預設修改為 <code>MongoDB\Laravel\Eloquent\Model</code>。</p>
+</blockquote>
+<h5 id="建立-migration（optional）"><a href="#建立-migration（optional）" class="headerlink" title="建立 migration（optional）"></a>建立 migration（optional）</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan make:migration create_locations_table</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>因爲 MongoDB 是一種 NoSQL 資料庫，不像關聯式資料庫 (MySQL) 使用較嚴謹的 migration，但在 MongoDB 使用 migration 可以知道資料的變更狀態，並保證不同開發環境間的一致性。</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="title">MongoDB</span>\<span class="title">Laravel</span>\<span class="title">Eloquent</span>\<span class="title">Model</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Location</span> <span class="keyword">extends</span> <span class="title">Model</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$connection</span> = <span class="string">&#x27;mongodb&#x27;</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$collection</span> = <span class="string">&#x27;locations&#x27;</span>;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$fillable</span> = [</span><br><span class="line">        <span class="string">&#x27;country_code&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;party_id&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;id&#x27;</span>,</span><br><span class="line">        ...</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$casts</span> = [</span><br><span class="line">        <span class="string">&#x27;publish&#x27;</span> =&gt; <span class="string">&#x27;boolean&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;charging_when_closed&#x27;</span> =&gt; <span class="string">&#x27;boolean&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;last_updated&#x27;</span> =&gt; <span class="string">&#x27;datetime&#x27;</span>,</span><br><span class="line">    ];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="筆記"><a href="#筆記" class="headerlink" title="筆記"></a>筆記</h6><p>在 <code>Location</code> 中 <code>coordinates</code> 是一個包含經度和緯度的 array。為了方便處理，當時使用 Laravel 的 <code>$casts</code> 屬性將 <code>coordinates</code> 轉換成 array。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Location</span> <span class="keyword">extends</span> <span class="title">Model</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$casts</span> = [</span><br><span class="line">        <span class="string">&#x27;coordinates&#x27;</span> =&gt; <span class="string">&#x27;array&#x27;</span>,</span><br><span class="line">    ];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但，當開始使用 Laravel 的 API 資源（APIResource）封裝這些地理位置數據為 JSON 格式進行回應時，就遇到了困難。<br>雖然 <code>coordinates</code> 在 Model 內部正確地被處理為一個 PHP array，但當通過 APIResource 轉換為 JSON 時，這個 array 並沒有按照預期的方式顯示，因為 APIResource 基本上是將 Model 的數據直接轉換成 JSON，沒有對原始的數據類型做特別處理。</p>
+<p><strong>為了解決這個問題，而不是在 APIResource 中再次轉換為 JSON 字串，就是在 APIResource 中直接使用它的原生屬性，而不進行額外的處理。</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Resources</span>\<span class="title">Json</span>\<span class="title">JsonResource</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LocationResource</span> <span class="keyword">extends</span> <span class="title">JsonResource</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">toArray</span>(<span class="params"><span class="variable">$request</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> [</span><br><span class="line">            <span class="string">&#x27;id&#x27;</span> =&gt; <span class="variable language_">$this</span>-&gt;id,</span><br><span class="line">            <span class="string">&#x27;name&#x27;</span> =&gt; <span class="variable language_">$this</span>-&gt;name,</span><br><span class="line">            <span class="string">&#x27;coordinates&#x27;</span> =&gt; <span class="variable language_">$this</span>-&gt;coordinates, <span class="comment">// 直接使用，無需額外轉換</span></span><br><span class="line">        ];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通過這種方式，確保了當 <code>coordinates</code> 被 APIResource 處理時，它保持為原生的格式，並且在最終的 JSON 回應中正確顯示。</p>
+</blockquote>
+<h3 id="CRUD"><a href="#CRUD" class="headerlink" title="CRUD"></a>CRUD</h3><ul>
+<li><p>Create</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$location</span> = <span class="keyword">new</span> <span class="title class_">Location</span>();</span><br><span class="line"><span class="variable">$location</span>-&gt;name = <span class="string">&#x27;台北 101&#x27;</span>;</span><br><span class="line"><span class="variable">$location</span>-&gt;address = <span class="string">&#x27;台北市信義區信義路五段7號&#x27;</span>;</span><br><span class="line"><span class="variable">$location</span>-&gt;<span class="title function_ invoke__">save</span>();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Read</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$locations</span> = <span class="title class_">Location</span>::<span class="title function_ invoke__">all</span>(); <span class="comment">// 獲取所有地點</span></span><br><span class="line"><span class="variable">$location</span> = <span class="title class_">Location</span>::<span class="title function_ invoke__">find</span>(<span class="variable">$id</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<blockquote>
+<p>若 Model 內有 data 爲 <code>id</code> 和 MongoDB 的 <code>_id</code> 可能會衝突，推薦使用 <code>where</code> 方法來進行精確查詢：</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$locations</span> = <span class="title class_">Location</span>::<span class="title function_ invoke__">all</span>(); <span class="comment">// 獲取所有地點</span></span><br><span class="line"><span class="variable">$location</span> = <span class="title class_">Location</span>::<span class="title function_ invoke__">where</span>(<span class="string">&#x27;id&#x27;</span>, <span class="variable">$location_id</span>)-&gt;<span class="title function_ invoke__">first</span>(); <span class="comment">// 根據自定義 ID 查詢</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Update<blockquote>
+<p>使用 <code>where</code> 方法找到特定 ID 的地點並更新：</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$location</span> = <span class="title class_">Location</span>::<span class="title function_ invoke__">where</span>(<span class="string">&#x27;id&#x27;</span>, <span class="variable">$location_id</span>)-&gt;<span class="title function_ invoke__">first</span>();</span><br><span class="line"><span class="variable">$location</span>-&gt;name = <span class="string">&#x27;台北 101 大樓&#x27;</span>;</span><br><span class="line"><span class="variable">$location</span>-&gt;<span class="title function_ invoke__">save</span>();</span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$location</span> = <span class="title class_">Location</span>::<span class="title function_ invoke__">where</span>(<span class="string">&#x27;id&#x27;</span>, <span class="variable">$location_id</span>)-&gt;<span class="title function_ invoke__">first</span>();</span><br><span class="line"><span class="variable">$location</span>-&gt;name = <span class="string">&#x27;台北 101 大樓&#x27;</span>;</span><br><span class="line"><span class="variable">$location</span>-&gt;<span class="title function_ invoke__">update</span>();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Delete<br>找到並刪除特定 ID 的地點：</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$location</span> = <span class="title class_">Location</span>::<span class="title function_ invoke__">where</span>(<span class="string">&#x27;id&#x27;</span>, <span class="variable">$location_id</span>)-&gt;<span class="title function_ invoke__">first</span>();</span><br><span class="line"><span class="variable">$location</span>-&gt;<span class="title function_ invoke__">delete</span>();</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>參考資料：</strong><br>➫ <a target="_blank" rel="noopener" href="https://github.com/mongodb/laravel-mongodb">mongodb&#x2F;laravel-mongodb</a><br>➫ <a target="_blank" rel="noopener" href="https://www.mongodb.com/resources/products/compatibilities/mongodb-laravel-integration">MongoDB and Laravel Integration</a></p>
+
+    </div>
+<!-- 
+    
+    <div class="about">
+        <h1>About this Post</h1>
+        <div class="details">
+            <p>This post is written by Zinni Chang, licensed under <a href="undefined">undefined</a>.</p>
+        </div>
+        
+        <p class="tags">
+            
+            <i class="icon"></i>
+            <a href="/tags/laravel/" class="tag">#laravel</a><a href="/tags/mongodb/" class="tag">#mongodb</a>
+        </p>
+        
+    </div>
+     -->
+
+    <div class="divider"></div>
+
+    <div class="container post-prev-next">
+        <a class="next"></a>
+        
+        <a href="/posts/leetcode-greatest-common-divisor-of-strings/" class="prev">
+            <div>
+                <div class="text">
+                    <p class="label">Previous</p>
+                    <h3 class="title">Viiisit [LeetCode] - 1071. Greatest Common Divisor of Strings</>
+                </div>
+            </div>
+        </a>
+        
+    </div>
+
+    
+        
+        
+    
+</article>
+
+        <footer>
+    <div class="inner">
+        <div class="links">
+            
+            <div class="group">
+                <h2 class="title">Viiiisit!</h2>
+                
+                <a href="/" class="item">Home</a>
+                
+                <a href="/archives" class="item">Archives</a>
+                
+                <a href="/tags" class="item">Tags</a>
+                
+                <a href="/categories" class="item">Categories</a>
+                
+            </div>
+            
+            <div class="group">
+                <h2 class="title">About Me</h2>
+                
+                <a target="_blank" rel="noopener" href="https://github.com/viiining" class="item">GitHub</a>
+                
+                <a target="_blank" rel="noopener" href="https://discordapp.com/users/1113786568956715118" class="item">Discord</a>
+                
+                <a href="mailto:czinni853@gmail.com" class="item">Email</a>
+                
+            </div>
+            
+        </div>
+        <span>&copy; 2024 Zinni Chang ∙ Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> </span>
+        
+        
+            <br>
+            <div class="color-scheme-toggle" role="radiogroup" id="theme-color-scheme-toggle">
+                <label>
+                    <input type="radio" value="light">
+                    <span>Light</span>
+                </label>
+                <label>
+                    <input type="radio" value="dark">
+                    <span>Dark</span>
+                </label>
+                <label>
+                    <input type="radio" value="auto">
+                    <span>Auto</span>
+                </label>
+            </div>
+        
+    </div>
+</footer>
+
+
+        
+<script src="/js/main.js"></script>
+
+        
+        
+        
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script>
+            window.addEventListener('load', () => {
+                ScrollReveal({ delay: 250, reset: true, easing: 'cubic-bezier(0, 0, 0, 1)' })
+                ScrollReveal().reveal('.post-list-item .cover-img img')
+                ScrollReveal().reveal('.post-list-item, .card, .content p img, .content .block-large img', { distance: '60px', origin: 'bottom', duration: 800 })
+            })
+        </script>
+        
+    </body>
+</html>
