@@ -162,7 +162,11 @@
     <div class="content">
         <h2 id="What-is-MongoDB"><a href="#What-is-MongoDB" class="headerlink" title="What is MongoDB?"></a>What is MongoDB?</h2><p>MongoDB 是目前流行的 NoSQL 資料庫，是一個文檔導向（doc）的資料庫，不使用傳統的表格與行的模式，而是使用 JSON-like 的文檔（在 MongoDB 中稱為 BSON）來存儲資料。這使得數據結構可以非常靈活，能夠存儲更復雜的數據類型並輕鬆進行嵌套。MongoDB 廣泛用於需要處理大量數據並且數據頻繁變動的應用場景中。</p>
 <hr>
-<h2 id="要如何在-Laravel-專案中使用-MongoDB"><a href="#要如何在-Laravel-專案中使用-MongoDB" class="headerlink" title="要如何在 Laravel 專案中使用 MongoDB?"></a>要如何在 Laravel 專案中使用 MongoDB?</h2><h3 id="安裝-mongodb-x2F-laravel-mongodb"><a href="#安裝-mongodb-x2F-laravel-mongodb" class="headerlink" title="安裝 mongodb&#x2F;laravel-mongodb"></a>安裝 <a target="_blank" rel="noopener" href="https://github.com/mongodb/laravel-mongodb">mongodb&#x2F;laravel-mongodb</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer require mongodb/laravel-mongodb</span><br></pre></td></tr></table></figure>
+<h2 id="要如何在-Laravel-專案中使用-MongoDB"><a href="#要如何在-Laravel-專案中使用-MongoDB" class="headerlink" title="要如何在 Laravel 專案中使用 MongoDB?"></a>要如何在 Laravel 專案中使用 MongoDB?</h2><h3 id="系統：安裝-MongoDB-PHP-Extension"><a href="#系統：安裝-MongoDB-PHP-Extension" class="headerlink" title="系統：安裝 MongoDB PHP Extension"></a>系統：安裝 MongoDB PHP Extension</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pecl install mongodb</span><br></pre></td></tr></table></figure>
+<p>並確認在 <code>php.ini</code> 裡有：</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">extension=&quot;mongodb.so&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Laravel-專案：安裝-mongodb-x2F-laravel-mongodb"><a href="#Laravel-專案：安裝-mongodb-x2F-laravel-mongodb" class="headerlink" title="Laravel 專案：安裝 mongodb&#x2F;laravel-mongodb"></a>Laravel 專案：安裝 <a target="_blank" rel="noopener" href="https://github.com/mongodb/laravel-mongodb">mongodb&#x2F;laravel-mongodb</a></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer require mongodb/laravel-mongodb</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>註：<code>mongodb/laravel-mongodb</code> 之前叫做 <code>jenssegers/mongodb</code>，因為所有權轉移給 MongoDB, Inc. 而更名為 <code>mongodb/laravel-mongodb</code>。</p>
 </blockquote>
